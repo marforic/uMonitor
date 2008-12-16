@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface RootViewController : UITableViewController {
-@private
-	NSStream * iStream;
-	NSStream * oStream;
+@public
+	NSInputStream * iStream;
+	NSOutputStream * oStream;
 }
 
 - (BOOL)connectedToNetwork;

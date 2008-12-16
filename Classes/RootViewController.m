@@ -111,8 +111,7 @@
         }
         NSHost *host = [NSHost hostWithName:[website host]];
         // iStream and oStream are instance variables
-        [NSStream getStreamsToHost:host port:80 inputStream:&iStream
-					  outputStream:&oStream];
+        [NSStream getStreamsToHost:host port:80 inputStream:&iStream outputStream:&oStream];
         [iStream retain];
         [oStream retain];
         [iStream setDelegate:self];
@@ -133,6 +132,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	if ([self connectedToNetwork] && [self hostAvailable:@"ea17.homends.org"]) self.navigationItem.rightBarButtonItem.enabled = false;
+	[self searchForSite:@"ea17.homedns.org"];
 }
 
 
