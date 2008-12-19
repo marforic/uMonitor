@@ -14,6 +14,8 @@
 #import <arpa/inet.h>
 #import <netdb.h>
 
+#import <JSON/JSON.h>
+
 @implementation RootViewController
 
 - (BOOL)connectedToNetwork {
@@ -99,40 +101,37 @@
 	return addressString;
 }
 
-- (IBAction)searchForSite:(id)sender
-{
-    NSString *urlStr = [sender stringValue];
-    if (![urlStr isEqualToString:@""]) {
-        //[searchField setEnabled:NO];
-        NSURL *website = [NSURL URLWithString:urlStr];
-        if (!website) {
-            NSLog(@"%@ is not a valid URL");
-            return;
-        }
-        NSHost *host = [NSHost hostWithName:[website host]];
-        // iStream and oStream are instance variables
-        [NSStream getStreamsToHost:host port:80 inputStream:&iStream outputStream:&oStream];
-        [iStream retain];
-        [oStream retain];
-        [iStream setDelegate:self];
-        [oStream setDelegate:self];
-        [iStream scheduleInRunLoop:[NSRunLoop currentRunLoop]
-						   forMode:NSDefaultRunLoopMode];
-        [oStream scheduleInRunLoop:[NSRunLoop currentRunLoop]
-						   forMode:NSDefaultRunLoopMode];
-        [iStream open];
-        [oStream open];
-    }
-}
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	if ([self connectedToNetwork] && [self hostAvailable:@"ea17.homends.org"]) self.navigationItem.rightBarButtonItem.enabled = false;
-	[self searchForSite:@"ea17.homedns.org"];
+	if ([self connectedToNetwork] && [self hostAvailable:@"ea17.homends.org"])
+		printf("network connection established and host available\n");
+	else
+		printf("couldn't reach host\n");
+	
+	// la chiamata funziona e carica la pagina. ora bisogna capire cosa far chiamare!!
+	// http://iphone.zcentric.com/test-json-get.php?id=1
+	NSURL *jsonURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://ea17.homedns.org:8080", nil]];
+	NSString *jsonData = [[NSString alloc] initWithContentsOfURL:jsonURL];
+	NSLog(@"raw data: %@\n", jsonData);
+	if (jsonData == nil)
+		printf("empty jsondata\n");
+	else {
+		NSDictionary *jsonItem = [jsonData JSONValue];
+		printf("generated dictionaty\n");
+		NSEnumerator *enumerator = [jsonItem objectEnumerator];
+		id value;
+		//NSLog(@"title %@\n", [jsonItem objectForKey:@"title"]);
+		while ((value = [enumerator nextObject])) {
+			NSLog(@"value for:%@\n", value);
+		}
+	}
+		
+	
+	
 }
 
 
