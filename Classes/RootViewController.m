@@ -268,7 +268,7 @@
     // Set up the cell...
 	// setting the text
 	NSArray *itemAtIndex = (NSArray *)[self.jsonArray objectAtIndex:indexPath.row];
-	[cell setText:[itemAtIndex NAME]];
+	[cell setText:[itemAtIndex objectAtIndex:NAME]];
 
 	
 	
