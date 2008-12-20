@@ -11,6 +11,7 @@
 @interface RootViewController : UITableViewController {
 	@private
 	NSMutableData * receivedData;
+	NSDictionary * jsonItem;
 }
 
 - (BOOL)connectedToNetwork;

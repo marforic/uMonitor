@@ -185,7 +185,15 @@
     // receivedData is declared as a method instance elsewhere
     NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
 	NSString * readableString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-	NSLog(@"receivedData = %@\n", readableString);
+
+	jsonItem = [readableString JSONValue];
+	NSEnumerator *enumerator = [jsonItem keyEnumerator];
+	id value;
+	while ((value = [enumerator nextObject])) {
+		NSLog(@"value for:%@\n", value);
+	}
+	
+	//NSLog(@"receivedData = %@\n", readableString);
     // release the connection, and the data object
     [connection release];
     [receivedData release];
