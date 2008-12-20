@@ -106,32 +106,89 @@
     [super viewDidLoad];
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-	self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	// self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	if ([self connectedToNetwork] && [self hostAvailable:@"ea17.homends.org"])
 		printf("network connection established and host available\n");
 	else
 		printf("couldn't reach host\n");
 	
-	// la chiamata funziona e carica la pagina. ora bisogna capire cosa far chiamare!!
-	// http://iphone.zcentric.com/test-json-get.php?id=1
-	NSURL *jsonURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://ea17.homedns.org:8080", nil]];
-	NSString *jsonData = [[NSString alloc] initWithContentsOfURL:jsonURL];
-	NSLog(@"raw data: %@\n", jsonData);
-	if (jsonData == nil)
-		printf("empty jsondata\n");
-	else {
-		NSDictionary *jsonItem = [jsonData JSONValue];
-		printf("generated dictionaty\n");
-		NSEnumerator *enumerator = [jsonItem objectEnumerator];
-		id value;
-		//NSLog(@"title %@\n", [jsonItem objectForKey:@"title"]);
-		while ((value = [enumerator nextObject])) {
-			NSLog(@"value for:%@\n", value);
-		}
+	// create the request
+	NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://ea17.homedns.org:8080/gui/?list=1"]];
+	NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+	if (theConnection) {
+		// Create the NSMutableData that will hold
+		// the received data
+		// receivedData is declared as a method instance elsewhere
+		NSLog(@"theConnection != nil: %@\n", theConnection);
+		receivedData = [[NSMutableData data] retain];
+	} else {
+		// inform the user that the download could not be made
+		NSLog(@"download can't be made\n");
 	}
-		
 	
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+	NSLog(@"didReceiveResonse called: %@", response);
+    // this method is called when the server has determined that it
+    // has enough information to create the NSURLResponse
 	
+    // it can be called multiple times, for example in the case of a
+    // redirect, so each time we reset the data.
+    // receivedData is declared as a method instance elsewhere
+    [receivedData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    // append the new data to the receivedData
+    // receivedData is declared as a method instance elsewhere
+	NSLog(@"didReceiveData got called\n");
+    [receivedData appendData:data];
+}
+
+-(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+	NSLog(@"connectiondidReceiveAuthenticationChallenge got called\n");
+    if ([challenge previousFailureCount] == 0) {
+        NSURLCredential *newCredential;
+        newCredential=[NSURLCredential credentialWithUser:@"zurich"
+                                                 password:@"Mike Nub ImbaFail!"
+                                              persistence:NSURLCredentialPersistenceNone];
+        [[challenge sender] useCredential:newCredential
+               forAuthenticationChallenge:challenge];
+    } else {
+        [[challenge sender] cancelAuthenticationChallenge:challenge];
+        // inform the user that the user name and password
+        // in the preferences are incorrect
+		NSLog(@"credentials incorrect\n");
+    }
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    // release the connection, and the data object
+    [connection release];
+    // receivedData is declared as a method instance elsewhere
+    [receivedData release];
+	
+    // inform the user
+    NSLog(@"Connection failed! Error - %@ %@",
+          [error localizedDescription],
+          [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    // do something with the data
+    // receivedData is declared as a method instance elsewhere
+    NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
+	NSString * readableString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+	NSLog(@"receivedData = %@\n", readableString);
+    // release the connection, and the data object
+    [connection release];
+    [receivedData release];
 }
 
 
