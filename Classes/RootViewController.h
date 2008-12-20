@@ -12,7 +12,14 @@
 	@private
 	NSMutableData * receivedData;
 	NSDictionary * jsonItem;
+	NSMutableArray * jsonArray;
+	
+	IBOutlet UITableView * torrentsTable;
 }
+
+@property (nonatomic, retain) NSMutableArray *jsonArray;
+@property (nonatomic, retain) NSDictionary *jsonItem;
+@property (nonatomic,retain) IBOutlet UITableView *torrentsTable;
 
 - (BOOL)connectedToNetwork;
 - (BOOL)hostAvailable: (NSString *) theHost;

@@ -18,6 +18,10 @@
 
 @implementation RootViewController
 
+@synthesize jsonArray;
+@synthesize jsonItem;
+@synthesize torrentsTable;
+
 - (BOOL)connectedToNetwork {
 	struct sockaddr_in zeroAddress;
 	bzero(&zeroAddress, sizeof(zeroAddress));
@@ -107,6 +111,7 @@
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	// self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
 	if ([self connectedToNetwork] && [self hostAvailable:@"ea17.homends.org"])
 		printf("network connection established and host available\n");
 	else
@@ -119,7 +124,7 @@
 		// Create the NSMutableData that will hold
 		// the received data
 		// receivedData is declared as a method instance elsewhere
-		NSLog(@"theConnection != nil: %@\n", theConnection);
+		//NSLog(@"theConnection != nil: %@\n", theConnection);
 		receivedData = [[NSMutableData data] retain];
 	} else {
 		// inform the user that the download could not be made
@@ -130,7 +135,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-	NSLog(@"didReceiveResonse called: %@", response);
+	//NSLog(@"didReceiveResonse called: %@", response);
     // this method is called when the server has determined that it
     // has enough information to create the NSURLResponse
 	
@@ -144,13 +149,13 @@
 {
     // append the new data to the receivedData
     // receivedData is declared as a method instance elsewhere
-	NSLog(@"didReceiveData got called\n");
+	//NSLog(@"didReceiveData got called\n");
     [receivedData appendData:data];
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
-	NSLog(@"connectiondidReceiveAuthenticationChallenge got called\n");
+	//NSLog(@"connectiondidReceiveAuthenticationChallenge got called\n");
     if ([challenge previousFailureCount] == 0) {
         NSURLCredential *newCredential;
         newCredential=[NSURLCredential credentialWithUser:@"zurich"
@@ -185,18 +190,31 @@
     // receivedData is declared as a method instance elsewhere
     NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
 	NSString * readableString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-
-	jsonItem = [readableString JSONValue];
-	for (id key in jsonItem)
+	
+	self.jsonItem = [readableString JSONValue];
+	self.jsonArray = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"torrents"]];
+	
+	NSLog(@"jsonArray size: %i", [self.jsonArray count]);
+	// reload Table
+	[torrentsTable reloadData];
+	//NSLog(@"jsonArray: %@", self.jsonArray);
+	
+	/*for (id key in jsonItem)
 	{
 		NSLog(@"key: %@, value: %@", key, [jsonItem objectForKey:key]);
-	}
+	}*/
+	
+	/*int i = 0;
+	for (i = 0; i < [jsonArray count]; i++) {
+		NSLog(@"id: %@, value: %@", i, [jsonArray objectAtIndex:i]);
+	}*/
 	
 
 	//NSLog(@"receivedData = %@\n", readableString);
     // release the connection, and the data object
     [connection release];
     [receivedData release];
+	[readableString release];
 }
 
 
@@ -243,22 +261,28 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [jsonArray count];
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"Cell";
+    NSLog(@"called");
+    static NSString *CellIdentifier = @"My Identifier";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     // Set up the cell...
+	// setting the text
+	NSArray *itemAtIndex = (NSArray *)[self.jsonArray objectAtIndex:indexPath.row];
+	[cell setText:[itemAtIndex objectAtIndex:2]];
 
+	
+	
     return cell;
 }
 
@@ -312,6 +336,8 @@
 
 
 - (void)dealloc {
+	[jsonArray dealloc];
+	[jsonItem dealloc];
     [super dealloc];
 }
 
