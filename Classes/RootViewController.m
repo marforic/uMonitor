@@ -187,12 +187,12 @@
 	NSString * readableString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
 
 	jsonItem = [readableString JSONValue];
-	NSEnumerator *enumerator = [jsonItem keyEnumerator];
-	id value;
-	while ((value = [enumerator nextObject])) {
-		NSLog(@"value for:%@\n", value);
+	for (id key in jsonItem)
+	{
+		NSLog(@"key: %@, value: %@", key, [jsonItem objectForKey:key]);
 	}
 	
+
 	//NSLog(@"receivedData = %@\n", readableString);
     // release the connection, and the data object
     [connection release];
