@@ -8,6 +8,7 @@
 
 #import "RootViewController.h"
 #import "uTorrentViewAppDelegate.h"
+#import "uTorrentConstants.h"
 
 #import <SystemConfiguration/SCNetworkConnection.h>
 #import <netinet/in.h>
@@ -198,19 +199,7 @@
 	// reload Table
 	[torrentsTable reloadData];
 	//NSLog(@"jsonArray: %@", self.jsonArray);
-	
-	/*for (id key in jsonItem)
-	{
-		NSLog(@"key: %@, value: %@", key, [jsonItem objectForKey:key]);
-	}*/
-	
-	/*int i = 0;
-	for (i = 0; i < [jsonArray count]; i++) {
-		NSLog(@"id: %@, value: %@", i, [jsonArray objectAtIndex:i]);
-	}*/
-	
 
-	//NSLog(@"receivedData = %@\n", readableString);
     // release the connection, and the data object
     [connection release];
     [receivedData release];
@@ -279,7 +268,7 @@
     // Set up the cell...
 	// setting the text
 	NSArray *itemAtIndex = (NSArray *)[self.jsonArray objectAtIndex:indexPath.row];
-	[cell setText:[itemAtIndex objectAtIndex:2]];
+	[cell setText:[itemAtIndex NAME]];
 
 	
 	
