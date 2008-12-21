@@ -35,8 +35,10 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	self.navigationItem.title = (NSString *)[self.torrent objectAtIndex:NAME];
+	
 	[self.torrentTitle setText:(NSString *)[self.torrent objectAtIndex:NAME]];
-	[self.torrentTitle ];
 	[self updateLabels];
 }
 
