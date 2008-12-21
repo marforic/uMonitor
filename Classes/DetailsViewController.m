@@ -12,23 +12,11 @@
 
 @implementation DetailsViewController
 
-@synthesize torrent;
-@synthesize actionButton;
-@synthesize statusLabel;
-@synthesize torrentTitle;
-@synthesize torrentStatus;
-@synthesize torrentSize;
-@synthesize torrentProgress;
-@synthesize torrentDownloaded;
-@synthesize torrentUploaded;
-@synthesize torrentRatio;
-@synthesize torrentUspeed;
-@synthesize torrentDspeed;
-@synthesize torrentEta;
-@synthesize torrentPeers;
-@synthesize torrentSeeds;
-@synthesize torrentAvail;
-@synthesize torrentRem;
+@synthesize torrent, actionButton, statusLabel, torrentTitle, torrentStatus, torrentSize, torrentProgress;
+@synthesize torrentDownloaded, torrentUploaded, torrentRatio, torrentUspeed, torrentDspeed, torrentEta;
+@synthesize torrentPeers, torrentSeeds, torrentAvail, torrentRem, sizeLabel, progressLabel, downloadedLabel;
+@synthesize uploadedLabel, ratioLabel, uspeedLabel, dspeedLabel, etaLabel, peersLabel, seedsLabel, availLabel;
+@synthesize remLabel;
 
 - (id)initWithTorrent:(NSArray *)selectedTorrent {
 	if (self = [super initWithNibName:@"DetailsViewController" bundle:nil]) {
@@ -48,7 +36,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self.torrentTitle setText:(NSString *)[self.torrent objectAtIndex:NAME]];
-	NSLog([self.torrent description]);
+	[self.torrentTitle ];
+	[self updateLabels];
+}
+
+
+/*
+// Override to allow orientations other than the default portrait orientation.
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+*/
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
+    // Release anything that's not essential, such as cached data
+}
+
+- (void)updateLabels {
 	[self.torrentStatus setText: [[self.torrent objectAtIndex:STATUS] stringValue]];
 	[self.torrentSize setText: [[self.torrent objectAtIndex:SIZE] stringValue]];
 	[self.torrentProgress setText: [[self.torrent objectAtIndex:PERCENT_PROGRESS] stringValue]];
@@ -64,18 +70,8 @@
 	[self.torrentRem setText: [[self.torrent objectAtIndex:REMAINING] stringValue]];
 }
 
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
-    // Release anything that's not essential, such as cached data
+- (void)refresh {
+	
 }
 
 
