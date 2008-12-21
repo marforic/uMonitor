@@ -18,6 +18,7 @@
 		49C0C8F10EFD7EFB00DCBCA3 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C0C8F00EFD7EFB00DCBCA3 /* DetailsViewController.m */; };
 		49C0C8FA0EFD80D700DCBCA3 /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C0C8F90EFD80D700DCBCA3 /* DetailsViewController.xib */; };
 		610620F00EFD7DC0003A3B53 /* TorrentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 610620EF0EFD7DC0003A3B53 /* TorrentCell.m */; };
+		61DDE7270EFEDB5F00EE8119 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DDE7260EFEDB5F00EE8119 /* Utilities.m */; };
 		61EB95110EF6C51F00340762 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61EB95100EF6C51F00340762 /* Settings.bundle */; };
 		61EB956B0EF6CC6000340762 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EB956A0EF6CC6000340762 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
@@ -41,6 +42,8 @@
 		610620BD0EFD77FC003A3B53 /* uTorrentConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uTorrentConstants.h; sourceTree = "<group>"; };
 		610620EE0EFD7DC0003A3B53 /* TorrentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentCell.h; sourceTree = "<group>"; };
 		610620EF0EFD7DC0003A3B53 /* TorrentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorrentCell.m; sourceTree = "<group>"; };
+		61DDE7250EFEDB5F00EE8119 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		61DDE7260EFEDB5F00EE8119 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		61EB95100EF6C51F00340762 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		61EB956A0EF6CC6000340762 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -73,6 +76,8 @@
 				610620EF0EFD7DC0003A3B53 /* TorrentCell.m */,
 				49C0C8EF0EFD7EFB00DCBCA3 /* DetailsViewController.h */,
 				49C0C8F00EFD7EFB00DCBCA3 /* DetailsViewController.m */,
+				61DDE7250EFEDB5F00EE8119 /* Utilities.h */,
+				61DDE7260EFEDB5F00EE8119 /* Utilities.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -197,6 +202,7 @@
 				28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */,
 				610620F00EFD7DC0003A3B53 /* TorrentCell.m in Sources */,
 				49C0C8F10EFD7EFB00DCBCA3 /* DetailsViewController.m in Sources */,
+				61DDE7270EFEDB5F00EE8119 /* Utilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

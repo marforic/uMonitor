@@ -36,8 +36,6 @@
 
 - (void)setData:(NSArray *)data;
 - (UILabel *)newLabelWithPrimaryColor:(UIColor *)primaryColor selectedColor:(UIColor *)selectedColor fontSize:(CGFloat)fontSize bold:(BOOL)bold;
--(NSString *)getSizeReadable:(NSDecimalNumber *)size;
--(NSString *)getStatusReadable:(NSDecimalNumber *)status forProgress:(NSDecimalNumber *)progress;
--(float)getProgressForBar:(NSDecimalNumber *)progress;
+- (float)getProgressForBar:(NSDecimalNumber *)progress;
 
 @end

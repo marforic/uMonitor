@@ -8,6 +8,7 @@
 
 #import "TorrentCell.h"
 #import "uTorrentConstants.h"
+#import "Utilities.h"
 
 @implementation TorrentCell
 
@@ -19,7 +20,7 @@
 		
 		UIView *myContentView = self.contentView;
 		
-		// initialize title label
+		// initialize label
 		self.titleLabel = [self newLabelWithPrimaryColor:[UIColor blackColor] selectedColor:[UIColor whiteColor] fontSize:14.0 bold:YES]; 
 		self.titleLabel.textAlignment = UITextAlignmentLeft; // default
 		[myContentView addSubview:self.titleLabel];
@@ -49,70 +50,15 @@
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
-
--(NSString *)getStatusReadable:(NSDecimalNumber *)status forProgress:(NSDecimalNumber *)progress {
-	int theStatus = [status intValue];
-	int theProgress = [progress intValue];
-	bool flag = false;
-	NSString * ret = @"";
-	
-	if ((theStatus & 1) == 1){ //Started
-		if ((theStatus & 32) == 32){ //paused
-			ret = @"Paused";
-			flag = true;
-		} else { //seeding or leeching
-			if ((theStatus & 64) == 64) {
-				ret = (theProgress == 1000) ? @"Seeding" : @"Downloading";
-				flag = true;
-			}
-			else {
-				ret = (theProgress == 1000) ? @"Forced Seeding" : @"Forced Downloading";
-				flag = true;
-			}
-		}
-	} else if ((theStatus & 2) == 2){ //checking
-		ret = @"Checking";
-		flag = true;
-	} else if ((theStatus & 16) == 16){ //error
-		ret = @"Error";
-		flag = true;
-	} else if ((theStatus & 64) == 64){ //queued
-		ret = @"Queued";
-		flag = true;
-	}
-	
-	if (theProgress == 1000 && !flag) {
-		ret = @"Finished";
-	}
-	else if (theProgress < 1000 && !flag) {
-		ret = @"Stopped";
-	}
-	
-	return ret;
-	
-}
-
--(NSString *)getSizeReadable:(NSDecimalNumber *)size {
-	double theSize = [size doubleValue];
-	float floatSize = theSize;
-	if (theSize < 1023)
-		return([NSString stringWithFormat:@"%i bytes",theSize]);
-	floatSize = floatSize / 1024;
-	if (floatSize < 1023)
-		return([NSString stringWithFormat:@"%1.1f KB",floatSize]);
-	floatSize = floatSize / 1024;
-	if (floatSize < 1023)
-		return([NSString stringWithFormat:@"%1.1f MB",floatSize]);
-	floatSize = floatSize / 1024;
-	return([NSString stringWithFormat:@"%1.1f GB",floatSize]);
-}
-
+/*
+ * Takes a progress in format x/1000 and outputs it's value in float format
+ * example: 100/1000 = 0.1
+ * To be used for progress bars which takes arguments from 0.0 to 1.0
+ */
 -(float)getProgressForBar:(NSDecimalNumber *)progress {
 	float theProgress = [progress floatValue];
 	float ret = theProgress / 1000;
@@ -123,17 +69,17 @@
 	self.titleLabel.text = [data objectAtIndex:NAME];
 	
 	NSString * size = @"Size: ";
-	NSString * sizeText = [size stringByAppendingString:[self getSizeReadable:[data objectAtIndex:SIZE]]];
+	NSString * sizeText = [size stringByAppendingString:[Utilities getSizeReadable:[data objectAtIndex:SIZE]]];
 	self.sizeLabel.text = sizeText;
 	
 	NSString * done = @"Done: ";
-	NSString * doneText = [done stringByAppendingString:[self getSizeReadable:[data objectAtIndex:DOWNLOADED]]];
+	NSString * doneText = [done stringByAppendingString:[Utilities getSizeReadable:[data objectAtIndex:DOWNLOADED]]];
 	self.doneLabel.text = doneText;
 	
 	self.progressView.progress = [self getProgressForBar:[data objectAtIndex:PERCENT_PROGRESS]];
 	
 	NSString * status = @"Status: ";
-	NSString * statusText = [status stringByAppendingString:[self getStatusReadable:[data objectAtIndex:STATUS]
+	NSString * statusText = [status stringByAppendingString:[Utilities getStatusReadable:[data objectAtIndex:STATUS]
 																		forProgress:[data objectAtIndex:PERCENT_PROGRESS]]];
 	self.statusLabel.text = statusText;
 }
@@ -182,16 +128,13 @@
 }
 
 /*
- this function was taken from an XML example
- provided by Apple
- 
- I can take no credit in this
+ * Function was taken from an XML example provided by Apple
  */
-- (UILabel *)newLabelWithPrimaryColor:(UIColor *)primaryColor selectedColor:(UIColor *)selectedColor fontSize:(CGFloat)fontSize bold:(BOOL)bold
-{
-	/*
-	 Create and configure a label.
-	 */
+- (UILabel *)newLabelWithPrimaryColor:(UIColor *)primaryColor 
+						selectedColor:(UIColor *)selectedColor 
+							 fontSize:(CGFloat)fontSize 
+								 bold:(BOOL)bold {
+	// Create and configure a label.
 	
     UIFont *font;
     if (bold) {
@@ -201,7 +144,9 @@
     }
     
     /*
-	 Views are drawn most efficiently when they are opaque and do not have a clear background, so set these defaults.  To show selection properly, however, the views need to be transparent (so that the selection color shows through).  This is handled in setSelected:animated:.
+	 * Views are drawn most efficiently when they are opaque and do not have a clear background, so set these defaults.
+	 * To show selection properly, however, the views need to be transparent (so that the selection color shows through).  
+	 * This is handled in setSelected:animated:.
 	 */
 	UILabel *newLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 	newLabel.backgroundColor = [UIColor whiteColor];
