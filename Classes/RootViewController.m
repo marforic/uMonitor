@@ -117,6 +117,56 @@
 	
 	self.navigationItem.title = @"Torrents";
 	
+	CGRect frame = CGRectMake(0.0, 0.0, 25.0, 25.0);
+	UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithFrame:frame];
+	[loading startAnimating];
+	[loading sizeToFit];
+	loading.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin |
+								UIViewAutoresizingFlexibleRightMargin |
+								UIViewAutoresizingFlexibleTopMargin |
+								UIViewAutoresizingFlexibleBottomMargin);
+	
+	// initing the bar button
+	UIBarButtonItem *loadingView = [[UIBarButtonItem alloc] initWithCustomView:loading];
+	[loading release];
+	loadingView.target = self;
+	
+	self.navigationItem.rightBarButtonItem = loadingView;
+	
+	[self networkRequest];
+	//[NSThread detachNewThreadSelector: @selector(updateData) toTarget:self withObject:nil];
+}
+
+
+- (void)updateData {
+	while (1) {
+		NSAutoreleasePool *pool = [ [ NSAutoreleasePool alloc ] init ];
+		sleep(10);
+		[self networkRequest];
+		[pool release];
+	}
+}
+
+- (void)networkRequest {
+	CGRect frame = CGRectMake(0.0, 0.0, 25.0, 25.0);
+	UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithFrame:frame];
+	[loading startAnimating];
+	[loading sizeToFit];
+	loading.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin |
+								UIViewAutoresizingFlexibleRightMargin |
+								UIViewAutoresizingFlexibleTopMargin |
+								UIViewAutoresizingFlexibleBottomMargin);
+	
+	// initing the bar button
+	UIBarButtonItem *loadingView = [[UIBarButtonItem alloc] initWithCustomView:loading];
+	[loading release];
+	loadingView.target = self;
+	
+	self.navigationItem.rightBarButtonItem = loadingView;
+	
+	//NSLog(@"got called");
+	//NSAutoreleasePool *pool = [ [ NSAutoreleasePool alloc ] init ];
+	
 	if ([self connectedToNetwork] && [self hostAvailable:@"ea17.homends.org"])
 		printf("network connection established and host available\n");
 	else
@@ -135,6 +185,9 @@
 		// inform the user that the download could not be made
 		NSLog(@"download can't be made\n");
 	}
+	// auto release
+	//[pool release];
+	// remove indicator
 	
 }
 
@@ -187,6 +240,8 @@
     NSLog(@"Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+	
+	self.navigationItem.rightBarButtonItem = nil;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -208,6 +263,7 @@
     [connection release];
     [receivedData release];
 	[readableString release];
+	self.navigationItem.rightBarButtonItem = nil;
 }
 
 
@@ -260,7 +316,6 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"called");
     static NSString *CellIdentifier = @"My Identifier";
     
     TorrentCell *cell = (TorrentCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];

@@ -25,6 +25,7 @@
 - (BOOL)hostAvailable: (NSString *) theHost;
 - (BOOL)addressFromString: (NSString *)IPAddress address:(struct sockaddr_in *) address;
 - (NSString *) getIPAddressForHost: (NSString *) theHost;
+- (void)networkRequest;
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
