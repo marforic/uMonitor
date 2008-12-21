@@ -114,8 +114,9 @@
 }
 
 -(float)getProgressForBar:(NSDecimalNumber *)progress {
-	int theProgress = [progress intValue];
-	return theProgress/100;
+	float theProgress = [progress floatValue];
+	float ret = theProgress / 1000;
+	return ret;
 }
 
 -(void)setData:(NSArray *)data {
@@ -129,7 +130,6 @@
 	NSString * doneText = [done stringByAppendingString:[self getSizeReadable:[data objectAtIndex:DOWNLOADED]]];
 	self.doneLabel.text = doneText;
 	
-	NSLog(@"progress: %@ is: %@", [data objectAtIndex:PERCENT_PROGRESS], [[data objectAtIndex:PERCENT_PROGRESS] class]);
 	self.progressView.progress = [self getProgressForBar:[data objectAtIndex:PERCENT_PROGRESS]];
 	
 	NSString * status = @"Status: ";
