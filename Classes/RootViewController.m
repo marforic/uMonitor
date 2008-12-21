@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "uTorrentViewAppDelegate.h"
 #import "uTorrentConstants.h"
+#import "DetailsViewController.h"
 
 #import <SystemConfiguration/SCNetworkConnection.h>
 #import <netinet/in.h>
@@ -278,9 +279,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
-	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
-	// [self.navigationController pushViewController:anotherViewController];
-	// [anotherViewController release];
+	NSArray * itemAtIndex = (NSArray *)[self.jsonArray objectAtIndex:indexPath.row];
+	DetailsViewController * detailsViewController = [[DetailsViewController alloc] initWithTorrent:itemAtIndex];
+	[self.navigationController pushViewController:detailsViewController animated:YES];
+	[detailsViewController release];
 }
 
 
