@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "uTorrentViewAppDelegate.h"
 #import "uTorrentConstants.h"
+#import "TorrentCell.h"
 #import "DetailsViewController.h"
 
 #import <SystemConfiguration/SCNetworkConnection.h>
@@ -260,16 +261,17 @@
     NSLog(@"called");
     static NSString *CellIdentifier = @"My Identifier";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TorrentCell *cell = (TorrentCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[[TorrentCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     // Set up the cell...
 	// setting the text
 	NSArray *itemAtIndex = (NSArray *)[self.jsonArray objectAtIndex:indexPath.row];
-	[cell setText:[itemAtIndex objectAtIndex:NAME]];
+	[cell setData:itemAtIndex];
+	//[cell setText:[itemAtIndex objectAtIndex:NAME]];
 
 	
 	
