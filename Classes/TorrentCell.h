@@ -18,8 +18,9 @@
 	UILabel * DLLabel;
 	UILabel * ULLabel;
 	UILabel * ETALabel;
-	UILabel * PeersLabel;
-	UILabel * SeedsLabel;
+	UILabel * peersLabel;
+	UILabel * seedsLabel;
+	UIProgressView * progressView;
 }
 
 @property (nonatomic, retain) UILabel * titleLabel;
@@ -29,12 +30,14 @@
 @property (nonatomic, retain) UILabel * DLLabel;
 @property (nonatomic, retain) UILabel * ULLabel;
 @property (nonatomic, retain) UILabel * ETALabel;
-@property (nonatomic, retain) UILabel * PeersLabel;
-@property (nonatomic, retain) UILabel * SeedsLabel;
+@property (nonatomic, retain) UILabel * peersLabel;
+@property (nonatomic, retain) UILabel * seedsLabel;
+@property (nonatomic, retain) UIProgressView * progressView;
 
 - (void)setData:(NSArray *)data;
 - (UILabel *)newLabelWithPrimaryColor:(UIColor *)primaryColor selectedColor:(UIColor *)selectedColor fontSize:(CGFloat)fontSize bold:(BOOL)bold;
 -(NSString *)getSizeReadable:(NSDecimalNumber *)size;
 -(NSString *)getStatusReadable:(NSDecimalNumber *)status forProgress:(NSDecimalNumber *)progress;
+-(float)getProgressForBar:(NSDecimalNumber *)progress;
 
 @end

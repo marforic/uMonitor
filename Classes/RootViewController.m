@@ -287,6 +287,11 @@
 	[detailsViewController release];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath  
+{  
+    return 80.0; //returns floating point which will be used for a cell row height at specified row index  
+}
+
 
 /*
 // Override to support conditional editing of the table view.

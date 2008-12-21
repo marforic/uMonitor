@@ -32,4 +32,6 @@
 - (void)connection:(NSURLConnection *)connection   didFailWithError:(NSError *)error;
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
