@@ -8,11 +8,12 @@
 
 #import "DetailsViewController.h"
 #import "uTorrentConstants.h"
+#import "Utilities.h"
 
 
 @implementation DetailsViewController
 
-@synthesize torrent, actionButton, statusLabel, torrentTitle, torrentStatus, torrentSize, torrentProgress;
+@synthesize torrent, actionButton, statusLabel, torrentStatus, torrentSize, torrentProgress;
 @synthesize torrentDownloaded, torrentUploaded, torrentRatio, torrentUspeed, torrentDspeed, torrentEta;
 @synthesize torrentPeers, torrentSeeds, torrentAvail, torrentRem, sizeLabel, progressLabel, downloadedLabel;
 @synthesize uploadedLabel, ratioLabel, uspeedLabel, dspeedLabel, etaLabel, peersLabel, seedsLabel, availLabel;
@@ -35,10 +36,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
 	self.navigationItem.title = (NSString *)[self.torrent objectAtIndex:NAME];
-	
-	[self.torrentTitle setText:(NSString *)[self.torrent objectAtIndex:NAME]];
 	[self updateLabels];
 }
 
@@ -57,19 +55,19 @@
 }
 
 - (void)updateLabels {
-	[self.torrentStatus setText: [[self.torrent objectAtIndex:STATUS] stringValue]];
-	[self.torrentSize setText: [[self.torrent objectAtIndex:SIZE] stringValue]];
-	[self.torrentProgress setText: [[self.torrent objectAtIndex:PERCENT_PROGRESS] stringValue]];
-	[self.torrentDownloaded setText: [[self.torrent objectAtIndex:DOWNLOADED] stringValue]];
-	[self.torrentUploaded setText: [[self.torrent objectAtIndex:UPLOADED] stringValue]];
-	[self.torrentRatio setText: [[self.torrent objectAtIndex:RATIO] stringValue]];
-	[self.torrentUspeed setText: [[self.torrent objectAtIndex:UPLOAD_SPEED] stringValue]];
-	[self.torrentDspeed setText: [[self.torrent objectAtIndex:DOWNLOAD_SPEED] stringValue]];
+	[self.torrentStatus setText: [Utilities getStatusReadable:[self.torrent objectAtIndex:STATUS] forProgress:[self.torrent objectAtIndex:PERCENT_PROGRESS]]];
+	[self.torrentSize setText: [Utilities getSizeReadable:[self.torrent objectAtIndex:SIZE]]];
+	[self.torrentProgress setText: [[[self.torrent objectAtIndex:PERCENT_PROGRESS] decimalNumberByDividingBy:[[NSDecimalNumber alloc] initWithInt:10]] stringValue]];
+	[self.torrentDownloaded setText: [Utilities getSizeReadable:[self.torrent objectAtIndex:DOWNLOADED]]];
+	[self.torrentUploaded setText: [Utilities getSizeReadable:[self.torrent objectAtIndex:UPLOADED]]];
+	[self.torrentRatio setText: [[[self.torrent objectAtIndex:RATIO] decimalNumberByDividingBy:[[NSDecimalNumber alloc] initWithInt:10]] stringValue]];
+	[self.torrentUspeed setText: [Utilities getSizeReadable:[self.torrent objectAtIndex:UPLOAD_SPEED]]];
+	[self.torrentDspeed setText: [Utilities getSizeReadable:[self.torrent objectAtIndex:DOWNLOAD_SPEED]]];
 	[self.torrentEta setText: [[self.torrent objectAtIndex:ETA] stringValue]];
 	[self.torrentPeers setText: [[self.torrent objectAtIndex:PEERS_CONNECTED] stringValue]];
 	[self.torrentSeeds setText: [[self.torrent objectAtIndex:SEEDS_CONNECTED] stringValue]];
-	[self.torrentAvail setText: [[self.torrent objectAtIndex:AVAILABILITY] stringValue]];
-	[self.torrentRem setText: [[self.torrent objectAtIndex:REMAINING] stringValue]];
+	[self.torrentAvail setText: [[[self.torrent objectAtIndex:AVAILABILITY] decimalNumberByDividingBy:[[NSDecimalNumber alloc] initWithInt:65535]] stringValue]];
+	[self.torrentRem setText: [Utilities getSizeReadable:[self.torrent objectAtIndex:REMAINING]]];
 }
 
 - (void)refresh {

@@ -13,7 +13,6 @@
 	@private
 	NSArray * torrent;
 	UIButton * actionButton;
-	UILabel * torrentTitle;
 	UILabel * statusLabel;
 	UILabel * torrentStatus;
 	UILabel * sizeLabel;
@@ -44,7 +43,6 @@
 
 @property (nonatomic, retain) NSArray * torrent;
 @property (nonatomic, retain) UIButton * actionButton;
-@property (nonatomic, retain) UILabel * torrentTitle;
 @property (nonatomic, retain) UILabel * statusLabel;
 @property (nonatomic, retain) UILabel * torrentStatus;
 @property (nonatomic, retain) UILabel * sizeLabel;
