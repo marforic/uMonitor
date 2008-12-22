@@ -13,13 +13,15 @@
 @implementation uTorrentViewAppDelegate
 
 @synthesize window;
-@synthesize navigationController;
+//@synthesize navigationController;
+@synthesize tabBarController;
 
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
 	
 	// Configure and show the window
-	[window addSubview:[navigationController view]];
+	//[window addSubview:[navigationController view]];
+	[window addSubview:[tabBarController view]];
 	[window makeKeyAndVisible];
 }
 
@@ -30,7 +32,8 @@
 
 
 - (void)dealloc {
-	[navigationController release];
+	[tabBarController release];
+	//[navigationController release];
 	[window release];
 	[super dealloc];
 }

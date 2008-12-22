@@ -111,11 +111,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-	// self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
+	// set the title
 	self.navigationItem.title = @"Torrents";
+	
+	// set the refresh button
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(networkRequest)];
 	
 	CGRect frame = CGRectMake(0.0, 0.0, 25.0, 25.0);
 	UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithFrame:frame];
@@ -134,17 +135,6 @@
 	self.navigationItem.rightBarButtonItem = loadingView;
 	
 	[self networkRequest];
-	//[NSThread detachNewThreadSelector: @selector(updateData) toTarget:self withObject:nil];
-}
-
-
-- (void)updateData {
-	while (1) {
-		NSAutoreleasePool *pool = [ [ NSAutoreleasePool alloc ] init ];
-		sleep(10);
-		[self networkRequest];
-		[pool release];
-	}
 }
 
 - (void)networkRequest {
@@ -164,9 +154,6 @@
 	
 	self.navigationItem.rightBarButtonItem = loadingView;
 	
-	//NSLog(@"got called");
-	//NSAutoreleasePool *pool = [ [ NSAutoreleasePool alloc ] init ];
-	
 	if ([self connectedToNetwork] && [self hostAvailable:@"ea17.homends.org"])
 		printf("network connection established and host available\n");
 	else
@@ -179,16 +166,11 @@
 		// Create the NSMutableData that will hold
 		// the received data
 		// receivedData is declared as a method instance elsewhere
-		//NSLog(@"theConnection != nil: %@\n", theConnection);
 		receivedData = [[NSMutableData data] retain];
 	} else {
 		// inform the user that the download could not be made
 		NSLog(@"download can't be made\n");
 	}
-	// auto release
-	//[pool release];
-	// remove indicator
-	
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
