@@ -15,6 +15,10 @@
 
 +(NSString *)getStatusReadable:(NSDecimalNumber *)status forProgress:(NSDecimalNumber *)progress;
 +(NSString *)getSizeReadable:(NSDecimalNumber *)size;
++(NSString *)getSpeedReadable:(NSDecimalNumber *)speed;
++(NSString *)getRatioReadable:(NSDecimalNumber *)ratio;
++(NSString *)getETAReadable:(NSDecimalNumber *)eta;
++(NSString *)getAvailabilityReadable:(NSDecimalNumber *)availability;
 +(void)createAndShowAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
 
 @end

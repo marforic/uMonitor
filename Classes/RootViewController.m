@@ -11,7 +11,7 @@
 #import "uTorrentConstants.h"
 #import "Utilities.h"
 #import "TorrentCell.h"
-#import "DetailsViewController.h"
+#import "DetailedViewController.h"
 
 @implementation RootViewController
 
@@ -25,28 +25,23 @@
 	self.navigationItem.title = @"Torrents";
 	
 	// set the refresh button
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(networkRequest)];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(networkRequest)];
 	
-	CGRect frame = CGRectMake(0.0, 0.0, 25.0, 25.0);
-	UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithFrame:frame];
-	[loading startAnimating];
-	[loading sizeToFit];
-	loading.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin |
-								UIViewAutoresizingFlexibleRightMargin |
-								UIViewAutoresizingFlexibleTopMargin |
-								UIViewAutoresizingFlexibleBottomMargin);
-	
-	// initing the bar button
-	UIBarButtonItem *loadingView = [[UIBarButtonItem alloc] initWithCustomView:loading];
-	[loading release];
-	loadingView.target = self;
-	
-	self.navigationItem.rightBarButtonItem = loadingView;
+	[self showLoadingCursor];
 	
 	[self networkRequest];
 }
 
 - (void)networkRequest {
+	self.navigationItem.rightBarButtonItem.enabled = FALSE;
+	[self showLoadingCursor];
+	
+	// create the request
+	[tnm requestList];
+}
+
+
+-(void)showLoadingCursor {
 	CGRect frame = CGRectMake(0.0, 0.0, 25.0, 25.0);
 	UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithFrame:frame];
 	[loading startAnimating];
@@ -61,10 +56,7 @@
 	[loading release];
 	loadingView.target = self;
 	
-	self.navigationItem.rightBarButtonItem = loadingView;
-	
-	// create the request
-	[tnm requestList];
+	self.navigationItem.leftBarButtonItem = loadingView;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -138,7 +130,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
 	NSArray * itemAtIndex = (NSArray *)[tnm.jsonArray objectAtIndex:indexPath.row];
-	DetailsViewController * detailsViewController = [[DetailsViewController alloc] initWithTorrent:itemAtIndex];
+	DetailedViewController * detailsViewController = [[DetailedViewController alloc] initWithTorrent:itemAtIndex];
 	[self.navigationController pushViewController:detailsViewController animated:YES];
 	[detailsViewController release];
 }
@@ -190,7 +182,8 @@
 
 - (void)update {
 	[torrentsTable reloadData];
-	self.navigationItem.rightBarButtonItem = nil;
+	self.navigationItem.rightBarButtonItem.enabled = YES;
+	self.navigationItem.leftBarButtonItem = nil;
 }
 
 - (void)dealloc {

@@ -68,6 +68,45 @@
 	return([NSString stringWithFormat:@"%1.1f GB",floatSize]);
 }
 
++(NSString *)getSpeedReadable:(NSDecimalNumber *)speed {
+	double theSpeed = [speed doubleValue];
+	float floatSize = theSpeed;
+	//if (theSpeed < 1023)
+	//	return([NSString stringWithFormat:@"%1.1f bytes/s",theSpeed]);
+	floatSize = floatSize / 1024;
+	if (floatSize < 1023)
+		return([NSString stringWithFormat:@"%1.1f kB/s",floatSize]);
+	floatSize = floatSize / 1024;
+	if (floatSize < 1023)
+		return([NSString stringWithFormat:@"%1.1f MB/s",floatSize]);
+	floatSize = floatSize / 1024;
+	// codiez se scaricano cosi': GIEF BANDA!!!
+	return([NSString stringWithFormat:@"%1.1f GB/s",floatSize]);
+}
+
++(NSString *)getETAReadable:(NSDecimalNumber *)eta {
+	// TODO: non capisco come mai il codice sotto qui' non funziona.
+	/*int theETA = [eta intValue];
+	NSDate * now = [[NSDate alloc] dateWithTimeIntervalSinceNow:(NSTimeInterval)theETA];
+	return [now description];*/
+	return @"TODO";
+}
+
++(NSString *)getAvailabilityReadable:(NSDecimalNumber *)availability {
+	double theAvailability = [availability doubleValue];
+	float tmpAvailability = theAvailability / 65535;
+	NSString * ret = [NSString stringWithFormat:@"%1.2f", tmpAvailability];
+	return ret;
+}
+
+
++(NSString *)getRatioReadable:(NSDecimalNumber *)ratio {
+	float theRatio = [ratio floatValue];
+	float tmpRet = theRatio / 1000;
+	NSString * ret = [NSString stringWithFormat:@"%1.2f", tmpRet];
+	return ret;
+}
+
 +(void)createAndShowAlertWithTitle:(NSString *)title andMessage:(NSString *)message {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message
 												   delegate:self 

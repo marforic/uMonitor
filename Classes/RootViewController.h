@@ -20,5 +20,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)networkRequest;
+-(void)showLoadingCursor;
 
 @end
