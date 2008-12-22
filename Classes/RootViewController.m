@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "uTorrentViewAppDelegate.h"
 #import "uTorrentConstants.h"
+#import "Utilities.h"
 #import "TorrentCell.h"
 #import "DetailsViewController.h"
 
@@ -207,8 +208,8 @@
         [[challenge sender] cancelAuthenticationChallenge:challenge];
         // inform the user that the user name and password
         // in the preferences are incorrect
-		NSLog(@"credentials incorrect\n");
-    }
+		[Utilities createAndShowAlertWithTitle:@"Credentials Incorrect" andMessage:@"Username or Password incorrect"];
+	}
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error

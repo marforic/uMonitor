@@ -68,6 +68,14 @@
 	return([NSString stringWithFormat:@"%1.1f GB",floatSize]);
 }
 
++(void)createAndShowAlertWithTitle:(NSString *)title andMessage:(NSString *)message {
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message
+												   delegate:self 
+										  cancelButtonTitle:@"OK" otherButtonTitles: nil];
+	[alert show];	
+	[alert release];	
+}
+
 
 
 

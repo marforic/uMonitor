@@ -15,6 +15,6 @@
 
 +(NSString *)getStatusReadable:(NSDecimalNumber *)status forProgress:(NSDecimalNumber *)progress;
 +(NSString *)getSizeReadable:(NSDecimalNumber *)size;
-
++(void)createAndShowAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
 
 @end
