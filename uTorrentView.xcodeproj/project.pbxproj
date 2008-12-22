@@ -17,6 +17,7 @@
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		49C0C8F10EFD7EFB00DCBCA3 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C0C8F00EFD7EFB00DCBCA3 /* DetailsViewController.m */; };
 		49C0C8FA0EFD80D700DCBCA3 /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C0C8F90EFD80D700DCBCA3 /* DetailsViewController.xib */; };
+		49F16D260EFFFC490069037E /* TorrentNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F16D250EFFFC490069037E /* TorrentNetworkManager.m */; };
 		610620F00EFD7DC0003A3B53 /* TorrentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 610620EF0EFD7DC0003A3B53 /* TorrentCell.m */; };
 		61DDE7270EFEDB5F00EE8119 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DDE7260EFEDB5F00EE8119 /* Utilities.m */; };
 		61EB95110EF6C51F00340762 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61EB95100EF6C51F00340762 /* Settings.bundle */; };
@@ -39,6 +40,9 @@
 		49C0C8EF0EFD7EFB00DCBCA3 /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		49C0C8F00EFD7EFB00DCBCA3 /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		49C0C8F90EFD80D700DCBCA3 /* DetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsViewController.xib; sourceTree = "<group>"; };
+		49F16D240EFFFC490069037E /* TorrentNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentNetworkManager.h; sourceTree = "<group>"; };
+		49F16D250EFFFC490069037E /* TorrentNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorrentNetworkManager.m; sourceTree = "<group>"; };
+		49F16D2E0F0010730069037E /* TorrentListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentListener.h; sourceTree = "<group>"; };
 		610620BD0EFD77FC003A3B53 /* uTorrentConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uTorrentConstants.h; sourceTree = "<group>"; };
 		610620EE0EFD7DC0003A3B53 /* TorrentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentCell.h; sourceTree = "<group>"; };
 		610620EF0EFD7DC0003A3B53 /* TorrentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorrentCell.m; sourceTree = "<group>"; };
@@ -78,6 +82,9 @@
 				49C0C8F00EFD7EFB00DCBCA3 /* DetailsViewController.m */,
 				61DDE7250EFEDB5F00EE8119 /* Utilities.h */,
 				61DDE7260EFEDB5F00EE8119 /* Utilities.m */,
+				49F16D240EFFFC490069037E /* TorrentNetworkManager.h */,
+				49F16D250EFFFC490069037E /* TorrentNetworkManager.m */,
+				49F16D2E0F0010730069037E /* TorrentListener.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -203,6 +210,7 @@
 				610620F00EFD7DC0003A3B53 /* TorrentCell.m in Sources */,
 				49C0C8F10EFD7EFB00DCBCA3 /* DetailsViewController.m in Sources */,
 				61DDE7270EFEDB5F00EE8119 /* Utilities.m in Sources */,
+				49F16D260EFFFC490069037E /* TorrentNetworkManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

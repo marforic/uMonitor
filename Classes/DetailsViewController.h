@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TorrentNetworkManager.h"
+#import "TorrentListener.h"
 
-
-@interface DetailsViewController : UIViewController {
+@interface DetailsViewController : UIViewController<TorrentListener> {
 	@private
 	NSArray * torrent;
 	UIButton * actionButton;
@@ -71,5 +72,6 @@
 @property (nonatomic, retain) UILabel * torrentRem;
 
 - (id)initWithTorrent:(NSArray *)selectedTorrent;
+- (void)update;
 - (void)updateLabels;
 @end

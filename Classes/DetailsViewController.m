@@ -70,12 +70,13 @@
 	[self.torrentRem setText: [Utilities getSizeReadable:[self.torrent objectAtIndex:REMAINING]]];
 }
 
-- (void)refresh {
+- (void)update {
 	
 }
 
 
 - (void)dealloc {
+	[self.torrent release];
     [super dealloc];
 }
 
