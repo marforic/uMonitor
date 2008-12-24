@@ -13,11 +13,13 @@
 	@private
 	NSMutableData * receivedData;
 	NSDictionary * jsonItem;
-	NSMutableArray * jsonArray;
+	NSMutableArray * torrentsData;
+	NSMutableArray * labelsData;
 	NSMutableArray * listeners;
 }
 
-@property (nonatomic, retain) NSMutableArray * jsonArray;
+@property (nonatomic, retain) NSMutableArray * torrentsData;
+@property (nonatomic, retain) NSMutableArray * labelsData;
 @property (nonatomic, retain) NSDictionary * jsonItem;
 
 - (BOOL)connectedToNetwork;

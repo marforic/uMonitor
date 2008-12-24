@@ -103,13 +103,13 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [tnm.jsonArray count];
+    return [tnm.torrentsData count];
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"My Identifier";
+    static NSString *CellIdentifier = @"TorrentsCell";
     
     TorrentCell *cell = (TorrentCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -119,7 +119,7 @@
     
     // Set up the cell...
 	// setting the text
-	NSArray *itemAtIndex = (NSArray *)[tnm.jsonArray objectAtIndex:indexPath.row];
+	NSArray *itemAtIndex = (NSArray *)[tnm.torrentsData objectAtIndex:indexPath.row];
 	[cell setData:itemAtIndex];
 	//[cell setText:[itemAtIndex objectAtIndex:NAME]];
 
@@ -131,7 +131,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
-	NSArray * itemAtIndex = (NSArray *)[tnm.jsonArray objectAtIndex:indexPath.row];
+	NSArray * itemAtIndex = (NSArray *)[tnm.torrentsData objectAtIndex:indexPath.row];
 	DetailedViewController * detailsViewController = [[DetailedViewController alloc] initWithTorrent:itemAtIndex];
 	[self.navigationController pushViewController:detailsViewController animated:YES];
 	[detailsViewController release];

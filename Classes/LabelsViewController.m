@@ -29,11 +29,11 @@
 	
 	mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
-	tnm = [[TorrentNetworkManager alloc] init];
+	tnm = [mainAppDelegate getTNM];
 	[tnm addListener:self];
-	// set the title
-	self.navigationItem.title = @"Torrents";
 	
+	// set the title
+	self.navigationItem.title = @"Labels";
 	// set the refresh button
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(networkRequest)];
 }
@@ -89,14 +89,14 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [tnm.labelsData count];
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"LabelsCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -104,7 +104,7 @@
     }
     
     // Set up the cell...
-
+	cell.text = [[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:0];
     return cell;
 }
 

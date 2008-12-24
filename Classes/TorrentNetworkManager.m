@@ -19,7 +19,8 @@
 
 @implementation TorrentNetworkManager
 	
-@synthesize jsonArray;
+@synthesize torrentsData;
+@synthesize labelsData;
 @synthesize jsonItem;
 
 - (id)init {
@@ -166,9 +167,11 @@
 	NSString * readableString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
 	
 	self.jsonItem = [readableString JSONValue];
-	self.jsonArray = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"torrents"]];
+	self.torrentsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"torrents"]];
+	self.labelsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"label"]];
 	
-	NSLog(@"jsonArray size: %i", [self.jsonArray count]);
+	NSLog(@"torrentsData size: %i", [self.torrentsData count]);
+	NSLog(@"labelsData size: %i", [self.labelsData count]);
 	//NSLog(@"jsonArray: %@", self.jsonArray);
 	NSEnumerator * enumerator = [listeners objectEnumerator];
 	id obj;
@@ -204,7 +207,6 @@
 }
 
 - (void)requestList {
-	NSLog(@"got called!");
 	[self sendNetworkRequest:@"?list=1"];
 }
 
@@ -224,7 +226,8 @@
 }
 
 - (void)dealloc {
-	[jsonArray dealloc];
+	[torrentsData dealloc];
+	[labelsData dealloc];
 	[jsonItem dealloc];
     [super dealloc];
 }
