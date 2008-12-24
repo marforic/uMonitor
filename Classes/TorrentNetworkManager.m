@@ -204,6 +204,7 @@
 }
 
 - (void)requestList {
+	NSLog(@"got called!");
 	[self sendNetworkRequest:@"?list=1"];
 }
 

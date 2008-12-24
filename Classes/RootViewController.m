@@ -16,14 +16,16 @@
 @implementation RootViewController
 
 @synthesize torrentsTable;
+@synthesize mainAppDelegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	tnm = [[TorrentNetworkManager alloc] init];
+	mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
+	tnm = [mainAppDelegate getTNM];
 	[tnm addListener:self];
+	
 	// set the title
 	self.navigationItem.title = @"Torrents";
-	
 	// set the refresh button
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(networkRequest)];
 	

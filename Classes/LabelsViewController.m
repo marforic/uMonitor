@@ -12,6 +12,7 @@
 @implementation LabelsViewController
 
 @synthesize labelsTable;
+@synthesize mainAppDelegate;
 
 /*
 - (id)initWithStyle:(UITableViewStyle)style {
@@ -22,14 +23,21 @@
 }
 */
 
-/*
-- (void)viewDidLoad {
-    [super viewDidLoad];
 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	
+	mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	tnm = [[TorrentNetworkManager alloc] init];
+	[tnm addListener:self];
+	// set the title
+	self.navigationItem.title = @"Torrents";
+	
+	// set the refresh button
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(networkRequest)];
 }
-*/
+
 
 /*
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,6 +72,13 @@
     [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
     // Release anything that's not essential, such as cached data
 }
+
+- (void)update {
+	[labelsTable reloadData];
+	//self.navigationItem.rightBarButtonItem.enabled = YES;
+	//self.navigationItem.leftBarButtonItem = nil;
+}
+
 
 #pragma mark Table view methods
 
@@ -144,6 +159,7 @@
 
 - (void)dealloc {
     [super dealloc];
+	[tnm dealloc];
 }
 
 

@@ -8,12 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+#import "TorrentNetworkManager.h"
+#import "TorrentListener.h"
+#import "uTorrentViewAppDelegate.h"
 
-@interface LabelsViewController : UITableViewController {
+@interface LabelsViewController : UITableViewController<TorrentListener> {
 	@private
 	IBOutlet UITableView * labelsTable;
+	TorrentNetworkManager * tnm;
+	uTorrentViewAppDelegate * mainAppDelegate;
 }
 
 @property (nonatomic,retain) IBOutlet UITableView *labelsTable;
+@property (nonatomic,retain) uTorrentViewAppDelegate * mainAppDelegate;
 
 @end

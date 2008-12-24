@@ -13,14 +13,20 @@
 @implementation uTorrentViewAppDelegate
 
 @synthesize window;
-//@synthesize navigationController;
 @synthesize tabBarController;
 
+@synthesize tnm;
+
+- (TorrentNetworkManager *)getTNM {
+	return tnm;
+}
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
 	
+	// instantiate our Torrent Network Manager
+	tnm = [[TorrentNetworkManager alloc] init];
+	
 	// Configure and show the window
-	//[window addSubview:[navigationController view]];
 	[window addSubview:[tabBarController view]];
 	[window makeKeyAndVisible];
 }
@@ -32,8 +38,9 @@
 
 
 - (void)dealloc {
+	[tnm release];
+	
 	[tabBarController release];
-	//[navigationController release];
 	[window release];
 	[super dealloc];
 }
