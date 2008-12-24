@@ -15,6 +15,8 @@
 @implementation DetailedViewController
 
 @synthesize torrent;
+@synthesize customFooter;
+@synthesize startButton, deleteButton;
 
 - (id)initWithTorrent:(NSArray *)selectedTorrent {
 	if (self = [super initWithStyle:UITableViewStyleGrouped])
@@ -84,6 +86,26 @@
 	}
 	return title;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+	return 80.0;
+}
+
+
+- (UIView *)tableView: (UITableView *)tableView viewForFooterInSection: (NSInteger)section {
+	[[NSBundle mainBundle] loadNibNamed:@"CustomFooterView"	owner:self options:nil];
+	
+	// check if the torrent is running or not
+	int torrentStatus = [Utilities getStatusProgrammable:[self.torrent objectAtIndex:STATUS]
+											 forProgress:[self.torrent objectAtIndex:PERCENT_PROGRESS]];
+	if (torrentStatus == STARTED || torrentStatus == QUEUED)
+		[self.startButton setTitle:@"Stop" forState:UIControlStateNormal];
+	else if (torrentStatus == CHECKING || torrentStatus == ERROR)
+		self.startButton.enabled = NO;
+	
+	return self.customFooter;
+}
+
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

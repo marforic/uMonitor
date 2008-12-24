@@ -8,6 +8,8 @@
 
 #import "Utilities.h"
 
+#import "uTorrentConstants.h"
+
 
 @implementation Utilities
 
@@ -51,6 +53,47 @@
 	
 	return ret;
 	
+}
+
++(int) getStatusProgrammable:(NSDecimalNumber *)status forProgress:(NSDecimalNumber *)progress {
+	int theStatus = [status intValue];
+	int theProgress = [progress intValue];
+	bool flag = false;
+	int ret = STOPPED;
+	
+	if ((theStatus & 1) == 1){ //Started
+		if ((theStatus & 32) == 32){ //paused
+			ret = PAUSED;
+			flag = true;
+		} else { //seeding or leeching
+			if ((theStatus & 64) == 64) {
+				ret = STARTED;
+				flag = true;
+			}
+			else {
+				ret = STARTED;
+				flag = true;
+			}
+		}
+	} else if ((theStatus & 2) == 2){ //checking
+		ret = CHECKING;
+		flag = true;
+	} else if ((theStatus & 16) == 16){ //error
+		ret = ERROR;
+		flag = true;
+	} else if ((theStatus & 64) == 64){ //queued
+		ret = QUEUED;
+		flag = true;
+	}
+	
+	if (theProgress == 1000 && !flag) {
+		ret = STOPPED; // TODO: not sure!!
+	}
+	else if (theProgress < 1000 && !flag) {
+		ret = STOPPED;
+	}
+	
+	return ret;
 }
 
 +(NSString *)getSizeReadable:(NSDecimalNumber *)size {

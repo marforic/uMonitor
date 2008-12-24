@@ -31,7 +31,16 @@
 		AVAILABILITY = 16,
 		TORRENT_QUEUE_ORDER = 17,
 		REMAINING = 18
-	};	
+	};
+	
+	enum TORRENTS_STATUS {
+		STARTED = 0,
+		PAUSED = 1,
+		CHECKING = 2,
+		ERROR = 3,
+		QUEUED = 4,
+		STOPPED = 5
+	};
 }
 
 @end

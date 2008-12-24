@@ -14,6 +14,7 @@
 }
 
 +(NSString *)getStatusReadable:(NSDecimalNumber *)status forProgress:(NSDecimalNumber *)progress;
++(int) getStatusProgrammable:(NSDecimalNumber *)status forProgress:(NSDecimalNumber *)progress;
 +(NSString *)getSizeReadable:(NSDecimalNumber *)size;
 +(NSString *)getSpeedReadable:(NSDecimalNumber *)speed;
 +(NSString *)getRatioReadable:(NSDecimalNumber *)ratio;
