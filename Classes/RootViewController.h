@@ -18,8 +18,7 @@
 
 @property (nonatomic,retain) IBOutlet UITableView *torrentsTable;
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)networkRequest;
--(void)showLoadingCursor;
+- (void)showLoadingCursor;
 
 @end
