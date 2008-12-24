@@ -69,6 +69,54 @@
     // Release anything that's not essential, such as cached data
 }
 
+#pragma mark Buttons methods
+- (void)startButtonAction {
+	NSLog(@"Start Button");
+}
+
+- (void)stopButtonAction {
+	NSLog(@"Stop Button");
+}
+
+- (void)deleteButtonAction {
+	// open a dialog with two custom buttons
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Delete Torrent"
+															 delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil
+													otherButtonTitles:@"Cancel", @"Delete .torrent", @"Delete .torrent and data", nil];
+	actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+	actionSheet.destructiveButtonIndex = 2;	// make the second button red (destructive)
+	[actionSheet showInView:self.view]; // show from our table view (pops up in the middle of the table)
+	[actionSheet release];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	switch(buttonIndex) {
+		case 0: // cancel
+			break;
+		case 1: // delete .torrent only
+			// TODO: call the deletion of .torrent file
+			break;
+		case 2: // delete .torrent and data
+			[Utilities alertOKCancelAction:@"Confirm data deletion" 
+								andMessage:@"You are going to destroy data that has been downloaded, are you sure?" 
+							  withDelegate:self];
+			break;
+		default:
+			break;
+	}
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	switch (buttonIndex) {
+		case 1: // OK
+			// TODO: call the deletion of .torrent file and data
+			NSLog(@"Doom be upon you, you are deleting everything!");
+			break;
+		default:
+			break;
+	}
+}
+
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -95,17 +143,26 @@
 - (UIView *)tableView: (UITableView *)tableView viewForFooterInSection: (NSInteger)section {
 	[[NSBundle mainBundle] loadNibNamed:@"CustomFooterView"	owner:self options:nil];
 	
-	// check if the torrent is running or not
+	// action for delete button
+	[self.deleteButton addTarget:self action:@selector(deleteButtonAction) forControlEvents:UIControlEventTouchDown];
+	
+	// action for start button
+	[self.startButton addTarget:self action:@selector(startButtonAction) forControlEvents:UIControlEventTouchDown];
+	
+	// check if the torrent is running or not to set the start/stop button accordingly
 	int torrentStatus = [Utilities getStatusProgrammable:[self.torrent objectAtIndex:STATUS]
 											 forProgress:[self.torrent objectAtIndex:PERCENT_PROGRESS]];
-	if (torrentStatus == STARTED || torrentStatus == QUEUED)
+	if (torrentStatus == STARTED || torrentStatus == QUEUED) {
 		[self.startButton setTitle:@"Stop" forState:UIControlStateNormal];
+		[self.startButton setTitle:@"Stop" forState:UIControlStateHighlighted];
+		[self.startButton removeTarget:self	action:@selector(startButtonAction) forControlEvents:UIControlEventTouchDown];
+		[self.startButton addTarget:self action:@selector(stopButtonAction) forControlEvents:UIControlEventTouchDown];
+	}
 	else if (torrentStatus == CHECKING || torrentStatus == ERROR)
 		self.startButton.enabled = NO;
 	
 	return self.customFooter;
 }
-
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

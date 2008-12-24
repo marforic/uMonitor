@@ -158,6 +158,13 @@
 	[alert release];	
 }
 
++(void)alertOKCancelAction:(NSString *)title andMessage:(NSString *)message withDelegate:(id)del {
+	// open a alert with an OK and cancel button
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message
+												   delegate:del cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+	[alert show];
+	[alert release];
+}
 
 
 

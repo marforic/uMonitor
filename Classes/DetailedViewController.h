@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface DetailedViewController : UITableViewController {
+@interface DetailedViewController : UITableViewController <UIActionSheetDelegate, UIAlertViewDelegate> {
 	@private
 	NSArray * torrent;
 	IBOutlet UIView * customFooter;
@@ -23,6 +23,8 @@
 @property (nonatomic, retain) IBOutlet UIButton * deleteButton;
 
 - (id)initWithTorrent:(NSArray *)selectedTorrent;
-
+- (void)startButtonAction;
+- (void)stopButtonAction;
+- (void)deleteButtonAction;
 
 @end
