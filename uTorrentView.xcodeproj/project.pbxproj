@@ -22,6 +22,7 @@
 		612483DA0F02600700DB8B5F /* CustomFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 612483D90F02600700DB8B5F /* CustomFooterView.xib */; };
 		612484980F02A0D600DB8B5F /* LabelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612484970F02A0D600DB8B5F /* LabelsViewController.m */; };
 		6124849A0F02A11D00DB8B5F /* LabelsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 612484990F02A11D00DB8B5F /* LabelsViewController.xib */; };
+		61613FFC0F03A72500DD585B /* LabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61613FFB0F03A72500DD585B /* LabelCell.m */; };
 		61A511860F0032A700839B16 /* DetailedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A511850F0032A700839B16 /* DetailedViewController.m */; };
 		61DDE7270EFEDB5F00EE8119 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DDE7260EFEDB5F00EE8119 /* Utilities.m */; };
 		61EB95110EF6C51F00340762 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61EB95100EF6C51F00340762 /* Settings.bundle */; };
@@ -54,6 +55,8 @@
 		612484960F02A0D600DB8B5F /* LabelsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelsViewController.h; sourceTree = "<group>"; };
 		612484970F02A0D600DB8B5F /* LabelsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelsViewController.m; sourceTree = "<group>"; };
 		612484990F02A11D00DB8B5F /* LabelsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelsViewController.xib; sourceTree = "<group>"; };
+		61613FFA0F03A72500DD585B /* LabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelCell.h; sourceTree = "<group>"; };
+		61613FFB0F03A72500DD585B /* LabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelCell.m; sourceTree = "<group>"; };
 		61A511840F0032A700839B16 /* DetailedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailedViewController.h; sourceTree = "<group>"; };
 		61A511850F0032A700839B16 /* DetailedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailedViewController.m; sourceTree = "<group>"; };
 		61DDE7250EFEDB5F00EE8119 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
@@ -81,6 +84,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				61613FFA0F03A72500DD585B /* LabelCell.h */,
+				61613FFB0F03A72500DD585B /* LabelCell.m */,
 				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
 				28C286E00D94DF7D0034E888 /* RootViewController.m */,
 				1D3623240D0F684500981E51 /* uTorrentViewAppDelegate.h */,
@@ -231,6 +236,7 @@
 				49F16D260EFFFC490069037E /* TorrentNetworkManager.m in Sources */,
 				61A511860F0032A700839B16 /* DetailedViewController.m in Sources */,
 				612484980F02A0D600DB8B5F /* LabelsViewController.m in Sources */,
+				61613FFC0F03A72500DD585B /* LabelCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

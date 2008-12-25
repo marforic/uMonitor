@@ -7,6 +7,7 @@
 //
 
 #import "LabelsViewController.h"
+#import "LabelCell.h"
 
 
 @implementation LabelsViewController
@@ -98,13 +99,21 @@
     
     static NSString *CellIdentifier = @"LabelsCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	cell = (LabelCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (cell == nil) {
+		[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil];
+		[cell setCellDataWithLabelString:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:0]
+							 colorString:[[UIColor alloc] initWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
+	}
+	
+	/*UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
     }
     
     // Set up the cell...
 	cell.text = [[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:0];
+	 */
     return cell;
 }
 
