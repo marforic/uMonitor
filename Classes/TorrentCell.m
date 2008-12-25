@@ -12,11 +12,11 @@
 
 @implementation TorrentCell
 
-@synthesize titleLabel, statusLabel, sizeLabel, doneLabel, DLLabel, ULLabel, ETALabel, peersLabel, seedsLabel, progressView;
+//@synthesize titleLabel, statusLabel, sizeLabel, doneLabel, DLLabel, ULLabel, ETALabel, peersLabel, seedsLabel, progressView;
 
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
-        // Initialization code
+        /*// Initialization code
 		
 		UIView *myContentView = self.contentView;
 		
@@ -43,6 +43,7 @@
 		
 		self.progressView = [UIProgressView alloc];
 		[self.progressView initWithProgressViewStyle:UIProgressViewStyleDefault];
+		 */
 		
     }
     return self;
@@ -66,6 +67,21 @@
 }
 
 -(void)setData:(NSArray *)data {
+	nameLabel.text = [data objectAtIndex:NAME];
+	
+	sizeLabel.font = [UIFont systemFontOfSize:12];
+	sizeLabel.text = [sizeLabel.text stringByAppendingString:[Utilities getSizeReadable:[data objectAtIndex:SIZE]]];
+	
+	doneLabel.font = [UIFont systemFontOfSize:12];
+	doneLabel.text = [doneLabel.text stringByAppendingString:[Utilities getSizeReadable:[data objectAtIndex:DOWNLOADED]]];
+
+	progressView.progress = [self getProgressForBar:[data objectAtIndex:PERCENT_PROGRESS]];
+	
+	// TODO: set right images depending on status
+	statusImage.image = [[UIImage imageNamed:@"status_green.png"] retain];
+	
+	
+	/*
 	self.titleLabel.text = [data objectAtIndex:NAME];
 	
 	NSString * size = @"Size: ";
@@ -82,9 +98,10 @@
 	NSString * statusText = [status stringByAppendingString:[Utilities getStatusReadable:[data objectAtIndex:STATUS]
 																		forProgress:[data objectAtIndex:PERCENT_PROGRESS]]];
 	self.statusLabel.text = statusText;
+	 */
 }
 
-- (void)layoutSubviews {
+/*- (void)layoutSubviews {
 	
     [super layoutSubviews];
 	
@@ -104,7 +121,7 @@
 		 place the label 4 pixels from the top
 		 make the label 300 pixels wide
 		 make the label 20 pixels high
-		 */
+		 
 		frame = CGRectMake(boundsX + 10, 4, 300, 20);
 		self.titleLabel.frame = frame;
 		
@@ -125,11 +142,12 @@
 		frame = CGRectMake(boundsX + 10, 50, 200, 20);
 		self.statusLabel.frame = frame;
 	}
-}
+}*/
 
 /*
  * Function was taken from an XML example provided by Apple
  */
+/*
 - (UILabel *)newLabelWithPrimaryColor:(UIColor *)primaryColor 
 						selectedColor:(UIColor *)selectedColor 
 							 fontSize:(CGFloat)fontSize 
@@ -147,7 +165,7 @@
 	 * Views are drawn most efficiently when they are opaque and do not have a clear background, so set these defaults.
 	 * To show selection properly, however, the views need to be transparent (so that the selection color shows through).  
 	 * This is handled in setSelected:animated:.
-	 */
+	 
 	UILabel *newLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 	newLabel.backgroundColor = [UIColor whiteColor];
 	newLabel.opaque = YES;
@@ -157,16 +175,20 @@
 	
 	return newLabel;
 }
+*/
 
 
 
 
 - (void)dealloc {
+	/*
 	[titleLabel dealloc];
 	[sizeLabel dealloc];
 	[statusLabel dealloc];
 	[doneLabel dealloc];
 	[progressView dealloc];
+	 */
+	[statusImage release];
     [super dealloc];
 }
 

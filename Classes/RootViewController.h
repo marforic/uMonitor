@@ -11,9 +11,12 @@
 #import "TorrentListener.h"
 #import "uTorrentViewAppDelegate.h"
 
+#import "TorrentCell.h"
+
 @interface RootViewController : UITableViewController<TorrentListener> {
 	@private
 	IBOutlet UITableView * torrentsTable;
+	IBOutlet TorrentCell * cell;
 	TorrentNetworkManager * tnm;
 	uTorrentViewAppDelegate * mainAppDelegate;
 }

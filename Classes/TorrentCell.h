@@ -11,6 +11,13 @@
 
 @interface TorrentCell : UITableViewCell {
 	@private
+	IBOutlet UILabel * nameLabel;
+	IBOutlet UILabel * sizeLabel;
+	IBOutlet UILabel * doneLabel;
+	IBOutlet UIImageView * statusImage;
+	IBOutlet UIProgressView * progressView;
+	
+	/*
 	UILabel * titleLabel;
 	UILabel * statusLabel;
 	UILabel * sizeLabel;
@@ -21,9 +28,10 @@
 	UILabel * peersLabel;
 	UILabel * seedsLabel;
 	UIProgressView * progressView;
+	 */
 }
 
-@property (nonatomic, retain) UILabel * titleLabel;
+/*@property (nonatomic, retain) UILabel * titleLabel;
 @property (nonatomic, retain) UILabel * statusLabel;
 @property (nonatomic, retain) UILabel * sizeLabel;
 @property (nonatomic, retain) UILabel * doneLabel;
@@ -33,9 +41,10 @@
 @property (nonatomic, retain) UILabel * peersLabel;
 @property (nonatomic, retain) UILabel * seedsLabel;
 @property (nonatomic, retain) UIProgressView * progressView;
+ */
 
 - (void)setData:(NSArray *)data;
-- (UILabel *)newLabelWithPrimaryColor:(UIColor *)primaryColor selectedColor:(UIColor *)selectedColor fontSize:(CGFloat)fontSize bold:(BOOL)bold;
+//- (UILabel *)newLabelWithPrimaryColor:(UIColor *)primaryColor selectedColor:(UIColor *)selectedColor fontSize:(CGFloat)fontSize bold:(BOOL)bold;
 - (float)getProgressForBar:(NSDecimalNumber *)progress;
 
 @end

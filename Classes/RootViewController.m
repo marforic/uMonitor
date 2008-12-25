@@ -111,16 +111,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"TorrentsCell";
     
-    TorrentCell *cell = (TorrentCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    cell = (TorrentCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-		cell = [[[TorrentCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		//cell = [[[TorrentCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+		[[NSBundle mainBundle] loadNibNamed:@"TorrentCell" owner:self options:nil];
+		NSArray *itemAtIndex = (NSArray *)[tnm.torrentsData objectAtIndex:indexPath.row];
+		[cell setData:itemAtIndex];
+		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     // Set up the cell...
 	// setting the text
-	NSArray *itemAtIndex = (NSArray *)[tnm.torrentsData objectAtIndex:indexPath.row];
-	[cell setData:itemAtIndex];
+	
 	//[cell setText:[itemAtIndex objectAtIndex:NAME]];
 
 	
