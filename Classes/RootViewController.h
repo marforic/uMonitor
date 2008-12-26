@@ -28,7 +28,6 @@
 
 - (void)networkRequest;
 - (void)showLoadingCursor;
-- (NSInteger *)countTorrentsWithLabel:(int)label;
 - (int)getSectionFromStatus:(int)status;
 - (void)organize;
 
