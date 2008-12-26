@@ -152,7 +152,7 @@
 	// check if the torrent is running or not to set the start/stop button accordingly
 	int torrentStatus = [Utilities getStatusProgrammable:[self.torrent objectAtIndex:STATUS]
 											 forProgress:[self.torrent objectAtIndex:PERCENT_PROGRESS]];
-	if (torrentStatus == STARTED || torrentStatus == QUEUED) {
+	if (torrentStatus == SEEDING || torrentStatus == LEECHING || torrentStatus == QUEUED) {
 		[self.startButton setTitle:@"Stop" forState:UIControlStateNormal];
 		[self.startButton setTitle:@"Stop" forState:UIControlStateHighlighted];
 		[self.startButton removeTarget:self	action:@selector(startButtonAction) forControlEvents:UIControlEventTouchDown];

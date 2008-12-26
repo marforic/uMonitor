@@ -78,7 +78,28 @@
 	progressView.progress = [self getProgressForBar:[data objectAtIndex:PERCENT_PROGRESS]];
 	
 	// TODO: set right images depending on status
-	statusImage.image = [[UIImage imageNamed:@"status_green.png"] retain];
+	switch ([Utilities getStatusProgrammable:[data objectAtIndex:STATUS] forProgress:[data objectAtIndex:PERCENT_PROGRESS]]) {
+		case LEECHING:
+			statusImage.image = [[UIImage imageNamed:@"status_green.png"] retain];
+			break;
+		case SEEDING:
+			statusImage.image = [[UIImage imageNamed:@"status_blue.png"] retain];
+			break;
+		case PAUSED:
+			statusImage.image = [[UIImage imageNamed:@"status_yellow.png"] retain];
+			break;
+		case CHECKING:// same as stopped
+		case STOPPED:
+			statusImage.image = [[UIImage imageNamed:@"status_grey.png"] retain];
+			break;
+		case FINISHED:
+			statusImage.image = [[UIImage imageNamed:@"status_violet.png"] retain];
+			break;
+		case ERROR:
+			statusImage.image = [[UIImage imageNamed:@"status_skull.png"] retain];
+			break;
+	}
+	
 	
 	
 	/*

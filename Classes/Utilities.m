@@ -67,11 +67,11 @@
 			flag = true;
 		} else { //seeding or leeching
 			if ((theStatus & 64) == 64) {
-				ret = STARTED;
+				ret = (theProgress == 1000) ? SEEDING : LEECHING;
 				flag = true;
 			}
 			else {
-				ret = STARTED;
+				ret = (theProgress == 1000) ? SEEDING : LEECHING;
 				flag = true;
 			}
 		}
@@ -87,7 +87,7 @@
 	}
 	
 	if (theProgress == 1000 && !flag) {
-		ret = STOPPED; // TODO: not sure!!
+		ret = FINISHED;
 	}
 	else if (theProgress < 1000 && !flag) {
 		ret = STOPPED;

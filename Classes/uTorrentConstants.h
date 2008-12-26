@@ -39,7 +39,10 @@
 		CHECKING = 2,
 		ERROR = 3,
 		QUEUED = 4,
-		STOPPED = 5
+		STOPPED = 5,
+		FINISHED = 6,
+		SEEDING = 7,
+		LEECHING = 8
 	};
 }
 
