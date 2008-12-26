@@ -14,12 +14,21 @@
     UIWindow *window;
 	UITabBarController * tabBarController;
     TorrentNetworkManager * tnm;
+	
+	NSString * settingsPassword;
+	NSString * settingsUname;
+	NSString * settingsPort;
+	NSString * settingsAddress;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController * tabBarController;
 
 @property (nonatomic, retain) TorrentNetworkManager * tnm;
+@property (nonatomic, retain) NSString * settingsAddress;
+@property (nonatomic, retain) NSString * settingsPort;
+@property (nonatomic, retain) NSString * settingsUname;
+@property (nonatomic, retain) NSString * settingsPassword;
 
 - (TorrentNetworkManager *)getTNM;
 
