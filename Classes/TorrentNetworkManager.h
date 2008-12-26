@@ -16,11 +16,13 @@
 	NSMutableArray * torrentsData;
 	NSMutableArray * labelsData;
 	NSMutableArray * listeners;
+	NSString * torrentsCacheID;
 }
 
 @property (nonatomic, retain) NSMutableArray * torrentsData;
 @property (nonatomic, retain) NSMutableArray * labelsData;
 @property (nonatomic, retain) NSDictionary * jsonItem;
+@property (nonatomic, retain) NSString * torrentsCacheID;
 
 - (BOOL)connectedToNetwork;
 - (BOOL)hostAvailable:(NSString *)theHost;

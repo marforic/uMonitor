@@ -22,6 +22,7 @@
 @synthesize torrentsData;
 @synthesize labelsData;
 @synthesize jsonItem;
+@synthesize torrentsCacheID;
 
 - (id)init {
 	if (self = [super init]) {
@@ -29,6 +30,12 @@
     }
     return self;
 }
+
+/*
+ * TODO: this class may need HUGE refactoring
+ * the cache_ID doesn't seem to work, I always get back the full list of torrents.
+ * on the forum it says that uTorrent can only remember _1_ cacheID, so if checking for it, make sure nobody else is using the webui
+ */
 
 - (BOOL)connectedToNetwork {
 	struct sockaddr_in zeroAddress;
@@ -175,6 +182,11 @@
 		self.torrentsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"torrents"]];
 	if ([jsonItem objectForKey:@"label"] != nil)
 		self.labelsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"label"]];
+	if ([jsonItem objectForKey:@"torrentc"] != nil)
+		self.torrentsCacheID = [jsonItem objectForKey:@"torrentc"];
+	
+	//NSLog(@"%@", readableString);
+	NSLog(@"cacheID as string:%@ as int: %i", [jsonItem objectForKey:@"torrentc"], [[jsonItem objectForKey:@"torrentc"] intValue]);
 	
 	NSLog(@"torrentsData size: %i", [self.torrentsData count]);
 	NSLog(@"labelsData size: %i", [self.labelsData count]);
@@ -199,7 +211,14 @@
 		printf("couldn't reach host\n");
 	// create the request
 	NSString * url = @"http://ea17.homedns.org:8080/gui/";
-	NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[url stringByAppendingString:request]]];
+	NSString * urlrequest = [url stringByAppendingString:request];
+	if (self.torrentsCacheID != nil) {
+		urlrequest = [urlrequest stringByAppendingString:@"&cid="];
+		urlrequest = [urlrequest stringByAppendingString:self.torrentsCacheID];
+	}
+	NSLog(@"request: %@, chacheID: %@", urlrequest, self.torrentsCacheID);
+	NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlrequest]];
+		
 	NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
 	if (theConnection) {
 		// Create the NSMutableData that will hold
