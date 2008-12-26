@@ -27,7 +27,6 @@
 @property (nonatomic, retain) NSArray * organizedTorrents;
 
 - (void)networkRequest;
-- (void)showLoadingCursor;
 - (int)getSectionFromStatus:(int)status;
 - (void)organize;
 

@@ -166,6 +166,24 @@
 	[alert release];
 }
 
++(void)showLoadingCursorForViewController:(UIViewController *)controller {
+	CGRect frame = CGRectMake(0.0, 0.0, 25.0, 25.0);
+	UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithFrame:frame];
+	[loading startAnimating];
+	[loading sizeToFit];
+	loading.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin |
+								UIViewAutoresizingFlexibleRightMargin |
+								UIViewAutoresizingFlexibleTopMargin |
+								UIViewAutoresizingFlexibleBottomMargin);
+	
+	// initing the bar button
+	UIBarButtonItem *loadingView = [[UIBarButtonItem alloc] initWithCustomView:loading];
+	[loading release];
+	loadingView.target = controller;
+	
+	controller.navigationItem.leftBarButtonItem = loadingView;
+}
+
 
 
 @end

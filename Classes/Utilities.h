@@ -22,5 +22,6 @@
 +(NSString *)getAvailabilityReadable:(NSDecimalNumber *)availability;
 +(void)createAndShowAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
 +(void)alertOKCancelAction:(NSString *)title andMessage:(NSString *)message withDelegate:(id)del;
++(void)showLoadingCursorForViewController:(UIViewController *)controller;
 
 @end

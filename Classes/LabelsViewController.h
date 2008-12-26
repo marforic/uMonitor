@@ -26,4 +26,6 @@
 @property (nonatomic,retain) IBOutlet LabelCell * cell;
 @property (nonatomic,retain) uTorrentViewAppDelegate * mainAppDelegate;
 
+-(void) networkRequest;
+
 @end

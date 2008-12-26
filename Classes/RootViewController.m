@@ -30,36 +30,16 @@
 	// set the refresh button
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(networkRequest)];
 	
-	[self showLoadingCursor];
-	
+	[Utilities showLoadingCursorForViewController:self];
 	[self networkRequest];
 }
 
 - (void)networkRequest {
 	self.navigationItem.rightBarButtonItem.enabled = FALSE;
-	[self showLoadingCursor];
+	[Utilities showLoadingCursorForViewController:self];
 	self.organizedTorrents = [NSArray arrayWithObjects:[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], nil];
 	// create the request
 	[tnm requestList];
-}
-
-
--(void)showLoadingCursor {
-	CGRect frame = CGRectMake(0.0, 0.0, 25.0, 25.0);
-	UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithFrame:frame];
-	[loading startAnimating];
-	[loading sizeToFit];
-	loading.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin |
-								UIViewAutoresizingFlexibleRightMargin |
-								UIViewAutoresizingFlexibleTopMargin |
-								UIViewAutoresizingFlexibleBottomMargin);
-	
-	// initing the bar button
-	UIBarButtonItem *loadingView = [[UIBarButtonItem alloc] initWithCustomView:loading];
-	[loading release];
-	loadingView.target = self;
-	
-	self.navigationItem.leftBarButtonItem = loadingView;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -114,21 +94,11 @@
     static NSString *CellIdentifier = @"TorrentsCell";
     cell = (TorrentCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-		//cell = [[[TorrentCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 		[[NSBundle mainBundle] loadNibNamed:@"TorrentCell" owner:self options:nil];
 		NSMutableArray * ma = (NSMutableArray *)[self.organizedTorrents objectAtIndex:indexPath.section];
 		NSArray *itemAtIndex = (NSArray *)[ma objectAtIndex:indexPath.row];
 		[cell setData:itemAtIndex];
-		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    
-    // Set up the cell...
-	// setting the text
-	
-	//[cell setText:[itemAtIndex objectAtIndex:NAME]];
-
-	
-	
+    }	
     return cell;
 }
 
@@ -150,31 +120,31 @@
 	NSString * title = @"";
 	switch (section) {
 		case 0:
-			title = @"STARTED";
+			title = ([[organizedTorrents objectAtIndex:0] count] != 0) ? @"STARTED" : @"";
 			break;
 		case 1:
-			title = @"LEECHING";
+			title = ([[organizedTorrents objectAtIndex:1] count] != 0) ? @"LEECHING" : @"";
 			break;
 		case 2:
-			title = @"SEEDING";
+			title = ([[organizedTorrents objectAtIndex:2] count] != 0) ? @"SEEDING" : @"";
 			break;
 		case 3:
-			title = @"QUEUED";
+			title = ([[organizedTorrents objectAtIndex:3] count] != 0) ? @"QUEUED" : @"";
 			break;
 		case 4:
-			title = @"PAUSED";
+			title = ([[organizedTorrents objectAtIndex:4] count] != 0) ? @"PAUSED" : @"";
 			break;
 		case 5:
-			title = @"STOPPED";
+			title = ([[organizedTorrents objectAtIndex:5] count] != 0) ? @"STOPPED": @"";
 			break;
 		case 6:
-			title = @"FINISHED";
+			title = ([[organizedTorrents objectAtIndex:6] count] != 0) ? @"FINISHED": @"";
 			break;
 		case 7:
-			title = @"CHECKING";
+			title = ([[organizedTorrents objectAtIndex:7] count] != 0) ? @"CHECKING": @"";
 			break;
 		case 8:
-			title = @"ERROR";
+			title = ([[organizedTorrents objectAtIndex:8] count] != 0) ? @"ERROR" : @"";
 			break;
 		default:
 			title = @"";
@@ -247,6 +217,7 @@
 		}
 		[ma addObject:a];
 	}
+	NSLog(@"%i", [[organizedTorrents objectAtIndex:0] count]);
 }
 
 - (int)getSectionFromStatus:(int)status {

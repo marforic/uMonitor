@@ -8,12 +8,14 @@
 
 #import "LabelsViewController.h"
 #import "LabelCell.h"
+#import "Utilities.h"
 
 
 @implementation LabelsViewController
 
 @synthesize labelsTable;
 @synthesize mainAppDelegate;
+@synthesize cell;
 
 /*
 - (id)initWithStyle:(UITableViewStyle)style {
@@ -39,6 +41,12 @@
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(networkRequest)];
 }
 
+- (void)networkRequest {
+	self.navigationItem.rightBarButtonItem.enabled = FALSE;
+	[Utilities showLoadingCursorForViewController:self];
+	// create the request
+	[tnm requestList];
+}
 
 /*
 - (void)viewWillAppear:(BOOL)animated {
@@ -76,8 +84,8 @@
 
 - (void)update {
 	[labelsTable reloadData];
-	//self.navigationItem.rightBarButtonItem.enabled = YES;
-	//self.navigationItem.leftBarButtonItem = nil;
+	self.navigationItem.rightBarButtonItem.enabled = YES;
+	self.navigationItem.leftBarButtonItem = nil;
 }
 
 
