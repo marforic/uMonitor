@@ -17,6 +17,7 @@
 
 @synthesize torrentsTable;
 @synthesize mainAppDelegate;
+@synthesize organizedTorrents;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,7 +38,7 @@
 - (void)networkRequest {
 	self.navigationItem.rightBarButtonItem.enabled = FALSE;
 	[self showLoadingCursor];
-	
+	self.organizedTorrents = [NSArray arrayWithObjects:[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], nil];
 	// create the request
 	[tnm requestList];
 }
@@ -97,25 +98,26 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 9;
 }
 
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [tnm.torrentsData count];
+	NSMutableArray * ma = (NSMutableArray *)[self.organizedTorrents objectAtIndex:section];
+	return [ma count];
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"TorrentsCell";
-    
     cell = (TorrentCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
 		//cell = [[[TorrentCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 		[[NSBundle mainBundle] loadNibNamed:@"TorrentCell" owner:self options:nil];
-		NSArray *itemAtIndex = (NSArray *)[tnm.torrentsData objectAtIndex:indexPath.row];
+		NSMutableArray * ma = (NSMutableArray *)[self.organizedTorrents objectAtIndex:indexPath.section];
+		NSArray *itemAtIndex = (NSArray *)[ma objectAtIndex:indexPath.row];
 		[cell setData:itemAtIndex];
 		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
@@ -133,15 +135,52 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
-	NSArray * itemAtIndex = (NSArray *)[tnm.torrentsData objectAtIndex:indexPath.row];
+	NSMutableArray * ma = (NSMutableArray *)[self.organizedTorrents objectAtIndex:indexPath.section];
+	NSArray * itemAtIndex = (NSArray *)[ma objectAtIndex:indexPath.row];
 	DetailedViewController * detailsViewController = [[DetailedViewController alloc] initWithTorrent:itemAtIndex];
 	[self.navigationController pushViewController:detailsViewController animated:YES];
 	[detailsViewController release];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath  
-{  
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {  
     return 80.0; //returns floating point which will be used for a cell row height at specified row index  
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	NSString * title = @"";
+	switch (section) {
+		case 0:
+			title = @"STARTED";
+			break;
+		case 1:
+			title = @"LEECHING";
+			break;
+		case 2:
+			title = @"SEEDING";
+			break;
+		case 3:
+			title = @"QUEUED";
+			break;
+		case 4:
+			title = @"PAUSED";
+			break;
+		case 5:
+			title = @"STOPPED";
+			break;
+		case 6:
+			title = @"FINISHED";
+			break;
+		case 7:
+			title = @"CHECKING";
+			break;
+		case 8:
+			title = @"ERROR";
+			break;
+		default:
+			title = @"";
+			break;
+	}
+	return title;
 }
 
 
@@ -185,13 +224,69 @@
 */
 
 - (void)update {
+	[self organize];
 	[torrentsTable reloadData];
 	self.navigationItem.rightBarButtonItem.enabled = YES;
 	self.navigationItem.leftBarButtonItem = nil;
 }
 
+- (void)organize {
+	NSUInteger i, count = [tnm.torrentsData count];
+	for (i = 0; i < count; i++) {
+		NSArray * a = (NSArray *)[tnm.torrentsData objectAtIndex:i];
+		int section = [self getSectionFromStatus:[Utilities getStatusProgrammable:[a objectAtIndex:STATUS] forProgress:[a objectAtIndex:PERCENT_PROGRESS]]];
+		NSMutableArray * ma = (NSMutableArray *)[self.organizedTorrents objectAtIndex:section];
+		NSUInteger j, count = [ma count];
+		for (j = 0; j < count; j++) {
+			NSArray * b = (NSArray *)[ma objectAtIndex:j];
+			if ([b objectAtIndex:HASH] == [a objectAtIndex:HASH]) {
+				[ma removeObjectAtIndex:j];
+				[ma addObject:a];
+				return;
+			}
+		}
+		[ma addObject:a];
+	}
+}
+
+- (int)getSectionFromStatus:(int)status {
+	int ret = 0;
+	switch (status) {
+		case 0:
+			ret = 0;
+			break;
+		case 8:
+			ret = 1;
+			break;
+		case 7:
+			ret = 2;
+			break;
+		case 4:
+			ret = 3;
+			break;
+		case 1:
+			ret = 4;
+			break;
+		case 5:
+			ret = 5;
+			break;
+		case 6:
+			ret = 6;
+			break;
+		case 2:
+			ret = 7;
+			break;
+		case 3:
+			ret = 8;
+			break;
+	}
+	return ret;
+}
+
 - (void)dealloc {
     [super dealloc];
+	[self.organizedTorrents release];
+	[tnm release];
 }
 
 

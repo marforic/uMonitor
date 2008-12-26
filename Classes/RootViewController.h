@@ -19,12 +19,17 @@
 	IBOutlet TorrentCell * cell;
 	TorrentNetworkManager * tnm;
 	uTorrentViewAppDelegate * mainAppDelegate;
+	NSArray * organizedTorrents;
 }
 
 @property (nonatomic,retain) IBOutlet UITableView *torrentsTable;
 @property (nonatomic,retain) uTorrentViewAppDelegate * mainAppDelegate;
+@property (nonatomic, retain) NSArray * organizedTorrents;
 
 - (void)networkRequest;
 - (void)showLoadingCursor;
+- (NSInteger *)countTorrentsWithLabel:(int)label;
+- (int)getSectionFromStatus:(int)status;
+- (void)organize;
 
 @end
