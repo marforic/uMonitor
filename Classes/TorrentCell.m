@@ -74,10 +74,15 @@
 	
 	doneLabel.font = [UIFont systemFontOfSize:12];
 	doneLabel.text = [doneLabel.text stringByAppendingString:[Utilities getSizeReadable:[data objectAtIndex:DOWNLOADED]]];
+	
+	uploadLabel.font = [UIFont systemFontOfSize:12];
+	uploadLabel.text = [uploadLabel.text stringByAppendingString:[Utilities getSpeedReadable:[data objectAtIndex:UPLOAD_SPEED]]];
+	
+	downloadLabel.font = [UIFont systemFontOfSize:12];
+	downloadLabel.text = [downloadLabel.text stringByAppendingString:[Utilities getSpeedReadable:[data objectAtIndex:DOWNLOAD_SPEED]]];
 
 	progressView.progress = [self getProgressForBar:[data objectAtIndex:PERCENT_PROGRESS]];
-	
-	// TODO: set right images depending on status
+
 	switch ([Utilities getStatusProgrammable:[data objectAtIndex:STATUS] forProgress:[data objectAtIndex:PERCENT_PROGRESS]]) {
 		case LEECHING:
 			statusImage.image = [[UIImage imageNamed:@"status_green.png"] retain];

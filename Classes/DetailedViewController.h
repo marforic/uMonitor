@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#import "uTorrentViewAppDelegate.h"
+#import "TorrentNetworkManager.h"
+
 
 @interface DetailedViewController : UITableViewController <UIActionSheetDelegate, UIAlertViewDelegate> {
 	@private
@@ -15,6 +18,8 @@
 	IBOutlet UIView * customFooter;
 	IBOutlet UIButton * startButton;
 	IBOutlet UIButton * deleteButton;
+	TorrentNetworkManager * tnm;
+	uTorrentViewAppDelegate * mainAppDelegate;
 }
 
 @property (nonatomic, retain) NSArray * torrent;

@@ -21,7 +21,8 @@
 - (id)initWithTorrent:(NSArray *)selectedTorrent {
 	if (self = [super initWithStyle:UITableViewStyleGrouped])
 		self.torrent = selectedTorrent;
-	//NSLog(@"%@", self.torrent);
+	mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
+	tnm = [mainAppDelegate getTNM];
     return self;
 }
 
@@ -71,10 +72,14 @@
 
 #pragma mark Buttons methods
 - (void)startButtonAction {
+	// TODO: action works, but torrent needs to be updated!!
+	[tnm actionStartForTorrent:[self.torrent objectAtIndex:HASH]];
 	NSLog(@"Start Button");
 }
 
 - (void)stopButtonAction {
+	// TODO: action works, but torrent needs to be updated!!
+	[tnm actionStopForTorrent:[self.torrent objectAtIndex:HASH]];
 	NSLog(@"Stop Button");
 }
 

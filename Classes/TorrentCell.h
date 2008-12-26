@@ -14,6 +14,8 @@
 	IBOutlet UILabel * nameLabel;
 	IBOutlet UILabel * sizeLabel;
 	IBOutlet UILabel * doneLabel;
+	IBOutlet UILabel * uploadLabel;
+	IBOutlet UILabel * downloadLabel;
 	IBOutlet UIImageView * statusImage;
 	IBOutlet UIProgressView * progressView;
 	

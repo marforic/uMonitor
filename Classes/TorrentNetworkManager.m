@@ -164,11 +164,17 @@
     // do something with the data
     // receivedData is declared as a method instance elsewhere
     NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
+	
 	NSString * readableString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+	// Uncomment to see what is returned from the network call
+	//NSLog(@"%@", readableString);
 	
 	self.jsonItem = [readableString JSONValue];
-	self.torrentsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"torrents"]];
-	self.labelsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"label"]];
+	// if checks because following requests (actions) won't return the list
+	if ([jsonItem objectForKey:@"torrents"] != nil)
+		self.torrentsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"torrents"]];
+	if ([jsonItem objectForKey:@"label"] != nil)
+		self.labelsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"label"]];
 	
 	NSLog(@"torrentsData size: %i", [self.torrentsData count]);
 	NSLog(@"labelsData size: %i", [self.labelsData count]);
@@ -204,6 +210,16 @@
 		// inform the user that the download could not be made
 		NSLog(@"download can't be made\n");
 	}
+}
+
+- (void)actionStartForTorrent:(NSString *)hash {
+	NSString * action = @"?action=start&hash=";
+	[self sendNetworkRequest:[action stringByAppendingString:hash]];
+}
+
+- (void)actionStopForTorrent:(NSString *)hash {
+	NSString * action = @"?action=stop&hash=";
+	[self sendNetworkRequest:[action stringByAppendingString:hash]];
 }
 
 - (void)requestList {

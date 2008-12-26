@@ -34,6 +34,8 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
 
+- (void)actionStartForTorrent:(NSString *)hash;
+- (void)actionStopForTorrent:(NSString *)hash;
 - (void)requestList;
 
 - (void)addListener:(id<TorrentListener>)listener;
