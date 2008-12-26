@@ -9,6 +9,8 @@
 #import "TorrentNetworkManager.h"
 
 #import "Utilities.h"
+#import "TorrentListener.h"
+#import "uTorrentConstants.h"
 
 #import <SystemConfiguration/SCNetworkConnection.h>
 #import <netinet/in.h>
@@ -178,8 +180,21 @@
 	
 	self.jsonItem = [readableString JSONValue];
 	// if checks because following requests (actions) won't return the list
-	if ([jsonItem objectForKey:@"torrents"] != nil)
+	if ([jsonItem objectForKey:@"torrents"] != nil) { // new request -> no cache
 		self.torrentsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"torrents"]];
+	} else if ([jsonItem objectForKey:@"torrentp"] != nil) { // cache id being used - this are the modified torrents
+		for (NSArray* newTorrent in [jsonItem objectForKey:@"torrentp"]) {
+			for (NSArray* oldTorrent in torrentsData) {
+				NSString * newHash = [newTorrent objectAtIndex:HASH];
+				NSString * oldHash = [oldTorrent objectAtIndex:HASH];
+				if ([newHash isEqual:oldHash]) {
+					[torrentsData removeObject:oldTorrent];
+					[torrentsData addObject:newTorrent];
+					break;
+				}
+			}
+		}
+	}
 	if ([jsonItem objectForKey:@"label"] != nil)
 		self.labelsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"label"]];
 	if ([jsonItem objectForKey:@"torrentc"] != nil)

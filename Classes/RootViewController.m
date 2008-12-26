@@ -37,6 +37,7 @@
 - (void)networkRequest {
 	self.navigationItem.rightBarButtonItem.enabled = FALSE;
 	[Utilities showLoadingCursorForViewController:self];
+	self.organizedTorrents = nil;
 	self.organizedTorrents = [NSArray arrayWithObjects:[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], nil];
 	// create the request
 	[tnm requestList];
