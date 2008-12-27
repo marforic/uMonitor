@@ -110,9 +110,13 @@
 	cell = (LabelCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
 		[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil];
+		float randomR, randomG, randomB = 0.0f;
+		randomR = (float) random() / (float) 0x7fffffff;
+		randomG = (float) random() / (float) 0x7fffffff;
+		randomB = (float) random() / (float) 0x7fffffff;
 		[cell setCellDataWithLabelString:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:0] 
 							  withNumber:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:1]
-							 colorString:[[UIColor alloc] initWithRed:0.5f green:0.5f blue:1.0f alpha:1.0f]];
+							 colorString:[[UIColor alloc] initWithRed:randomR green:randomG blue:randomB alpha:1.0f]];
 	}
     return cell;
 }
