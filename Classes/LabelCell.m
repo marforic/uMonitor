@@ -7,20 +7,29 @@
 //
 
 #import "LabelCell.h"
+#import "BlueBadge.h"
 
 
 @implementation LabelCell
 
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
-        // Initialization code
+		
     }
-    return self;
+	return self;
 }
 
-- (void)setCellDataWithLabelString:(NSString *)label colorString:(UIColor *)color {
+- (void)setCellDataWithLabelString:(NSString *)label withNumber:(NSDecimalNumber *)count colorString:(UIColor *)color {
 	labelLabel.text = label;
 	colorLabel.backgroundColor = color;
+	
+	CGRect contentRect = self.contentView.bounds;
+	CGFloat boundsX = contentRect.origin.x;
+	CGRect frame = CGRectMake(boundsX + 250, 12, 40, 40);
+	BlueBadge *blueBadge = [[BlueBadge alloc] initWithFrame:frame];
+	[blueBadge drawWithCount:[count intValue]];
+	[self.contentView addSubview:blueBadge];
+	[blueBadge release];
 }
 
 

@@ -44,7 +44,7 @@
 							<object class="IBUILabel" id="68326837">
 								<reference key="NSNextResponder" ref="526872184"/>
 								<int key="NSvFlags">260</int>
-								<string key="NSFrame">{{24, 8}, {170, 21}}</string>
+								<string key="NSFrame">{{24, 10}, {142, 21}}</string>
 								<reference key="NSSuperview" ref="526872184"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -61,7 +61,7 @@
 							<object class="IBUILabel" id="222276152">
 								<reference key="NSNextResponder" ref="526872184"/>
 								<int key="NSvFlags">297</int>
-								<string key="NSFrame">{{219, 9}, {42, 21}}</string>
+								<string key="NSFrame">{{199, 10}, {42, 21}}</string>
 								<reference key="NSSuperview" ref="526872184"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -77,7 +77,7 @@
 								<int key="IBUITextAlignment">2</int>
 							</object>
 						</object>
-						<string key="NSFrameSize">{281, 39}</string>
+						<string key="NSFrameSize">{320, 39}</string>
 						<reference key="NSSuperview" ref="1036537253"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -98,7 +98,7 @@
 				<bool key="IBUIOpaque">NO</bool>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 				<int key="IBUISeparatorStyle">1</int>
-				<int key="IBUIAccessoryType">2</int>
+				<int key="IBUISelectionStyle">0</int>
 				<reference key="IBUIContentView" ref="526872184"/>
 			</object>
 		</object>

@@ -37,6 +37,7 @@
 		6161407C0F044D1C00DD585B /* status_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 616140710F044D1C00DD585B /* status_yellow.png */; };
 		616141E80F053DE400DD585B /* LabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 616141E70F053DE400DD585B /* LabelCell.xib */; };
 		6161423D0F05865B00DD585B /* DownloadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6161423C0F05865B00DD585B /* DownloadingViewController.m */; };
+		619E70890F06B70100A9CBDB /* BlueBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 619E70880F06B70100A9CBDB /* BlueBadge.m */; };
 		61A511860F0032A700839B16 /* DetailedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A511850F0032A700839B16 /* DetailedViewController.m */; };
 		61DDE7270EFEDB5F00EE8119 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DDE7260EFEDB5F00EE8119 /* Utilities.m */; };
 		61EB95110EF6C51F00340762 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61EB95100EF6C51F00340762 /* Settings.bundle */; };
@@ -85,6 +86,8 @@
 		616141E70F053DE400DD585B /* LabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelCell.xib; sourceTree = "<group>"; };
 		6161423B0F05865B00DD585B /* DownloadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadingViewController.h; sourceTree = "<group>"; };
 		6161423C0F05865B00DD585B /* DownloadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadingViewController.m; sourceTree = "<group>"; };
+		619E70870F06B70100A9CBDB /* BlueBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueBadge.h; sourceTree = "<group>"; };
+		619E70880F06B70100A9CBDB /* BlueBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueBadge.m; sourceTree = "<group>"; };
 		61A511840F0032A700839B16 /* DetailedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailedViewController.h; sourceTree = "<group>"; };
 		61A511850F0032A700839B16 /* DetailedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailedViewController.m; sourceTree = "<group>"; };
 		61DDE7250EFEDB5F00EE8119 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
@@ -112,6 +115,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				619E70870F06B70100A9CBDB /* BlueBadge.h */,
+				619E70880F06B70100A9CBDB /* BlueBadge.m */,
 				61613FFA0F03A72500DD585B /* LabelCell.h */,
 				61613FFB0F03A72500DD585B /* LabelCell.m */,
 				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
@@ -301,6 +306,7 @@
 				612484980F02A0D600DB8B5F /* LabelsViewController.m in Sources */,
 				61613FFC0F03A72500DD585B /* LabelCell.m in Sources */,
 				6161423D0F05865B00DD585B /* DownloadingViewController.m in Sources */,
+				619E70890F06B70100A9CBDB /* BlueBadge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

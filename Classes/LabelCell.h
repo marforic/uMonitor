@@ -14,6 +14,6 @@
 	IBOutlet UILabel * colorLabel;
 }
 
-- (void)setCellDataWithLabelString:(NSString *)label colorString:(UIColor *)color;
+- (void)setCellDataWithLabelString:(NSString *)label withNumber:(NSDecimalNumber *)count colorString:(UIColor *)color;
 
 @end
