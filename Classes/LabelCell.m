@@ -9,6 +9,8 @@
 #import "LabelCell.h"
 #import "BlueBadge.h"
 
+#import "Utilities.h"
+
 
 @implementation LabelCell
 
@@ -21,7 +23,10 @@
 
 - (void)setCellDataWithLabelString:(NSString *)label withNumber:(NSDecimalNumber *)count colorString:(UIColor *)color {
 	labelLabel.text = label;
-	colorLabel.backgroundColor = color;
+	
+	UIImage * colorizedImage = [Utilities colorizeImage:labelImage.image color:color];
+	labelImage.image = colorizedImage;
+	
 	
 	CGRect contentRect = self.contentView.bounds;
 	CGFloat boundsX = contentRect.origin.x;

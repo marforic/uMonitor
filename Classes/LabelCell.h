@@ -11,7 +11,7 @@
 
 @interface LabelCell : UITableViewCell {
 	IBOutlet UILabel * labelLabel;
-	IBOutlet UILabel * colorLabel;
+	IBOutlet UIImageView * labelImage;
 }
 
 - (void)setCellDataWithLabelString:(NSString *)label withNumber:(NSDecimalNumber *)count colorString:(UIColor *)color;
