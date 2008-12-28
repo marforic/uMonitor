@@ -8,7 +8,6 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -44,8 +43,9 @@
 							<object class="IBUILabel" id="68326837">
 								<reference key="NSNextResponder" ref="526872184"/>
 								<int key="NSvFlags">260</int>
-								<string key="NSFrame">{{24, 10}, {142, 21}}</string>
+								<string key="NSFrame">{{20, 10}, {142, 21}}</string>
 								<reference key="NSSuperview" ref="526872184"/>
+								<reference key="NSWindow"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -63,6 +63,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{201, 4}, {30, 30}}</string>
 								<reference key="NSSuperview" ref="526872184"/>
+								<reference key="NSWindow"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 								<int key="IBUIContentMode">4</int>
@@ -72,9 +73,39 @@
 									<string key="NSResourceName">labels.png</string>
 								</object>
 							</object>
+							<object class="IBUIButton" id="1005556557">
+								<reference key="NSNextResponder" ref="526872184"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{114, 6}, {42, 25}}</string>
+								<reference key="NSSuperview" ref="526872184"/>
+								<reference key="NSWindow"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+								<int key="IBUIContentHorizontalAlignment">0</int>
+								<int key="IBUIContentVerticalAlignment">0</int>
+								<object class="NSFont" key="IBUIFont">
+									<string key="NSName">Helvetica-Bold</string>
+									<double key="NSSize">1.500000e+01</double>
+									<int key="NSfFlags">16</int>
+								</object>
+								<int key="IBUIButtonType">1</int>
+								<string key="IBUIHighlightedTitle">Test</string>
+								<string key="IBUIDisabledTitle">Test</string>
+								<string key="IBUISelectedTitle">Test</string>
+								<string key="IBUINormalTitle">Test</string>
+								<object class="NSColor" key="IBUIHighlightedTitleColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MSAxIDEAA</bytes>
+								</object>
+								<object class="NSColor" key="IBUINormalTitleColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4xOTYwNzg0MyAwLjMwOTgwMzkzIDAuNTIxNTY4NjYAA</bytes>
+								</object>
+							</object>
 						</object>
 						<string key="NSFrameSize">{320, 39}</string>
 						<reference key="NSSuperview" ref="1036537253"/>
+						<reference key="NSWindow"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -87,6 +118,7 @@
 				</object>
 				<string key="NSFrameSize">{320, 40}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MSAwAA</bytes>
@@ -125,6 +157,14 @@
 					</object>
 					<int key="connectionID">14</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">test</string>
+						<reference key="source" ref="1036537253"/>
+						<reference key="destination" ref="1005556557"/>
+					</object>
+					<int key="connectionID">16</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -153,8 +193,9 @@
 						<reference key="object" ref="1036537253"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="68326837"/>
 							<reference ref="898775274"/>
+							<reference ref="1005556557"/>
+							<reference ref="68326837"/>
 						</object>
 						<reference key="parent" ref="957960031"/>
 					</object>
@@ -168,6 +209,11 @@
 						<reference key="object" ref="898775274"/>
 						<reference key="parent" ref="1036537253"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">15</int>
+						<reference key="object" ref="1005556557"/>
+						<reference key="parent" ref="1036537253"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -177,6 +223,7 @@
 					<string>-1.CustomClassName</string>
 					<string>-2.CustomClassName</string>
 					<string>13.IBPluginDependency</string>
+					<string>15.IBPluginDependency</string>
 					<string>2.CustomClassName</string>
 					<string>2.IBEditorWindowLastContentRect</string>
 					<string>2.IBPluginDependency</string>
@@ -186,6 +233,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>LabelsViewController</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>LabelCell</string>
 					<string>{{497, 691}, {320, 40}}</string>
@@ -213,7 +261,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">14</int>
+			<int key="maxID">16</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -227,11 +275,13 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>labelImage</string>
 							<string>labelLabel</string>
+							<string>test</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIImageView</string>
 							<string>UILabel</string>
+							<string>UIButton</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

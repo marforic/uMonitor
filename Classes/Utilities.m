@@ -233,5 +233,26 @@
     return newImage;
 }
 
++ (NSArray *)RGBtoHSB:(UIColor *)RGBcolor {
+	float r, g, b = 0.0f;
+	float v, x, f = 0.0f;
+	int i = 0;
+	r = CGColorGetComponents(RGBcolor.CGColor)[0];
+	g = CGColorGetComponents(RGBcolor.CGColor)[1];
+	b = CGColorGetComponents(RGBcolor.CGColor)[2];
+	x = fminf(r, fminf(g, b));
+	v = fmaxf(r, fmaxf(g, b));
+	if (v == x) return [[NSArray alloc] initWithObjects:[[NSNumber alloc] initWithFloat:0.0f], 
+														[[NSNumber alloc] initWithFloat:0.0f], 
+														[[NSNumber alloc] initWithFloat:v], 
+														nil];
+	f = (r == x) ? g - b : ((g == x) ? b - r : r - g);
+	i = (r == x) ? 3 : ((g == x) ? 5 : 1);
+	return [[NSArray alloc] initWithObjects:[[NSNumber alloc] initWithFloat:((i - f /(v - x)) / 6)], 
+											[[NSNumber alloc] initWithFloat:(v - x) / v], 
+											[[NSNumber alloc] initWithFloat:v], 
+											nil];
+}
+
 
 @end

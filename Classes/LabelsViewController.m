@@ -10,6 +10,8 @@
 #import "LabelCell.h"
 #import "Utilities.h"
 
+#import <math.h>
+
 
 @implementation LabelsViewController
 
@@ -110,13 +112,13 @@
 	cell = (LabelCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
 		[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil];
-		float randomR, randomG, randomB = 0.0f;
-		randomR = (float) random() / (float) 0x7fffffff;
-		randomG = (float) random() / (float) 0x7fffffff;
+		float randomH, randomB = 0.0f;
+		randomH = (float) random() / (float) 0x7fffffff;
 		randomB = (float) random() / (float) 0x7fffffff;
+		UIColor * color = [[UIColor alloc] initWithHue:randomH saturation:1.0f brightness:randomB alpha:1.0f];
 		[cell setCellDataWithLabelString:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:0] 
 							  withNumber:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:1]
-							 colorString:[[UIColor alloc] initWithRed:randomR green:randomG blue:randomB alpha:1.0f]];
+							 colorString:color];
 	}
     return cell;
 }

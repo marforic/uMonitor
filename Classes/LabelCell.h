@@ -9,11 +9,21 @@
 #import <UIKit/UIKit.h>
 
 
+#define kMyAlert	123
+
 @interface LabelCell : UITableViewCell {
 	IBOutlet UILabel * labelLabel;
 	IBOutlet UIImageView * labelImage;
+	IBOutlet UIImage * colorizedImage;
+	IBOutlet UIButton * test;
+	UIColor * labelColor;
 }
 
+@property (nonatomic,retain) UIColor * labelColor;
+@property (nonatomic,retain) UIImage * colorizedImage;
+
 - (void)setCellDataWithLabelString:(NSString *)label withNumber:(NSDecimalNumber *)count colorString:(UIColor *)color;
+- (void)testAction;
+
 
 @end

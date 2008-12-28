@@ -24,5 +24,6 @@
 +(void)alertOKCancelAction:(NSString *)title andMessage:(NSString *)message withDelegate:(id)del;
 +(void)showLoadingCursorForViewController:(UIViewController *)controller;
 +(UIImage *)colorizeImage:(UIImage *)baseImage color:(UIColor *)theColor;
++(NSArray *)RGBtoHSB:(UIColor *)RGBcolor;
 
 @end
