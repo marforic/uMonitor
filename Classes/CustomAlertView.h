@@ -15,13 +15,16 @@
 @interface CustomAlertView : UIAlertView {
 	UISlider * hueSlider;
 	UISlider * brightnessSlider;
+	UIImage * plainThumbImage;
 	BOOL layoutDone;
 }
 
 @property (nonatomic, retain) UISlider * hueSlider;
 @property (nonatomic, retain) UISlider * brightnessSlider;
+@property (nonatomic, retain) UIImage * plainThumbImage;
 
 - (id)initWithTitle:(NSString *)title message:(NSString *)message delegate:(id)delegate 
   cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ...;
+- (void) updateBrightnessSlider;
 
 @end

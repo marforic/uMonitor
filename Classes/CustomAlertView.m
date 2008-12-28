@@ -8,11 +8,14 @@
 
 #import "CustomAlertView.h"
 
+#import "Utilities.h"
+
 
 @implementation CustomAlertView
 
 @synthesize hueSlider;
 @synthesize brightnessSlider;
+@synthesize plainThumbImage;
 
 /*
  *	Initialize view with maximum of two buttons
@@ -22,8 +25,15 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
 	self = [super initWithTitle:title message:message delegate:delegate cancelButtonTitle:cancelButtonTitle
 			  otherButtonTitles:otherButtonTitles, nil];
 	if (self) {
+		self.plainThumbImage = [UIImage imageNamed:@"ring.png"];
 		CGRect frame = CGRectMake(40, 35, 200.0, 7.0);
 		hueSlider = [[[UISlider alloc] initWithFrame:frame] retain];
+		hueSlider.minimumValue = 0.01;
+		UIImage * stetchLeftTrack = [UIImage imageNamed:@"hue.png"];
+		[hueSlider setThumbImage:self.plainThumbImage forState:UIControlStateNormal];
+		[hueSlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
+		[hueSlider setMaximumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
+		[hueSlider addTarget:self action:@selector(updateBrightnessSlider) forControlEvents:UIControlEventValueChanged];
 		frame = CGRectMake(110, 90, 200.0, 20.0);
 		UILabel * brightness = [[[UILabel alloc] initWithFrame:frame] retain];
 		brightness.backgroundColor = [UIColor clearColor];
@@ -33,6 +43,10 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
 		brightness.text = @"Brightness";
 		frame = CGRectMake(40, 85, 200.0, 7.0);
 		brightnessSlider = [[[UISlider alloc] initWithFrame:frame] retain];
+		stetchLeftTrack = [UIImage imageNamed:@"brightness.png"];
+		[brightnessSlider setThumbImage:self.plainThumbImage forState:UIControlStateNormal];
+		[brightnessSlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
+		[brightnessSlider setMaximumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
 		// insert UITextField before first button
 		BOOL inserted = NO;
 		for( UIView *view in self.subviews ){
@@ -54,12 +68,22 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
 	return self;
 }
 
+- (void) updateBrightnessSlider {
+	UIImage * tmpImage = [Utilities colorizeImage:self.plainThumbImage 
+											color:[[UIColor alloc] initWithHue:self.hueSlider.value 
+																	saturation:1.0 
+																	brightness:1.0 
+																		 alpha:1.0]];
+	[hueSlider setThumbImage:tmpImage forState:UIControlStateNormal];
+}
+
+
 /*
- *	Show alert view and make keyboard visible
+ *	Show alert view and update thumb for hue
  */
 - (void) show {
 	[super show];
-	//[[self textField] becomeFirstResponder];
+	[self updateBrightnessSlider];
 }
 
 /*
