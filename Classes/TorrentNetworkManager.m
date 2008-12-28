@@ -11,6 +11,7 @@
 #import "Utilities.h"
 #import "TorrentListener.h"
 #import "uTorrentConstants.h"
+#import "uTorrentViewAppDelegate.h"
 
 #import <SystemConfiguration/SCNetworkConnection.h>
 #import <netinet/in.h>
@@ -196,8 +197,17 @@
 		}
 	}
 	// TODO: have to do the remove case with the @"torrentm" selector
-	if ([jsonItem objectForKey:@"label"] != nil)
+	if ([jsonItem objectForKey:@"label"] != nil) {
 		self.labelsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"label"]];
+		/*uTorrentViewAppDelegate * mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
+		UIColor * labelColor = [UIColor alloc];
+		float randomH;
+		for (NSArray * label in self.labelsData) {
+			randomH = (float) random() / (float) 0x7fffffff;
+			[labelColor initWithHue:randomH saturation:1.0 brightness:1.0 alpha:1.0];
+			//[mainAppDelegate.labelColors addObject:[[NSArray array] initWithObjects:[self.labelsData objectAtIndex:0], labelColor, nil]];
+		}*/
+	}
 	if ([jsonItem objectForKey:@"torrentc"] != nil)
 		self.torrentsCacheID = [jsonItem objectForKey:@"torrentc"];
 	

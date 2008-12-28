@@ -12,8 +12,6 @@
 
 @implementation TorrentCell
 
-//@synthesize titleLabel, statusLabel, sizeLabel, doneLabel, DLLabel, ULLabel, ETALabel, peersLabel, seedsLabel, progressView;
-
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
         /*// Initialization code
@@ -52,7 +50,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
 }
 
 /*
@@ -68,6 +65,13 @@
 
 -(void)setData:(NSArray *)data {
 	nameLabel.text = [data objectAtIndex:NAME];
+	
+	float randomH = (float) random() / (float) 0x7fffffff;
+	labelImage.image = [Utilities colorizeImage:labelImage.image 
+										  color:[UIColor colorWithHue:randomH 
+														   saturation:1.0 
+														   brightness:1.0 
+																alpha:1.0]];
 	
 	sizeLabel.font = [UIFont systemFontOfSize:12];
 	sizeLabel.text = [sizeLabel.text stringByAppendingString:[Utilities getSizeReadable:[data objectAtIndex:SIZE]]];
@@ -104,27 +108,6 @@
 			statusImage.image = [[UIImage imageNamed:@"status_skull.png"] retain];
 			break;
 	}
-	
-	
-	
-	/*
-	self.titleLabel.text = [data objectAtIndex:NAME];
-	
-	NSString * size = @"Size: ";
-	NSString * sizeText = [size stringByAppendingString:[Utilities getSizeReadable:[data objectAtIndex:SIZE]]];
-	self.sizeLabel.text = sizeText;
-	
-	NSString * done = @"Done: ";
-	NSString * doneText = [done stringByAppendingString:[Utilities getSizeReadable:[data objectAtIndex:DOWNLOADED]]];
-	self.doneLabel.text = doneText;
-	
-	self.progressView.progress = [self getProgressForBar:[data objectAtIndex:PERCENT_PROGRESS]];
-	
-	NSString * status = @"Status: ";
-	NSString * statusText = [status stringByAppendingString:[Utilities getStatusReadable:[data objectAtIndex:STATUS]
-																		forProgress:[data objectAtIndex:PERCENT_PROGRESS]]];
-	self.statusLabel.text = statusText;
-	 */
 }
 
 /*- (void)layoutSubviews {
@@ -170,51 +153,9 @@
 	}
 }*/
 
-/*
- * Function was taken from an XML example provided by Apple
- */
-/*
-- (UILabel *)newLabelWithPrimaryColor:(UIColor *)primaryColor 
-						selectedColor:(UIColor *)selectedColor 
-							 fontSize:(CGFloat)fontSize 
-								 bold:(BOOL)bold {
-	// Create and configure a label.
-	
-    UIFont *font;
-    if (bold) {
-        font = [UIFont boldSystemFontOfSize:fontSize];
-    } else {
-        font = [UIFont systemFontOfSize:fontSize];
-    }
-    
-    /*
-	 * Views are drawn most efficiently when they are opaque and do not have a clear background, so set these defaults.
-	 * To show selection properly, however, the views need to be transparent (so that the selection color shows through).  
-	 * This is handled in setSelected:animated:.
-	 
-	UILabel *newLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-	newLabel.backgroundColor = [UIColor whiteColor];
-	newLabel.opaque = YES;
-	newLabel.textColor = primaryColor;
-	newLabel.highlightedTextColor = selectedColor;
-	newLabel.font = font;
-	
-	return newLabel;
-}
-*/
-
-
-
-
 - (void)dealloc {
-	/*
-	[titleLabel dealloc];
-	[sizeLabel dealloc];
-	[statusLabel dealloc];
-	[doneLabel dealloc];
-	[progressView dealloc];
-	 */
 	[statusImage release];
+	[labelImage release];
     [super dealloc];
 }
 

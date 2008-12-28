@@ -44,7 +44,7 @@
 							<object class="IBUILabel" id="1034164094">
 								<reference key="NSNextResponder" ref="1051962516"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{23.5, 0}, {260, 26}}</string>
+								<string key="NSFrame">{{25.5, 0}, {260, 26}}</string>
 								<reference key="NSSuperview" ref="1051962516"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -136,7 +136,7 @@
 							<object class="IBUIImageView" id="477516940">
 								<reference key="NSNextResponder" ref="1051962516"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{3, 7}, {16, 16}}</string>
+								<string key="NSFrame">{{5, 7}, {16, 16}}</string>
 								<reference key="NSSuperview" ref="1051962516"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -146,6 +146,20 @@
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 								<int key="IBUIContentMode">1</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
+							</object>
+							<object class="IBUIImageView" id="541720432">
+								<reference key="NSNextResponder" ref="1051962516"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{0, 29}, {21, 50}}</string>
+								<reference key="NSSuperview" ref="1051962516"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+								<int key="IBUIContentMode">6</int>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">flag_white.png</string>
+								</object>
 							</object>
 						</object>
 						<string key="NSFrameSize">{297, 79}</string>
@@ -241,6 +255,14 @@
 					</object>
 					<int key="connectionID">17</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">labelImage</string>
+						<reference key="source" ref="265633414"/>
+						<reference key="destination" ref="541720432"/>
+					</object>
+					<int key="connectionID">19</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -276,6 +298,7 @@
 							<reference ref="477516940"/>
 							<reference ref="364375347"/>
 							<reference ref="923031915"/>
+							<reference ref="541720432"/>
 						</object>
 						<reference key="parent" ref="957960031"/>
 					</object>
@@ -314,6 +337,11 @@
 						<reference key="object" ref="923031915"/>
 						<reference key="parent" ref="265633414"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">18</int>
+						<reference key="object" ref="541720432"/>
+						<reference key="parent" ref="265633414"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -324,6 +352,7 @@
 					<string>-2.CustomClassName</string>
 					<string>14.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
+					<string>18.IBPluginDependency</string>
 					<string>2.CustomClassName</string>
 					<string>2.IBEditorWindowLastContentRect</string>
 					<string>2.IBPluginDependency</string>
@@ -337,6 +366,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>RootViewController</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>TorrentCell</string>
@@ -369,7 +399,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">17</int>
+			<int key="maxID">19</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -404,6 +434,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>doneLabel</string>
 							<string>downloadLabel</string>
+							<string>labelImage</string>
 							<string>nameLabel</string>
 							<string>progressView</string>
 							<string>sizeLabel</string>
@@ -414,6 +445,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UILabel</string>
 							<string>UILabel</string>
+							<string>UIImageView</string>
 							<string>UILabel</string>
 							<string>UIProgressView</string>
 							<string>UILabel</string>

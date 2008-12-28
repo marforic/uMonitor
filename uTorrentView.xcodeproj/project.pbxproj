@@ -17,6 +17,7 @@
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		49C0C8FA0EFD80D700DCBCA3 /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C0C8F90EFD80D700DCBCA3 /* DetailsViewController.xib */; };
 		49F16D260EFFFC490069037E /* TorrentNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F16D250EFFFC490069037E /* TorrentNetworkManager.m */; };
+		6102A6CB0F08403700F3CC2C /* flag_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 6102A6CA0F08403700F3CC2C /* flag_white.png */; };
 		610620F00EFD7DC0003A3B53 /* TorrentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 610620EF0EFD7DC0003A3B53 /* TorrentCell.m */; };
 		612483DA0F02600700DB8B5F /* CustomFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 612483D90F02600700DB8B5F /* CustomFooterView.xib */; };
 		612484980F02A0D600DB8B5F /* LabelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612484970F02A0D600DB8B5F /* LabelsViewController.m */; };
@@ -46,6 +47,7 @@
 		61BE8F9D0F08253800D83454 /* brightness.png in Resources */ = {isa = PBXBuildFile; fileRef = 61BE8F9C0F08253800D83454 /* brightness.png */; };
 		61BE8FE30F08318300D83454 /* ring.png in Resources */ = {isa = PBXBuildFile; fileRef = 61BE8FE20F08318300D83454 /* ring.png */; };
 		61BE8FF70F0833F000D83454 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 61BE8FF60F0833F000D83454 /* down.png */; };
+		61BE903E0F083BD700D83454 /* flag.png in Resources */ = {isa = PBXBuildFile; fileRef = 61BE903D0F083BD700D83454 /* flag.png */; };
 		61DDE7270EFEDB5F00EE8119 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DDE7260EFEDB5F00EE8119 /* Utilities.m */; };
 		61EB95110EF6C51F00340762 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61EB95100EF6C51F00340762 /* Settings.bundle */; };
 		61EB956B0EF6CC6000340762 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EB956A0EF6CC6000340762 /* SystemConfiguration.framework */; };
@@ -68,6 +70,7 @@
 		49F16D240EFFFC490069037E /* TorrentNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentNetworkManager.h; sourceTree = "<group>"; };
 		49F16D250EFFFC490069037E /* TorrentNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorrentNetworkManager.m; sourceTree = "<group>"; };
 		49F16D2E0F0010730069037E /* TorrentListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentListener.h; sourceTree = "<group>"; };
+		6102A6CA0F08403700F3CC2C /* flag_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flag_white.png; sourceTree = "<group>"; };
 		610620BD0EFD77FC003A3B53 /* uTorrentConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uTorrentConstants.h; sourceTree = "<group>"; };
 		610620EE0EFD7DC0003A3B53 /* TorrentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentCell.h; sourceTree = "<group>"; };
 		610620EF0EFD7DC0003A3B53 /* TorrentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorrentCell.m; sourceTree = "<group>"; };
@@ -105,6 +108,7 @@
 		61BE8F9C0F08253800D83454 /* brightness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brightness.png; sourceTree = "<group>"; };
 		61BE8FE20F08318300D83454 /* ring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ring.png; sourceTree = "<group>"; };
 		61BE8FF60F0833F000D83454 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
+		61BE903D0F083BD700D83454 /* flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flag.png; sourceTree = "<group>"; };
 		61DDE7250EFEDB5F00EE8119 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		61DDE7260EFEDB5F00EE8119 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		61EB95100EF6C51F00340762 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -218,6 +222,8 @@
 		616140180F0410A700DD585B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6102A6CA0F08403700F3CC2C /* flag_white.png */,
+				61BE903D0F083BD700D83454 /* flag.png */,
 				61BE8FF60F0833F000D83454 /* down.png */,
 				61BE8FE20F08318300D83454 /* ring.png */,
 				61BE8F9C0F08253800D83454 /* brightness.png */,
@@ -315,6 +321,8 @@
 				61BE8F9D0F08253800D83454 /* brightness.png in Resources */,
 				61BE8FE30F08318300D83454 /* ring.png in Resources */,
 				61BE8FF70F0833F000D83454 /* down.png in Resources */,
+				61BE903E0F083BD700D83454 /* flag.png in Resources */,
+				6102A6CB0F08403700F3CC2C /* flag_white.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
