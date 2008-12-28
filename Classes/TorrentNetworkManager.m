@@ -195,6 +195,7 @@
 			}
 		}
 	}
+	// TODO: have to do the remove case with the @"torrentm" selector
 	if ([jsonItem objectForKey:@"label"] != nil)
 		self.labelsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"label"]];
 	if ([jsonItem objectForKey:@"torrentc"] != nil)

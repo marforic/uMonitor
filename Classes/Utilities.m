@@ -128,11 +128,32 @@
 }
 
 +(NSString *)getETAReadable:(NSDecimalNumber *)eta {
-	// TODO: non capisco come mai il codice sotto qui' non funziona.
-	/*int theETA = [eta intValue];
-	NSDate * now = [[NSDate alloc] dateWithTimeIntervalSinceNow:(NSTimeInterval)theETA];
-	return [now description];*/
-	return @"TODO";
+	double theETA = [eta doubleValue];
+	if (theETA == -1)
+		return @"∞";
+	else if (theETA == 0)
+		return @"DONE";
+	else {
+		NSDate * futureDone = [[NSDate alloc] initWithTimeIntervalSinceNow:theETA];
+		int sinceNow = [futureDone timeIntervalSinceNow];
+		int week = (int)(sinceNow / 604800);
+		int day = (int)((sinceNow % 604800) / 86400);
+		if (week > 0)
+			return [NSString stringWithFormat:@"%iw %id", week, day];
+		int hour = (int)((sinceNow % 86400) / 3600);
+		if (day > 0)
+			return [NSString stringWithFormat:@"%id %ih", day, hour];
+		int minutes = (int)((sinceNow % 3600) / 60);
+		if (hour > 0)
+			return [NSString stringWithFormat:@"%ih %im", hour, minutes];
+		int seconds = (int)((sinceNow % 3600) % 60);
+		if (minutes > 0)
+			return [NSString stringWithFormat:@"%im %is", minutes, seconds];
+		if (seconds > 0)
+			return [NSString stringWithFormat:@"%is", seconds];
+		//NSLog(@"week: %i, day: %i, hour: %i, minutes: %i, seconds: %i", week, day, hour, minutes, seconds);
+	}
+	return @"Unknown";
 }
 
 +(NSString *)getAvailabilityReadable:(NSDecimalNumber *)availability {
