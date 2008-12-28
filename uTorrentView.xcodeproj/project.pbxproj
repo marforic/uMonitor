@@ -41,7 +41,7 @@
 		619E70AB0F06BCC200A9CBDB /* labels.png in Resources */ = {isa = PBXBuildFile; fileRef = 619E70AA0F06BCC200A9CBDB /* labels.png */; };
 		619E70AF0F06BD4D00A9CBDB /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 619E70AD0F06BD4D00A9CBDB /* down.png */; };
 		619E70B00F06BD4D00A9CBDB /* updown.png in Resources */ = {isa = PBXBuildFile; fileRef = 619E70AE0F06BD4D00A9CBDB /* updown.png */; };
-		619E723A0F07A42D00A9CBDB /* CustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 619E72390F07A42D00A9CBDB /* CustomActionSheet.m */; };
+		619E723A0F07A42D00A9CBDB /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 619E72390F07A42D00A9CBDB /* CustomAlertView.m */; };
 		61A511860F0032A700839B16 /* DetailedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A511850F0032A700839B16 /* DetailedViewController.m */; };
 		61DDE7270EFEDB5F00EE8119 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DDE7260EFEDB5F00EE8119 /* Utilities.m */; };
 		61EB95110EF6C51F00340762 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61EB95100EF6C51F00340762 /* Settings.bundle */; };
@@ -95,8 +95,8 @@
 		619E70AA0F06BCC200A9CBDB /* labels.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = labels.png; sourceTree = "<group>"; };
 		619E70AD0F06BD4D00A9CBDB /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		619E70AE0F06BD4D00A9CBDB /* updown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = updown.png; sourceTree = "<group>"; };
-		619E72380F07A42D00A9CBDB /* CustomActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomActionSheet.h; sourceTree = "<group>"; };
-		619E72390F07A42D00A9CBDB /* CustomActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomActionSheet.m; sourceTree = "<group>"; };
+		619E72380F07A42D00A9CBDB /* CustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlertView.h; sourceTree = "<group>"; };
+		619E72390F07A42D00A9CBDB /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
 		61A511840F0032A700839B16 /* DetailedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailedViewController.h; sourceTree = "<group>"; };
 		61A511850F0032A700839B16 /* DetailedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailedViewController.m; sourceTree = "<group>"; };
 		61DDE7250EFEDB5F00EE8119 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
@@ -146,8 +146,8 @@
 				612484970F02A0D600DB8B5F /* LabelsViewController.m */,
 				6161423B0F05865B00DD585B /* DownloadingViewController.h */,
 				6161423C0F05865B00DD585B /* DownloadingViewController.m */,
-				619E72380F07A42D00A9CBDB /* CustomActionSheet.h */,
-				619E72390F07A42D00A9CBDB /* CustomActionSheet.m */,
+				619E72380F07A42D00A9CBDB /* CustomAlertView.h */,
+				619E72390F07A42D00A9CBDB /* CustomAlertView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -324,7 +324,7 @@
 				61613FFC0F03A72500DD585B /* LabelCell.m in Sources */,
 				6161423D0F05865B00DD585B /* DownloadingViewController.m in Sources */,
 				619E70890F06B70100A9CBDB /* BlueBadge.m in Sources */,
-				619E723A0F07A42D00A9CBDB /* CustomActionSheet.m in Sources */,
+				619E723A0F07A42D00A9CBDB /* CustomAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

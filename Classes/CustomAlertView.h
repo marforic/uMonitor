@@ -12,7 +12,7 @@
 #define kUITextFieldYPadding 10.0
 #define kUIAlertOffset 100.0
 
-@interface CustomActionSheet : UIAlertView {
+@interface CustomAlertView : UIAlertView {
 	UISlider * hueSlider;
 	UISlider * brightnessSlider;
 	BOOL layoutDone;

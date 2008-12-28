@@ -6,10 +6,10 @@
 //  Copyright 2008 __MyCompanyName__. All rights reserved.
 //
 
-#import "CustomActionSheet.h"
+#import "CustomAlertView.h"
 
 
-@implementation CustomActionSheet
+@implementation CustomAlertView
 
 @synthesize hueSlider;
 @synthesize brightnessSlider;

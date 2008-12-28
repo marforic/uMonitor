@@ -21,6 +21,7 @@
 
 @property (nonatomic,retain) UIColor * labelColor;
 @property (nonatomic,retain) UIImage * colorizedImage;
+@property (nonatomic,retain) IBOutlet UIImageView * labelImage;
 
 - (void)setCellDataWithLabelString:(NSString *)label withNumber:(NSDecimalNumber *)count colorString:(UIColor *)color;
 - (void)testAction;

@@ -13,13 +13,14 @@
 
 //#import "UIAlertView_Extended.h"
 
-#import "CustomActionSheet.h"
+#import "CustomAlertView.h"
 
 
 @implementation LabelCell
 
 @synthesize labelColor;
 @synthesize colorizedImage;
+@synthesize labelImage;
 
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
@@ -53,7 +54,7 @@
 }
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-	CustomActionSheet *alertView = (CustomActionSheet*) actionSheet;
+	CustomAlertView *alertView = (CustomAlertView*) actionSheet;
 	if(buttonIndex > 0) {
 		if(alertView.tag == 1) {
 			float hS = alertView.hueSlider.value;
@@ -65,8 +66,16 @@
 	}
 }
 
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+	NSLog("called");
+	UITouch * touch = [[event allTouches] anyObject];
+	if ([touch view] == self.labelImage) {
+		[self testAction];
+	}
+}
+
 - (void)testAction {
-	CustomActionSheet *alert = [[CustomActionSheet alloc] initWithTitle:@"Choose Color" 
+	CustomAlertView *alert = [[CustomAlertView alloc] initWithTitle:@"Choose Color" 
 																message:@"Color" 
 															   delegate:self 
 													  cancelButtonTitle:@"Cancel"
