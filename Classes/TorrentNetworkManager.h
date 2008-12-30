@@ -17,6 +17,7 @@
 	NSMutableArray * labelsData;
 	NSMutableArray * listeners;
 	NSString * torrentsCacheID;
+	BOOL needListUpdate;
 }
 
 @property (nonatomic, retain) NSMutableArray * torrentsData;

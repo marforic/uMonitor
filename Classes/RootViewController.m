@@ -31,14 +31,15 @@
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(networkRequest)];
 	
 	[Utilities showLoadingCursorForViewController:self];
+	
+	self.organizedTorrents = [NSArray arrayWithObjects:[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], nil];
+	
 	[self networkRequest];
 }
 
 - (void)networkRequest {
 	self.navigationItem.rightBarButtonItem.enabled = FALSE;
 	[Utilities showLoadingCursorForViewController:self];
-	self.organizedTorrents = nil;
-	self.organizedTorrents = [NSArray arrayWithObjects:[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], nil];
 	// create the request
 	[tnm requestList];
 }
@@ -203,22 +204,25 @@
 
 - (void)organize {
 	NSUInteger i, count = [tnm.torrentsData count];
+	BOOL stop = NO;
 	for (i = 0; i < count; i++) {
 		NSArray * a = (NSArray *)[tnm.torrentsData objectAtIndex:i];
 		int section = [self getSectionFromStatus:[Utilities getStatusProgrammable:[a objectAtIndex:STATUS] forProgress:[a objectAtIndex:PERCENT_PROGRESS]]];
-		NSMutableArray * ma = (NSMutableArray *)[self.organizedTorrents objectAtIndex:section];
-		NSUInteger j, count = [ma count];
-		for (j = 0; j < count; j++) {
-			NSArray * b = (NSArray *)[ma objectAtIndex:j];
-			if ([b objectAtIndex:HASH] == [a objectAtIndex:HASH]) {
-				[ma removeObjectAtIndex:j];
-				[ma addObject:a];
-				return;
+		NSUInteger k, count2 = [organizedTorrents count];
+		for (k = 0; (k < count2) && !stop; k++) {
+			NSMutableArray * ma = (NSMutableArray *)[organizedTorrents objectAtIndex:k];
+			NSUInteger j, count3 = [ma count];
+			for (j = 0; (j < count3) && !stop; j++) {
+				NSArray * b = (NSArray *)[ma objectAtIndex:j];
+				if ([[a objectAtIndex:HASH] isEqual:[b objectAtIndex:HASH]]) {
+					[ma removeObjectAtIndex:j];
+					stop = YES;
+				}
 			}
 		}
-		[ma addObject:a];
+		[[organizedTorrents objectAtIndex:section] addObject:a];
+		stop = NO;
 	}
-	NSLog(@"%i", [[organizedTorrents objectAtIndex:0] count]);
 }
 
 - (int)getSectionFromStatus:(int)status {

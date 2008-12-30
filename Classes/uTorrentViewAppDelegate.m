@@ -49,7 +49,6 @@
 	// Save data if appropriate
 }
 
-
 - (void)dealloc {
 	[tnm release];
 	[settingsAddress release];

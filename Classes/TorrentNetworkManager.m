@@ -30,6 +30,7 @@
 - (id)init {
 	if (self = [super init]) {
         listeners = [[NSMutableArray alloc] init];
+		needListUpdate = NO;
     }
     return self;
 }
@@ -217,6 +218,7 @@
 	NSLog(@"torrentsData size: %i", [self.torrentsData count]);
 	NSLog(@"labelsData size: %i", [self.labelsData count]);
 	//NSLog(@"jsonArray: %@", self.jsonArray);
+	// call update method on listeners
 	NSEnumerator * enumerator = [listeners objectEnumerator];
 	id obj;
 	while (obj = [enumerator nextObject]) {
@@ -227,7 +229,9 @@
     [connection release];
     [receivedData release];
 	[readableString release];
-	// call update method on listeners
+	
+	if (needListUpdate)
+		[self requestList];
 }
 
 - (void)sendNetworkRequest:(NSString *)request {
@@ -245,7 +249,7 @@
 	NSLog(@"request: %@, chacheID: %@", urlrequest, self.torrentsCacheID);
 	NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlrequest]];
 		
-	NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+	NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self startImmediately:YES];
 	if (theConnection) {
 		// Create the NSMutableData that will hold
 		// the received data
@@ -258,16 +262,19 @@
 }
 
 - (void)actionStartForTorrent:(NSString *)hash {
+	needListUpdate = YES;
 	NSString * action = @"?action=start&hash=";
 	[self sendNetworkRequest:[action stringByAppendingString:hash]];
 }
 
 - (void)actionStopForTorrent:(NSString *)hash {
+	needListUpdate = YES;
 	NSString * action = @"?action=stop&hash=";
 	[self sendNetworkRequest:[action stringByAppendingString:hash]];
 }
 
 - (void)requestList {
+	needListUpdate = NO;
 	[self sendNetworkRequest:@"?list=1"];
 }
 
