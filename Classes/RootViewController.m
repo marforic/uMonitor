@@ -12,12 +12,14 @@
 #import "Utilities.h"
 #import "TorrentCell.h"
 #import "DetailedViewController.h"
+#import "StatusOrganizer.h"
+#import "NameOrganizer.h"
 
 @implementation RootViewController
 
 @synthesize torrentsTable;
 @synthesize mainAppDelegate;
-@synthesize organizedTorrents;
+@synthesize organizers;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,13 +29,13 @@
 	
 	// set the title
 	self.navigationItem.title = @"Torrents";
+	
 	// set the refresh button
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(networkRequest)];
 	
 	[Utilities showLoadingCursorForViewController:self];
-	
-	self.organizedTorrents = [NSArray arrayWithObjects:[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], nil];
-	
+	self.organizers = [NSArray arrayWithObjects:[[StatusOrganizer alloc] initWithTNM:tnm], [[NameOrganizer alloc] initWithTNM:tnm], nil];
+	currentOrganizer = 0;
 	[self networkRequest];
 }
 
@@ -80,14 +82,15 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 9;
+	id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
+    return [organizer getSectionNumber];
 }
 
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	NSMutableArray * ma = (NSMutableArray *)[self.organizedTorrents objectAtIndex:section];
-	return [ma count];
+	id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
+	return [organizer getRowNumberInSection:section];
 }
 
 
@@ -97,9 +100,8 @@
     cell = (TorrentCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
 		[[NSBundle mainBundle] loadNibNamed:@"TorrentCell" owner:self options:nil];
-		NSMutableArray * ma = (NSMutableArray *)[self.organizedTorrents objectAtIndex:indexPath.section];
-		NSArray *itemAtIndex = (NSArray *)[ma objectAtIndex:indexPath.row];
-		[cell setData:itemAtIndex];
+		id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
+		[cell setData:[organizer getItemInPath:indexPath]];
     }	
     return cell;
 }
@@ -107,9 +109,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
-	NSMutableArray * ma = (NSMutableArray *)[self.organizedTorrents objectAtIndex:indexPath.section];
-	NSArray * itemAtIndex = (NSArray *)[ma objectAtIndex:indexPath.row];
-	DetailedViewController * detailsViewController = [[DetailedViewController alloc] initWithTorrent:itemAtIndex];
+	id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
+	DetailedViewController * detailsViewController = [[DetailedViewController alloc] initWithTorrent:[organizer getItemInPath:indexPath]];
 	[self.navigationController pushViewController:detailsViewController animated:YES];
 	[detailsViewController release];
 }
@@ -119,40 +120,8 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	NSString * title = @"";
-	switch (section) {
-		case 0:
-			title = ([[organizedTorrents objectAtIndex:0] count] != 0) ? @"STARTED" : @"";
-			break;
-		case 1:
-			title = ([[organizedTorrents objectAtIndex:1] count] != 0) ? @"LEECHING" : @"";
-			break;
-		case 2:
-			title = ([[organizedTorrents objectAtIndex:2] count] != 0) ? @"SEEDING" : @"";
-			break;
-		case 3:
-			title = ([[organizedTorrents objectAtIndex:3] count] != 0) ? @"QUEUED" : @"";
-			break;
-		case 4:
-			title = ([[organizedTorrents objectAtIndex:4] count] != 0) ? @"PAUSED" : @"";
-			break;
-		case 5:
-			title = ([[organizedTorrents objectAtIndex:5] count] != 0) ? @"STOPPED": @"";
-			break;
-		case 6:
-			title = ([[organizedTorrents objectAtIndex:6] count] != 0) ? @"FINISHED": @"";
-			break;
-		case 7:
-			title = ([[organizedTorrents objectAtIndex:7] count] != 0) ? @"CHECKING": @"";
-			break;
-		case 8:
-			title = ([[organizedTorrents objectAtIndex:8] count] != 0) ? @"ERROR" : @"";
-			break;
-		default:
-			title = @"";
-			break;
-	}
-	return title;
+	id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
+	return [organizer getTitleForSection:section];
 }
 
 
@@ -196,72 +165,23 @@
 */
 
 - (void)update {
-	[self organize];
+	id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
+	[organizer organize];
 	[torrentsTable reloadData];
+	organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:((currentOrganizer + 1) % [self.organizers count])];
 	self.navigationItem.rightBarButtonItem.enabled = YES;
-	self.navigationItem.leftBarButtonItem = nil;
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[organizer getLabelText] style:UIBarButtonItemStyleBordered target:self action:@selector(toggleOrganizer)];
+	self.navigationItem.leftBarButtonItem.enabled = TRUE;
 }
 
-- (void)organize {
-	NSUInteger i, count = [tnm.torrentsData count];
-	BOOL stop = NO;
-	for (i = 0; i < count; i++) {
-		NSArray * a = (NSArray *)[tnm.torrentsData objectAtIndex:i];
-		int section = [self getSectionFromStatus:[Utilities getStatusProgrammable:[a objectAtIndex:STATUS] forProgress:[a objectAtIndex:PERCENT_PROGRESS]]];
-		NSUInteger k, count2 = [organizedTorrents count];
-		for (k = 0; (k < count2) && !stop; k++) {
-			NSMutableArray * ma = (NSMutableArray *)[organizedTorrents objectAtIndex:k];
-			NSUInteger j, count3 = [ma count];
-			for (j = 0; (j < count3) && !stop; j++) {
-				NSArray * b = (NSArray *)[ma objectAtIndex:j];
-				if ([[a objectAtIndex:HASH] isEqual:[b objectAtIndex:HASH]]) {
-					[ma removeObjectAtIndex:j];
-					stop = YES;
-				}
-			}
-		}
-		[[organizedTorrents objectAtIndex:section] addObject:a];
-		stop = NO;
-	}
-}
-
-- (int)getSectionFromStatus:(int)status {
-	int ret = 0;
-	switch (status) {
-		case 0:
-			ret = 0;
-			break;
-		case 8:
-			ret = 1;
-			break;
-		case 7:
-			ret = 2;
-			break;
-		case 4:
-			ret = 3;
-			break;
-		case 1:
-			ret = 4;
-			break;
-		case 5:
-			ret = 5;
-			break;
-		case 6:
-			ret = 6;
-			break;
-		case 2:
-			ret = 7;
-			break;
-		case 3:
-			ret = 8;
-			break;
-	}
-	return ret;
+- (void)toggleOrganizer {
+	currentOrganizer = ((currentOrganizer + 1) % [self.organizers count]);
+	[self update];
 }
 
 - (void)dealloc {
     [super dealloc];
-	[self.organizedTorrents release];
+	[self.organizers dealloc];
 	[tnm release];
 }
 

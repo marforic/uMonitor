@@ -10,6 +10,7 @@
 #import "TorrentNetworkManager.h"
 #import "TorrentListener.h"
 #import "uTorrentViewAppDelegate.h"
+#import "TorrentOrganizer.h"
 
 #import "TorrentCell.h"
 
@@ -19,15 +20,15 @@
 	IBOutlet TorrentCell * cell;
 	TorrentNetworkManager * tnm;
 	uTorrentViewAppDelegate * mainAppDelegate;
-	NSArray * organizedTorrents;
+	NSArray * organizers;
+	NSUInteger currentOrganizer;
 }
 
-@property (nonatomic,retain) IBOutlet UITableView *torrentsTable;
-@property (nonatomic,retain) uTorrentViewAppDelegate * mainAppDelegate;
-@property (nonatomic, retain) NSArray * organizedTorrents;
+@property (nonatomic, retain) IBOutlet UITableView *torrentsTable;
+@property (nonatomic, retain) uTorrentViewAppDelegate * mainAppDelegate;
+@property (nonatomic, retain) NSArray * organizers;
 
 - (void)networkRequest;
-- (int)getSectionFromStatus:(int)status;
-- (void)organize;
+- (void)toggleOrganizer;
 
 @end

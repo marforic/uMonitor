@@ -15,6 +15,8 @@
 		2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E55F0DE3E45000AC0155 /* RootViewController.xib */; };
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		49AC9E290F0E3B5C001DC76B /* StatusOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E280F0E3B5C001DC76B /* StatusOrganizer.m */; };
+		49AC9F740F0E6037001DC76B /* NameOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9F730F0E6037001DC76B /* NameOrganizer.m */; };
 		49C0C8FA0EFD80D700DCBCA3 /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C0C8F90EFD80D700DCBCA3 /* DetailsViewController.xib */; };
 		49F16D260EFFFC490069037E /* TorrentNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F16D250EFFFC490069037E /* TorrentNetworkManager.m */; };
 		6102A6CB0F08403700F3CC2C /* flag_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 6102A6CA0F08403700F3CC2C /* flag_white.png */; };
@@ -66,6 +68,11 @@
 		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		49AC9E240F0E3A7E001DC76B /* TorrentOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentOrganizer.h; sourceTree = "<group>"; };
+		49AC9E270F0E3B5C001DC76B /* StatusOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusOrganizer.h; sourceTree = "<group>"; };
+		49AC9E280F0E3B5C001DC76B /* StatusOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusOrganizer.m; sourceTree = "<group>"; };
+		49AC9F720F0E6037001DC76B /* NameOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameOrganizer.h; sourceTree = "<group>"; };
+		49AC9F730F0E6037001DC76B /* NameOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameOrganizer.m; sourceTree = "<group>"; };
 		49C0C8F90EFD80D700DCBCA3 /* DetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsViewController.xib; sourceTree = "<group>"; };
 		49F16D240EFFFC490069037E /* TorrentNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentNetworkManager.h; sourceTree = "<group>"; };
 		49F16D250EFFFC490069037E /* TorrentNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorrentNetworkManager.m; sourceTree = "<group>"; };
@@ -158,6 +165,11 @@
 				6161423C0F05865B00DD585B /* DownloadingViewController.m */,
 				619E72380F07A42D00A9CBDB /* CustomAlertView.h */,
 				619E72390F07A42D00A9CBDB /* CustomAlertView.m */,
+				49AC9E240F0E3A7E001DC76B /* TorrentOrganizer.h */,
+				49AC9E270F0E3B5C001DC76B /* StatusOrganizer.h */,
+				49AC9E280F0E3B5C001DC76B /* StatusOrganizer.m */,
+				49AC9F720F0E6037001DC76B /* NameOrganizer.h */,
+				49AC9F730F0E6037001DC76B /* NameOrganizer.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -345,6 +357,8 @@
 				6161423D0F05865B00DD585B /* DownloadingViewController.m in Sources */,
 				619E70890F06B70100A9CBDB /* BlueBadge.m in Sources */,
 				619E723A0F07A42D00A9CBDB /* CustomAlertView.m in Sources */,
+				49AC9E290F0E3B5C001DC76B /* StatusOrganizer.m in Sources */,
+				49AC9F740F0E6037001DC76B /* NameOrganizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

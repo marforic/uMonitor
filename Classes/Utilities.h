@@ -25,5 +25,6 @@
 +(void)showLoadingCursorForViewController:(UIViewController *)controller;
 +(UIImage *)colorizeImage:(UIImage *)baseImage color:(UIColor *)theColor;
 +(NSArray *)RGBtoHSB:(UIColor *)RGBcolor;
++ (void)insertItemOrderedByName:(NSArray *)item inArrey:(NSMutableArray *)ma;
 
 @end

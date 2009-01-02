@@ -254,5 +254,22 @@
 											nil];
 }
 
++ (void)insertItemOrderedByName:(NSArray *)item inArrey:(NSMutableArray *)ma {
+	NSUInteger i, count = [ma count];
+	NSString * itemName = [item objectAtIndex:NAME];
+	if (count == 0) {
+		[ma addObject:item];
+	} else {
+		for (i = 0; i < count; i++) {
+			NSArray * a = (NSArray *)[ma objectAtIndex:i];
+			NSString * aName = [a objectAtIndex:NAME];
+			if ([itemName compare:aName] == NSOrderedAscending) {
+				[ma insertObject:item atIndex:i];
+				break;
+			} else if (i == (count - 1))
+				[ma addObject:item];
+		}
+	}
+}
 
 @end
