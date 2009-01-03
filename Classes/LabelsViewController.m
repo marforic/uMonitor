@@ -135,6 +135,10 @@
 	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
 	// [self.navigationController pushViewController:anotherViewController];
 	// [anotherViewController release];
+	[self.navigationController dismissModalViewControllerAnimated:YES]; 
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+	LabelCell * myCell = (LabelCell *)[tableView cellForRowAtIndexPath:indexPath];
+	[myCell colorChangedAction];
 }
 
 

@@ -8,11 +8,7 @@
 
 #import "LabelCell.h"
 #import "BlueBadge.h"
-
 #import "Utilities.h"
-
-//#import "UIAlertView_Extended.h"
-
 #import "CustomAlertView.h"
 
 
@@ -32,9 +28,6 @@
 - (void)setCellDataWithLabelString:(NSString *)label withNumber:(NSDecimalNumber *)count colorString:(UIColor *)color {
 	self.labelColor = color;
 
-	[test addTarget:self action:@selector(testAction) forControlEvents:UIControlEventTouchDown];
-	
-	
 	labelLabel.text = label;
 	
 
@@ -56,7 +49,7 @@
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	CustomAlertView *alertView = (CustomAlertView*) actionSheet;
 	if(buttonIndex > 0) {
-		if(alertView.tag == 1) {
+		if(alertView.tag == kMyAlert) {
 			float hS = alertView.hueSlider.value;
 			float bS = alertView.brightnessSlider.value;
 			// set label image color
@@ -69,15 +62,7 @@
 	}
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-	NSLog(@"called");
-	UITouch * touch = [[event allTouches] anyObject];
-	if ([touch view] == self.labelImage) {
-		[self testAction];
-	}
-}
-
-- (void)testAction {
+- (void)colorChangedAction {
 	CustomAlertView *alert = [[CustomAlertView alloc] initWithTitle:@"Choose Color" 
 																message:@"Color" 
 															   delegate:self 
@@ -87,27 +72,13 @@
 	alert.hueSlider.value = [[[Utilities RGBtoHSB:self.labelColor] objectAtIndex:0] floatValue];
 	alert.brightnessSlider.value = [[[Utilities RGBtoHSB:self.labelColor] objectAtIndex:2] floatValue];
 	// tag the alert in case you have multiple alert sheet calls
-	alert.tag = 1;
+	alert.tag = kMyAlert;
 	[alert show];
 	[alert release];
 }
 
-/*
-- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if(buttonIndex > 0) {
-		if(actionSheet.tag == kMyAlert) {
-			NSString *textValue = [actionSheet textField].text;
-			if(textValue==nil)
-				return;
-			NSInteger value = [textValue integerValue];
-		}
-	}
-}*/
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
