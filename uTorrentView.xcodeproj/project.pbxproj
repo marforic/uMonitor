@@ -50,7 +50,6 @@
 		61BE8F9D0F08253800D83454 /* brightness.png in Resources */ = {isa = PBXBuildFile; fileRef = 61BE8F9C0F08253800D83454 /* brightness.png */; };
 		61BE8FE30F08318300D83454 /* ring.png in Resources */ = {isa = PBXBuildFile; fileRef = 61BE8FE20F08318300D83454 /* ring.png */; };
 		61BE8FF70F0833F000D83454 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 61BE8FF60F0833F000D83454 /* down.png */; };
-		61BE903E0F083BD700D83454 /* flag.png in Resources */ = {isa = PBXBuildFile; fileRef = 61BE903D0F083BD700D83454 /* flag.png */; };
 		61DDE7270EFEDB5F00EE8119 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DDE7260EFEDB5F00EE8119 /* Utilities.m */; };
 		61EB95110EF6C51F00340762 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61EB95100EF6C51F00340762 /* Settings.bundle */; };
 		61EB956B0EF6CC6000340762 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EB956A0EF6CC6000340762 /* SystemConfiguration.framework */; };
@@ -117,7 +116,6 @@
 		61BE8F9C0F08253800D83454 /* brightness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brightness.png; sourceTree = "<group>"; };
 		61BE8FE20F08318300D83454 /* ring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ring.png; sourceTree = "<group>"; };
 		61BE8FF60F0833F000D83454 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
-		61BE903D0F083BD700D83454 /* flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flag.png; sourceTree = "<group>"; };
 		61DDE7250EFEDB5F00EE8119 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		61DDE7260EFEDB5F00EE8119 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		61EB95100EF6C51F00340762 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -238,7 +236,6 @@
 			children = (
 				618DED220F0FF71E00B15244 /* my_flag.png */,
 				6102A6CA0F08403700F3CC2C /* flag_white.png */,
-				61BE903D0F083BD700D83454 /* flag.png */,
 				61BE8FF60F0833F000D83454 /* down.png */,
 				61BE8FE20F08318300D83454 /* ring.png */,
 				61BE8F9C0F08253800D83454 /* brightness.png */,
@@ -336,7 +333,6 @@
 				61BE8F9D0F08253800D83454 /* brightness.png in Resources */,
 				61BE8FE30F08318300D83454 /* ring.png in Resources */,
 				61BE8FF70F0833F000D83454 /* down.png in Resources */,
-				61BE903E0F083BD700D83454 /* flag.png in Resources */,
 				6102A6CB0F08403700F3CC2C /* flag_white.png in Resources */,
 				618DED230F0FF71E00B15244 /* my_flag.png in Resources */,
 			);
