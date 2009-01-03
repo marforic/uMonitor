@@ -8,6 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -31,7 +32,7 @@
 				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
 			</object>
 			<object class="IBUITableViewCell" id="1036537253">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -43,7 +44,7 @@
 							<object class="IBUILabel" id="68326837">
 								<reference key="NSNextResponder" ref="526872184"/>
 								<int key="NSvFlags">260</int>
-								<string key="NSFrame">{{20, 10}, {142, 21}}</string>
+								<string key="NSFrame">{{50, 10}, {142, 21}}</string>
 								<reference key="NSSuperview" ref="526872184"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -60,7 +61,7 @@
 							<object class="IBUIImageView" id="898775274">
 								<reference key="NSNextResponder" ref="526872184"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{201, 4}, {30, 30}}</string>
+								<string key="NSFrame">{{9, 5}, {30, 30}}</string>
 								<reference key="NSSuperview" ref="526872184"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -85,6 +86,7 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{320, 40}</string>
+				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MSAwAA</bytes>
@@ -150,8 +152,8 @@
 						<reference key="object" ref="1036537253"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="898775274"/>
 							<reference ref="68326837"/>
+							<reference ref="898775274"/>
 						</object>
 						<reference key="parent" ref="957960031"/>
 					</object>
@@ -225,14 +227,12 @@
 							<string>colorizedImage</string>
 							<string>labelImage</string>
 							<string>labelLabel</string>
-							<string>test</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIImage</string>
 							<string>UIImageView</string>
 							<string>UILabel</string>
-							<string>UIButton</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

@@ -196,6 +196,11 @@
 				}
 			}
 		}
+		for (NSArray * removedTorrent in [jsonItem objectForKey:@"torrentm"]) {
+			for (NSArray * oldTorrent in torrentsData) {
+				
+			}
+		}
 	}
 	// TODO: have to do the remove case with the @"torrentm" selector
 	if ([jsonItem objectForKey:@"label"] != nil) {

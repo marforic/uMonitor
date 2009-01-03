@@ -33,6 +33,7 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
 		[hueSlider setThumbImage:self.plainThumbImage forState:UIControlStateNormal];
 		[hueSlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
 		[hueSlider setMaximumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
+		[hueSlider addTarget:self action:@selector(updateHueSlider) forControlEvents:UIControlEventValueChanged];
 		[hueSlider addTarget:self action:@selector(updateBrightnessSlider) forControlEvents:UIControlEventValueChanged];
 		frame = CGRectMake(110, 90, 200.0, 20.0);
 		UILabel * brightness = [[[UILabel alloc] initWithFrame:frame] retain];
@@ -47,6 +48,7 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
 		[brightnessSlider setThumbImage:self.plainThumbImage forState:UIControlStateNormal];
 		[brightnessSlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
 		[brightnessSlider setMaximumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
+		[brightnessSlider addTarget:self action:@selector(updateBrightnessSlider) forControlEvents:UIControlEventValueChanged];
 		// insert UITextField before first button
 		BOOL inserted = NO;
 		for( UIView *view in self.subviews ){
@@ -68,13 +70,22 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
 	return self;
 }
 
-- (void) updateBrightnessSlider {
+- (void) updateHueSlider {
 	UIImage * tmpImage = [Utilities colorizeImage:self.plainThumbImage 
 											color:[[UIColor alloc] initWithHue:self.hueSlider.value 
 																	saturation:1.0 
-																	brightness:1.0 
+																	brightness:1.0
 																		 alpha:1.0]];
 	[hueSlider setThumbImage:tmpImage forState:UIControlStateNormal];
+}
+
+- (void) updateBrightnessSlider {
+	UIImage * tmpImage = [Utilities colorizeImage:self.plainThumbImage 
+											color:[[UIColor alloc] initWithHue:self.hueSlider.value 
+																	saturation: 1.0 
+																	brightness: self.brightnessSlider.value 
+																		 alpha:1.0]];
+	[brightnessSlider setThumbImage:tmpImage forState:UIControlStateNormal];
 }
 
 
@@ -83,6 +94,7 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
  */
 - (void) show {
 	[super show];
+	[self updateHueSlider];
 	[self updateBrightnessSlider];
 }
 
