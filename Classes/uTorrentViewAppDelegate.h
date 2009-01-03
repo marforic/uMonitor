@@ -20,7 +20,6 @@
 	NSString * settingsPort;
 	NSString * settingsAddress;
 	
-	NSMutableArray * labelColors;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -31,8 +30,6 @@
 @property (nonatomic, retain) NSString * settingsPort;
 @property (nonatomic, retain) NSString * settingsUname;
 @property (nonatomic, retain) NSString * settingsPassword;
-
-@property (nonatomic, retain) NSMutableArray * labelColors;
 
 - (TorrentNetworkManager *)getTNM;
 

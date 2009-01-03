@@ -112,13 +112,19 @@
 	cell = (LabelCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
 		[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil];
-		float randomH, randomB = 0.0f;
-		randomH = (float) random() / (float) 0x7fffffff;
-		randomB = (float) random() / (float) 0x7fffffff;
-		UIColor * color = [[UIColor alloc] initWithHue:randomH saturation:1.0f brightness:randomB alpha:1.0f];
+		NSArray * color = [[NSUserDefaults standardUserDefaults] arrayForKey:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:0]];
+		float colorHue, colorBrightness = 0.0f;
+		if (color != nil) {
+			colorHue = [[color objectAtIndex:0] floatValue];
+			colorBrightness = [[color objectAtIndex:1] floatValue];
+		} else {
+			colorHue = 0.5f;
+			colorBrightness = 0.4f;
+		}
+		UIColor * theColor = [[UIColor alloc] initWithHue:colorHue saturation:1.0f brightness:colorBrightness alpha:1.0f];
 		[cell setCellDataWithLabelString:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:0] 
 							  withNumber:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:1]
-							 colorString:color];
+							 colorString:theColor];
 	}
     return cell;
 }

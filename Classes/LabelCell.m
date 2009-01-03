@@ -59,15 +59,18 @@
 		if(alertView.tag == 1) {
 			float hS = alertView.hueSlider.value;
 			float bS = alertView.brightnessSlider.value;
+			// set label image color
 			self.labelColor = [[UIColor alloc] initWithHue:hS saturation:1.0f brightness:bS alpha:1.0];
 			labelImage.image = [Utilities colorizeImage:self.colorizedImage color:self.labelColor];
-			//NSLog(@"hueSlider: %f, brightnessSlider: %f", hS, bS);
+			// save info into UserDefaults
+			NSArray * colorInfo = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:hS], [NSNumber numberWithFloat:bS], nil];
+			[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:labelLabel.text];
 		}
 	}
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-	NSLog("called");
+	NSLog(@"called");
 	UITouch * touch = [[event allTouches] anyObject];
 	if ([touch view] == self.labelImage) {
 		[self testAction];

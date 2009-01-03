@@ -66,11 +66,20 @@
 -(void)setData:(NSArray *)data {
 	nameLabel.text = [data objectAtIndex:NAME];
 	
-	float randomH = (float) random() / (float) 0x7fffffff;
+	NSArray * color = [[NSUserDefaults standardUserDefaults] arrayForKey:[data objectAtIndex:LABEL]];
+	float colorHue, colorBrightness = 0.0f;
+	if (color != nil) {
+		colorHue = [[color objectAtIndex:0] floatValue];
+		colorBrightness = [[color objectAtIndex:1] floatValue];
+	} else {
+		colorHue = 0.5f;
+		colorBrightness = 0.4f;
+	}
+
 	labelImage.image = [Utilities colorizeImage:labelImage.image 
-										  color:[UIColor colorWithHue:randomH 
+										  color:[UIColor colorWithHue:colorHue
 														   saturation:1.0 
-														   brightness:1.0 
+														   brightness:colorBrightness 
 																alpha:1.0]];
 	
 	sizeLabel.font = [UIFont systemFontOfSize:12];

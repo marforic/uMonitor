@@ -200,14 +200,17 @@
 	// TODO: have to do the remove case with the @"torrentm" selector
 	if ([jsonItem objectForKey:@"label"] != nil) {
 		self.labelsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"label"]];
-		/*uTorrentViewAppDelegate * mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
-		UIColor * labelColor = [UIColor alloc];
 		float randomH;
+		NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+		NSArray * labelColorData;
 		for (NSArray * label in self.labelsData) {
-			randomH = (float) random() / (float) 0x7fffffff;
-			[labelColor initWithHue:randomH saturation:1.0 brightness:1.0 alpha:1.0];
-			//[mainAppDelegate.labelColors addObject:[[NSArray array] initWithObjects:[self.labelsData objectAtIndex:0], labelColor, nil]];
-		}*/
+			if ((labelColorData = [defaults arrayForKey:[label objectAtIndex:0]]) == nil) {
+				// label not found in user defaults, create random color and store it
+				randomH = (float) random() / (float) 0x7fffffff;
+				NSArray * colorInfo = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:randomH], [NSNumber numberWithFloat:1.0f], nil];
+				[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:[label objectAtIndex:0]];
+			}
+		}
 	}
 	if ([jsonItem objectForKey:@"torrentc"] != nil)
 		self.torrentsCacheID = [jsonItem objectForKey:@"torrentc"];

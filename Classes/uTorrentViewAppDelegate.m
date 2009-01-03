@@ -16,17 +16,12 @@
 @synthesize tabBarController;
 @synthesize tnm;
 @synthesize settingsAddress, settingsPort, settingsUname, settingsPassword;
-@synthesize labelColors;
 
 - (TorrentNetworkManager *)getTNM {
 	return tnm;
 }
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-	
-	// configure colors for labels
-	labelColors = [[NSMutableArray alloc] init];
-	
 	
 	// instantiate our Torrent Network Manager
 	tnm = [[TorrentNetworkManager alloc] init];
