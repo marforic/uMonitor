@@ -40,6 +40,7 @@
 		6161407C0F044D1C00DD585B /* status_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 616140710F044D1C00DD585B /* status_yellow.png */; };
 		616141E80F053DE400DD585B /* LabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 616141E70F053DE400DD585B /* LabelCell.xib */; };
 		6161423D0F05865B00DD585B /* DownloadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6161423C0F05865B00DD585B /* DownloadingViewController.m */; };
+		618DED230F0FF71E00B15244 /* my_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = 618DED220F0FF71E00B15244 /* my_flag.png */; };
 		619E70890F06B70100A9CBDB /* BlueBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 619E70880F06B70100A9CBDB /* BlueBadge.m */; };
 		619E70AB0F06BCC200A9CBDB /* labels.png in Resources */ = {isa = PBXBuildFile; fileRef = 619E70AA0F06BCC200A9CBDB /* labels.png */; };
 		619E70B00F06BD4D00A9CBDB /* updown.png in Resources */ = {isa = PBXBuildFile; fileRef = 619E70AE0F06BD4D00A9CBDB /* updown.png */; };
@@ -103,6 +104,7 @@
 		616141E70F053DE400DD585B /* LabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelCell.xib; sourceTree = "<group>"; };
 		6161423B0F05865B00DD585B /* DownloadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadingViewController.h; sourceTree = "<group>"; };
 		6161423C0F05865B00DD585B /* DownloadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadingViewController.m; sourceTree = "<group>"; };
+		618DED220F0FF71E00B15244 /* my_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = my_flag.png; sourceTree = "<group>"; };
 		619E70870F06B70100A9CBDB /* BlueBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueBadge.h; sourceTree = "<group>"; };
 		619E70880F06B70100A9CBDB /* BlueBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueBadge.m; sourceTree = "<group>"; };
 		619E70AA0F06BCC200A9CBDB /* labels.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = labels.png; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 		616140180F0410A700DD585B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				618DED220F0FF71E00B15244 /* my_flag.png */,
 				6102A6CA0F08403700F3CC2C /* flag_white.png */,
 				61BE903D0F083BD700D83454 /* flag.png */,
 				61BE8FF60F0833F000D83454 /* down.png */,
@@ -335,6 +338,7 @@
 				61BE8FF70F0833F000D83454 /* down.png in Resources */,
 				61BE903E0F083BD700D83454 /* flag.png in Resources */,
 				6102A6CB0F08403700F3CC2C /* flag_white.png in Resources */,
+				618DED230F0FF71E00B15244 /* my_flag.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

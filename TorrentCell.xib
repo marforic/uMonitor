@@ -150,15 +150,15 @@
 							<object class="IBUIImageView" id="541720432">
 								<reference key="NSNextResponder" ref="1051962516"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{0, 29}, {21, 50}}</string>
+								<string key="NSFrame">{{-1, 26}, {21, 50}}</string>
 								<reference key="NSSuperview" ref="1051962516"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-								<int key="IBUIContentMode">6</int>
+								<int key="IBUIContentMode">4</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">flag_white.png</string>
+									<string key="NSResourceName">my_flag.png</string>
 								</object>
 							</object>
 						</object>
