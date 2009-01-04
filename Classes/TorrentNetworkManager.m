@@ -185,6 +185,16 @@
 	if ([jsonItem objectForKey:@"torrents"] != nil) { // new request -> no cache
 		self.torrentsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"torrents"]];
 	} else if ([jsonItem objectForKey:@"torrentp"] != nil) { // cache id being used - this are the modified torrents
+		NSArray * removedTorrents = [[NSArray alloc] initWithArray:[jsonItem objectForKey:@"torrentm"]];
+		if (removedTorrents != nil) {
+			for (NSString * removedTorrentHash in removedTorrents) {
+				for (NSArray* oldTorrent in torrentsData) {
+					NSString * oldHash = [oldTorrent objectAtIndex:HASH];
+					if ([removedTorrentHash isEqual:oldHash])
+						[torrentsData removeObject:oldTorrent];
+				}
+			}
+		}
 		for (NSArray* newTorrent in [jsonItem objectForKey:@"torrentp"]) {
 			for (NSArray* oldTorrent in torrentsData) {
 				NSString * newHash = [newTorrent objectAtIndex:HASH];
@@ -196,13 +206,8 @@
 				}
 			}
 		}
-		for (NSArray * removedTorrent in [jsonItem objectForKey:@"torrentm"]) {
-			for (NSArray * oldTorrent in torrentsData) {
-				
-			}
-		}
 	}
-	// TODO: have to do the remove case with the @"torrentm" selector
+	
 	if ([jsonItem objectForKey:@"label"] != nil) {
 		self.labelsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"label"]];
 		float randomH;
