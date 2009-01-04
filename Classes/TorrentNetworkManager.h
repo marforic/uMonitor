@@ -18,11 +18,13 @@
 	NSNumber * unlabelledTorrents;
 	NSMutableArray * listeners;
 	NSString * torrentsCacheID;
+	NSArray * removedTorrents;
 	BOOL needListUpdate;
 }
 
 @property (nonatomic, retain) NSMutableArray * torrentsData;
 @property (nonatomic, retain) NSMutableArray * labelsData;
+@property (nonatomic, retain) NSArray * removedTorrents;
 @property (nonatomic, retain) NSDictionary * jsonItem;
 @property (nonatomic, retain) NSString * torrentsCacheID;
 @property (nonatomic, retain) NSNumber * unlabelledTorrents;

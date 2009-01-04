@@ -30,7 +30,6 @@
 	BOOL stop = NO;
 	for (i = 0; i < count; i++) {
 		NSArray * a = (NSArray *)[tnm.torrentsData objectAtIndex:i];
-		int section = [self getSectionFromStatus:[Utilities getStatusProgrammable:[a objectAtIndex:STATUS] forProgress:[a objectAtIndex:PERCENT_PROGRESS]]];
 		NSUInteger k, count2 = [self.organizedTorrents count];
 		for (k = 0; (k < count2) && !stop; k++) {
 			NSMutableArray * ma = (NSMutableArray *)[self.organizedTorrents objectAtIndex:k];
@@ -43,8 +42,28 @@
 				}
 			}
 		}
+		int section = [self getSectionFromStatus:[Utilities getStatusProgrammable:[a objectAtIndex:STATUS] forProgress:[a objectAtIndex:PERCENT_PROGRESS]]];
 		[Utilities insertItemOrderedByName:a inArrey:[self.organizedTorrents objectAtIndex:section]];
 		stop = NO;
+	}
+	if (tnm.removedTorrents != nil) {
+		count = [self.organizedTorrents count];
+		BOOL stop = NO;
+		for (NSString * rm in tnm.removedTorrents) {
+			for (i = 0; i < count && !stop; i++) {
+				NSMutableArray * ma = (NSMutableArray *)[self.organizedTorrents objectAtIndex:i];
+				NSUInteger j, count2 = [ma count];
+				for (j = 0; j < count2 && !stop; j++) {
+					NSArray * t = (NSArray *)[ma objectAtIndex:j];
+					NSString * tHash = (NSString *)[t objectAtIndex:HASH];
+					if ([rm isEqual:tHash]) {
+						[ma removeObjectAtIndex:j];
+						stop = YES;
+					}
+				}
+			}
+			stop = NO;
+		}
 	}
 }
 

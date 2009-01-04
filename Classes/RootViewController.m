@@ -170,6 +170,8 @@
 	[torrentsTable reloadData];
 	organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:((currentOrganizer + 1) % [self.organizers count])];
 	self.navigationItem.rightBarButtonItem.enabled = YES;
+	if (self.navigationItem.leftBarButtonItem != nil)
+		[self.navigationItem.leftBarButtonItem release];
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[organizer getLabelText] style:UIBarButtonItemStyleBordered target:self action:@selector(toggleOrganizer)];
 	self.navigationItem.leftBarButtonItem.enabled = TRUE;
 }

@@ -34,7 +34,6 @@
 }
 
 - (void)organize {
-	NSLog(@"LOL");
 	NSUInteger i, count = [tnm.torrentsData count];
 	for (i = 0; i < count; i++) {
 		NSArray * a = (NSArray *)[tnm.torrentsData objectAtIndex:i];
@@ -49,6 +48,25 @@
 			}
 		}
 		[Utilities insertItemOrderedByName:a inArrey:ma];
+	}
+	if (tnm.removedTorrents != nil) {
+		count = [self.organizedTorrents count];
+		BOOL stop = NO;
+		for (NSString * rm in tnm.removedTorrents) {
+			for (i = 0; i < count && !stop; i++) {
+				NSMutableArray * ma = (NSMutableArray *)[self.organizedTorrents objectAtIndex:i];
+				NSUInteger j, count2 = [ma count];
+				for (j = 0; j < count2 && !stop; j++) {
+					NSArray * t = (NSArray *)[ma objectAtIndex:j];
+					NSString * tHash = (NSString *)[t objectAtIndex:HASH];
+					if ([rm isEqual:tHash]) {
+						[ma removeObjectAtIndex:j];
+						stop = YES;
+					}
+				}
+			}
+			stop = NO;
+		}
 	}
 }
 

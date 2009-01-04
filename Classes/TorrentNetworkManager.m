@@ -27,6 +27,7 @@
 @synthesize jsonItem;
 @synthesize torrentsCacheID;
 @synthesize unlabelledTorrents;
+@synthesize removedTorrents;
 
 - (id)init {
 	if (self = [super init]) {
@@ -186,9 +187,11 @@
 	if ([jsonItem objectForKey:@"torrents"] != nil) { // new request -> no cache
 		self.torrentsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"torrents"]];
 	} else if ([jsonItem objectForKey:@"torrentp"] != nil) { // cache id being used - this are the modified torrents
-		NSArray * removedTorrents = [[NSArray alloc] initWithArray:[jsonItem objectForKey:@"torrentm"]];
-		if (removedTorrents != nil) {
-			for (NSString * removedTorrentHash in removedTorrents) {
+		if (self.removedTorrents != nil)
+			[self.removedTorrents release];
+		self.removedTorrents = [[NSArray alloc] initWithArray:[jsonItem objectForKey:@"torrentm"]];
+		if (self.removedTorrents != nil) {
+			for (NSString * removedTorrentHash in self.removedTorrents) {
 				for (NSArray* oldTorrent in torrentsData) {
 					NSString * oldHash = [oldTorrent objectAtIndex:HASH];
 					if ([removedTorrentHash isEqual:oldHash])
@@ -337,6 +340,7 @@
 	[torrentsData dealloc];
 	[labelsData dealloc];
 	[jsonItem dealloc];
+	[removedTorrents dealloc];
     [super dealloc];
 }
 @end
