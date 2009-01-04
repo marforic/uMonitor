@@ -230,21 +230,26 @@
 	if ([jsonItem objectForKey:@"torrentc"] != nil)
 		self.torrentsCacheID = [jsonItem objectForKey:@"torrentc"];
 	
-	//NSLog(@"%@", readableString);
 	NSLog(@"cacheID as string:%@ as int: %i", [jsonItem objectForKey:@"torrentc"], [[jsonItem objectForKey:@"torrentc"] intValue]);
 	
 	NSLog(@"torrentsData size: %i", [self.torrentsData count]);
 	NSLog(@"labelsData size: %i", [self.labelsData count]);
 	NSLog(@"unlabelled Torrents: %i", [[self updateUnlabelledTorrents] intValue]);
 	
-	//NSLog(@"jsonArray: %@", self.jsonArray);
 	// call update method on listeners
-	NSEnumerator * enumerator = [listeners objectEnumerator];
-	id obj;
-	while (obj = [enumerator nextObject]) {
-		id<TorrentListener> listener = (id<TorrentListener>)obj;
-		[listener update];
+	// only if it was a requestList!
+	if (needListUpdate == NO) {
+		NSEnumerator * enumerator = [listeners objectEnumerator];
+		id obj;
+		while (obj = [enumerator nextObject]) {
+			id<TorrentListener> listener = (id<TorrentListener>)obj;
+			[listener update];
+		}
 	}
+	
+	// stop the spinning
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	
     // release the connection, and the data object
     [connection release];
     [receivedData release];
@@ -266,6 +271,9 @@
 		urlrequest = [urlrequest stringByAppendingString:@"&cid="];
 		urlrequest = [urlrequest stringByAppendingString:self.torrentsCacheID];
 	}
+	
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	
 	NSLog(@"request: %@, chacheID: %@", urlrequest, self.torrentsCacheID);
 	NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlrequest]];
 		

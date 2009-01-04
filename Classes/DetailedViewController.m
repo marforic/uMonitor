@@ -23,6 +23,7 @@
 		self.torrent = selectedTorrent;
 	mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
 	tnm = [mainAppDelegate getTNM];
+	//[tnm addListener:self];
     return self;
 }
 
@@ -46,6 +47,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+	[tnm addListener:self];
     [super viewDidAppear:animated];
 }
  
@@ -54,6 +56,7 @@
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
+	[tnm removeListener:self];
 	[super viewDidDisappear:animated];
 }
 
@@ -254,6 +257,17 @@
     return cell;
 }
 
+- (void)update {
+	NSLog(@"I should have reloaded my data!");
+	for (NSArray * t in tnm.torrentsData) {
+		if ([[t objectAtIndex:HASH] isEqual:[self.torrent objectAtIndex:HASH]]) {
+			self.torrent = t;
+			break;
+		}
+	}
+	[self.tableView reloadData];
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
@@ -304,6 +318,7 @@
 
 
 - (void)dealloc {
+	[tnm removeListener:self];
     [super dealloc];
 }
 

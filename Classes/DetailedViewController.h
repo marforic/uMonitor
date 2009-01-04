@@ -12,7 +12,7 @@
 #import "TorrentNetworkManager.h"
 
 
-@interface DetailedViewController : UITableViewController <UIActionSheetDelegate, UIAlertViewDelegate> {
+@interface DetailedViewController : UITableViewController <UIActionSheetDelegate, UIAlertViewDelegate, TorrentListener> {
 	@private
 	NSArray * torrent;
 	IBOutlet UIView * customFooter;
