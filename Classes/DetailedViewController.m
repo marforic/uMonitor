@@ -265,6 +265,8 @@
 		}
 	}
 	[self.tableView reloadData];
+	// TODO: make this happen only after a delete
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 
