@@ -100,7 +100,11 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [tnm.labelsData count];
+	int unlabelled = 0;
+	if ((unlabelled = [[tnm updateUnlabelledTorrents] intValue]) == 0)
+		return [tnm.labelsData count]; // no unlabelled torrents
+	else
+		return [tnm.labelsData count] + 1; // unlabelled torrents
 }
 
 
@@ -112,19 +116,35 @@
 	cell = (LabelCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
 		[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil];
-		NSArray * color = [[NSUserDefaults standardUserDefaults] arrayForKey:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:0]];
-		float colorHue, colorBrightness = 0.0f;
-		if (color != nil) {
-			colorHue = [[color objectAtIndex:0] floatValue];
-			colorBrightness = [[color objectAtIndex:1] floatValue];
-		} else {
-			colorHue = 0.5f;
-			colorBrightness = 0.4f;
+		if (indexPath.row < [tnm.labelsData count]) {
+			NSArray * color = [[NSUserDefaults standardUserDefaults] arrayForKey:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:0]];
+			float colorHue, colorBrightness = 0.0f;
+			if (color != nil) {
+				colorHue = [[color objectAtIndex:0] floatValue];
+				colorBrightness = [[color objectAtIndex:1] floatValue];
+			} else {
+				colorHue = 0.5f;
+				colorBrightness = 0.4f;
+			}
+			UIColor * theColor = [[UIColor alloc] initWithHue:colorHue saturation:1.0f brightness:colorBrightness alpha:1.0f];
+			[cell setCellDataWithLabelString:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:0] 
+								  withNumber:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:1]
+								 colorString:theColor];
+		} else { // no label case
+			NSArray * color = [[NSUserDefaults standardUserDefaults] arrayForKey:@"No label"];
+			float colorHue, colorBrightness = 0.0f;
+			if (color != nil) {
+				colorHue = [[color objectAtIndex:0] floatValue];
+				colorBrightness = [[color objectAtIndex:1] floatValue];
+			} else {
+				colorHue = 0.5f;
+				colorBrightness = 0.4f;
+			}
+			UIColor * theColor = [[UIColor alloc] initWithHue:colorHue saturation:1.0f brightness:colorBrightness alpha:1.0f];
+			[cell setCellDataWithLabelString:@"No Label"
+								  withNumber:(NSDecimalNumber *)[tnm updateUnlabelledTorrents]
+								 colorString:theColor];
 		}
-		UIColor * theColor = [[UIColor alloc] initWithHue:colorHue saturation:1.0f brightness:colorBrightness alpha:1.0f];
-		[cell setCellDataWithLabelString:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:0] 
-							  withNumber:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:1]
-							 colorString:theColor];
 	}
     return cell;
 }

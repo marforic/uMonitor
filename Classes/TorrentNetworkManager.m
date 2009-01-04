@@ -26,6 +26,7 @@
 @synthesize labelsData;
 @synthesize jsonItem;
 @synthesize torrentsCacheID;
+@synthesize unlabelledTorrents;
 
 - (id)init {
 	if (self = [super init]) {
@@ -221,7 +222,11 @@
 				[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:[label objectAtIndex:0]];
 			}
 		}
+		// add color (black) for 'No label' torrents
+		NSArray * colorInfo = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:1.0f], [NSNumber numberWithFloat:0.0f], nil];
+		[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:@"No label"];
 	}
+	
 	if ([jsonItem objectForKey:@"torrentc"] != nil)
 		self.torrentsCacheID = [jsonItem objectForKey:@"torrentc"];
 	
@@ -230,6 +235,8 @@
 	
 	NSLog(@"torrentsData size: %i", [self.torrentsData count]);
 	NSLog(@"labelsData size: %i", [self.labelsData count]);
+	NSLog(@"unlabelled Torrents: %i", [[self updateUnlabelledTorrents] intValue]);
+	
 	//NSLog(@"jsonArray: %@", self.jsonArray);
 	// call update method on listeners
 	NSEnumerator * enumerator = [listeners objectEnumerator];
@@ -304,6 +311,18 @@
 			break;
 		}
 	}
+}
+
+- (NSNumber *) updateUnlabelledTorrents {
+	int ret = 0;
+	int labelledItemCount = 0;
+	for (NSArray * label in labelsData) {
+		labelledItemCount += [[label objectAtIndex:1] intValue];
+	}
+	ret = [torrentsData count] - labelledItemCount;
+	NSNumber * retObj = [[NSNumber alloc] initWithInt:ret];
+	//self.unlabelledTorrents = retObj;
+	return retObj;
 }
 
 - (void)dealloc {
