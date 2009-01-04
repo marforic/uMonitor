@@ -304,6 +304,18 @@
 	[self sendNetworkRequest:[action stringByAppendingString:hash]];
 }
 
+- (void)actionDeleteDotTorrent:(NSString *)hash {
+	needListUpdate = YES;
+	NSString * action = @"?action=remove&hash=";
+	[self sendNetworkRequest:[action stringByAppendingString:hash]];
+}
+
+- (void)actionDeleteData:(NSString *)hash {
+	needListUpdate = YES;
+	NSString * action = @"?action=removedata&hash=";
+	[self sendNetworkRequest:[action stringByAppendingString:hash]];
+}
+
 - (void)requestList {
 	needListUpdate = NO;
 	[self sendNetworkRequest:@"?list=1"];

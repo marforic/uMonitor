@@ -75,13 +75,11 @@
 
 #pragma mark Buttons methods
 - (void)startButtonAction {
-	// TODO: action works, but torrent needs to be updated!!
 	[tnm actionStartForTorrent:[self.torrent objectAtIndex:HASH]];
 	NSLog(@"Start Button");
 }
 
 - (void)stopButtonAction {
-	// TODO: action works, but torrent needs to be updated!!
 	[tnm actionStopForTorrent:[self.torrent objectAtIndex:HASH]];
 	NSLog(@"Stop Button");
 }
@@ -102,7 +100,8 @@
 		case 0: // cancel
 			break;
 		case 1: // delete .torrent only
-			// TODO: call the deletion of .torrent file
+			[tnm actionDeleteDotTorrent:[self.torrent objectAtIndex:HASH]];
+			NSLog(@".torrent deleted");
 			break;
 		case 2: // delete .torrent and data
 			[Utilities alertOKCancelAction:@"Confirm data deletion" 
@@ -117,7 +116,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	switch (buttonIndex) {
 		case 1: // OK
-			// TODO: call the deletion of .torrent file and data
+			[tnm actionDeleteData:[self.torrent objectAtIndex:HASH]];
 			NSLog(@"Doom be upon you, you are deleting everything!");
 			break;
 		default:

@@ -44,6 +44,8 @@
 
 - (void)actionStartForTorrent:(NSString *)hash;
 - (void)actionStopForTorrent:(NSString *)hash;
+- (void)actionDeleteData:(NSString *)hash;
+- (void)actionDeleteDotTorrent:(NSString *)hash;
 - (void)requestList;
 
 - (void)addListener:(id<TorrentListener>)listener;
