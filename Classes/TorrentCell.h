@@ -19,6 +19,8 @@
 	IBOutlet UIImageView * statusImage;
 	IBOutlet UIImageView * labelImage;
 	IBOutlet UIProgressView * progressView;
+	UIImage * cachedLabel;
+	UIImage * cachedStatus;
 }
 
 - (void)setData:(NSArray *)data;

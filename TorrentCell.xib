@@ -295,10 +295,10 @@
 							<reference ref="784027341"/>
 							<reference ref="40930291"/>
 							<reference ref="893727013"/>
-							<reference ref="477516940"/>
 							<reference ref="364375347"/>
 							<reference ref="923031915"/>
 							<reference ref="541720432"/>
+							<reference ref="477516940"/>
 						</object>
 						<reference key="parent" ref="957960031"/>
 					</object>
@@ -323,11 +323,6 @@
 						<reference key="parent" ref="265633414"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">7</int>
-						<reference key="object" ref="477516940"/>
-						<reference key="parent" ref="265633414"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">14</int>
 						<reference key="object" ref="364375347"/>
 						<reference key="parent" ref="265633414"/>
@@ -340,6 +335,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">18</int>
 						<reference key="object" ref="541720432"/>
+						<reference key="parent" ref="265633414"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">7</int>
+						<reference key="object" ref="477516940"/>
 						<reference key="parent" ref="265633414"/>
 					</object>
 				</object>

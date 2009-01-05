@@ -53,7 +53,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-	[self.torrentsTable reloadData];
+	//[self.torrentsTable reloadData];
 }
 
 
@@ -67,13 +67,12 @@
 }
 
 
-/*
+
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
@@ -97,13 +96,16 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"TorrentsCell";
-    cell = (TorrentCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
+	NSArray * torrentData = [organizer getItemInPath:indexPath];
+	NSString * CellIdentifier = @"TorrentCell";//[torrentData objectAtIndex:HASH];
+	cell = (TorrentCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
+		//NSLog(@"cell created! %@", CellIdentifier);
 		[[NSBundle mainBundle] loadNibNamed:@"TorrentCell" owner:self options:nil];
-		id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
-		[cell setData:[organizer getItemInPath:indexPath]];
-    }	
+    }
+	
+	[cell setData:torrentData];
     return cell;
 }
 

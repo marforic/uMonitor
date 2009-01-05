@@ -64,7 +64,7 @@
 }
 
 -(void)setData:(NSArray *)data {
-	nameLabel.text = [data objectAtIndex:NAME];
+	nameLabel.text = [data objectAtIndex:NAME];	
 	
 	NSArray * color = [[NSUserDefaults standardUserDefaults] arrayForKey:[data objectAtIndex:LABEL]];
 	float colorHue, colorBrightness = 0.0f;
@@ -76,11 +76,18 @@
 		colorBrightness = 0.4f;
 	}
 
-	labelImage.image = [Utilities colorizeImage:labelImage.image 
-										  color:[UIColor colorWithHue:colorHue
-														   saturation:1.0 
-														   brightness:colorBrightness 
-																alpha:1.0]];
+	if (cachedLabel == nil) {
+		labelImage.image = [Utilities colorizeImage:labelImage.image 
+											  color:[UIColor colorWithHue:colorHue
+															   saturation:1.0 
+															   brightness:colorBrightness 
+																	alpha:1.0]];
+		cachedLabel = labelImage.image;
+	} else {
+		//NSLog (@"using cached image!!!!");
+		labelImage.image = cachedLabel;
+	}
+	
 	
 	sizeLabel.font = [UIFont systemFontOfSize:12];
 	sizeLabel.text = [sizeLabel.text stringByAppendingString:[Utilities getSizeReadable:[data objectAtIndex:SIZE]]];
@@ -96,27 +103,33 @@
 
 	progressView.progress = [self getProgressForBar:[data objectAtIndex:PERCENT_PROGRESS]];
 
-	switch ([Utilities getStatusProgrammable:[data objectAtIndex:STATUS] forProgress:[data objectAtIndex:PERCENT_PROGRESS]]) {
-		case LEECHING:
-			statusImage.image = [[UIImage imageNamed:@"status_green.png"] retain];
-			break;
-		case SEEDING:
-			statusImage.image = [[UIImage imageNamed:@"status_blue.png"] retain];
-			break;
-		case PAUSED:
-			statusImage.image = [[UIImage imageNamed:@"status_yellow.png"] retain];
-			break;
-		case CHECKING:// same as stopped
-		case STOPPED:
-			statusImage.image = [[UIImage imageNamed:@"status_grey.png"] retain];
-			break;
-		case FINISHED:
-			statusImage.image = [[UIImage imageNamed:@"status_violet.png"] retain];
-			break;
-		case ERROR:
-			statusImage.image = [[UIImage imageNamed:@"status_skull.png"] retain];
-			break;
+	if (cachedStatus == nil) {
+		switch ([Utilities getStatusProgrammable:[data objectAtIndex:STATUS] forProgress:[data objectAtIndex:PERCENT_PROGRESS]]) {
+			case LEECHING:
+				statusImage.image = [[UIImage imageNamed:@"status_green.png"] retain];
+				break;
+			case SEEDING:
+				statusImage.image = [[UIImage imageNamed:@"status_blue.png"] retain];
+				break;
+			case PAUSED:
+				statusImage.image = [[UIImage imageNamed:@"status_yellow.png"] retain];
+				break;
+			case CHECKING:// same as stopped
+			case STOPPED:
+				statusImage.image = [[UIImage imageNamed:@"status_grey.png"] retain];
+				break;
+			case FINISHED:
+				statusImage.image = [[UIImage imageNamed:@"status_violet.png"] retain];
+				break;
+			case ERROR:
+				statusImage.image = [[UIImage imageNamed:@"status_skull.png"] retain];
+				break;
+		}
+		cachedStatus = statusImage.image;
+	} else {
+		statusImage.image = cachedStatus;
 	}
+	
 }
 
 /*- (void)layoutSubviews {
