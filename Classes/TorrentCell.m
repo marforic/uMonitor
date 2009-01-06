@@ -90,15 +90,19 @@
 	
 	
 	sizeLabel.font = [UIFont systemFontOfSize:12];
+	sizeLabel.text = @"Size: ";
 	sizeLabel.text = [sizeLabel.text stringByAppendingString:[Utilities getSizeReadable:[data objectAtIndex:SIZE]]];
 	
 	doneLabel.font = [UIFont systemFontOfSize:12];
+	doneLabel.text = @"Done: ";
 	doneLabel.text = [doneLabel.text stringByAppendingString:[Utilities getSizeReadable:[data objectAtIndex:DOWNLOADED]]];
 	
 	uploadLabel.font = [UIFont systemFontOfSize:12];
+	uploadLabel.text = @"UL: ";
 	uploadLabel.text = [uploadLabel.text stringByAppendingString:[Utilities getSpeedReadable:[data objectAtIndex:UPLOAD_SPEED]]];
 	
 	downloadLabel.font = [UIFont systemFontOfSize:12];
+	downloadLabel.text = @"DL: ";
 	downloadLabel.text = [downloadLabel.text stringByAppendingString:[Utilities getSpeedReadable:[data objectAtIndex:DOWNLOAD_SPEED]]];
 
 	progressView.progress = [self getProgressForBar:[data objectAtIndex:PERCENT_PROGRESS]];
