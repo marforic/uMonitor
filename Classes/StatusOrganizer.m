@@ -47,7 +47,7 @@
 		stop = NO;
 	}
 	if (tnm.removedTorrents != nil) {
-		NSLog([tnm.removedTorrents description]);
+		//NSLog([tnm.removedTorrents description]);
 		count = [self.organizedTorrents count];
 		BOOL stop = NO;
 		for (NSString * rm in tnm.removedTorrents) {
