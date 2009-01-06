@@ -27,11 +27,13 @@
 @synthesize torrentsCacheID;
 @synthesize unlabelledTorrents;
 @synthesize removedTorrents;
+@synthesize needToDelete;
 
 - (id)init {
 	if (self = [super init]) {
         listeners = [[NSMutableArray alloc] init];
 		needListUpdate = NO;
+		self.needToDelete = NO;
     }
     return self;
 }
@@ -189,7 +191,7 @@
 	} else if ([jsonItem objectForKey:@"torrentp"] != nil) { // cache id being used - this are the modified torrents
 		if (self.removedTorrents != nil)
 			[self.removedTorrents release];
-		self.removedTorrents = [NSArray arrayWithArray:[jsonItem objectForKey:@"torrentm"]];
+		self.removedTorrents = [jsonItem objectForKey:@"torrentm"];
 		if (self.removedTorrents != nil) {
 			for (NSString * removedTorrentHash in self.removedTorrents) {
 				for (NSArray* oldTorrent in torrentsData) {
@@ -314,6 +316,7 @@
 - (void)actionDeleteDotTorrent:(NSString *)hash {
 	type = T_DELETE;
 	needListUpdate = YES;
+	self.needToDelete = YES;
 	NSString * action = @"?action=remove&hash=";
 	[self sendNetworkRequest:[action stringByAppendingString:hash]];
 }
@@ -321,6 +324,7 @@
 - (void)actionDeleteData:(NSString *)hash {
 	type = T_DELETE;
 	needListUpdate = YES;
+	self.needToDelete = YES;
 	NSString * action = @"?action=removedata&hash=";
 	[self sendNetworkRequest:[action stringByAppendingString:hash]];
 }

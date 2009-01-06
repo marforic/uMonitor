@@ -19,6 +19,7 @@
 	NSString * torrentsCacheID;
 	NSArray * removedTorrents;
 	BOOL needListUpdate;
+	BOOL needToDelete;
 	NSUInteger type;
 }
 
@@ -27,6 +28,7 @@
 @property (nonatomic, retain) NSArray * removedTorrents;
 @property (nonatomic, retain) NSString * torrentsCacheID;
 @property (nonatomic, retain) NSNumber * unlabelledTorrents;
+@property BOOL needToDelete;
 
 - (BOOL)connectedToNetwork;
 - (BOOL)hostAvailable:(NSString *)theHost;

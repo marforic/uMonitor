@@ -47,6 +47,7 @@
 		stop = NO;
 	}
 	if (tnm.removedTorrents != nil) {
+		NSLog([tnm.removedTorrents description]);
 		count = [self.organizedTorrents count];
 		BOOL stop = NO;
 		for (NSString * rm in tnm.removedTorrents) {
@@ -64,7 +65,37 @@
 			}
 			stop = NO;
 		}
-	}
+	} else if (tnm.needToDelete) {
+		BOOL toRemove = YES;
+		NSInteger i, count = [self.organizedTorrents count];
+		NSUInteger k, count3 = [tnm.torrentsData count];
+		for (i = 0; i < count; i++) {
+			NSMutableArray * indexToRemove = [[NSMutableArray alloc] init];
+			NSMutableArray * ma = (NSMutableArray *)[self.organizedTorrents objectAtIndex:i];
+			NSUInteger j, count2 = [ma count];
+			for (j = 0; j < count2; j++) {
+				NSArray * a = (NSArray *)[ma objectAtIndex:j];
+				NSString * aHASH = (NSString *)[a objectAtIndex:HASH];
+				for (k = 0; k < count3; k++) {
+					NSArray * b = (NSArray *)[tnm.torrentsData objectAtIndex:k];
+					NSString * bHash = (NSString *)[b objectAtIndex:HASH];
+					if ([aHASH isEqual:bHash]) {
+						toRemove = NO;
+						break;
+					}
+				}
+				if (toRemove)
+					[indexToRemove addObject:[NSNumber numberWithInt:j]];
+				toRemove = YES;
+			}
+			NSUInteger l, count4 = [indexToRemove count];
+			for (l = 0; l < count4; l++) {
+				NSNumber * n = (NSNumber *)[indexToRemove objectAtIndex:l];
+				[ma removeObjectAtIndex:[n intValue]];
+			}
+		}
+		tnm.needToDelete = NO;
+	} 
 }
 
 - (int)getSectionFromStatus:(int)status {
