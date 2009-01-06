@@ -185,7 +185,7 @@
 	NSDictionary * jsonItem = [readableString JSONValue];
 	// if checks because following requests (actions) won't return the list
 	if ([jsonItem objectForKey:@"torrents"] != nil) { // new request -> no cache
-		self.torrentsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"torrents"]];
+		self.torrentsData = [NSMutableArray arrayWithArray:[jsonItem objectForKey:@"torrents"]];
 	} else if ([jsonItem objectForKey:@"torrentp"] != nil) { // cache id being used - this are the modified torrents
 		if (self.removedTorrents != nil)
 			[self.removedTorrents release];
@@ -260,6 +260,7 @@
     [receivedData release];
 	[readableString release];
 	[labelsData release];
+	//[torrentsData release];
 	//[jsonItem release];
 	
 	if (needListUpdate)
