@@ -221,6 +221,7 @@
 		NSArray * labelColorData;
 		for (NSArray * label in self.labelsData) {
 			if ((labelColorData = [defaults arrayForKey:[label objectAtIndex:0]]) == nil) {
+				NSLog(@"%@/%@ not found:", [label objectAtIndex:0], labelColorData);
 				// label not found in user defaults, create random color and store it
 				randomH = (float) random() / (float) 0x7fffffff;
 				NSArray * colorInfo = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:randomH], [NSNumber numberWithFloat:1.0f], nil];

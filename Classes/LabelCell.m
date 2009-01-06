@@ -26,6 +26,10 @@
 }
 
 - (void)setCellDataWithLabelString:(NSString *)label withNumber:(NSDecimalNumber *)count colorString:(UIColor *)color {
+	
+	//if (!mainAppDelegate)
+	//	mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
 	self.labelColor = color;
 
 	labelLabel.text = label;
@@ -58,6 +62,7 @@
 			// save info into UserDefaults
 			NSArray * colorInfo = [NSArray arrayWithObjects:[NSNumber numberWithFloat:hS], [NSNumber numberWithFloat:bS], nil];
 			[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:labelLabel.text];
+			//mainAppDelegate.cacheNeedsRefresh = YES;
 		}
 	}
 }

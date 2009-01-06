@@ -16,12 +16,16 @@
 @synthesize tabBarController;
 @synthesize tnm;
 @synthesize settingsAddress, settingsPort, settingsUname, settingsPassword;
+@synthesize cacheNeedsRefresh;
 
 - (TorrentNetworkManager *)getTNM {
 	return tnm;
 }
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
+	
+	// set the cacheNeedsUpdate to false
+	cacheNeedsRefresh = NO;
 	
 	// instantiate our Torrent Network Manager
 	tnm = [[TorrentNetworkManager alloc] init];

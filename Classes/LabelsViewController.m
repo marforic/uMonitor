@@ -208,6 +208,9 @@
 - (void)dealloc {
     [super dealloc];
 	[tnm dealloc];
+	[cell dealloc];
+	[labelsTable dealloc];
+	[mainAppDelegate release];
 }
 
 

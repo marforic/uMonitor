@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "uTorrentViewAppDelegate.h"
+
 
 @interface TorrentCell : UITableViewCell {
 	@private
@@ -21,6 +23,8 @@
 	IBOutlet UIProgressView * progressView;
 	UIImage * cachedLabel;
 	UIImage * cachedStatus;
+	UIImage * nonColoredImage;
+	//uTorrentViewAppDelegate * mainAppDelegate;
 }
 
 - (void)setData:(NSArray *)data;

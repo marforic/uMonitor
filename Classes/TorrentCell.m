@@ -14,34 +14,6 @@
 
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
-        /*// Initialization code
-		
-		UIView *myContentView = self.contentView;
-		
-		// initialize label
-		self.titleLabel = [self newLabelWithPrimaryColor:[UIColor blackColor] selectedColor:[UIColor whiteColor] fontSize:14.0 bold:YES]; 
-		self.titleLabel.textAlignment = UITextAlignmentLeft; // default
-		[myContentView addSubview:self.titleLabel];
-		[self.titleLabel release];
-		
-		self.sizeLabel = [self newLabelWithPrimaryColor:[UIColor blackColor] selectedColor:[UIColor whiteColor] fontSize:12.0 bold:NO]; 
-		self.sizeLabel.textAlignment = UITextAlignmentLeft; // default
-		[myContentView addSubview:self.sizeLabel];
-		[self.sizeLabel release];
-		
-		self.statusLabel = [self newLabelWithPrimaryColor:[UIColor blackColor] selectedColor:[UIColor whiteColor] fontSize:12.0 bold:NO]; 
-		self.statusLabel.textAlignment = UITextAlignmentLeft; // default
-		[myContentView addSubview:self.statusLabel];
-		[self.statusLabel release];
-		
-		self.doneLabel = [self newLabelWithPrimaryColor:[UIColor blackColor] selectedColor:[UIColor whiteColor] fontSize:12.0 bold:NO]; 
-		self.doneLabel.textAlignment = UITextAlignmentLeft; // default
-		[myContentView addSubview:self.doneLabel];
-		[self.doneLabel release];
-		
-		self.progressView = [UIProgressView alloc];
-		[self.progressView initWithProgressViewStyle:UIProgressViewStyleDefault];
-		 */
 		
     }
     return self;
@@ -64,6 +36,20 @@
 }
 
 -(void)setData:(NSArray *)data {
+	/*if (!mainAppDelegate)
+		mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	// uncache cached images to refresh them
+	if (mainAppDelegate.cacheNeedsRefresh) {
+		cachedStatus = nil;
+		cachedLabel = nil;
+		mainAppDelegate.cacheNeedsRefresh = NO;
+	}
+	*/
+	
+	
+	nonColoredImage = [UIImage imageNamed:@"my_flag.png"];
+	
 	nameLabel.text = [data objectAtIndex:NAME];	
 	
 	NSArray * color = [[NSUserDefaults standardUserDefaults] arrayForKey:[data objectAtIndex:LABEL]];
@@ -76,17 +62,18 @@
 		colorBrightness = 0.4f;
 	}
 
-	if (cachedLabel == nil) {
-		labelImage.image = [Utilities colorizeImage:labelImage.image 
+	//if (cachedLabel == nil) {
+		//NSLog(@"I'm %@ colorHue: %f, brightness: %f", [data objectAtIndex:NAME], colorHue, colorBrightness);
+		labelImage.image = [Utilities colorizeImage:nonColoredImage
 											  color:[UIColor colorWithHue:colorHue
 															   saturation:1.0 
 															   brightness:colorBrightness 
 																	alpha:1.0]];
-		cachedLabel = labelImage.image;
-	} else {
+	//	cachedLabel = labelImage.image;
+	//} else {
 		//NSLog (@"using cached image!!!!");
-		labelImage.image = cachedLabel;
-	}
+	//	labelImage.image = cachedLabel;
+	//}
 	
 	
 	sizeLabel.font = [UIFont systemFontOfSize:12];
@@ -106,8 +93,9 @@
 	downloadLabel.text = [downloadLabel.text stringByAppendingString:[Utilities getSpeedReadable:[data objectAtIndex:DOWNLOAD_SPEED]]];
 
 	progressView.progress = [self getProgressForBar:[data objectAtIndex:PERCENT_PROGRESS]];
-
-	if (cachedStatus == nil) {
+	
+	
+	//if (cachedStatus == nil) {
 		switch ([Utilities getStatusProgrammable:[data objectAtIndex:STATUS] forProgress:[data objectAtIndex:PERCENT_PROGRESS]]) {
 			case LEECHING:
 				statusImage.image = [[UIImage imageNamed:@"status_green.png"] retain];
@@ -129,10 +117,10 @@
 				statusImage.image = [[UIImage imageNamed:@"status_skull.png"] retain];
 				break;
 		}
-		cachedStatus = statusImage.image;
-	} else {
-		statusImage.image = cachedStatus;
-	}
+	//	cachedStatus = statusImage.image;
+	//} else {
+	//	statusImage.image = cachedStatus;
+	//}
 	
 }
 

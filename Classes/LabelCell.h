@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "uTorrentViewAppDelegate.h"
 
 #define kMyAlert	1337
 
@@ -16,6 +16,7 @@
 	IBOutlet UIImageView * labelImage;
 	IBOutlet UIImage * colorizedImage;
 	UIColor * labelColor;
+	//uTorrentViewAppDelegate * mainAppDelegate;
 }
 
 @property (nonatomic,retain) UIColor * labelColor;

@@ -20,6 +20,8 @@
 	NSString * settingsPort;
 	NSString * settingsAddress;
 	
+	BOOL cacheNeedsRefresh;
+	
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -30,6 +32,8 @@
 @property (nonatomic, retain) NSString * settingsPort;
 @property (nonatomic, retain) NSString * settingsUname;
 @property (nonatomic, retain) NSString * settingsPassword;
+
+@property BOOL cacheNeedsRefresh;
 
 - (TorrentNetworkManager *)getTNM;
 
