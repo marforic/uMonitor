@@ -189,7 +189,7 @@
 	} else if ([jsonItem objectForKey:@"torrentp"] != nil) { // cache id being used - this are the modified torrents
 		if (self.removedTorrents != nil)
 			[self.removedTorrents release];
-		self.removedTorrents = [[NSArray alloc] initWithArray:[jsonItem objectForKey:@"torrentm"]];
+		self.removedTorrents = [NSArray arrayWithArray:[jsonItem objectForKey:@"torrentm"]];
 		if (self.removedTorrents != nil) {
 			for (NSString * removedTorrentHash in self.removedTorrents) {
 				for (NSArray* oldTorrent in torrentsData) {
@@ -213,7 +213,7 @@
 	}
 	
 	if ([jsonItem objectForKey:@"label"] != nil) {
-		self.labelsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"label"]];
+		self.labelsData = [NSMutableArray arrayWithArray:[jsonItem objectForKey:@"label"]];
 		float randomH;
 		NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
 		NSArray * labelColorData;
@@ -259,7 +259,7 @@
     [connection release];
     [receivedData release];
 	[readableString release];
-	[labelsData release];
+	//[labelsData release];
 	//[torrentsData release];
 	//[jsonItem release];
 	
