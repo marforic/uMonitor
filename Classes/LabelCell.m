@@ -59,6 +59,7 @@
 			// set label image color
 			self.labelColor = [[UIColor alloc] initWithHue:hS saturation:1.0f brightness:bS alpha:1.0];
 			labelImage.image = [Utilities colorizeImage:self.colorizedImage color:self.labelColor];
+			[self.labelColor release];
 			// save info into UserDefaults
 			NSArray * colorInfo = [NSArray arrayWithObjects:[NSNumber numberWithFloat:hS], [NSNumber numberWithFloat:bS], nil];
 			[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:labelLabel.text];
@@ -89,6 +90,7 @@
 
 
 - (void)dealloc {
+	[labelColor dealloc];
     [super dealloc];
 }
 

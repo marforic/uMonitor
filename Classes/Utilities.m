@@ -201,7 +201,6 @@
 	UIBarButtonItem *loadingView = [[UIBarButtonItem alloc] initWithCustomView:loading];
 	[loading release];
 	loadingView.target = controller;
-	
 	controller.navigationItem.leftBarButtonItem = loadingView;
 }
 

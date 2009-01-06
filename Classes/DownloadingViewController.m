@@ -100,6 +100,7 @@
 	[self gatherDownloadingTorrents];
 	[torrentsTable reloadData];
 	self.navigationItem.rightBarButtonItem.enabled = YES;
+	[self.navigationItem.leftBarButtonItem release];
 	self.navigationItem.leftBarButtonItem = nil;
 }
 
