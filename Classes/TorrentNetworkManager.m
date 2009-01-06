@@ -191,8 +191,7 @@
 	if ([jsonItem objectForKey:@"torrents"] != nil) { // new request -> no cache
 		self.torrentsData = [NSMutableArray arrayWithArray:[jsonItem objectForKey:@"torrents"]];
 	} else if ([jsonItem objectForKey:@"torrentp"] != nil) { // cache id being used - this are the modified torrents
-		if (self.removedTorrents != nil)
-			[self.removedTorrents release];
+		//[self.removedTorrents release];
 		self.removedTorrents = [jsonItem objectForKey:@"torrentm"];
 		if (self.removedTorrents != nil) {
 			for (NSString * removedTorrentHash in self.removedTorrents) {
@@ -264,9 +263,6 @@
     [connection release];
     [receivedData release];
 	[readableString release];
-	//[labelsData release];
-	//[torrentsData release];
-	//[jsonItem release];
 	
 	if (needListUpdate)
 		[self requestList];
