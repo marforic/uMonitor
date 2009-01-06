@@ -20,6 +20,7 @@
 	NSArray * removedTorrents;
 	BOOL needListUpdate;
 	BOOL needToDelete;
+	BOOL hasReceivedResponse;
 	NSUInteger type;
 }
 

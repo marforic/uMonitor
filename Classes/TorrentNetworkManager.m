@@ -34,6 +34,7 @@
         listeners = [[NSMutableArray alloc] init];
 		needListUpdate = NO;
 		self.needToDelete = NO;
+		hasReceivedResponse = YES;
     }
     return self;
 }
@@ -176,6 +177,7 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	hasReceivedResponse = YES;
     // do something with the data
     // receivedData is declared as a method instance elsewhere
     NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
@@ -271,6 +273,8 @@
 }
 
 - (void)sendNetworkRequest:(NSString *)request {
+	if (!hasReceivedResponse)
+		return;
 	if ([self connectedToNetwork] && [self hostAvailable:@"ea17.homends.org"])
 		printf("network connection established and host available\n");
 	else
@@ -294,6 +298,7 @@
 		// the received data
 		// receivedData is declared as a method instance elsewhere
 		receivedData = [[NSMutableData data] retain];
+		hasReceivedResponse = NO;
 	} else {
 		// inform the user that the download could not be made
 		NSLog(@"download can't be made\n");
