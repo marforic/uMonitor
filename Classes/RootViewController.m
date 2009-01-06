@@ -104,7 +104,6 @@
 		//NSLog(@"cell created! %@", CellIdentifier);
 		[[NSBundle mainBundle] loadNibNamed:@"TorrentCell" owner:self options:nil];
     }
-	
 	[cell setData:torrentData];
     return cell;
 }

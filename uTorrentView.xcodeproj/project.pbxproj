@@ -407,7 +407,7 @@
 					"-ljson",
 				);
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D62C1F-089D-42CF-93FE-3E0DE3D10E63";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "26942A10-9BCA-4D84-B0FE-E65DA21B4F2A";
 				SDKROOT = iphoneos2.2;
 			};
 			name = Debug;
@@ -428,7 +428,7 @@
 					"-ljson",
 				);
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D62C1F-089D-42CF-93FE-3E0DE3D10E63";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "26942A10-9BCA-4D84-B0FE-E65DA21B4F2A";
 				SDKROOT = iphoneos2.2;
 			};
 			name = Release;
