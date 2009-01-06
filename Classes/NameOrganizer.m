@@ -95,6 +95,7 @@
 				NSNumber * n = (NSNumber *)[indexToRemove objectAtIndex:l];
 				[ma removeObjectAtIndex:[n intValue]];
 			}
+			[indexToRemove release];
 		}
 		tnm.needToDelete = NO;
 	}
