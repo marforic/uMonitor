@@ -12,7 +12,6 @@
 @interface TorrentNetworkManager : NSObject {
 	@private
 	NSMutableData * receivedData;
-	NSDictionary * jsonItem;
 	NSMutableArray * torrentsData;
 	NSMutableArray * labelsData;
 	NSNumber * unlabelledTorrents;
@@ -26,7 +25,6 @@
 @property (nonatomic, retain) NSMutableArray * torrentsData;
 @property (nonatomic, retain) NSMutableArray * labelsData;
 @property (nonatomic, retain) NSArray * removedTorrents;
-@property (nonatomic, retain) NSDictionary * jsonItem;
 @property (nonatomic, retain) NSString * torrentsCacheID;
 @property (nonatomic, retain) NSNumber * unlabelledTorrents;
 

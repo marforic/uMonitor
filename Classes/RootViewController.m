@@ -30,9 +30,8 @@
 	// set the title
 	self.navigationItem.title = @"Torrents";
 	
-	// set the refresh button
+	// set the refresh buttoni
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(networkRequest)];
-	
 	[Utilities showLoadingCursorForViewController:self];
 	self.organizers = [NSArray arrayWithObjects:[[StatusOrganizer alloc] initWithTNM:tnm], [[NameOrganizer alloc] initWithTNM:tnm], nil];
 	currentOrganizer = 0;
@@ -41,6 +40,7 @@
 
 - (void)networkRequest {
 	self.navigationItem.rightBarButtonItem.enabled = FALSE;
+	[self.navigationItem.leftBarButtonItem release];
 	[Utilities showLoadingCursorForViewController:self];
 	// create the request
 	[tnm requestList];
@@ -174,8 +174,7 @@
 	[torrentsTable reloadData];
 	organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:((currentOrganizer + 1) % [self.organizers count])];
 	self.navigationItem.rightBarButtonItem.enabled = YES;
-	if (self.navigationItem.leftBarButtonItem != nil)
-		[self.navigationItem.leftBarButtonItem release];
+	[self.navigationItem.leftBarButtonItem release];
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[organizer getLabelText] style:UIBarButtonItemStyleBordered target:self action:@selector(toggleOrganizer)];
 	self.navigationItem.leftBarButtonItem.enabled = TRUE;
 }

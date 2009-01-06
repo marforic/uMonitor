@@ -24,7 +24,6 @@
 	
 @synthesize torrentsData;
 @synthesize labelsData;
-@synthesize jsonItem;
 @synthesize torrentsCacheID;
 @synthesize unlabelledTorrents;
 @synthesize removedTorrents;
@@ -153,6 +152,7 @@
                                               persistence:NSURLCredentialPersistenceNone];
         [[challenge sender] useCredential:newCredential
                forAuthenticationChallenge:challenge];
+		[newCredential release];
     } else {
         [[challenge sender] cancelAuthenticationChallenge:challenge];
         // inform the user that the user name and password
@@ -182,7 +182,7 @@
 	// Uncomment to see what is returned from the network call
 	//NSLog(@"%@", readableString);
 	
-	self.jsonItem = [readableString JSONValue];
+	NSDictionary * jsonItem = [readableString JSONValue];
 	// if checks because following requests (actions) won't return the list
 	if ([jsonItem objectForKey:@"torrents"] != nil) { // new request -> no cache
 		self.torrentsData = [[NSMutableArray alloc] initWithArray:[jsonItem objectForKey:@"torrents"]];
@@ -223,21 +223,23 @@
 				randomH = (float) random() / (float) 0x7fffffff;
 				NSArray * colorInfo = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:randomH], [NSNumber numberWithFloat:1.0f], nil];
 				[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:[label objectAtIndex:0]];
+				[colorInfo release];
 			}
 		}
 		// add color (black) for 'No label' torrents
 		NSArray * colorInfo = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:1.0f], [NSNumber numberWithFloat:0.0f], nil];
 		[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:@"No label"];
+		[colorInfo release];
 	}
 	
 	if ([jsonItem objectForKey:@"torrentc"] != nil)
 		self.torrentsCacheID = [jsonItem objectForKey:@"torrentc"];
 	
-	NSLog(@"cacheID as string:%@ as int: %i", [jsonItem objectForKey:@"torrentc"], [[jsonItem objectForKey:@"torrentc"] intValue]);
+	//NSLog(@"cacheID as string:%@ as int: %i", [jsonItem objectForKey:@"torrentc"], [[jsonItem objectForKey:@"torrentc"] intValue]);
 	
-	NSLog(@"torrentsData size: %i", [self.torrentsData count]);
-	NSLog(@"labelsData size: %i", [self.labelsData count]);
-	NSLog(@"unlabelled Torrents: %i", [[self updateUnlabelledTorrents] intValue]);
+	//NSLog(@"torrentsData size: %i", [self.torrentsData count]);
+	//NSLog(@"labelsData size: %i", [self.labelsData count]);
+	//NSLog(@"unlabelled Torrents: %i", [[self updateUnlabelledTorrents] intValue]);
 	
 	// call update method on listeners
 	// only if it was a requestList!
@@ -257,6 +259,8 @@
     [connection release];
     [receivedData release];
 	[readableString release];
+	[labelsData release];
+	//[jsonItem release];
 	
 	if (needListUpdate)
 		[self requestList];
@@ -356,7 +360,6 @@
 - (void)dealloc {
 	[torrentsData dealloc];
 	[labelsData dealloc];
-	[jsonItem dealloc];
 	[removedTorrents dealloc];
     [super dealloc];
 }

@@ -87,6 +87,7 @@
 - (void)update:(NSUInteger)type {
 	[labelsTable reloadData];
 	self.navigationItem.rightBarButtonItem.enabled = YES;
+	[self.navigationItem.leftBarButtonItem release];
 	self.navigationItem.leftBarButtonItem = nil;
 }
 
@@ -130,6 +131,7 @@
 			[cell setCellDataWithLabelString:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:0] 
 								  withNumber:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:1]
 								 colorString:theColor];
+			[theColor release];
 		} else { // no label case
 			NSArray * color = [[NSUserDefaults standardUserDefaults] arrayForKey:@"No label"];
 			float colorHue, colorBrightness = 0.0f;
@@ -144,6 +146,7 @@
 			[cell setCellDataWithLabelString:@"No Label"
 								  withNumber:(NSDecimalNumber *)[tnm updateUnlabelledTorrents]
 								 colorString:theColor];
+			[theColor release];
 		}
 	}
     return cell;

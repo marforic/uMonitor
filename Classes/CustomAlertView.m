@@ -71,20 +71,24 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
 }
 
 - (void) updateHueSlider {
+	UIColor * color = [[UIColor alloc] initWithHue:self.hueSlider.value 
+								saturation:1.0 
+								brightness:1.0
+									 alpha:1.0];
 	UIImage * tmpImage = [Utilities colorizeImage:self.plainThumbImage 
-											color:[[UIColor alloc] initWithHue:self.hueSlider.value 
-																	saturation:1.0 
-																	brightness:1.0
-																		 alpha:1.0]];
+											color:color];
+	[color release];
 	[hueSlider setThumbImage:tmpImage forState:UIControlStateNormal];
 }
 
 - (void) updateBrightnessSlider {
+	UIColor * color = [[UIColor alloc] initWithHue:self.hueSlider.value 
+										saturation: 1.0 
+										brightness: self.brightnessSlider.value 
+											 alpha:1.0];
 	UIImage * tmpImage = [Utilities colorizeImage:self.plainThumbImage 
-											color:[[UIColor alloc] initWithHue:self.hueSlider.value 
-																	saturation: 1.0 
-																	brightness: self.brightnessSlider.value 
-																		 alpha:1.0]];
+											color:color];
+	[color release];
 	[brightnessSlider setThumbImage:tmpImage forState:UIControlStateNormal];
 }
 

@@ -151,7 +151,7 @@
 			return [NSString stringWithFormat:@"%im %is", minutes, seconds];
 		if (seconds > 0)
 			return [NSString stringWithFormat:@"%is", seconds];
-		//NSLog(@"week: %i, day: %i, hour: %i, minutes: %i, seconds: %i", week, day, hour, minutes, seconds);
+		[futureDone release];
 	}
 	return @"Unknown";
 }
@@ -237,21 +237,26 @@
 	float r, g, b = 0.0f;
 	float v, x, f = 0.0f;
 	int i = 0;
+	NSArray * ret;
 	r = CGColorGetComponents(RGBcolor.CGColor)[0];
 	g = CGColorGetComponents(RGBcolor.CGColor)[1];
 	b = CGColorGetComponents(RGBcolor.CGColor)[2];
 	x = fminf(r, fminf(g, b));
 	v = fmaxf(r, fmaxf(g, b));
-	if (v == x) return [[NSArray alloc] initWithObjects:[[NSNumber alloc] initWithFloat:0.0f], 
-														[[NSNumber alloc] initWithFloat:0.0f], 
-														[[NSNumber alloc] initWithFloat:v], 
-														nil];
+	if (v == x) {
+		ret = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0f], 
+			   [NSNumber numberWithFloat:0.0f], 
+			   [NSNumber numberWithFloat:v], 
+			   nil];
+		return ret;
+	}
 	f = (r == x) ? g - b : ((g == x) ? b - r : r - g);
 	i = (r == x) ? 3 : ((g == x) ? 5 : 1);
-	return [[NSArray alloc] initWithObjects:[[NSNumber alloc] initWithFloat:((i - f /(v - x)) / 6)], 
-											[[NSNumber alloc] initWithFloat:(v - x) / v], 
-											[[NSNumber alloc] initWithFloat:v], 
-											nil];
+	ret = [NSArray arrayWithObjects:[NSNumber numberWithFloat:((i - f /(v - x)) / 6)], 
+					 [NSNumber numberWithFloat:(v - x) / v], 
+					 [NSNumber numberWithFloat:v], 
+					 nil];
+	return ret;
 }
 
 + (void)insertItemOrderedByName:(NSArray *)item inArrey:(NSMutableArray *)ma {
