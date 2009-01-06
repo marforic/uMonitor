@@ -166,7 +166,9 @@
 }
 */
 
-- (void)update {
+- (void)update:(NSUInteger)type {
+	if (type != T_LIST)
+		return;
 	id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
 	[organizer organize];
 	[torrentsTable reloadData];
@@ -180,7 +182,7 @@
 
 - (void)toggleOrganizer {
 	currentOrganizer = ((currentOrganizer + 1) % [self.organizers count]);
-	[self update];
+	[self update:T_LIST];
 }
 
 - (void)dealloc {

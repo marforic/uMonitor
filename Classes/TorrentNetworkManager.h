@@ -20,6 +20,7 @@
 	NSString * torrentsCacheID;
 	NSArray * removedTorrents;
 	BOOL needListUpdate;
+	NSUInteger type;
 }
 
 @property (nonatomic, retain) NSMutableArray * torrentsData;

@@ -246,7 +246,7 @@
 		id obj;
 		while (obj = [enumerator nextObject]) {
 			id<TorrentListener> listener = (id<TorrentListener>)obj;
-			[listener update];
+			[listener update:type];
 		}
 	}
 	
@@ -293,30 +293,35 @@
 }
 
 - (void)actionStartForTorrent:(NSString *)hash {
+	type = T_START;
 	needListUpdate = YES;
 	NSString * action = @"?action=start&hash=";
 	[self sendNetworkRequest:[action stringByAppendingString:hash]];
 }
 
 - (void)actionStopForTorrent:(NSString *)hash {
+	type = T_STOP;
 	needListUpdate = YES;
 	NSString * action = @"?action=stop&hash=";
 	[self sendNetworkRequest:[action stringByAppendingString:hash]];
 }
 
 - (void)actionDeleteDotTorrent:(NSString *)hash {
+	type = T_DELETE;
 	needListUpdate = YES;
 	NSString * action = @"?action=remove&hash=";
 	[self sendNetworkRequest:[action stringByAppendingString:hash]];
 }
 
 - (void)actionDeleteData:(NSString *)hash {
+	type = T_DELETE;
 	needListUpdate = YES;
 	NSString * action = @"?action=removedata&hash=";
 	[self sendNetworkRequest:[action stringByAppendingString:hash]];
 }
 
 - (void)requestList {
+	type = T_LIST;
 	needListUpdate = NO;
 	[self sendNetworkRequest:@"?list=1"];
 }
@@ -336,7 +341,7 @@
 	}
 }
 
-- (NSNumber *) updateUnlabelledTorrents {
+- (NSNumber *)updateUnlabelledTorrents {
 	int ret = 0;
 	int labelledItemCount = 0;
 	for (NSArray * label in labelsData) {

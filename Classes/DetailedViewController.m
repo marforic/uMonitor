@@ -256,7 +256,7 @@
     return cell;
 }
 
-- (void)update {
+- (void)update:(NSUInteger)type {
 	NSLog(@"I should have reloaded my data!");
 	for (NSArray * t in tnm.torrentsData) {
 		if ([[t objectAtIndex:HASH] isEqual:[self.torrent objectAtIndex:HASH]]) {

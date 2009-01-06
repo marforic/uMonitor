@@ -40,7 +40,7 @@
 	// set the refresh button
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(networkRequest)];
 	
-	[self update];
+	[self update:T_LIST];
 }
 
 
@@ -96,7 +96,7 @@
 	}
 }
 
-- (void)update {
+- (void)update:(NSUInteger)type {
 	[self gatherDownloadingTorrents];
 	[torrentsTable reloadData];
 	self.navigationItem.rightBarButtonItem.enabled = YES;

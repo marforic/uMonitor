@@ -1,3 +1,3 @@
 @protocol TorrentListener
-- (void)update;
+- (void)update:(NSUInteger)type;
 @end

@@ -84,7 +84,7 @@
     // Release anything that's not essential, such as cached data
 }
 
-- (void)update {
+- (void)update:(NSUInteger)type {
 	[labelsTable reloadData];
 	self.navigationItem.rightBarButtonItem.enabled = YES;
 	self.navigationItem.leftBarButtonItem = nil;
