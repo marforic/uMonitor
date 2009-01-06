@@ -136,6 +136,7 @@
 	else {
 		NSDate * futureDone = [[NSDate alloc] initWithTimeIntervalSinceNow:theETA];
 		int sinceNow = [futureDone timeIntervalSinceNow];
+		[futureDone release];
 		int week = (int)(sinceNow / 604800);
 		int day = (int)((sinceNow % 604800) / 86400);
 		if (week > 0)
@@ -151,7 +152,6 @@
 			return [NSString stringWithFormat:@"%im %is", minutes, seconds];
 		if (seconds > 0)
 			return [NSString stringWithFormat:@"%is", seconds];
-		[futureDone release];
 	}
 	return @"Unknown";
 }
