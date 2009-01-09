@@ -62,7 +62,10 @@
 			[self.labelColor release];
 			// save info into UserDefaults
 			NSArray * colorInfo = [NSArray arrayWithObjects:[NSNumber numberWithFloat:hS], [NSNumber numberWithFloat:bS], nil];
-			[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:labelLabel.text];
+			if ([labelLabel.text isEqual:@"No Label"])
+				[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:@"nolabel"];
+			else
+				[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:labelLabel.text];
 			//mainAppDelegate.cacheNeedsRefresh = YES;
 		}
 	}

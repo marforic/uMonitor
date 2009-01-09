@@ -52,7 +52,11 @@
 	
 	nameLabel.text = [data objectAtIndex:NAME];	
 	
-	NSArray * color = [[NSUserDefaults standardUserDefaults] arrayForKey:[data objectAtIndex:LABEL]];
+	NSArray * color;
+	if ([[data objectAtIndex:LABEL] length] != 0)
+		color = [[NSUserDefaults standardUserDefaults] arrayForKey:[data objectAtIndex:LABEL]];
+	else
+		color = [[NSUserDefaults standardUserDefaults] arrayForKey:@"nolabel"];
 	float colorHue, colorBrightness = 0.0f;
 	if (color != nil) {
 		colorHue = [[color objectAtIndex:0] floatValue];

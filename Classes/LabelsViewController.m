@@ -133,7 +133,7 @@
 								 colorString:theColor];
 			[theColor release];
 		} else { // no label case
-			NSArray * color = [[NSUserDefaults standardUserDefaults] arrayForKey:@"No label"];
+			NSArray * color = [[NSUserDefaults standardUserDefaults] arrayForKey:@"nolabel"];
 			float colorHue, colorBrightness = 0.0f;
 			if (color != nil) {
 				colorHue = [[color objectAtIndex:0] floatValue];

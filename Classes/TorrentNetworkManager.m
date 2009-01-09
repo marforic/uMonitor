@@ -226,14 +226,17 @@
 				// label not found in user defaults, create random color and store it
 				randomH = (float) random() / (float) 0x7fffffff;
 				NSArray * colorInfo = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:randomH], [NSNumber numberWithFloat:1.0f], nil];
-				[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:[label objectAtIndex:0]];
+				[defaults setObject:colorInfo forKey:[label objectAtIndex:0]];
 				[colorInfo release];
 			}
 		}
-		// add color (black) for 'No label' torrents
-		NSArray * colorInfo = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:1.0f], [NSNumber numberWithFloat:0.0f], nil];
-		[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:@"No label"];
-		[colorInfo release];
+		// add color (black) for 'No label' torrents only if it doesn't exist!
+		if ([defaults arrayForKey:@"nolabel"] == nil) {
+			NSLog(@"defaults: %@", [defaults arrayForKey:@"nolabel"]);
+			NSArray * colorInfo = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:1.0f], [NSNumber numberWithFloat:0.1f], nil];
+			[defaults setObject:colorInfo forKey:@"nolabel"];
+			[colorInfo release];
+		}
 	}
 	
 	if ([jsonItem objectForKey:@"torrentc"] != nil)

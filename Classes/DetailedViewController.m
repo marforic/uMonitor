@@ -235,7 +235,7 @@
 			break;
 		case 10:
 			cellContent = @"Label: ";
-			cellContent = [cellContent stringByAppendingString:[self.torrent objectAtIndex:LABEL]];
+			cellContent = [cellContent stringByAppendingString:([[self.torrent objectAtIndex:LABEL] length] != 0) ? [self.torrent objectAtIndex:LABEL] : @"No Label"];
 			break;
 		case 11:
 			cellContent = @"Availability ";
