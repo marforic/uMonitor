@@ -22,6 +22,10 @@
 	BOOL needToDelete;
 	BOOL hasReceivedResponse;
 	NSUInteger type;
+	NSString * settingsPassword;
+	NSString * settingsUname;
+	NSString * settingsPort;
+	NSString * settingsAddress;
 }
 
 @property (nonatomic, retain) NSMutableArray * torrentsData;
@@ -29,6 +33,10 @@
 @property (nonatomic, retain) NSArray * removedTorrents;
 @property (nonatomic, retain) NSString * torrentsCacheID;
 @property (nonatomic, retain) NSNumber * unlabelledTorrents;
+@property (nonatomic, retain) NSString * settingsAddress;
+@property (nonatomic, retain) NSString * settingsPort;
+@property (nonatomic, retain) NSString * settingsUname;
+@property (nonatomic, retain) NSString * settingsPassword;
 @property BOOL needToDelete;
 
 - (BOOL)connectedToNetwork;

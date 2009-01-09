@@ -28,6 +28,7 @@
 @synthesize unlabelledTorrents;
 @synthesize removedTorrents;
 @synthesize needToDelete;
+@synthesize settingsAddress, settingsPort, settingsUname, settingsPassword;
 
 - (id)init {
 	if (self = [super init]) {
@@ -35,6 +36,12 @@
 		needListUpdate = NO;
 		self.needToDelete = NO;
 		hasReceivedResponse = YES;
+		
+		// load User settings
+		settingsAddress = [[NSUserDefaults standardUserDefaults] stringForKey:@"address_preference"];
+		settingsPort = [[NSUserDefaults standardUserDefaults] stringForKey:@"uport_preference"];
+		settingsUname = [[NSUserDefaults standardUserDefaults] stringForKey:@"username_preference"];
+		settingsPassword = [[NSUserDefaults standardUserDefaults] stringForKey:@"pwd_preference"];
     }
     return self;
 }
@@ -150,8 +157,8 @@
 	//NSLog(@"connectiondidReceiveAuthenticationChallenge got called\n");
     if ([challenge previousFailureCount] == 0) {
         NSURLCredential *newCredential;
-        newCredential=[NSURLCredential credentialWithUser:@"zurich"
-                                                 password:@"Mike Nub ImbaFail!"
+        newCredential=[NSURLCredential credentialWithUser:settingsUname
+                                                 password:settingsPassword
                                               persistence:NSURLCredentialPersistenceNone];
         [[challenge sender] useCredential:newCredential
                forAuthenticationChallenge:challenge];
@@ -160,7 +167,14 @@
         [[challenge sender] cancelAuthenticationChallenge:challenge];
         // inform the user that the user name and password
         // in the preferences are incorrect
-		[Utilities createAndShowAlertWithTitle:@"Credentials Incorrect" andMessage:@"Username or Password incorrect"];
+		//[Utilities createAndShowAlertWithTitle:@"Credentials Incorrect" andMessage:@"Username or Password incorrect" withDelegate:self];
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Credentials Problem" 
+														message:@"Username and/or Password are incorrect\nPlease check your settings\n ... Exit on OK ..."
+													   delegate:self 
+											  cancelButtonTitle:@"OK" otherButtonTitles: nil];
+		alert.tag = 13371007;
+		[alert show];	
+		[alert release];
 	}
 }
 
@@ -170,17 +184,40 @@
     // receivedData is declared as a method instance elsewhere
     [receivedData release];
 	
+	NSString * message;
     // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+	switch ([error code]) {
+		case -1012: // credentials incorrect - handled in another funtion (just above)
+			return;
+		default:
+			message = [[@"Error - " stringByAppendingString:[error localizedDescription]] stringByAppendingString:@"\nPlease check your settings\n... Exit on OK ..."];
+			break;
+	}
+	
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Problem" message:message
+												   delegate:self 
+										  cancelButtonTitle:@"OK" otherButtonTitles: nil];
+	alert.tag = 13371007;
+	[alert show];	
+	[alert release];	
+	
+	NSLog(@"error: %i - %@ - %@", [error code], [error localizedDescription], [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+    //NSLog(@"Connection failed! Error - %@ %@",
+    //      [error localizedDescription],
+    //      [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+}
+
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	UIAlertView *alertView = (UIAlertView*) actionSheet;
+	if (alertView.tag == 13371007)
+		[[UIApplication sharedApplication] terminateWithSuccess];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	hasReceivedResponse = YES;
     // do something with the data
     // receivedData is declared as a method instance elsewhere
-    NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
+    //NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
 	
 	NSString * readableString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
 	// Uncomment to see what is returned from the network call
@@ -232,7 +269,7 @@
 		}
 		// add color (black) for 'No label' torrents only if it doesn't exist!
 		if ([defaults arrayForKey:@"nolabel"] == nil) {
-			NSLog(@"defaults: %@", [defaults arrayForKey:@"nolabel"]);
+			//NSLog(@"defaults: %@", [defaults arrayForKey:@"nolabel"]);
 			NSArray * colorInfo = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:1.0f], [NSNumber numberWithFloat:0.1f], nil];
 			[defaults setObject:colorInfo forKey:@"nolabel"];
 			[colorInfo release];
@@ -274,12 +311,17 @@
 - (void)sendNetworkRequest:(NSString *)request {
 	if (!hasReceivedResponse)
 		return;
-	if ([self connectedToNetwork] && [self hostAvailable:@"ea17.homends.org"])
+	
+	// This are expensive calls (Apple states so) - error is shown anyway from the callback
+	/*if ([self connectedToNetwork] && [self hostAvailable:@"ea17.homends.org"])
 		printf("network connection established and host available\n");
 	else
 		printf("couldn't reach host\n");
+	*/
+	
 	// create the request
-	NSString * url = @"http://ea17.homedns.org:8080/gui/";
+	NSString * url = [[[settingsAddress stringByAppendingString:@":"] stringByAppendingString:settingsPort] stringByAppendingString:@"/gui/"];
+	//NSString * url = @"http://ea17.homedns.org:8080/gui/";
 	NSString * urlrequest = [url stringByAppendingString:request];
 	if (self.torrentsCacheID != nil) {
 		urlrequest = [urlrequest stringByAppendingString:@"&cid="];
@@ -300,7 +342,8 @@
 		hasReceivedResponse = NO;
 	} else {
 		// inform the user that the download could not be made
-		NSLog(@"download can't be made\n");
+		//NSLog(@"download can't be made\n");
+		[Utilities createAndShowAlertWithTitle:@"Download Problem" andMessage:@"Download can't be made\nTry restarting the application" withDelegate:self];
 	}
 }
 
@@ -371,6 +414,10 @@
 	[torrentsData dealloc];
 	[labelsData dealloc];
 	[removedTorrents dealloc];
+	[settingsAddress release];
+	[settingsPort release];
+	[settingsUname release];
+	[settingsPassword release];
     [super dealloc];
 }
 @end

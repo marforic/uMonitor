@@ -171,9 +171,9 @@
 	return ret;
 }
 
-+(void)createAndShowAlertWithTitle:(NSString *)title andMessage:(NSString *)message {
++(void)createAndShowAlertWithTitle:(NSString *)title andMessage:(NSString *)message withDelegate:(id)del {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message
-												   delegate:self 
+												   delegate:del 
 										  cancelButtonTitle:@"OK" otherButtonTitles: nil];
 	[alert show];	
 	[alert release];	

@@ -20,7 +20,7 @@
 +(NSString *)getRatioReadable:(NSDecimalNumber *)ratio;
 +(NSString *)getETAReadable:(NSDecimalNumber *)eta;
 +(NSString *)getAvailabilityReadable:(NSDecimalNumber *)availability;
-+(void)createAndShowAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
++(void)createAndShowAlertWithTitle:(NSString *)title andMessage:(NSString *)message withDelegate:(id)del;
 +(void)alertOKCancelAction:(NSString *)title andMessage:(NSString *)message withDelegate:(id)del;
 +(void)showLoadingCursorForViewController:(UIViewController *)controller;
 +(UIImage *)colorizeImage:(UIImage *)baseImage color:(UIColor *)theColor;
