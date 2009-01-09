@@ -16,7 +16,7 @@
 			<key>Key</key>
 			<string>address_preference</string>
 			<key>DefaultValue</key>
-			<string></string>
+			<string>http://</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>
@@ -52,7 +52,7 @@
 			<key>Key</key>
 			<string>username_preference</string>
 			<key>DefaultValue</key>
-			<string></string>
+			<string>username</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>
