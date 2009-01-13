@@ -321,6 +321,8 @@
 	
 	// create the request
 	NSString * url = [[[settingsAddress stringByAppendingString:@":"] stringByAppendingString:settingsPort] stringByAppendingString:@"/gui/"];
+	if (url == nil)
+		url = @"";
 	//NSString * url = @"http://ea17.homedns.org:8080/gui/";
 	NSString * urlrequest = [url stringByAppendingString:request];
 	if (self.torrentsCacheID != nil) {
