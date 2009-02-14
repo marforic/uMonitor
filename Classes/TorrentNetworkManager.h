@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TorrentListener.h"
 
-@interface TorrentNetworkManager : NSObject {
+@interface TorrentNetworkManager : NSObject<UIAlertViewDelegate> {
 	@private
 	NSMutableData * receivedData;
 	NSMutableArray * torrentsData;

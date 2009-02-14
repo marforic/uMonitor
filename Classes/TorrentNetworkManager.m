@@ -179,6 +179,7 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+	hasReceivedResponse = YES;
     // release the connection, and the data object
     [connection release];
     // receivedData is declared as a method instance elsewhere
@@ -190,16 +191,10 @@
 		case -1012: // credentials incorrect - handled in another funtion (just above)
 			return;
 		default:
-			message = [[@"Error - " stringByAppendingString:[error localizedDescription]] stringByAppendingString:@"\nPlease check your settings\n... Exit on OK ..."];
+			message = [[@"Error - " stringByAppendingString:[error localizedDescription]] stringByAppendingString:@"\nPlease check your settings"];
 			break;
 	}
-	
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Problem" message:message
-												   delegate:self 
-										  cancelButtonTitle:@"OK" otherButtonTitles: nil];
-	alert.tag = 13371007;
-	[alert show];	
-	[alert release];	
+	[Utilities createAndShowAlertWithTitle:@"Network Problem" andMessage:message withDelegate:self andTag:13371007];
 	
 	NSLog(@"error: %i - %@ - %@", [error code], [error localizedDescription], [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
     //NSLog(@"Connection failed! Error - %@ %@",
@@ -208,9 +203,19 @@
 }
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-	UIAlertView *alertView = (UIAlertView*) actionSheet;
-	if (alertView.tag == 13371007)
-		[[UIApplication sharedApplication] terminateWithSuccess];
+	NSInteger problem;
+	id obj;
+	
+	if (actionSheet.tag == 13371007)
+		problem = T_NETWORK_PROBLEM;
+	else
+		problem = T_DOWNLOAD_PROBLEM;
+	
+	NSEnumerator * enumerator = [listeners objectEnumerator];
+	while (obj = [enumerator nextObject]) {
+		id<TorrentListener> listener = (id<TorrentListener>)obj;
+		[listener update:problem];
+	}
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
@@ -345,7 +350,7 @@
 	} else {
 		// inform the user that the download could not be made
 		//NSLog(@"download can't be made\n");
-		[Utilities createAndShowAlertWithTitle:@"Download Problem" andMessage:@"Download can't be made\nTry restarting the application" withDelegate:self];
+		[Utilities createAndShowAlertWithTitle:@"Download Problem" andMessage:@"Download can't be made\nTry restarting the application" withDelegate:self andTag:13371008];
 	}
 }
 

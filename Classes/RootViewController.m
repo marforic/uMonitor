@@ -167,16 +167,20 @@
 */
 
 - (void)update:(NSUInteger)type {
-	if (type != T_LIST)
-		return;
-	id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
-	[organizer organize];
-	[torrentsTable reloadData];
-	organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:((currentOrganizer + 1) % [self.organizers count])];
-	self.navigationItem.rightBarButtonItem.enabled = YES;
-	[self.navigationItem.leftBarButtonItem release];
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[organizer getLabelText] style:UIBarButtonItemStyleBordered target:self action:@selector(toggleOrganizer)];
-	self.navigationItem.leftBarButtonItem.enabled = TRUE;
+	if (type == T_NETWORK_PROBLEM) {
+		self.navigationItem.rightBarButtonItem.enabled = YES;
+		[self.navigationItem.leftBarButtonItem release];
+		self.navigationItem.leftBarButtonItem = nil;
+	} else if (type == T_LIST) {
+		id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
+		[organizer organize];
+		[torrentsTable reloadData];
+		organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:((currentOrganizer + 1) % [self.organizers count])];
+		self.navigationItem.rightBarButtonItem.enabled = YES;
+		[self.navigationItem.leftBarButtonItem release];
+		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[organizer getLabelText] style:UIBarButtonItemStyleBordered target:self action:@selector(toggleOrganizer)];
+		self.navigationItem.leftBarButtonItem.enabled = TRUE;
+	}
 }
 
 - (void)toggleOrganizer {

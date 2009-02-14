@@ -171,10 +171,11 @@
 	return ret;
 }
 
-+(void)createAndShowAlertWithTitle:(NSString *)title andMessage:(NSString *)message withDelegate:(id)del {
++(void)createAndShowAlertWithTitle:(NSString *)title andMessage:(NSString *)message withDelegate:(id)del andTag:(NSInteger)tag {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message
 												   delegate:del 
 										  cancelButtonTitle:@"OK" otherButtonTitles: nil];
+	alert.tag = tag;
 	[alert show];	
 	[alert release];	
 }
