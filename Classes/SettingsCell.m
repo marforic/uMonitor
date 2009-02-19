@@ -35,6 +35,7 @@
 	[self.textField setKeyboardType:type];
 	self.textField.clearsOnBeginEditing = NO;
 	self.textField.tag = fieldTag;
+	[self.textField setFont:[UIFont systemFontOfSize:17.0]];
 }
 
 
