@@ -106,7 +106,7 @@
 	unichar firstchar = [name characterAtIndex:0];
 	NSUInteger section;
 	if (firstchar < 65 || firstchar > 90)
-		section = 27;
+		section = 26;
 	else
 		section = (NSUInteger)firstchar - 65;
 	return section;
