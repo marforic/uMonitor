@@ -13,9 +13,9 @@
 
 @synthesize label, textField;
 
-- (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
-        
+- (id)initWithCoder:(NSCoder *)coder {
+    if (self = [super initWithCoder:coder]) {
+		[self setBackgroundColor:[UIColor whiteColor]];
     }
     return self;
 }
