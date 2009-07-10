@@ -31,8 +31,8 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
 		hueSlider.minimumValue = 0.01;
 		UIImage * stetchLeftTrack = [UIImage imageNamed:@"hue.png"];
 		[hueSlider setThumbImage:self.plainThumbImage forState:UIControlStateNormal];
-		[hueSlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
-		[hueSlider setMaximumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
+		//[hueSlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
+		//[hueSlider setMaximumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
 		[hueSlider addTarget:self action:@selector(updateHueSlider) forControlEvents:UIControlEventValueChanged];
 		[hueSlider addTarget:self action:@selector(updateBrightnessSlider) forControlEvents:UIControlEventValueChanged];
 		frame = CGRectMake(110, 90, 200.0, 20.0);

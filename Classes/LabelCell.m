@@ -9,7 +9,7 @@
 #import "LabelCell.h"
 #import "BlueBadge.h"
 #import "Utilities.h"
-#import "CustomAlertView.h"
+//#import "CustomAlertView.h"
 
 
 @implementation LabelCell
@@ -17,6 +17,7 @@
 @synthesize labelColor;
 @synthesize colorizedImage;
 @synthesize labelImage;
+@synthesize labelLabel;
 
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
@@ -27,13 +28,8 @@
 
 - (void)setCellDataWithLabelString:(NSString *)label withNumber:(NSDecimalNumber *)count colorString:(UIColor *)color {
 	
-	//if (!mainAppDelegate)
-	//	mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
 	self.labelColor = color;
-
 	labelLabel.text = label;
-	
 
 	self.colorizedImage = [Utilities colorizeImage:labelImage.image color:color];
 	UIImage * tmpImage = labelImage.image;
@@ -50,6 +46,7 @@
 	[blueBadge release];
 }
 
+/*
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	CustomAlertView *alertView = (CustomAlertView*) actionSheet;
 	if(buttonIndex > 0) {
@@ -72,7 +69,7 @@
 }
 
 - (void)colorChangedAction {
-	CustomAlertView *alert = [[CustomAlertView alloc] initWithTitle:@"Choose Color" 
+	 CustomAlertView *alert = [[CustomAlertView alloc] initWithTitle:@"Choose Color" 
 																message:@"Color" 
 															   delegate:self 
 													  cancelButtonTitle:@"Cancel"
@@ -85,6 +82,7 @@
 	[alert show];
 	[alert release];
 }
+*/
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -93,7 +91,10 @@
 
 
 - (void)dealloc {
-	[labelColor dealloc];
+	[self.labelLabel release];
+	[self.labelImage release];
+	[self.colorizedImage release];
+	[self.labelColor release];
     [super dealloc];
 }
 

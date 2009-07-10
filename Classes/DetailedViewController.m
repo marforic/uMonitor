@@ -76,12 +76,12 @@
 #pragma mark Buttons methods
 - (void)startButtonAction {
 	[tnm actionStartForTorrent:[self.torrent objectAtIndex:HASH]];
-	NSLog(@"Start Button");
+	//NSLog(@"Start Button");
 }
 
 - (void)stopButtonAction {
 	[tnm actionStopForTorrent:[self.torrent objectAtIndex:HASH]];
-	NSLog(@"Stop Button");
+	//NSLog(@"Stop Button");
 }
 
 - (void)deleteButtonAction {
@@ -101,7 +101,7 @@
 			break;
 		case 1: // delete .torrent only
 			[tnm actionDeleteDotTorrent:[self.torrent objectAtIndex:HASH]];
-			NSLog(@".torrent deleted");
+			//NSLog(@".torrent deleted");
 			break;
 		case 2: // delete .torrent and data
 			[Utilities alertOKCancelAction:@"Confirm data deletion" 
@@ -117,7 +117,7 @@
 	switch (buttonIndex) {
 		case 1: // OK
 			[tnm actionDeleteData:[self.torrent objectAtIndex:HASH]];
-			NSLog(@"Doom be upon you, you are deleting everything!");
+			//NSLog(@"Doom be upon you, you are deleting everything!");
 			break;
 		default:
 			break;
@@ -257,7 +257,7 @@
 }
 
 - (void)update:(NSUInteger)type {
-	NSLog(@"I should have reloaded my data!");
+	//NSLog(@"I should have reloaded my data!");
 	for (NSArray * t in tnm.torrentsData) {
 		if ([[t objectAtIndex:HASH] isEqual:[self.torrent objectAtIndex:HASH]]) {
 			self.torrent = t;

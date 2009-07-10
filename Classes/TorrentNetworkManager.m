@@ -197,9 +197,18 @@
 	[Utilities createAndShowAlertWithTitle:@"Network Problem" andMessage:message withDelegate:self andTag:13371007];
 	
 	NSLog(@"error: %i - %@ - %@", [error code], [error localizedDescription], [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
-    //NSLog(@"Connection failed! Error - %@ %@",
-    //      [error localizedDescription],
-    //      [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+	NSLog(@"whole error: %@", error);
+	
+	/* hack to test labels without net
+	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+	self.labelsData = [NSMutableArray arrayWithArray:[NSArray arrayWithObjects:@"nolabel", [NSNumber numberWithInt:10], nil]];
+	if ([defaults arrayForKey:@"nolabel"] == nil) {
+		//NSLog(@"defaults: %@", [defaults arrayForKey:@"nolabel"]);
+		NSArray * colorInfo = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:1.0f], [NSNumber numberWithFloat:0.1f], nil];
+		[defaults setObject:colorInfo forKey:@"nolabel"];
+		[colorInfo release];
+	}
+	*/
 }
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -280,7 +289,7 @@
 			[colorInfo release];
 		}
 	}
-	
+
 	if ([jsonItem objectForKey:@"torrentc"] != nil)
 		self.torrentsCacheID = [jsonItem objectForKey:@"torrentc"];
 	
@@ -337,7 +346,7 @@
 	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	
-	NSLog(@"request: %@, chacheID: %@", urlrequest, self.torrentsCacheID);
+	//NSLog(@"request: %@, chacheID: %@", urlrequest, self.torrentsCacheID);
 	NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlrequest]];
 		
 	NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self startImmediately:YES];

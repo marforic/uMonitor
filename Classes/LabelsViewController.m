@@ -18,16 +18,7 @@
 @synthesize labelsTable;
 @synthesize mainAppDelegate;
 @synthesize cell;
-
-/*
-- (id)initWithStyle:(UITableViewStyle)style {
-    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if (self = [super initWithStyle:style]) {
-    }
-    return self;
-}
-*/
-
+@synthesize fakeView, sliderView, currentlyEditingCell, plainThumbImage;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -41,6 +32,27 @@
 	self.navigationItem.title = @"Labels";
 	// set the refresh button
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(networkRequest)];
+	
+	// plainThumbImage
+	self.plainThumbImage = [UIImage imageNamed:@"ring.png"];
+	// sliderView definition
+	CGRect frame = self.sliderView.frame;
+	frame.origin.x = round((self.view.frame.size.width - frame.size.width) / 2.0);
+	frame.origin.y = self.view.frame.size.height - 350;
+	self.sliderView.frame = frame;
+	[self.fakeView addSubview:self.sliderView];
+	// set the paramenters
+	[self.sliderView.hue setMinimumTrackImage:[UIImage imageNamed:@"transparent.png"] forState:UIControlStateNormal];
+	[self.sliderView.hue setThumbImage:self.plainThumbImage forState:UIControlStateNormal];
+	[self.sliderView.brightness setMinimumTrackImage:[UIImage imageNamed:@"transparent.png"] forState:UIControlStateNormal];
+	[self.sliderView.brightness setThumbImage:self.plainThumbImage forState:UIControlStateNormal];
+	// add selectors for events
+	[self.sliderView.hue addTarget:self action:@selector(updateHueSlider) forControlEvents:UIControlEventValueChanged];
+	[self.sliderView.hue addTarget:self action:@selector(updateBrightnessSlider) forControlEvents:UIControlEventValueChanged];
+	[self.sliderView.brightness addTarget:self action:@selector(updateBrightnessSlider) forControlEvents:UIControlEventValueChanged];
+	
+	// add fakeView
+	[self.view addSubview:self.fakeView];
 }
 
 - (void)networkRequest {
@@ -49,27 +61,6 @@
 	// create the request
 	[tnm requestList];
 }
-
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-*/
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-*/
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -117,6 +108,7 @@
 	cell = (LabelCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
 		[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil];
+		//NSLog(@"%i, %i", indexPath.row, [tnm.labelsData count]);
 		if (indexPath.row < [tnm.labelsData count]) {
 			NSArray * color = [[NSUserDefaults standardUserDefaults] arrayForKey:[[tnm.labelsData objectAtIndex:indexPath.row] objectAtIndex:0]];
 			float colorHue, colorBrightness = 0.0f;
@@ -152,58 +144,76 @@
     return cell;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
-	// [self.navigationController pushViewController:anotherViewController];
-	// [anotherViewController release];
 	[self.navigationController dismissModalViewControllerAnimated:YES]; 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-	LabelCell * myCell = (LabelCell *)[tableView cellForRowAtIndexPath:indexPath];
-	[myCell colorChangedAction];
+	currentlyEditingCell = (LabelCell *)[tableView cellForRowAtIndexPath:indexPath];
+
+	// configure values of sliderView
+	sliderView.hue.value = [[[Utilities RGBtoHSB:currentlyEditingCell.labelColor] objectAtIndex:0] floatValue];
+	sliderView.brightness.value = [[[Utilities RGBtoHSB:currentlyEditingCell.labelColor] objectAtIndex:2] floatValue];
+	[self updateHueSlider];
+	[self updateBrightnessSlider];
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.40];
+	
+	fakeView.alpha = 1;
+	sliderView.alpha = 1;
+	[UIView commitAnimations];
 }
 
+#pragma mark LabelsSliderView
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (IBAction)cancelButtonPressed:(id)sender {
+	currentlyEditingCell = nil;
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.40];
+	
+	fakeView.alpha = 0.0;
+	sliderView.alpha = 0.0;
+	[UIView commitAnimations];
 }
-*/
 
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (IBAction)okButtonPressed:(id)sender {
+	float hS = self.sliderView.hue.value;
+	float bS = self.sliderView.brightness.value;
+	// set label image color
+	currentlyEditingCell.labelColor = [[UIColor alloc] initWithHue:hS saturation:1.0f brightness:bS alpha:1.0];
+	currentlyEditingCell.labelImage.image = [Utilities colorizeImage:currentlyEditingCell.colorizedImage color:currentlyEditingCell.labelColor];
+	[currentlyEditingCell.labelColor release];
+	// save info into UserDefaults
+	NSArray * colorInfo = [NSArray arrayWithObjects:[NSNumber numberWithFloat:hS], [NSNumber numberWithFloat:bS], nil];
+	if ([currentlyEditingCell.labelLabel.text isEqual:@"No Label"])
+		[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:@"nolabel"];
+	else
+		[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:currentlyEditingCell.labelLabel.text];
+	
+	// remove the views
+	[self cancelButtonPressed:sender];
 }
-*/
 
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (void) updateHueSlider {
+	UIColor * color = [[UIColor alloc] initWithHue:self.sliderView.hue.value 
+										saturation:1.0 
+										brightness:1.0
+											 alpha:1.0];
+	UIImage * tmpImage = [Utilities colorizeImage:self.plainThumbImage 
+											color:color];
+	[color release];
+	[self.sliderView.hue setThumbImage:tmpImage forState:UIControlStateNormal];
 }
-*/
 
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (void) updateBrightnessSlider {
+	UIColor * color = [[UIColor alloc] initWithHue:self.sliderView.hue.value 
+										saturation: 1.0 
+										brightness:self.sliderView.brightness.value 
+											 alpha:1.0];
+	UIImage * tmpImage = [Utilities colorizeImage:self.plainThumbImage
+											color:color];
+	[color release];
+	[self.sliderView.brightness setThumbImage:tmpImage forState:UIControlStateNormal];
 }
-*/
-
 
 - (void)dealloc {
     [super dealloc];
@@ -211,6 +221,10 @@
 	[cell dealloc];
 	[labelsTable dealloc];
 	[mainAppDelegate release];
+	[self.fakeView release];
+	[self.sliderView release];
+	[self.plainThumbImage release];
+	[self.currentlyEditingCell release];
 }
 
 
