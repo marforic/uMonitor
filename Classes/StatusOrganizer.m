@@ -18,7 +18,7 @@
 
 - (id)initWithTNM:(TorrentNetworkManager *)networkManager {
 	if (self = [super init]) {
-		tnm = networkManager;
+		tnm = [networkManager retain];
 		NSArray * tmp = [[NSArray alloc] initWithObjects:[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], 
 						 [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], 
 						 [NSMutableArray array], [NSMutableArray array], nil];

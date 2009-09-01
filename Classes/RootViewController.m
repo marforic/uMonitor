@@ -15,6 +15,7 @@
 #import "StatusOrganizer.h"
 #import "NameOrganizer.h"
 #import "TorrentNetworkManager.h"
+#import "LabelOrganizer.h"
 
 @implementation RootViewController
 
@@ -32,7 +33,12 @@
 	// set the refresh buttoni
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(networkRequest)];
 	[Utilities showLoadingCursorForViewController:self];
-	self.organizers = [NSArray arrayWithObjects:[[StatusOrganizer alloc] initWithTNM:tnm], [[NameOrganizer alloc] initWithTNM:tnm], nil];
+	StatusOrganizer * so = [[StatusOrganizer alloc] initWithTNM:tnm];
+	NameOrganizer * no = [[NameOrganizer alloc] initWithTNM:tnm];
+	LabelOrganizer * lo = [[LabelOrganizer alloc] initWithTNM:tnm];
+	NSArray * tmp = [[NSArray alloc] initWithObjects:so, no, lo, nil];
+	self.organizers = tmp;
+	[tmp release];
 	currentOrganizer = 0;
 	[self networkRequest];
 }
