@@ -46,7 +46,7 @@
 }
 
 - (NSString *)getTitleForSection:(NSInteger)section {
-	return @"Size";
+	return nil;
 }
 
 - (NSInteger)getSectionNumber {

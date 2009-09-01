@@ -21,6 +21,7 @@
 @implementation RootViewController
 
 @synthesize torrentsTable, mainAppDelegate, organizers, filteredListContent, savedSearchTerm, savedScopeButtonIndex, searchWasActive;
+@synthesize pickerView, allPickerView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -57,6 +58,11 @@
         self.savedSearchTerm = nil;
     }
 	
+	// sorting options
+	allPickerView.frame = CGRectMake(0, 63, 320, 417);
+	allPickerView.hidden = YES;
+	pickerView.alpha = 0.0;
+	[mainAppDelegate.window addSubview:allPickerView];
 	[self networkRequest];
 }
 
@@ -133,6 +139,24 @@
     return YES;
 }
 
+#pragma mark -
+#pragma mark Picker View Methods
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)thePickerView {
+	return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)thePickerView numberOfRowsInComponent:(NSInteger)component {
+	return [organizers count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+	return [[organizers objectAtIndex:row] getLabelText];
+}
+
+- (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+	selectedSorting = row - 1 % [organizers count];
+}
 
 #pragma mark -
 #pragma mark Table view methods
@@ -217,17 +241,28 @@
 		[organizer organize];
 		self.filteredListContent = [NSMutableArray arrayWithCapacity:[tnm.torrentsData count]];
 		[torrentsTable reloadData];
-		organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:((currentOrganizer + 1) % [self.organizers count])];
+		//organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:((currentOrganizer + 1) % [self.organizers count])];
 		self.navigationItem.rightBarButtonItem.enabled = YES;
 		[self.navigationItem.leftBarButtonItem release];
-		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[organizer getLabelText] style:UIBarButtonItemStyleBordered target:self action:@selector(toggleOrganizer)];
+		//self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[organizer getLabelText] style:UIBarButtonItemStyleBordered target:self action:@selector(toggleOrganizer)];
+		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sorting" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleOrganizer)];
 		self.navigationItem.leftBarButtonItem.enabled = TRUE;
 	}
 }
 
 - (void)toggleOrganizer {
-	currentOrganizer = ((currentOrganizer + 1) % [self.organizers count]);
-	[self update:T_LIST];
+	allPickerView.hidden = !allPickerView.hidden;
+	if (allPickerView.hidden) {
+		pickerView.alpha = 0.0;
+		currentOrganizer = ((selectedSorting + 1) % [self.organizers count]);
+		[self update:T_LIST];
+	} else {
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationDuration:0.5];
+		pickerView.alpha = 1.0;
+		[UIView commitAnimations];
+		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleOrganizer)];
+	}
 }
 
 - (void)dealloc {
@@ -236,6 +271,8 @@
 	[cell release];
 	[organizers release];
 	[tnm release];
+	[pickerView release];
+	[allPickerView release];
 	[super dealloc];
 }
 
