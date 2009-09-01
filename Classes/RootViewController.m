@@ -148,7 +148,6 @@
 	
 	[torrentsTable release];
 	[cell release];
-	uTorrentViewAppDelegate * mainAppDelegate;
 	[organizers release];
 	[tnm release];
 	[super dealloc];

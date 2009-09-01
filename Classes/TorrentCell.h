@@ -20,6 +20,7 @@
 	IBOutlet UIImageView * statusImage;
 	IBOutlet UIImageView * labelImage;
 	IBOutlet UIProgressView * progressView;
+	UIImage * nonColoredImage;
 }
 
 @property(nonatomic, retain) IBOutlet UILabel * nameLabel;

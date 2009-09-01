@@ -11,6 +11,7 @@
 #import "uTorrentConstants.h"
 #import "DetailedViewController.h"
 #import "TorrentCell.h"
+#import "uTorrentViewAppDelegate.h"
 
 @implementation DownloadingViewController
 

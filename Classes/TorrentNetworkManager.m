@@ -154,7 +154,7 @@
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-	NSLog(@"connectiondidReceiveAuthenticationChallenge got called\n");
+	//NSLog(@"connectiondidReceiveAuthenticationChallenge got called\n");
     if ([challenge previousFailureCount] == 0) {
         NSURLCredential * newCredential;
         newCredential = [NSURLCredential credentialWithUser:(settingsUname == nil) ? @"" : settingsUname
