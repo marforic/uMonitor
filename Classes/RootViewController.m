@@ -192,8 +192,12 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
-	return [organizer getTitleForSection:section];
+	if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return nil;
+    } else {
+		id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
+		return [organizer getTitleForSection:section];
+	}
 }
 
 - (void)update:(NSUInteger)type {
