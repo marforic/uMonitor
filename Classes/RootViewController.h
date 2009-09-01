@@ -7,26 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TorrentNetworkManager.h"
 #import "TorrentListener.h"
-#import "uTorrentViewAppDelegate.h"
 #import "TorrentOrganizer.h"
 
-#import "TorrentCell.h"
+@class TorrentNetworkManager;
+@class uTorrentViewAppDelegate;
+@class TorrentCell;
 
 @interface RootViewController : UITableViewController<TorrentListener> {
 	@private
+	NSUInteger currentOrganizer;
 	IBOutlet UITableView * torrentsTable;
 	IBOutlet TorrentCell * cell;
 	TorrentNetworkManager * tnm;
 	uTorrentViewAppDelegate * mainAppDelegate;
 	NSArray * organizers;
-	NSUInteger currentOrganizer;
 }
 
-@property (nonatomic, retain) IBOutlet UITableView *torrentsTable;
-@property (nonatomic, retain) uTorrentViewAppDelegate * mainAppDelegate;
-@property (nonatomic, retain) NSArray * organizers;
+@property(nonatomic, retain) IBOutlet UITableView *torrentsTable;
+@property(nonatomic, retain) uTorrentViewAppDelegate * mainAppDelegate;
+@property(nonatomic, retain) NSArray * organizers;
 
 - (void)networkRequest;
 - (void)toggleOrganizer;

@@ -18,13 +18,15 @@
 - (id)initWithTNM:(TorrentNetworkManager *)networkManager {
 	if (self = [super init]) {
 		tnm = networkManager;
-		self.organizedTorrents = [[NSArray alloc] initWithObjects:[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], 
+		NSArray * tmp = [[NSArray alloc] initWithObjects:[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], 
 								  [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], 
 								  [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], 
 								  [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], 
 								  [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], 
 								  [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], 
 								  [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], nil];
+		self.organizedTorrents = tmp;
+		[tmp release];
 	}
 	return self;
 }

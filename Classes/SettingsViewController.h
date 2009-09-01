@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SettingsCell.h"
-#import "TorrentNetworkManager.h"
+@class SettingsCell;
+@class TorrentNetworkManager;
 
 @interface SettingsViewController : UITableViewController<UITextFieldDelegate> {
 	@private

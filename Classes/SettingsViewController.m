@@ -9,6 +9,8 @@
 #import "SettingsViewController.h"
 #import "uTorrentViewAppDelegate.h"
 #import "uTorrentConstants.h"
+#import "SettingsCell.h"
+#import "TorrentNetworkManager.h"
 
 @implementation SettingsViewController
 

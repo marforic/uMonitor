@@ -9,8 +9,11 @@
 #import "TorrentCell.h"
 #import "uTorrentConstants.h"
 #import "Utilities.h"
+#import "uTorrentViewAppDelegate.h"
 
 @implementation TorrentCell
+
+@synthesize nameLabel, sizeLabel, doneLabel, uploadLabel, downloadLabel, statusImage, labelImage, progressView;
 
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
@@ -18,7 +21,6 @@
     }
     return self;
 }
-
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -36,18 +38,6 @@
 }
 
 -(void)setData:(NSArray *)data {
-	/*if (!mainAppDelegate)
-		mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
-	// uncache cached images to refresh them
-	if (mainAppDelegate.cacheNeedsRefresh) {
-		cachedStatus = nil;
-		cachedLabel = nil;
-		mainAppDelegate.cacheNeedsRefresh = NO;
-	}
-	*/
-	
-	
 	nonColoredImage = [UIImage imageNamed:@"my_flag.png"];
 	
 	nameLabel.text = [data objectAtIndex:NAME];	
@@ -65,20 +55,12 @@
 		colorHue = 0.5f;
 		colorBrightness = 0.4f;
 	}
-
-	//if (cachedLabel == nil) {
-		//NSLog(@"I'm %@ colorHue: %f, brightness: %f", [data objectAtIndex:NAME], colorHue, colorBrightness);
-		labelImage.image = [Utilities colorizeImage:nonColoredImage
-											  color:[UIColor colorWithHue:colorHue
-															   saturation:1.0 
-															   brightness:colorBrightness 
-																	alpha:1.0]];
-	//	cachedLabel = labelImage.image;
-	//} else {
-		//NSLog (@"using cached image!!!!");
-	//	labelImage.image = cachedLabel;
-	//}
 	
+	labelImage.image = [Utilities colorizeImage:nonColoredImage
+										  color:[UIColor colorWithHue:colorHue
+														   saturation:1.0 
+														   brightness:colorBrightness 
+																alpha:1.0]];
 	
 	sizeLabel.font = [UIFont systemFontOfSize:12];
 	sizeLabel.text = @"Size: ";
@@ -125,6 +107,12 @@
 }
 
 - (void)dealloc {
+	[nameLabel release];
+	[sizeLabel release];
+	[doneLabel release];
+	[uploadLabel release];
+	[downloadLabel release];
+	[progressView release];
 	[statusImage release];
 	[labelImage release];
     [super dealloc];

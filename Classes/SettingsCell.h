@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface SettingsCell : UITableViewCell {
 	@private
 	IBOutlet UILabel * label;

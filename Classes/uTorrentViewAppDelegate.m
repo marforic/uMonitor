@@ -27,7 +27,9 @@
 	cacheNeedsRefresh = NO;
 	
 	// instantiate our Torrent Network Manager
-	tnm = [[TorrentNetworkManager alloc] init];
+	TorrentNetworkManager * torrentManager = [[TorrentNetworkManager alloc] init];
+	self.tnm = torrentManager;
+	[torrentManager release];
 	
 	//NSLog(@"address: %@, port: %@, uname: %@, pwd:%@", settingsAddress, settingsPort, settingsUname, settingsPassword);
 	

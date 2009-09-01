@@ -11,7 +11,7 @@
 
 @interface uTorrentViewAppDelegate : NSObject <UIApplicationDelegate> {
     
-    UIWindow *window;
+    UIWindow * window;
 	UITabBarController * tabBarController;
     TorrentNetworkManager * tnm;
 	
@@ -19,11 +19,9 @@
 	
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UITabBarController * tabBarController;
-
-@property (nonatomic, retain) TorrentNetworkManager * tnm;
-
+@property(nonatomic, retain) IBOutlet UIWindow * window;
+@property(nonatomic, retain) IBOutlet UITabBarController * tabBarController;
+@property(nonatomic, retain) TorrentNetworkManager * tnm;
 @property BOOL cacheNeedsRefresh;
 
 - (TorrentNetworkManager *)getTNM;

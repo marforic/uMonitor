@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "uTorrentViewAppDelegate.h"
-
+@class uTorrentViewAppDelegate;
 
 @interface TorrentCell : UITableViewCell {
 	@private
@@ -21,11 +20,16 @@
 	IBOutlet UIImageView * statusImage;
 	IBOutlet UIImageView * labelImage;
 	IBOutlet UIProgressView * progressView;
-	UIImage * cachedLabel;
-	UIImage * cachedStatus;
-	UIImage * nonColoredImage;
-	//uTorrentViewAppDelegate * mainAppDelegate;
 }
+
+@property(nonatomic, retain) IBOutlet UILabel * nameLabel;
+@property(nonatomic, retain) IBOutlet UILabel * sizeLabel;
+@property(nonatomic, retain) IBOutlet UILabel * doneLabel;
+@property(nonatomic, retain) IBOutlet UILabel * uploadLabel;
+@property(nonatomic, retain) IBOutlet UILabel * downloadLabel;
+@property(nonatomic, retain) IBOutlet UIImageView * statusImage;
+@property(nonatomic, retain) IBOutlet UIImageView * labelImage;
+@property(nonatomic, retain) IBOutlet UIProgressView * progressView;
 
 - (void)setData:(NSArray *)data;
 - (float)getProgressForBar:(NSDecimalNumber *)progress;

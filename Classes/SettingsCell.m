@@ -20,14 +20,6 @@
     return self;
 }
 
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
 - (void)setCellDataWithLabelString:(NSString *)labelText withText:(NSString *)fieldText isSecure:(BOOL)secure withKeyboardType:(UIKeyboardType)type  andTag:(NSInteger)fieldTag{
 	self.label.text = labelText;
 	self.textField.text = fieldText;
@@ -37,7 +29,6 @@
 	self.textField.tag = fieldTag;
 	[self.textField setFont:[UIFont systemFontOfSize:17.0]];
 }
-
 
 - (void)dealloc {
 	[label release];
