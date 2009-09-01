@@ -10,30 +10,21 @@
 #import "Utilities.h"
 #import "uTorrentConstants.h"
 #import "DetailedViewController.h"
+#import "TorrentCell.h"
 
 @implementation DownloadingViewController
 
-@synthesize downloadingTorrents;
-
-/*
-- (id)initWithStyle:(UITableViewStyle)style {
-    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if (self = [super initWithStyle:style]) {
-    }
-    return self;
-}
-*/
-
+@synthesize downloadingTorrents, cell, torrentsTable, tnm, mainAppDelegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-	mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
+	self.mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
-	tnm = [mainAppDelegate getTNM];
+	self.tnm = [mainAppDelegate getTNM];
 	[tnm addListener:self];
 	
-	downloadingTorrents = [[NSMutableArray alloc] init];
+	self.downloadingTorrents = [[NSMutableArray alloc] init];
 	
 	// set the title
 	self.navigationItem.title = @"Downloading";
@@ -51,35 +42,10 @@
 	[tnm requestList];
 }
 
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-*/
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 	[torrentsTable reloadData];
 }
-
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-*/
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
@@ -117,12 +83,11 @@
     return [downloadingTorrents count];
 }
 
-
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"DownloadingTorrentsCell";
-    cell = (TorrentCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    self.cell = (TorrentCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
 		[[NSBundle mainBundle] loadNibNamed:@"TorrentCell" owner:self options:nil];
 		NSArray *itemAtIndex = (NSArray *)[downloadingTorrents objectAtIndex:indexPath.row];
@@ -144,9 +109,12 @@
 }
 
 - (void)dealloc {
+	[cell release];
+	[torrentsTable release];
+	[tnm release];
+	[mainAppDelegate release];
+	[downloadingTorrents release];
     [super dealloc];
 }
 
-
 @end
-

@@ -9,33 +9,19 @@
 #import "LabelCell.h"
 #import "BlueBadge.h"
 #import "Utilities.h"
-//#import "CustomAlertView.h"
-
 
 @implementation LabelCell
 
-@synthesize labelColor;
-@synthesize colorizedImage;
-@synthesize labelImage;
-@synthesize labelLabel;
-
-- (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
-		
-    }
-	return self;
-}
+@synthesize labelColor, colorizedImage, labelImage, labelLabel;
 
 - (void)setCellDataWithLabelString:(NSString *)label withNumber:(NSDecimalNumber *)count colorString:(UIColor *)color {
-	
 	self.labelColor = color;
 	labelLabel.text = label;
-
+	
 	self.colorizedImage = [Utilities colorizeImage:labelImage.image color:color];
 	UIImage * tmpImage = labelImage.image;
 	labelImage.image = colorizedImage;
 	self.colorizedImage = tmpImage;
-	
 	
 	CGRect contentRect = self.contentView.bounds;
 	CGFloat boundsX = contentRect.origin.x;

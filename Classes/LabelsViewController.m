@@ -6,26 +6,25 @@
 //  Copyright 2008 __MyCompanyName__. All rights reserved.
 //
 
+#import "uTorrentViewAppDelegate.h"
 #import "LabelsViewController.h"
-#import "LabelCell.h"
+#import "TorrentNetworkManager.h"
 #import "Utilities.h"
+#import "TorrentListener.h"
+#import "LabelSlidersView.h"
+#import "LabelCell.h"
 
 #import <math.h>
 
-
 @implementation LabelsViewController
 
-@synthesize labelsTable;
-@synthesize mainAppDelegate;
-@synthesize cell;
-@synthesize fakeView, sliderView, currentlyEditingCell, plainThumbImage;
+@synthesize labelsTable, mainAppDelegate, cell, fakeView, sliderView, currentlyEditingCell, plainThumbImage, tnm;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
-	tnm = [mainAppDelegate getTNM];
+	self.mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
+	self.tnm = [mainAppDelegate getTNM];
 	[tnm addListener:self];
 	
 	// set the title
@@ -62,14 +61,6 @@
 	[tnm requestList];
 }
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
     // Release anything that's not essential, such as cached data
@@ -82,7 +73,7 @@
 	self.navigationItem.leftBarButtonItem = nil;
 }
 
-
+#pragma mark -
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -163,6 +154,7 @@
 	[UIView commitAnimations];
 }
 
+#pragma mark -
 #pragma mark LabelsSliderView
 
 - (IBAction)cancelButtonPressed:(id)sender {
@@ -215,7 +207,7 @@
 	[self.sliderView.brightness setThumbImage:tmpImage forState:UIControlStateNormal];
 }
 
-- (void)dealloc {
+- (void)dealloc {	
 	[tnm release];
 	[cell release];
 	[labelsTable release];

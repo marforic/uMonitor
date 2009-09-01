@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface LabelSlidersView : UIView {
 	IBOutlet UISlider * hue;
 	IBOutlet UISlider * brightness;

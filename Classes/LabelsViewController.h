@@ -7,35 +7,36 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#import "TorrentNetworkManager.h"
 #import "TorrentListener.h"
-#import "uTorrentViewAppDelegate.h"
 
-#import "LabelSlidersView.h"
-#import "LabelCell.h"
+@class TorrentNetworkManager;
+@class uTorrentViewAppDelegate;
+@class LabelSlidersView;
+@class LabelCell;
 
 @interface LabelsViewController : UITableViewController<TorrentListener> {
 	@private
 	IBOutlet UITableView * labelsTable;
 	IBOutlet LabelCell * cell;
-	TorrentNetworkManager * tnm;
-	uTorrentViewAppDelegate * mainAppDelegate;
-	
-	LabelCell * currentlyEditingCell;
 	IBOutlet UIView * fakeView;
 	IBOutlet LabelSlidersView * sliderView;
+	
 	UIImage * plainThumbImage;
+	TorrentNetworkManager * tnm;
+	uTorrentViewAppDelegate * mainAppDelegate;
+	LabelCell * currentlyEditingCell;
 }
 
-@property (nonatomic,retain) IBOutlet UITableView *labelsTable;
-@property (nonatomic,retain) IBOutlet LabelCell * cell;
-@property (nonatomic,retain) uTorrentViewAppDelegate * mainAppDelegate;
 
-@property (nonatomic,retain) IBOutlet UIView * fakeView;
-@property (nonatomic,retain) IBOutlet LabelSlidersView * sliderView;
-@property (nonatomic,retain) LabelCell * currentlyEditingCell;
-@property (nonatomic,retain) UIImage * plainThumbImage;
+@property(nonatomic,retain) IBOutlet UITableView *labelsTable;
+@property(nonatomic,retain) IBOutlet LabelCell * cell;
+@property(nonatomic,retain) IBOutlet UIView * fakeView;
+@property(nonatomic,retain) IBOutlet LabelSlidersView * sliderView;
+
+@property(nonatomic,retain) uTorrentViewAppDelegate * mainAppDelegate;
+@property(nonatomic,retain) LabelCell * currentlyEditingCell;
+@property(nonatomic,retain) UIImage * plainThumbImage;
+@property(nonatomic,retain) TorrentNetworkManager * tnm;
 
 - (void)networkRequest;
 - (IBAction)cancelButtonPressed:(id)sender;

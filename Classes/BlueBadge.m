@@ -6,14 +6,12 @@
 
 #import "BlueBadge.h"
 
-
 @implementation BlueBadge
 
 @synthesize count;
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        // Initialization code
 		[self setBackgroundColor: [UIColor clearColor]];
 		[self setCount: 0];
     }

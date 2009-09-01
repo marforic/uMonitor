@@ -8,17 +8,9 @@
 
 #import "LabelSlidersView.h"
 
-
 @implementation LabelSlidersView
 
 @synthesize hue, brightness;
-
-- (id)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        // Initialization code
-    }
-    return self;
-}
 
 - (void)fillRoundedRect:(CGRect)rect inContext:(CGContextRef)context
 {
@@ -46,6 +38,8 @@
 }
 
 - (void)dealloc {
+	[hue release];
+	[brightness release];
     [super dealloc];
 }
 
