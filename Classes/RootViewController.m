@@ -19,7 +19,7 @@
 
 @implementation RootViewController
 
-@synthesize torrentsTable, mainAppDelegate, organizers;
+@synthesize torrentsTable, mainAppDelegate, organizers, filteredListContent, savedSearchTerm, savedScopeButtonIndex, searchWasActive;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,7 +30,7 @@
 	// set the title
 	self.navigationItem.title = @"Torrents";
 	
-	// set the refresh buttoni
+	// set the refresh button
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(networkRequest)];
 	[Utilities showLoadingCursorForViewController:self];
 	StatusOrganizer * so = [[StatusOrganizer alloc] initWithTNM:tnm];
@@ -40,6 +40,16 @@
 	self.organizers = tmp;
 	[tmp release];
 	currentOrganizer = 0;
+	
+	// search bar	
+	// restore search settings if they were saved in didReceiveMemoryWarning.
+    if (self.savedSearchTerm) {
+        [self.searchDisplayController setActive:self.searchWasActive];
+        [self.searchDisplayController.searchBar setSelectedScopeButtonIndex:self.savedScopeButtonIndex];
+        [self.searchDisplayController.searchBar setText:savedSearchTerm];
+        self.savedSearchTerm = nil;
+    }
+	
 	[self networkRequest];
 }
 
@@ -51,23 +61,18 @@
 	[tnm requestList];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidUnload {
+	// Save the state of the search UI so that it can be restored if the view is re-created.
+    self.searchWasActive = [self.searchDisplayController isActive];
+    self.savedSearchTerm = [self.searchDisplayController.searchBar text];
+    self.savedScopeButtonIndex = [self.searchDisplayController.searchBar selectedScopeButtonIndex];
+	
+	self.filteredListContent = nil;
 }
-
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 	[self.torrentsTable reloadData];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-
-
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
 }
 
 // Override to allow orientations other than the default portrait orientation.
@@ -81,31 +86,88 @@
     // Release anything that's not essential, such as cached data
 }
 
+#pragma mark -
+#pragma mark Content Filtering
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+	// Update the filtered array based on the search text and scope.
+	[self.filteredListContent removeAllObjects]; // First clear the filtered array.
+	
+	// Search the main list for products whose type matches the scope (if selected) and whose name matches searchText; add items that match to the filtered array.
+	NSArray * allTorrents = tnm.torrentsData;
+	for (NSArray * torrentData in allTorrents) {
+		NSRange searchRange = [[torrentData objectAtIndex:NAME] rangeOfString:searchText
+																	  options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch)];
+		if (searchRange.length != 0) {
+			[self.filteredListContent addObject:torrentData];
+		}
+	}
+}
+
+#pragma mark -
+#pragma mark UISearchDisplayController Delegate Methods
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString scope:
+	 [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
+{
+    [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:
+	 [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
+    
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
+
+#pragma mark -
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
-    return [organizer getSectionNumber];
+	if (tableView == self.searchDisplayController.searchResultsTableView) {
+		return 1;
+	} else {
+		id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
+		return [organizer getSectionNumber];
+	}
 }
 
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
-	return [organizer getRowNumberInSection:section];
+	if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [self.filteredListContent count];
+    } else {
+		id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
+		return [organizer getRowNumberInSection:section];
+	}
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
-	NSArray * torrentData = [organizer getItemInPath:indexPath];
 	NSString * CellIdentifier = @"TorrentCell";//[torrentData objectAtIndex:HASH];
 	cell = (TorrentCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
 		//NSLog(@"cell created! %@", CellIdentifier);
 		[[NSBundle mainBundle] loadNibNamed:@"TorrentCell" owner:self options:nil];
     }
+	
+	NSArray * torrentData = nil;
+	if (tableView == self.searchDisplayController.searchResultsTableView) {
+        torrentData = [self.filteredListContent objectAtIndex:indexPath.row];
+    } else {
+		id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
+		torrentData = [organizer getItemInPath:indexPath];
+	}
+
 	[cell setData:torrentData];
     return cell;
 }
@@ -113,8 +175,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
-	id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
-	DetailedViewController * detailsViewController = [[DetailedViewController alloc] initWithTorrent:[organizer getItemInPath:indexPath]];
+	DetailedViewController * detailsViewController = nil;
+	if (tableView == self.searchDisplayController.searchResultsTableView) {
+        detailsViewController = [[DetailedViewController alloc] initWithTorrent:[self.filteredListContent objectAtIndex:indexPath.row]];
+    } else {
+		id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
+		detailsViewController = [[DetailedViewController alloc] initWithTorrent:[organizer getItemInPath:indexPath]];
+	}
+	
 	[self.navigationController pushViewController:detailsViewController animated:YES];
 	[detailsViewController release];
 }
@@ -136,6 +204,7 @@
 	} else if (type == T_LIST) {
 		id<TorrentOrganizer> organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:currentOrganizer];
 		[organizer organize];
+		self.filteredListContent = [NSMutableArray arrayWithCapacity:[tnm.torrentsData count]];
 		[torrentsTable reloadData];
 		organizer = (id<TorrentOrganizer>)[self.organizers objectAtIndex:((currentOrganizer + 1) % [self.organizers count])];
 		self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -151,7 +220,7 @@
 }
 
 - (void)dealloc {
-	
+	[filteredListContent release];
 	[torrentsTable release];
 	[cell release];
 	[organizers release];

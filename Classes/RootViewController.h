@@ -14,19 +14,28 @@
 @class uTorrentViewAppDelegate;
 @class TorrentCell;
 
-@interface RootViewController : UITableViewController<TorrentListener> {
+@interface RootViewController : UITableViewController<TorrentListener, UISearchDisplayDelegate, UISearchBarDelegate> {
 	@private
 	NSUInteger currentOrganizer;
+	NSInteger savedScopeButtonIndex;
+	BOOL searchWasActive;
 	IBOutlet UITableView * torrentsTable;
 	IBOutlet TorrentCell * cell;
 	TorrentNetworkManager * tnm;
 	uTorrentViewAppDelegate * mainAppDelegate;
 	NSArray * organizers;
+	NSMutableArray * filteredListContent;
+	NSString * savedSearchTerm;
 }
 
 @property(nonatomic, retain) IBOutlet UITableView *torrentsTable;
 @property(nonatomic, retain) uTorrentViewAppDelegate * mainAppDelegate;
 @property(nonatomic, retain) NSArray * organizers;
+
+@property(nonatomic, retain) NSMutableArray * filteredListContent;
+@property(nonatomic, copy) NSString * savedSearchTerm;
+@property(nonatomic) NSInteger savedScopeButtonIndex;
+@property(nonatomic) BOOL searchWasActive;
 
 - (void)networkRequest;
 - (void)toggleOrganizer;

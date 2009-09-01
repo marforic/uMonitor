@@ -251,7 +251,6 @@
 	}
 	if ([jsonItem objectForKey:@"label"] != nil) {
 		self.labelsData = [NSMutableArray arrayWithArray:[jsonItem objectForKey:@"label"]];
-		NSLog([labelsData description]);
 		float randomH;
 		NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
 		NSArray * labelColorData;
