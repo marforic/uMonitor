@@ -9,7 +9,7 @@
 #import "NameOrganizer.h"
 #import "Utilities.h"
 #import "uTorrentConstants.h"
-
+#import "TorrentNetworkManager.h"
 
 @implementation NameOrganizer
 
@@ -18,7 +18,7 @@
 - (id)initWithTNM:(TorrentNetworkManager *)networkManager {
 	if (self = [super init]) {
 		tnm = networkManager;
-		self.organizedTorrents = [NSArray arrayWithObjects:[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], 
+		self.organizedTorrents = [[NSArray alloc] initWithObjects:[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], 
 								  [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], 
 								  [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], 
 								  [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], 
@@ -143,9 +143,9 @@
 }
 
 - (void)dealloc {
-	[super dealloc];
-	[self.organizedTorrents dealloc];
+	[organizedTorrents release];
 	[tnm release];
+	[super dealloc];
 }
 
 @end

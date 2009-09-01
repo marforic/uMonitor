@@ -1,5 +1,7 @@
-#import "TorrentNetworkManager.h"
+@class TorrentNetworkManager;
+
 @protocol TorrentOrganizer
+
 - (NSArray *)getOrganizedTorrents;
 - (void)organize;
 - (id)initWithTNM:(TorrentNetworkManager *)networkManager;
@@ -9,4 +11,5 @@
 - (NSArray *)getItemInPath:(NSIndexPath *)path;
 - (void)dealloc;
 - (NSString *)getLabelText;
+
 @end

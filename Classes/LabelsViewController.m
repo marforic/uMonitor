@@ -216,15 +216,15 @@
 }
 
 - (void)dealloc {
-    [super dealloc];
-	[tnm dealloc];
-	[cell dealloc];
-	[labelsTable dealloc];
+	[tnm release];
+	[cell release];
+	[labelsTable release];
 	[mainAppDelegate release];
-	[self.fakeView release];
-	[self.sliderView release];
-	[self.plainThumbImage release];
-	[self.currentlyEditingCell release];
+	[fakeView release];
+	[sliderView release];
+	[plainThumbImage release];
+	[currentlyEditingCell release];
+	[super dealloc];
 }
 
 

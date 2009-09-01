@@ -13,15 +13,17 @@
 #define kUIAlertOffset 100.0
 
 @interface CustomAlertView : UIAlertView {
+	@private
+	BOOL layoutDone;
+	
 	UISlider * hueSlider;
 	UISlider * brightnessSlider;
 	UIImage * plainThumbImage;
-	BOOL layoutDone;
 }
 
-@property (nonatomic, retain) UISlider * hueSlider;
-@property (nonatomic, retain) UISlider * brightnessSlider;
-@property (nonatomic, retain) UIImage * plainThumbImage;
+@property(nonatomic, retain) UISlider * hueSlider;
+@property(nonatomic, retain) UISlider * brightnessSlider;
+@property(nonatomic, retain) UIImage * plainThumbImage;
 
 - (id)initWithTitle:(NSString *)title message:(NSString *)message delegate:(id)delegate 
   cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ...;

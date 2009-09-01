@@ -70,7 +70,7 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
 	return self;
 }
 
-- (void) updateHueSlider {
+- (void)updateHueSlider {
 	UIColor * color = [[UIColor alloc] initWithHue:self.hueSlider.value 
 								saturation:1.0 
 								brightness:1.0
@@ -81,7 +81,7 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
 	[hueSlider setThumbImage:tmpImage forState:UIControlStateNormal];
 }
 
-- (void) updateBrightnessSlider {
+- (void)updateBrightnessSlider {
 	UIColor * color = [[UIColor alloc] initWithHue:self.hueSlider.value 
 										saturation: 1.0 
 										brightness: self.brightnessSlider.value 
@@ -96,7 +96,7 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
 /*
  *	Show alert view and update thumb for hue
  */
-- (void) show {
+- (void)show {
 	[super show];
 	[self updateHueSlider];
 	[self updateBrightnessSlider];
@@ -131,6 +131,13 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
 	} else {
 		// do nothing?
 	}
+}
+
+- (void)dealloc {
+	[hueSlider release];
+	[brightnessSlider release];
+	[plainThumbImage release];
+	[super dealloc];
 }
 
 @end

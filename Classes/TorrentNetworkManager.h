@@ -11,17 +11,18 @@
 
 @interface TorrentNetworkManager : NSObject<UIAlertViewDelegate> {
 	@private
-	NSMutableData * receivedData;
-	NSMutableArray * torrentsData;
-	NSMutableArray * labelsData;
-	NSNumber * unlabelledTorrents;
-	NSMutableArray * listeners;
-	NSString * torrentsCacheID;
-	NSArray * removedTorrents;
 	BOOL needListUpdate;
 	BOOL needToDelete;
 	BOOL hasReceivedResponse;
 	NSUInteger type;
+	
+	NSMutableData * receivedData;
+	NSMutableArray * listeners;
+	NSMutableArray * torrentsData;
+	NSMutableArray * labelsData;
+	NSNumber * unlabelledTorrents;
+	NSString * torrentsCacheID;
+	NSArray * removedTorrents;
 	NSString * settingsPassword;
 	NSString * settingsUname;
 	NSString * settingsPort;

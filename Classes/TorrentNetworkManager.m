@@ -157,8 +157,8 @@
 	NSLog(@"connectiondidReceiveAuthenticationChallenge got called\n");
     if ([challenge previousFailureCount] == 0) {
         NSURLCredential * newCredential;
-        newCredential = [NSURLCredential credentialWithUser:@"zurich"//(settingsUname == nil) ? @"" : settingsUname
-                                                   password:@"Mike Nub ImbaFail!"//(settingsPassword == nil) ? @"" : settingsPassword
+        newCredential = [NSURLCredential credentialWithUser:(settingsUname == nil) ? @"" : settingsUname
+                                                   password:(settingsPassword == nil) ? @"" : settingsPassword
                                                 persistence:NSURLCredentialPersistenceNone];
         [[challenge sender] useCredential:newCredential forAuthenticationChallenge:challenge];
     } else {
@@ -193,20 +193,6 @@
 			break;
 	}
 	[Utilities createAndShowAlertWithTitle:@"Network Problem" andMessage:message withDelegate:self andTag:13371007];
-	
-	NSLog(@"error: %i - %@ - %@", [error code], [error localizedDescription], [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
-	NSLog(@"whole error: %@", error);
-	
-	/* hack to test labels without net
-	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-	self.labelsData = [NSMutableArray arrayWithArray:[NSArray arrayWithObjects:@"nolabel", [NSNumber numberWithInt:10], nil]];
-	if ([defaults arrayForKey:@"nolabel"] == nil) {
-		//NSLog(@"defaults: %@", [defaults arrayForKey:@"nolabel"]);
-		NSArray * colorInfo = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:1.0f], [NSNumber numberWithFloat:0.1f], nil];
-		[defaults setObject:colorInfo forKey:@"nolabel"];
-		[colorInfo release];
-	}
-	*/
 }
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -291,12 +277,6 @@
 	if ([jsonItem objectForKey:@"torrentc"] != nil)
 		self.torrentsCacheID = [jsonItem objectForKey:@"torrentc"];
 	
-	//NSLog(@"cacheID as string:%@ as int: %i", [jsonItem objectForKey:@"torrentc"], [[jsonItem objectForKey:@"torrentc"] intValue]);
-	
-	//NSLog(@"torrentsData size: %i", [self.torrentsData count]);
-	//NSLog(@"labelsData size: %i", [self.labelsData count]);
-	//NSLog(@"unlabelled Torrents: %i", [[self updateUnlabelledTorrents] intValue]);
-	
 	// call update method on listeners
 	// only if it was a requestList!
 	if (needListUpdate == NO) {
@@ -323,14 +303,6 @@
 - (void)sendNetworkRequest:(NSString *)request {
 	if (!hasReceivedResponse)
 		return;
-	
-	// This are expensive calls (Apple states so) - error is shown anyway from the callback
-	/*if ([self connectedToNetwork] && [self hostAvailable:@"ea17.homends.org"])
-		printf("network connection established and host available\n");
-	else
-		printf("couldn't reach host\n");
-	*/
-	
 	// create the request
 	NSString * url = [[[settingsAddress stringByAppendingString:@":"] stringByAppendingString:settingsPort] stringByAppendingString:@"/gui/"];
 	if (url == nil)
@@ -347,7 +319,7 @@
 	//NSLog(@"request: %@, chacheID: %@", urlrequest, self.torrentsCacheID);
 	NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlrequest]];
 		
-	NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self startImmediately:YES];
+	NSURLConnection * theConnection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self startImmediately:YES];
 	if (theConnection) {
 		// Create the NSMutableData that will hold
 		// the received data
@@ -425,6 +397,9 @@
 }
 
 - (void)dealloc {
+	[unlabelledTorrents release];
+	[torrentsCacheID release];
+	[listeners release];
 	[torrentsData release];
 	[labelsData release];
 	[removedTorrents release];

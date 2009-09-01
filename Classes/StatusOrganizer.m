@@ -9,6 +9,7 @@
 #import "StatusOrganizer.h"
 #import "Utilities.h"
 #import "uTorrentConstants.h"
+#import "TorrentNetworkManager.h"
 
 
 @implementation StatusOrganizer
@@ -193,9 +194,9 @@
 }
 
 - (void)dealloc {
-	[super dealloc];
-	[organizedTorrents dealloc];
+	[organizedTorrents release];
 	[tnm release];
+	[super dealloc];
 }
 
 @end

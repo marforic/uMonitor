@@ -121,55 +121,8 @@
 				statusImage.image = [[UIImage imageNamed:@"status_skull.png"] retain];
 				break;
 		}
-	//	cachedStatus = statusImage.image;
-	//} else {
-	//	statusImage.image = cachedStatus;
-	//}
 	
 }
-
-/*- (void)layoutSubviews {
-	
-    [super layoutSubviews];
-	
-	// getting the cell size
-    CGRect contentRect = self.contentView.bounds;
-	
-	// In this example we will never be editing, but this illustrates the appropriate pattern
-    if (!self.editing) {
-		
-		// get the X pixel spot
-        CGFloat boundsX = contentRect.origin.x;
-		CGRect frame;
-        
-        /*
-		 Place the title label.
-		 place the label whatever the current X is plus 10 pixels from the left
-		 place the label 4 pixels from the top
-		 make the label 300 pixels wide
-		 make the label 20 pixels high
-		 
-		frame = CGRectMake(boundsX + 10, 4, 300, 20);
-		self.titleLabel.frame = frame;
-		
-		// place the size label
-		frame = CGRectMake(boundsX + 10, 20, 100, 20);
-		self.sizeLabel.frame = frame;
-		
-		// place the done label
-		frame = CGRectMake(boundsX + 110, 20, 100, 20);
-		self.doneLabel.frame = frame;
-		
-		// place the progress bar
-		[self.contentView addSubview:self.progressView];
-		frame = CGRectMake(boundsX + 10, 40, 270, 20);
-		self.progressView.frame = frame;
-		
-		// place the status label
-		frame = CGRectMake(boundsX + 10, 50, 200, 20);
-		self.statusLabel.frame = frame;
-	}
-}*/
 
 - (void)dealloc {
 	[statusImage release];

@@ -189,9 +189,9 @@
 }
 
 - (void)dealloc {
-    [super dealloc];
-	[self.organizers dealloc];
+	[organizers release];
 	[tnm release];
+	[super dealloc];
 }
 
 

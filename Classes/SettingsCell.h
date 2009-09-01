@@ -10,12 +10,18 @@
 
 
 @interface SettingsCell : UITableViewCell {
-	IBOutlet UILabel *label;
-	IBOutlet UITextField *textField;
+	@private
+	IBOutlet UILabel * label;
+	IBOutlet UITextField * textField;
 }
-@property (nonatomic, retain) IBOutlet UILabel *label;
-@property (nonatomic, retain) IBOutlet UITextField *textField;
 
-- (void)setCellDataWithLabelString:(NSString *)labelText withText:(NSString *)text isSecure:(BOOL)secure withKeyboardType:(UIKeyboardType)type andTag:(NSInteger)fieldTag;
+@property(nonatomic, retain) IBOutlet UILabel * label;
+@property(nonatomic, retain) IBOutlet UITextField * textField;
+
+- (void)setCellDataWithLabelString:(NSString *)labelText 
+						  withText:(NSString *)text 
+						  isSecure:(BOOL)secure 
+				  withKeyboardType:(UIKeyboardType)type 
+							andTag:(NSInteger)fieldTag;
 
 @end

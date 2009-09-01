@@ -12,20 +12,20 @@
 
 @interface SettingsViewController : UITableViewController<UITextFieldDelegate> {
 	@private
-	NSString *stringAddress;
-	NSString *stringPort;
-	NSString *stringUname;
-	NSString *stringPassword;
-	TorrentNetworkManager *tnm;
+	NSString * stringAddress;
+	NSString * stringPort;
+	NSString * stringUname;
+	NSString * stringPassword;
+	TorrentNetworkManager * tnm;
 	
-	IBOutlet SettingsCell *cell;
+	IBOutlet SettingsCell * cell;
 }
 
 @property (nonatomic, retain) NSString * stringAddress;
 @property (nonatomic, retain) NSString * stringPort;
 @property (nonatomic, retain) NSString * stringUname;
 @property (nonatomic, retain) NSString * stringPassword;
-@property (nonatomic, retain) IBOutlet SettingsCell *cell;
-@property (nonatomic, retain) TorrentNetworkManager *tnm;
+@property (nonatomic, retain) IBOutlet SettingsCell * cell;
+@property (nonatomic, retain) TorrentNetworkManager * tnm;
 
 @end

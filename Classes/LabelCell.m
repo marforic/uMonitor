@@ -46,55 +46,11 @@
 	[blueBadge release];
 }
 
-/*
-- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-	CustomAlertView *alertView = (CustomAlertView*) actionSheet;
-	if(buttonIndex > 0) {
-		if(alertView.tag == kMyAlert) {
-			float hS = alertView.hueSlider.value;
-			float bS = alertView.brightnessSlider.value;
-			// set label image color
-			self.labelColor = [[UIColor alloc] initWithHue:hS saturation:1.0f brightness:bS alpha:1.0];
-			labelImage.image = [Utilities colorizeImage:self.colorizedImage color:self.labelColor];
-			[self.labelColor release];
-			// save info into UserDefaults
-			NSArray * colorInfo = [NSArray arrayWithObjects:[NSNumber numberWithFloat:hS], [NSNumber numberWithFloat:bS], nil];
-			if ([labelLabel.text isEqual:@"No Label"])
-				[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:@"nolabel"];
-			else
-				[[NSUserDefaults standardUserDefaults] setObject:colorInfo forKey:labelLabel.text];
-			//mainAppDelegate.cacheNeedsRefresh = YES;
-		}
-	}
-}
-
-- (void)colorChangedAction {
-	 CustomAlertView *alert = [[CustomAlertView alloc] initWithTitle:@"Choose Color" 
-																message:@"Color" 
-															   delegate:self 
-													  cancelButtonTitle:@"Cancel"
-													  otherButtonTitles:@"OK", nil];
-
-	alert.hueSlider.value = [[[Utilities RGBtoHSB:self.labelColor] objectAtIndex:0] floatValue];
-	alert.brightnessSlider.value = [[[Utilities RGBtoHSB:self.labelColor] objectAtIndex:2] floatValue];
-	// tag the alert in case you have multiple alert sheet calls
-	alert.tag = kMyAlert;
-	[alert show];
-	[alert release];
-}
-*/
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
-}
-
-
 - (void)dealloc {
-	[self.labelLabel release];
-	[self.labelImage release];
-	[self.colorizedImage release];
-	[self.labelColor release];
+	[labelLabel release];
+	[labelImage release];
+	[colorizedImage release];
+	[labelColor release];
     [super dealloc];
 }
 

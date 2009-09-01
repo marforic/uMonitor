@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TorrentOrganizer.h"
-#import "TorrentNetworkManager.h"
+#import "TorrentOrganizer.h";
+@class TorrentNetworkManager;
 
 @interface StatusOrganizer : NSObject<TorrentOrganizer> {
 	@private

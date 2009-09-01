@@ -160,10 +160,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				1D3623240D0F684500981E51 /* uTorrentViewAppDelegate.h */,
-				1D3623250D0F684500981E51 /* uTorrentViewAppDelegate.m */,
-				619E72380F07A42D00A9CBDB /* CustomAlertView.h */,
-				619E72390F07A42D00A9CBDB /* CustomAlertView.m */,
+				4984CB29104DAAB70021371E /* Custom UI */,
 				61A02913100782A10006B85D /* Network */,
 				61A02912100782910006B85D /* Utilities and Constans */,
 				61A02911100782790006B85D /* Settings */,
@@ -225,6 +222,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4984CB29104DAAB70021371E /* Custom UI */ = {
+			isa = PBXGroup;
+			children = (
+				619E72380F07A42D00A9CBDB /* CustomAlertView.h */,
+				619E72390F07A42D00A9CBDB /* CustomAlertView.m */,
+			);
+			name = "Custom UI";
+			sourceTree = "<group>";
+		};
 		616140180F0410A700DD585B /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +278,8 @@
 		61A028BB100781750006B85D /* Torrents */ = {
 			isa = PBXGroup;
 			children = (
+				1D3623240D0F684500981E51 /* uTorrentViewAppDelegate.h */,
+				1D3623250D0F684500981E51 /* uTorrentViewAppDelegate.m */,
 				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
 				28C286E00D94DF7D0034E888 /* RootViewController.m */,
 				610620EE0EFD7DC0003A3B53 /* TorrentCell.h */,
