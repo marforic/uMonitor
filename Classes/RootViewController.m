@@ -16,6 +16,7 @@
 #import "NameOrganizer.h"
 #import "TorrentNetworkManager.h"
 #import "LabelOrganizer.h"
+#import "ParameterOrganizer.h"
 
 @implementation RootViewController
 
@@ -36,8 +37,14 @@
 	StatusOrganizer * so = [[StatusOrganizer alloc] initWithTNM:tnm];
 	NameOrganizer * no = [[NameOrganizer alloc] initWithTNM:tnm];
 	LabelOrganizer * lo = [[LabelOrganizer alloc] initWithTNM:tnm];
-	NSArray * tmp = [[NSArray alloc] initWithObjects:so, no, lo, nil];
+	ParameterOrganizer * sio = [[ParameterOrganizer alloc] initWithTNM:tnm parameter:SIZE andLabel:@"Sort By Size"];
+	ParameterOrganizer * pio = [[ParameterOrganizer alloc] initWithTNM:tnm parameter:PERCENT_PROGRESS andLabel:@"Sort By Progress"];
+	NSArray * tmp = [[NSArray alloc] initWithObjects:so, no, lo, sio, pio, nil];
 	self.organizers = tmp;
+	[so release];
+	[no release];
+	[lo release];
+	[sio release];
 	[tmp release];
 	currentOrganizer = 0;
 	

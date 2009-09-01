@@ -8,6 +8,7 @@
 
 #import "LabelOrganizer.h"
 #import "TorrentNetworkManager.h"
+#import "uTorrentConstants.h"
 
 @implementation LabelOrganizer
 
@@ -46,7 +47,7 @@
 	}
 	
 	for (NSArray * torrent in tnm.torrentsData) {
-		NSString * torrentLabel = [torrent objectAtIndex:11]; // at index 11 there is the torrent label
+		NSString * torrentLabel = [torrent objectAtIndex:LABEL];
 		NSNumber * section = [labelTitels valueForKey:torrentLabel];
 		if (!section) {
 			NSNumber * tmp = [[NSNumber alloc] initWithInteger:[organizedTorrents count] - 1];

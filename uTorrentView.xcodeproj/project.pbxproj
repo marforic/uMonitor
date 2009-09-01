@@ -15,6 +15,7 @@
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		4984CB9D104DBB410021371E /* LabelOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4984CB9C104DBB410021371E /* LabelOrganizer.m */; };
+		4984CC31104DD0EF0021371E /* ParamenterOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4984CC30104DD0EF0021371E /* ParamenterOrganizer.m */; };
 		49AC9E290F0E3B5C001DC76B /* StatusOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E280F0E3B5C001DC76B /* StatusOrganizer.m */; };
 		49AC9F740F0E6037001DC76B /* NameOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9F730F0E6037001DC76B /* NameOrganizer.m */; };
 		49B3904D0F45F490002A5FA0 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B3904C0F45F490002A5FA0 /* SettingsViewController.m */; };
@@ -77,6 +78,8 @@
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		4984CB9B104DBB410021371E /* LabelOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelOrganizer.h; sourceTree = "<group>"; };
 		4984CB9C104DBB410021371E /* LabelOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelOrganizer.m; sourceTree = "<group>"; };
+		4984CC2F104DD0EF0021371E /* ParameterOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParameterOrganizer.h; sourceTree = "<group>"; };
+		4984CC30104DD0EF0021371E /* ParamenterOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParamenterOrganizer.m; sourceTree = "<group>"; };
 		49AC9E240F0E3A7E001DC76B /* TorrentOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentOrganizer.h; sourceTree = "<group>"; };
 		49AC9E270F0E3B5C001DC76B /* StatusOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusOrganizer.h; sourceTree = "<group>"; };
 		49AC9E280F0E3B5C001DC76B /* StatusOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusOrganizer.m; sourceTree = "<group>"; };
@@ -305,6 +308,8 @@
 				49AC9F730F0E6037001DC76B /* NameOrganizer.m */,
 				4984CB9B104DBB410021371E /* LabelOrganizer.h */,
 				4984CB9C104DBB410021371E /* LabelOrganizer.m */,
+				4984CC2F104DD0EF0021371E /* ParameterOrganizer.h */,
+				4984CC30104DD0EF0021371E /* ParamenterOrganizer.m */,
 			);
 			name = Organizers;
 			sourceTree = "<group>";
@@ -459,6 +464,7 @@
 				61A0289710077BE30006B85D /* LabelSlidersView.m in Sources */,
 				61A0290D100782460006B85D /* main.m in Sources */,
 				4984CB9D104DBB410021371E /* LabelOrganizer.m in Sources */,
+				4984CC31104DD0EF0021371E /* ParamenterOrganizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
