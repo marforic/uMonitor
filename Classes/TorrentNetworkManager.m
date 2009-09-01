@@ -154,15 +154,13 @@
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-	//NSLog(@"connectiondidReceiveAuthenticationChallenge got called\n");
+	NSLog(@"connectiondidReceiveAuthenticationChallenge got called\n");
     if ([challenge previousFailureCount] == 0) {
-        NSURLCredential *newCredential;
-        newCredential=[NSURLCredential credentialWithUser:(settingsUname == nil) ? @"" : settingsUname
-                                                 password:(settingsPassword == nil) ? @"" : settingsPassword
-                                              persistence:NSURLCredentialPersistenceNone];
-        [[challenge sender] useCredential:newCredential
-               forAuthenticationChallenge:challenge];
-		[newCredential release];
+        NSURLCredential * newCredential;
+        newCredential = [NSURLCredential credentialWithUser:@"zurich"//(settingsUname == nil) ? @"" : settingsUname
+                                                   password:@"Mike Nub ImbaFail!"//(settingsPassword == nil) ? @"" : settingsPassword
+                                                persistence:NSURLCredentialPersistenceNone];
+        [[challenge sender] useCredential:newCredential forAuthenticationChallenge:challenge];
     } else {
         [[challenge sender] cancelAuthenticationChallenge:challenge];
         // inform the user that the user name and password
@@ -427,9 +425,9 @@
 }
 
 - (void)dealloc {
-	[torrentsData dealloc];
-	[labelsData dealloc];
-	[removedTorrents dealloc];
+	[torrentsData release];
+	[labelsData release];
+	[removedTorrents release];
 	[settingsAddress release];
 	[settingsPort release];
 	[settingsUname release];
