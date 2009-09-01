@@ -13,7 +13,7 @@
 
 @implementation TorrentCell
 
-@synthesize nameLabel, sizeLabel, doneLabel, uploadLabel, downloadLabel, statusImage, labelImage, progressView;
+@synthesize nameLabel, sizeLabel, doneLabel, uploadLabel, downloadLabel, statusImage, labelImage, progressView, downloadPercentageLabel;
 
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
@@ -80,6 +80,8 @@
 
 	progressView.progress = [self getProgressForBar:[data objectAtIndex:PERCENT_PROGRESS]];
 	
+	downloadPercentageLabel.font = [UIFont systemFontOfSize:12];
+	downloadPercentageLabel.text = [NSString stringWithFormat:@"%i%%", (int)([[data objectAtIndex:PERCENT_PROGRESS] intValue] / 10)];
 	
 	//if (cachedStatus == nil) {
 		switch ([Utilities getStatusProgrammable:[data objectAtIndex:STATUS] forProgress:[data objectAtIndex:PERCENT_PROGRESS]]) {
@@ -115,6 +117,7 @@
 	[progressView release];
 	[statusImage release];
 	[labelImage release];
+	[downloadPercentageLabel release];
     [super dealloc];
 }
 

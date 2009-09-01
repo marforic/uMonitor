@@ -17,6 +17,7 @@
 	IBOutlet UILabel * doneLabel;
 	IBOutlet UILabel * uploadLabel;
 	IBOutlet UILabel * downloadLabel;
+	IBOutlet UILabel * downloadPercentageLabel;
 	IBOutlet UIImageView * statusImage;
 	IBOutlet UIImageView * labelImage;
 	IBOutlet UIProgressView * progressView;
@@ -28,6 +29,7 @@
 @property(nonatomic, retain) IBOutlet UILabel * doneLabel;
 @property(nonatomic, retain) IBOutlet UILabel * uploadLabel;
 @property(nonatomic, retain) IBOutlet UILabel * downloadLabel;
+@property(nonatomic, retain) IBOutlet UILabel * downloadPercentageLabel;
 @property(nonatomic, retain) IBOutlet UIImageView * statusImage;
 @property(nonatomic, retain) IBOutlet UIImageView * labelImage;
 @property(nonatomic, retain) IBOutlet UIProgressView * progressView;
