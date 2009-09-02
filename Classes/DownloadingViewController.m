@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+	// FIXME: crashes when opened;
 	self.mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	self.tnm = [mainAppDelegate getTNM];

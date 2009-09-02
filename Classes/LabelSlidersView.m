@@ -12,8 +12,7 @@
 
 @synthesize hue, brightness;
 
-- (void)fillRoundedRect:(CGRect)rect inContext:(CGContextRef)context
-{
+- (void)fillRoundedRect:(CGRect)rect inContext:(CGContextRef)context {
     float radius = 10.0f;
     
     CGContextBeginPath(context);
@@ -28,8 +27,7 @@
     CGContextFillPath(context);
 }
 
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
 	// draw a box with rounded corners to fill the view -
 	CGRect boxRect = self.bounds;
     CGContextRef ctxt = UIGraphicsGetCurrentContext();	
