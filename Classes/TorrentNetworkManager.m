@@ -219,9 +219,23 @@
 	
 	NSString * readableString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
 	// Uncomment to see what is returned from the network call
-	//NSLog(@"%@", readableString);
 	
 	NSDictionary * jsonItem = [readableString JSONValue];
+	if (!jsonItem) { // something wrong with the settings
+		// stop the spinning
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+		
+		// release the connection, and the data object
+		[connection release];
+		[receivedData release];
+		[readableString release];
+		[Utilities createAndShowAlertWithTitle:@"Network Problem" 
+									andMessage:@"There's something wrong evaluating the JSON answer from the server. \n Either check the settings or contact the developers!" 
+								  withDelegate:self 
+										andTag:13371008];
+		return;
+	}
+	NSLog([jsonItem description]);
 	// if checks because following requests (actions) won't return the list
 	if ([jsonItem objectForKey:@"torrents"] != nil) { // new request -> no cache
 		self.torrentsData = [NSMutableArray arrayWithArray:[jsonItem objectForKey:@"torrents"]];
@@ -299,25 +313,27 @@
 		[self requestList];
 }
 
+- (NSString *)createRequest:(NSString *)request {
+	NSString * url = settingsAddress;
+	if (![url hasPrefix:@"http://"]) url = [NSString stringWithFormat:@"http://%@", url];
+	if ([url hasSuffix:@"/"]) url = [url substringToIndex:[url length] - 1];
+	if ([url hasSuffix:@"/gui"]) url = [url substringToIndex:[url length] - 4];
+	return [NSString stringWithFormat:@"%@:%@/gui/%@", url, (settingsPort && [settingsPort length] != 0) ? settingsPort : @"80", request];
+}
+
 - (void)sendNetworkRequest:(NSString *)request {
 	if (!hasReceivedResponse)
 		return;
 	// create the request
-	NSString * url = [[[settingsAddress stringByAppendingString:@":"] stringByAppendingString:settingsPort] stringByAppendingString:@"/gui/"];
+	NSString * url = [self createRequest:request];
 	if (url == nil)
 		url = @"";
-	//NSString * url = @"http://ea17.homedns.org:8080/gui/";
-	NSString * urlrequest = [url stringByAppendingString:request];
-	if (self.torrentsCacheID != nil) {
-		urlrequest = [urlrequest stringByAppendingString:@"&cid="];
-		urlrequest = [urlrequest stringByAppendingString:self.torrentsCacheID];
-	}
-	
+	NSString * urlrequest = [[NSString alloc] initWithFormat:@"%@&cid=%@", url, (self.torrentsCacheID != nil) ? self.torrentsCacheID : @""];
+
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	
-	//NSLog(@"request: %@, chacheID: %@", urlrequest, self.torrentsCacheID);
 	NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlrequest]];
-		
+	[urlrequest release];	
 	NSURLConnection * theConnection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self startImmediately:YES];
 	if (theConnection) {
 		// Create the NSMutableData that will hold

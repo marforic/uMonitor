@@ -47,6 +47,7 @@
 - (void)sendNetworkRequest:(NSString *)request;
 - (NSNumber *) updateUnlabelledTorrents;
 
+- (NSString *)createRequest:(NSString *)request;
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
