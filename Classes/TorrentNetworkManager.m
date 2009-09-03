@@ -131,7 +131,7 @@
 	}
 	
 	struct in_addr **list = (struct in_addr **)host->h_addr_list;
-	NSString *addressString = [NSString stringWithCString:inet_ntoa(*list[0])];
+	NSString *addressString = [NSString stringWithCString:inet_ntoa(*list[0]) encoding:NSUTF8StringEncoding];
 	return addressString;
 }
 
@@ -409,6 +409,27 @@
 	NSNumber * retObj = [[NSNumber alloc] initWithInt:ret];
 	//self.unlabelledTorrents = retObj;
 	return retObj;
+}
+
+#pragma mark -
+#pragma mark Torrent Search Requests
+
+- (NSString *)searchTorrentForQuery:(NSString *)query {
+	query = [query stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+	NSString * url = [[NSString alloc] initWithFormat:@"http://www.mininova.org/rss/%@", query];
+	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] 
+															  cachePolicy:NSURLRequestReloadIgnoringCacheData 
+														  timeoutInterval:10.0f];
+	[url release];
+	NSHTTPURLResponse * theResponse = NULL;
+	NSError * theError = NULL;
+	NSString * stringRet;
+	NSData * theResponseData = [NSURLConnection sendSynchronousRequest:theRequest returningResponse:&theResponse error:&theError];
+	if (!theError)
+		stringRet = [[NSString alloc] initWithData:theResponseData encoding:NSUTF8StringEncoding];
+	else
+		NSLog(@"ERROR: %@", [theError description]);
+	return stringRet;
 }
 
 - (void)dealloc {

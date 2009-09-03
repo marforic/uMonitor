@@ -14,6 +14,9 @@
 		2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E55F0DE3E45000AC0155 /* RootViewController.xib */; };
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		494C4084105026E5002AB715 /* TorrentBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494C4082105026E5002AB715 /* TorrentBrowserViewController.m */; };
+		494C4085105026E5002AB715 /* TorrentBrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 494C4083105026E5002AB715 /* TorrentBrowserViewController.xib */; };
+		494C4158105037D5002AB715 /* TorrentWebParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 494C4157105037D5002AB715 /* TorrentWebParser.m */; };
 		4984CB9D104DBB410021371E /* LabelOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4984CB9C104DBB410021371E /* LabelOrganizer.m */; };
 		4984CC31104DD0EF0021371E /* ParameterOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4984CC30104DD0EF0021371E /* ParameterOrganizer.m */; };
 		49AC9E290F0E3B5C001DC76B /* StatusOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E280F0E3B5C001DC76B /* StatusOrganizer.m */; };
@@ -75,6 +78,11 @@
 		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		494C4081105026E5002AB715 /* TorrentBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentBrowserViewController.h; sourceTree = "<group>"; };
+		494C4082105026E5002AB715 /* TorrentBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorrentBrowserViewController.m; sourceTree = "<group>"; };
+		494C4083105026E5002AB715 /* TorrentBrowserViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TorrentBrowserViewController.xib; path = Classes/TorrentBrowserViewController.xib; sourceTree = "<group>"; };
+		494C4156105037D5002AB715 /* TorrentWebParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentWebParser.h; sourceTree = "<group>"; };
+		494C4157105037D5002AB715 /* TorrentWebParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorrentWebParser.m; sourceTree = "<group>"; };
 		4984CB9B104DBB410021371E /* LabelOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelOrganizer.h; sourceTree = "<group>"; };
 		4984CB9C104DBB410021371E /* LabelOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelOrganizer.m; sourceTree = "<group>"; };
 		4984CC2F104DD0EF0021371E /* ParameterOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParameterOrganizer.h; sourceTree = "<group>"; };
@@ -163,6 +171,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				494C4155105037B7002AB715 /* Parser */,
+				494C40651050236F002AB715 /* Torrent Browser */,
 				4984CB29104DAAB70021371E /* Custom UI */,
 				61A02913100782A10006B85D /* Network */,
 				61A02912100782910006B85D /* Utilities and Constans */,
@@ -199,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				61A029A710078B590006B85D /* transparent.png */,
+				494C4083105026E5002AB715 /* TorrentBrowserViewController.xib */,
 				616141E70F053DE400DD585B /* LabelCell.xib */,
 				616140180F0410A700DD585B /* Images */,
 				612483D90F02600700DB8B5F /* CustomFooterView.xib */,
@@ -223,6 +234,24 @@
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		494C40651050236F002AB715 /* Torrent Browser */ = {
+			isa = PBXGroup;
+			children = (
+				494C4081105026E5002AB715 /* TorrentBrowserViewController.h */,
+				494C4082105026E5002AB715 /* TorrentBrowserViewController.m */,
+			);
+			name = "Torrent Browser";
+			sourceTree = "<group>";
+		};
+		494C4155105037B7002AB715 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				494C4156105037D5002AB715 /* TorrentWebParser.h */,
+				494C4157105037D5002AB715 /* TorrentWebParser.m */,
+			);
+			name = Parser;
 			sourceTree = "<group>";
 		};
 		4984CB29104DAAB70021371E /* Custom UI */ = {
@@ -431,6 +460,7 @@
 				49B391D60F462B93002A5FA0 /* SettingsCell.xib in Resources */,
 				61A291160F4CA672008FFF3B /* setup.png in Resources */,
 				61A029A810078B590006B85D /* transparent.png in Resources */,
+				494C4085105026E5002AB715 /* TorrentBrowserViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,6 +489,8 @@
 				61A0290D100782460006B85D /* main.m in Sources */,
 				4984CB9D104DBB410021371E /* LabelOrganizer.m in Sources */,
 				4984CC31104DD0EF0021371E /* ParameterOrganizer.m in Sources */,
+				494C4084105026E5002AB715 /* TorrentBrowserViewController.m in Sources */,
+				494C4158105037D5002AB715 /* TorrentWebParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +548,7 @@
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos3.1;
+				USER_HEADER_SEARCH_PATHS = "$(ELEMENTPARSER_SRC)/**";
 			};
 			name = iPhoneBay;
 		};
@@ -551,6 +584,7 @@
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "32AA433A-A6A3-4AE1-BE1A-49896CA0C060";
 				SDKROOT = iphoneos2.2;
+				USER_HEADER_SEARCH_PATHS = "$(ELEMENTPARSER_SRC)/**";
 			};
 			name = Distribution;
 		};
@@ -579,6 +613,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -587,6 +622,7 @@
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1BCC844E-5778-45A7-976F-3F5DC783F836";
 				SDKROOT = iphoneos3.0;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -608,6 +644,7 @@
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "32AA433A-A6A3-4AE1-BE1A-49896CA0C060";
 				SDKROOT = iphoneos2.2;
+				USER_HEADER_SEARCH_PATHS = "$(ELEMENTPARSER_SRC)/**";
 			};
 			name = Release;
 		};
