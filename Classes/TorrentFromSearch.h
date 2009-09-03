@@ -16,9 +16,10 @@
 	NSString * subcategoryName;
 	NSString * language;
 	NSString * uploader;
+	NSInteger seeds, leechers;
 	NSString * date;
+	NSString * unit;
 	NSString * link;
-	NSInteger category, subcategory, seeds, leechers;
 	float size;
 }
 
@@ -29,11 +30,12 @@
 @property(nonatomic, retain) NSString * uploader;
 @property(nonatomic, retain) NSString * date;
 @property(nonatomic, retain) NSString * link;
+@property(nonatomic, retain) NSString * unit;
 
-@property(assign) NSInteger category;
-@property(assign) NSInteger subcategory;
 @property(assign) NSInteger seeds;
 @property(assign) NSInteger leechers;
 @property(assign) float size;
+
+- (void)parseDescription:(NSString *)description;
 
 @end

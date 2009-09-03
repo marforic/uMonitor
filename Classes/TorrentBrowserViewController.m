@@ -76,7 +76,7 @@
 	TorrentFromSearch * torrent = [searchResult objectAtIndex:indexPath.row];
 	cell.torrent = torrent;
 	cell.torrentName.text = torrent.title;
-	NSString * size = [[NSString alloc] initWithFormat:@"%f MB", torrent.size];
+	NSString * size = [[NSString alloc] initWithFormat:@"%2.2f %@", torrent.size, torrent.unit];
 	cell.torrentSize.text = size;
 	[size release];
 	NSString * ratio = [[NSString alloc] initWithFormat:@"Seeds: %i - Leechers: %i", torrent.seeds, torrent.leechers];

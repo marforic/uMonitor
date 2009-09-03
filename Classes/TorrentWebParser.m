@@ -51,7 +51,8 @@
 	} else if ([elementName isEqualToString:@"title"] || 
 			   [elementName isEqualToString:@"pubDate"] || 
 			   [elementName isEqualToString:@"category"] || 
-			   [elementName isEqualToString:@"link"]) {
+			   [elementName isEqualToString:@"link"] ||
+			   [elementName isEqualToString:@"description"]) {
 		NSMutableString * ms = [[NSMutableString alloc] init];
 		self.characters = ms;
 		[ms release];
@@ -67,6 +68,8 @@
 		self.item.date = characters;
 	else if ([elementName isEqualToString:@"category"])
 		self.item.categoryName = characters;
+	else if ([elementName isEqualToString:@"description"])
+		[self.item parseDescription:characters];
 	else if ([elementName isEqualToString:@"link"])
 		self.item.link = characters;
 	else if ([elementName isEqualToString:@"item"]) {
