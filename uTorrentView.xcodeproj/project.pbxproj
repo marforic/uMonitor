@@ -44,7 +44,6 @@
 		6161407B0F044D1C00DD585B /* status_violet.png in Resources */ = {isa = PBXBuildFile; fileRef = 616140700F044D1C00DD585B /* status_violet.png */; };
 		6161407C0F044D1C00DD585B /* status_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 616140710F044D1C00DD585B /* status_yellow.png */; };
 		616141E80F053DE400DD585B /* LabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 616141E70F053DE400DD585B /* LabelCell.xib */; };
-		6161423D0F05865B00DD585B /* DownloadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6161423C0F05865B00DD585B /* DownloadingViewController.m */; };
 		618DED230F0FF71E00B15244 /* my_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = 618DED220F0FF71E00B15244 /* my_flag.png */; };
 		619E70890F06B70100A9CBDB /* BlueBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 619E70880F06B70100A9CBDB /* BlueBadge.m */; };
 		619E70AB0F06BCC200A9CBDB /* labels.png in Resources */ = {isa = PBXBuildFile; fileRef = 619E70AA0F06BCC200A9CBDB /* labels.png */; };
@@ -119,8 +118,6 @@
 		616140700F044D1C00DD585B /* status_violet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_violet.png; sourceTree = "<group>"; };
 		616140710F044D1C00DD585B /* status_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_yellow.png; sourceTree = "<group>"; };
 		616141E70F053DE400DD585B /* LabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelCell.xib; sourceTree = "<group>"; };
-		6161423B0F05865B00DD585B /* DownloadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadingViewController.h; sourceTree = "<group>"; };
-		6161423C0F05865B00DD585B /* DownloadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadingViewController.m; sourceTree = "<group>"; };
 		618DED220F0FF71E00B15244 /* my_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = my_flag.png; sourceTree = "<group>"; };
 		619E70870F06B70100A9CBDB /* BlueBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueBadge.h; sourceTree = "<group>"; };
 		619E70880F06B70100A9CBDB /* BlueBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueBadge.m; sourceTree = "<group>"; };
@@ -292,8 +289,6 @@
 				610620EF0EFD7DC0003A3B53 /* TorrentCell.m */,
 				61A511840F0032A700839B16 /* DetailedViewController.h */,
 				61A511850F0032A700839B16 /* DetailedViewController.m */,
-				6161423B0F05865B00DD585B /* DownloadingViewController.h */,
-				6161423C0F05865B00DD585B /* DownloadingViewController.m */,
 			);
 			name = Torrents;
 			sourceTree = "<group>";
@@ -454,7 +449,6 @@
 				61A511860F0032A700839B16 /* DetailedViewController.m in Sources */,
 				612484980F02A0D600DB8B5F /* LabelsViewController.m in Sources */,
 				61613FFC0F03A72500DD585B /* LabelCell.m in Sources */,
-				6161423D0F05865B00DD585B /* DownloadingViewController.m in Sources */,
 				619E70890F06B70100A9CBDB /* BlueBadge.m in Sources */,
 				619E723A0F07A42D00A9CBDB /* CustomAlertView.m in Sources */,
 				49AC9E290F0E3B5C001DC76B /* StatusOrganizer.m in Sources */,
