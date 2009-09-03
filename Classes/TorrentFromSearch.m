@@ -11,6 +11,10 @@
 
 @implementation TorrentFromSearch
 
-@synthesize name, categoryName, subcategoryName, language, uploader, category, subcategory, seeds, leechers, size;
+@synthesize title, categoryName, subcategoryName, language, uploader, category, subcategory, seeds, leechers, size, date, link;
+
+- (NSString *)description {
+	return [NSString stringWithFormat:@"title: %@\ncategory: %@\ndate: %@\nlink: %@", title, categoryName, date, link];
+}
 
 @end

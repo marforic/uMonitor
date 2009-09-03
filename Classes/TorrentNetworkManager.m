@@ -331,7 +331,6 @@
 	NSString * urlrequest = [[NSString alloc] initWithFormat:@"%@&cid=%@", url, (self.torrentsCacheID != nil) ? self.torrentsCacheID : @""];
 
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-	
 	NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlrequest]];
 	[urlrequest release];	
 	NSURLConnection * theConnection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self startImmediately:YES];
@@ -384,6 +383,14 @@
 	[self sendNetworkRequest:@"?list=1"];
 }
 
+- (void)addTorrent:(NSString *)torrentURL {
+	type = T_ADD;
+	needListUpdate = YES;
+	NSString * request = [[NSString alloc] initWithFormat:@"?action=add-url&s=%@", torrentURL];
+	[self sendNetworkRequest:request];
+	[request release];
+}
+
 - (void)addListener:(id<TorrentListener>)listener {
 	[listeners addObject:listener];
 }
@@ -409,27 +416,6 @@
 	NSNumber * retObj = [[NSNumber alloc] initWithInt:ret];
 	//self.unlabelledTorrents = retObj;
 	return retObj;
-}
-
-#pragma mark -
-#pragma mark Torrent Search Requests
-
-- (NSString *)searchTorrentForQuery:(NSString *)query {
-	query = [query stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-	NSString * url = [[NSString alloc] initWithFormat:@"http://www.mininova.org/rss/%@", query];
-	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] 
-															  cachePolicy:NSURLRequestReloadIgnoringCacheData 
-														  timeoutInterval:10.0f];
-	[url release];
-	NSHTTPURLResponse * theResponse = NULL;
-	NSError * theError = NULL;
-	NSString * stringRet;
-	NSData * theResponseData = [NSURLConnection sendSynchronousRequest:theRequest returningResponse:&theResponse error:&theError];
-	if (!theError)
-		stringRet = [[NSString alloc] initWithData:theResponseData encoding:NSUTF8StringEncoding];
-	else
-		NSLog(@"ERROR: %@", [theError description]);
-	return stringRet;
 }
 
 - (void)dealloc {

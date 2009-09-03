@@ -86,6 +86,7 @@
 		494C4083105026E5002AB715 /* TorrentBrowserViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TorrentBrowserViewController.xib; path = Classes/TorrentBrowserViewController.xib; sourceTree = "<group>"; };
 		494C4156105037D5002AB715 /* TorrentWebParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentWebParser.h; sourceTree = "<group>"; };
 		494C4157105037D5002AB715 /* TorrentWebParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorrentWebParser.m; sourceTree = "<group>"; };
+		494C43D510506B50002AB715 /* TorrentWebParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentWebParserDelegate.h; sourceTree = "<group>"; };
 		4984CB9B104DBB410021371E /* LabelOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelOrganizer.h; sourceTree = "<group>"; };
 		4984CB9C104DBB410021371E /* LabelOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelOrganizer.m; sourceTree = "<group>"; };
 		4984CC2F104DD0EF0021371E /* ParameterOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParameterOrganizer.h; sourceTree = "<group>"; };
@@ -263,6 +264,7 @@
 			children = (
 				494C4156105037D5002AB715 /* TorrentWebParser.h */,
 				494C4157105037D5002AB715 /* TorrentWebParser.m */,
+				494C43D510506B50002AB715 /* TorrentWebParserDelegate.h */,
 			);
 			name = Parser;
 			sourceTree = "<group>";

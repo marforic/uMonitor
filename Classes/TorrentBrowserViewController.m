@@ -15,21 +15,21 @@
 
 @implementation TorrentBrowserViewController
 
-@synthesize torrentSearchBar, cell;
+@synthesize torrentSearchBar, cell, searchResult;
 
-/*
-- (id)initWithStyle:(UITableViewStyle)style {
+- (id)initWithCoder:(NSCoder *)coder {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if (self = [super initWithStyle:style]) {
+    if (self = [super initWithCoder:coder]) {
+		
     }
     return self;
 }
-*/
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 	uTorrentViewAppDelegate * appDel = [[UIApplication sharedApplication] delegate];
 	tnm = [[appDel getTNM] retain];
+	twp = [[TorrentWebParser alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,7 +54,11 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [searchResult count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 63.0;
 }
 
 
@@ -63,46 +67,51 @@
     
     static NSString *CellIdentifier = @"TorrentBrowserCell";
     
-    cell = (TorrentBrowserCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    self.cell = (TorrentBrowserCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        [[NSBundle mainBundle] loadNibNamed:@"TorrentBrowserCell" owner:self options:nil];
     }
-    
 	
     // Set up the cell...
-	/*
-	TorrentFromSearch * torrent = [allTorrents objectAtIndex:indexPath.row];
+	TorrentFromSearch * torrent = [searchResult objectAtIndex:indexPath.row];
 	cell.torrent = torrent;
-	cell.torrentName = torrent.name;
+	cell.torrentName.text = torrent.title;
 	NSString * size = [[NSString alloc] initWithFormat:@"%f MB", torrent.size];
-	cell.torrentSize = size;
+	cell.torrentSize.text = size;
 	[size release];
 	NSString * ratio = [[NSString alloc] initWithFormat:@"Seeds: %i - Leechers: %i", torrent.seeds, torrent.leechers];
-	cell.torrentRatio = ratio;
+	cell.torrentRatio.text = ratio;
 	[ratio release];
-	*/
     return cell;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
-	// [self.navigationController pushViewController:anotherViewController];
-	// [anotherViewController release];
+    TorrentFromSearch * torrent = [searchResult objectAtIndex:indexPath.row];
+	NSString * torrentURL = [torrent.link stringByReplacingOccurrencesOfString:@"/tor/" withString:@"/get/"];
+	[tnm addTorrent:torrentURL];
 }
 
 #pragma mark -
 #pragma mark UISearchBarDelegate Methods
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-	NSString * result = [tnm searchTorrentForQuery:torrentSearchBar.text];
-	[TorrentWebParser parseRSSResults:result];
+	[twp parseRSSResultsForQuery:torrentSearchBar.text andDelegate:self];
+	[torrentSearchBar resignFirstResponder];
+}
+
+#pragma mark -
+#pragma mark TorrentWebParserDelegate Methods
+
+- (void)torrentWebParserDidFinishParsing:(NSMutableArray *)resultTorrents {
+	self.searchResult = resultTorrents;
+	[self.tableView reloadData];
 }
 
 - (void)dealloc {
 	[torrentSearchBar release];
 	[tnm release];
+	[twp release];
 	[cell release];
     [super dealloc];
 }

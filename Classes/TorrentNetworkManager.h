@@ -59,8 +59,7 @@
 - (void)actionDeleteData:(NSString *)hash;
 - (void)actionDeleteDotTorrent:(NSString *)hash;
 - (void)requestList;
-
-- (NSString *)searchTorrentForQuery:(NSString *)query;
+- (void)addTorrent:(NSString *)torrentURL;
 
 - (void)addListener:(id<TorrentListener>)listener;
 - (void)removeListener:(id<TorrentListener>)listener;

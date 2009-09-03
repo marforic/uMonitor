@@ -11,20 +11,24 @@
 
 @interface TorrentFromSearch : NSObject {
 	@private
-	NSString * name;
+	NSString * title;
 	NSString * categoryName;
 	NSString * subcategoryName;
 	NSString * language;
 	NSString * uploader;
+	NSString * date;
+	NSString * link;
 	NSInteger category, subcategory, seeds, leechers;
 	float size;
 }
 
-@property(nonatomic, retain) NSString * name;
+@property(nonatomic, retain) NSString * title;
 @property(nonatomic, retain) NSString * categoryName;
 @property(nonatomic, retain) NSString * subcategoryName;
 @property(nonatomic, retain) NSString * language;
 @property(nonatomic, retain) NSString * uploader;
+@property(nonatomic, retain) NSString * date;
+@property(nonatomic, retain) NSString * link;
 
 @property(assign) NSInteger category;
 @property(assign) NSInteger subcategory;
