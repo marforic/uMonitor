@@ -235,7 +235,7 @@
 										andTag:13371008];
 		return;
 	}
-	NSLog([jsonItem description]);
+	
 	// if checks because following requests (actions) won't return the list
 	if ([jsonItem objectForKey:@"torrents"] != nil) { // new request -> no cache
 		self.torrentsData = [NSMutableArray arrayWithArray:[jsonItem objectForKey:@"torrents"]];

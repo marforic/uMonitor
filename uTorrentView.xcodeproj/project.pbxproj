@@ -48,6 +48,9 @@
 		6161407C0F044D1C00DD585B /* status_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 616140710F044D1C00DD585B /* status_yellow.png */; };
 		616141E80F053DE400DD585B /* LabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 616141E70F053DE400DD585B /* LabelCell.xib */; };
 		618DED230F0FF71E00B15244 /* my_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = 618DED220F0FF71E00B15244 /* my_flag.png */; };
+		619BB08A10505BFE00B687D4 /* TorrentBrowserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 619BB08910505BFE00B687D4 /* TorrentBrowserCell.xib */; };
+		619BB09F10505C5000B687D4 /* TorrentBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 619BB09E10505C5000B687D4 /* TorrentBrowserCell.m */; };
+		619BB0C510505F3C00B687D4 /* TorrentFromSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 619BB0C410505F3C00B687D4 /* TorrentFromSearch.m */; };
 		619E70890F06B70100A9CBDB /* BlueBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 619E70880F06B70100A9CBDB /* BlueBadge.m */; };
 		619E70AB0F06BCC200A9CBDB /* labels.png in Resources */ = {isa = PBXBuildFile; fileRef = 619E70AA0F06BCC200A9CBDB /* labels.png */; };
 		619E70B00F06BD4D00A9CBDB /* updown.png in Resources */ = {isa = PBXBuildFile; fileRef = 619E70AE0F06BD4D00A9CBDB /* updown.png */; };
@@ -127,6 +130,11 @@
 		616140710F044D1C00DD585B /* status_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_yellow.png; sourceTree = "<group>"; };
 		616141E70F053DE400DD585B /* LabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelCell.xib; sourceTree = "<group>"; };
 		618DED220F0FF71E00B15244 /* my_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = my_flag.png; sourceTree = "<group>"; };
+		619BB08910505BFE00B687D4 /* TorrentBrowserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TorrentBrowserCell.xib; sourceTree = "<group>"; };
+		619BB09D10505C5000B687D4 /* TorrentBrowserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentBrowserCell.h; sourceTree = "<group>"; };
+		619BB09E10505C5000B687D4 /* TorrentBrowserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorrentBrowserCell.m; sourceTree = "<group>"; };
+		619BB0C310505F3C00B687D4 /* TorrentFromSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentFromSearch.h; sourceTree = "<group>"; };
+		619BB0C410505F3C00B687D4 /* TorrentFromSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorrentFromSearch.m; sourceTree = "<group>"; };
 		619E70870F06B70100A9CBDB /* BlueBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueBadge.h; sourceTree = "<group>"; };
 		619E70880F06B70100A9CBDB /* BlueBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueBadge.m; sourceTree = "<group>"; };
 		619E70AA0F06BCC200A9CBDB /* labels.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = labels.png; sourceTree = "<group>"; };
@@ -210,6 +218,7 @@
 			children = (
 				61A029A710078B590006B85D /* transparent.png */,
 				494C4083105026E5002AB715 /* TorrentBrowserViewController.xib */,
+				619BB08910505BFE00B687D4 /* TorrentBrowserCell.xib */,
 				616141E70F053DE400DD585B /* LabelCell.xib */,
 				616140180F0410A700DD585B /* Images */,
 				612483D90F02600700DB8B5F /* CustomFooterView.xib */,
@@ -241,6 +250,10 @@
 			children = (
 				494C4081105026E5002AB715 /* TorrentBrowserViewController.h */,
 				494C4082105026E5002AB715 /* TorrentBrowserViewController.m */,
+				619BB09D10505C5000B687D4 /* TorrentBrowserCell.h */,
+				619BB09E10505C5000B687D4 /* TorrentBrowserCell.m */,
+				619BB0C310505F3C00B687D4 /* TorrentFromSearch.h */,
+				619BB0C410505F3C00B687D4 /* TorrentFromSearch.m */,
 			);
 			name = "Torrent Browser";
 			sourceTree = "<group>";
@@ -461,6 +474,7 @@
 				61A291160F4CA672008FFF3B /* setup.png in Resources */,
 				61A029A810078B590006B85D /* transparent.png in Resources */,
 				494C4085105026E5002AB715 /* TorrentBrowserViewController.xib in Resources */,
+				619BB08A10505BFE00B687D4 /* TorrentBrowserCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,6 +505,8 @@
 				4984CC31104DD0EF0021371E /* ParameterOrganizer.m in Sources */,
 				494C4084105026E5002AB715 /* TorrentBrowserViewController.m in Sources */,
 				494C4158105037D5002AB715 /* TorrentWebParser.m in Sources */,
+				619BB09F10505C5000B687D4 /* TorrentBrowserCell.m in Sources */,
+				619BB0C510505F3C00B687D4 /* TorrentFromSearch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

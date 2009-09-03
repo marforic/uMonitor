@@ -8,14 +8,17 @@
 
 #import <UIKit/UIKit.h>
 @class TorrentNetworkManager;
+@class TorrentBrowserCell;
 
 @interface TorrentBrowserViewController : UITableViewController<UISearchBarDelegate> {
 	@private
 	IBOutlet UISearchBar * torrentSearchBar;
 	NSMutableArray * searchResult;
 	TorrentNetworkManager * tnm;
+	IBOutlet TorrentBrowserCell * cell;
 }
 
 @property(nonatomic, retain) IBOutlet UISearchBar * torrentSearchBar;
+@property(nonatomic, retain) IBOutlet TorrentBrowserCell * cell;
 
 @end

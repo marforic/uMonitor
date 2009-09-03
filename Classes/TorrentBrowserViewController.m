@@ -10,10 +10,12 @@
 #import "TorrentNetworkManager.h"
 #import "uTorrentViewAppDelegate.h"
 #import "TorrentWebParser.h"
+#import "TorrentBrowserCell.h"
+#import "TorrentFromSearch.h"
 
 @implementation TorrentBrowserViewController
 
-@synthesize torrentSearchBar;
+@synthesize torrentSearchBar, cell;
 
 /*
 - (id)initWithStyle:(UITableViewStyle)style {
@@ -59,15 +61,26 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"TorrentBrowserCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    cell = (TorrentBrowserCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    // Set up the cell...
 	
+    // Set up the cell...
+	/*
+	TorrentFromSearch * torrent = [allTorrents objectAtIndex:indexPath.row];
+	cell.torrent = torrent;
+	cell.torrentName = torrent.name;
+	NSString * size = [[NSString alloc] initWithFormat:@"%f MB", torrent.size];
+	cell.torrentSize = size;
+	[size release];
+	NSString * ratio = [[NSString alloc] initWithFormat:@"Seeds: %i - Leechers: %i", torrent.seeds, torrent.leechers];
+	cell.torrentRatio = ratio;
+	[ratio release];
+	*/
     return cell;
 }
 
@@ -90,6 +103,7 @@
 - (void)dealloc {
 	[torrentSearchBar release];
 	[tnm release];
+	[cell release];
     [super dealloc];
 }
 
