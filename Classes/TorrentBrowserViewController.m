@@ -85,7 +85,10 @@
 	NSString * leechers = [[NSString alloc] initWithFormat:@"%i", torrent.leechers];
 	cell.torrentLeechers.text = leechers;
 	[leechers release];
-	cell.torrentCategory.text = ([torrent.categoryName isKindOfClass:[NSString class]]) ? torrent.categoryName : @"No category";
+	cell.torrentCategory.text = torrent.categoryName;
+	if ([torrent.link rangeOfString:@"www.mininova.org"].location != NSNotFound) {
+		cell.torrentSite.image = [UIImage imageNamed:@"mininova.png"];
+	}
     return cell;
 }
 

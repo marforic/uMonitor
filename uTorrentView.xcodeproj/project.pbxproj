@@ -48,6 +48,7 @@
 		6161407C0F044D1C00DD585B /* status_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 616140710F044D1C00DD585B /* status_yellow.png */; };
 		616141E80F053DE400DD585B /* LabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 616141E70F053DE400DD585B /* LabelCell.xib */; };
 		6178B8F91051B37300502BEE /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 6178B8F81051B37300502BEE /* plus.png */; };
+		6178B9151051B7F500502BEE /* mininova.png in Resources */ = {isa = PBXBuildFile; fileRef = 6178B9141051B7F500502BEE /* mininova.png */; };
 		618DED230F0FF71E00B15244 /* my_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = 618DED220F0FF71E00B15244 /* my_flag.png */; };
 		619BB08A10505BFE00B687D4 /* TorrentBrowserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 619BB08910505BFE00B687D4 /* TorrentBrowserCell.xib */; };
 		619BB09F10505C5000B687D4 /* TorrentBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 619BB09E10505C5000B687D4 /* TorrentBrowserCell.m */; };
@@ -132,6 +133,7 @@
 		616140710F044D1C00DD585B /* status_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_yellow.png; sourceTree = "<group>"; };
 		616141E70F053DE400DD585B /* LabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelCell.xib; sourceTree = "<group>"; };
 		6178B8F81051B37300502BEE /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		6178B9141051B7F500502BEE /* mininova.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mininova.png; sourceTree = "<group>"; };
 		618DED220F0FF71E00B15244 /* my_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = my_flag.png; sourceTree = "<group>"; };
 		619BB08910505BFE00B687D4 /* TorrentBrowserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TorrentBrowserCell.xib; sourceTree = "<group>"; };
 		619BB09D10505C5000B687D4 /* TorrentBrowserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentBrowserCell.h; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 		616140180F0410A700DD585B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6178B9131051B7F500502BEE /* favicons */,
 				6178B8F81051B37300502BEE /* plus.png */,
 				61A291150F4CA672008FFF3B /* setup.png */,
 				61EE0FBF0F13A627001798BB /* Icon.png */,
@@ -308,6 +311,14 @@
 				616140190F0410BD00DD585B /* status_green.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		6178B9131051B7F500502BEE /* favicons */ = {
+			isa = PBXGroup;
+			children = (
+				6178B9141051B7F500502BEE /* mininova.png */,
+			);
+			path = favicons;
 			sourceTree = "<group>";
 		};
 		61A028BA100781550006B85D /* Labels */ = {
@@ -481,6 +492,7 @@
 				494C4085105026E5002AB715 /* TorrentBrowserViewController.xib in Resources */,
 				619BB08A10505BFE00B687D4 /* TorrentBrowserCell.xib in Resources */,
 				6178B8F91051B37300502BEE /* plus.png in Resources */,
+				6178B9151051B7F500502BEE /* mininova.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
