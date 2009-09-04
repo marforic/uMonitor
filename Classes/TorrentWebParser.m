@@ -17,7 +17,7 @@
 - (void)parseRSSResultsForQuery:(NSString *)query andDelegate:(id)parserDelegate {
 	delegate = parserDelegate;
 	query = [query stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-	NSString * url = [[NSString alloc] initWithFormat:@"http://www.mininova.org/rss/%@", query];
+	NSString * url = [[NSString alloc] initWithFormat:@"http://www.mininova.org/rss/%@/seeds", query];
 	NSXMLParser * p = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
 	self.rssParser = p;
 	[p release];
