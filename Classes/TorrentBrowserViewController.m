@@ -30,6 +30,7 @@
 	uTorrentViewAppDelegate * appDel = [[UIApplication sharedApplication] delegate];
 	tnm = [[appDel getTNM] retain];
 	twp = [[TorrentWebParser alloc] init];
+	self.navigationItem.title = @"Search and add torrents";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,7 +59,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	return 63.0;
+	return 76.0;
 }
 
 
@@ -74,14 +75,17 @@
 	
     // Set up the cell...
 	TorrentFromSearch * torrent = [searchResult objectAtIndex:indexPath.row];
-	cell.torrent = torrent;
 	cell.torrentName.text = torrent.title;
 	NSString * size = [[NSString alloc] initWithFormat:@"%2.2f %@", torrent.size, torrent.unit];
 	cell.torrentSize.text = size;
 	[size release];
-	NSString * ratio = [[NSString alloc] initWithFormat:@"Seeds: %i - Leechers: %i", torrent.seeds, torrent.leechers];
-	cell.torrentRatio.text = ratio;
-	[ratio release];
+	NSString * seeds = [[NSString alloc] initWithFormat:@"%i", torrent.seeds];
+	cell.torrentSeeds.text = seeds;
+	[seeds release];
+	NSString * leechers = [[NSString alloc] initWithFormat:@"%i", torrent.leechers];
+	cell.torrentLeechers.text = leechers;
+	[leechers release];
+	cell.torrentCategory.text = ([torrent.categoryName isKindOfClass:[NSString class]]) ? torrent.categoryName : @"No category";
     return cell;
 }
 

@@ -8,19 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@class TorrentFromSearch;
-
 @interface TorrentBrowserCell : UITableViewCell {
 	@private
 	IBOutlet UILabel * torrentName;
-	IBOutlet UILabel * torrentRatio;
+	IBOutlet UILabel * torrentSeeds;
+	IBOutlet UILabel * torrentLeechers;
 	IBOutlet UILabel * torrentSize;
-	TorrentFromSearch * torrent;
+	IBOutlet UILabel * torrentCategory;
+	IBOutlet UIImageView * torrentSite;
 }
 
 @property(nonatomic, retain) IBOutlet UILabel * torrentName;
-@property(nonatomic, retain) IBOutlet UILabel * torrentRatio;
+@property(nonatomic, retain) IBOutlet UILabel * torrentSeeds;
 @property(nonatomic, retain) IBOutlet UILabel * torrentSize;
-@property(nonatomic, retain) TorrentFromSearch * torrent;
+@property(nonatomic, retain) IBOutlet UILabel * torrentLeechers;
+@property(nonatomic, retain) IBOutlet UILabel * torrentCategory;
+@property(nonatomic, retain) IBOutlet UIImageView * torrentSite;
 
 @end

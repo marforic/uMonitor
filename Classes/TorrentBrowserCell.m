@@ -11,7 +11,7 @@
 
 @implementation TorrentBrowserCell
 
-@synthesize torrentName, torrentRatio, torrentSize, torrent;
+@synthesize torrentName, torrentSeeds, torrentLeechers, torrentSize, torrentCategory, torrentSite;
 
 - (id)initWithCoder:(NSCoder *)coder {
     if (self = [super initWithCoder:coder]) {
@@ -28,8 +28,11 @@
 
 - (void)dealloc {
 	[torrentName release];
-	[torrentRatio release];
+	[torrentSeeds release];
+	[torrentLeechers release];
 	[torrentSize release];
+	[torrentCategory release];
+	[torrentSite release];
     [super dealloc];
 }
 
