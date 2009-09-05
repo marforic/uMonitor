@@ -47,6 +47,7 @@
 		6161407B0F044D1C00DD585B /* status_violet.png in Resources */ = {isa = PBXBuildFile; fileRef = 616140700F044D1C00DD585B /* status_violet.png */; };
 		6161407C0F044D1C00DD585B /* status_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 616140710F044D1C00DD585B /* status_yellow.png */; };
 		616141E80F053DE400DD585B /* LabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 616141E70F053DE400DD585B /* LabelCell.xib */; };
+		6175C8661052FE9400B405C1 /* ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 6175C8651052FE9400B405C1 /* ok.png */; };
 		6178B8F91051B37300502BEE /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 6178B8F81051B37300502BEE /* plus.png */; };
 		6178B9151051B7F500502BEE /* mininova.png in Resources */ = {isa = PBXBuildFile; fileRef = 6178B9141051B7F500502BEE /* mininova.png */; };
 		618DED230F0FF71E00B15244 /* my_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = 618DED220F0FF71E00B15244 /* my_flag.png */; };
@@ -132,6 +133,7 @@
 		616140700F044D1C00DD585B /* status_violet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_violet.png; sourceTree = "<group>"; };
 		616140710F044D1C00DD585B /* status_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_yellow.png; sourceTree = "<group>"; };
 		616141E70F053DE400DD585B /* LabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelCell.xib; sourceTree = "<group>"; };
+		6175C8651052FE9400B405C1 /* ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ok.png; sourceTree = "<group>"; };
 		6178B8F81051B37300502BEE /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		6178B9141051B7F500502BEE /* mininova.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mininova.png; sourceTree = "<group>"; };
 		618DED220F0FF71E00B15244 /* my_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = my_flag.png; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 		616140180F0410A700DD585B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6175C8651052FE9400B405C1 /* ok.png */,
 				6178B9131051B7F500502BEE /* favicons */,
 				6178B8F81051B37300502BEE /* plus.png */,
 				61A291150F4CA672008FFF3B /* setup.png */,
@@ -493,6 +496,7 @@
 				619BB08A10505BFE00B687D4 /* TorrentBrowserCell.xib in Resources */,
 				6178B8F91051B37300502BEE /* plus.png in Resources */,
 				6178B9151051B7F500502BEE /* mininova.png in Resources */,
+				6175C8661052FE9400B405C1 /* ok.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

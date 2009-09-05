@@ -11,18 +11,23 @@
 @class TorrentNetworkManager;
 @class TorrentWebParser;
 @class TorrentBrowserCell;
+@class TorrentFromSearch;
 
-@interface TorrentBrowserViewController : UITableViewController<UISearchBarDelegate, TorrentWebParserDelegate> {
+@interface TorrentBrowserViewController : UITableViewController<UISearchBarDelegate, TorrentWebParserDelegate, UIAlertViewDelegate> {
 	@private
 	IBOutlet UISearchBar * torrentSearchBar;
 	NSMutableArray * searchResult;
 	TorrentNetworkManager * tnm;
 	TorrentWebParser * twp;
 	IBOutlet TorrentBrowserCell * cell;
+	TorrentFromSearch * selectedTorrent;
+	UIImageView * selectedCellImage;
 }
 
 @property(nonatomic, retain) IBOutlet UISearchBar * torrentSearchBar;
 @property(nonatomic, retain) IBOutlet TorrentBrowserCell * cell;
 @property(nonatomic, retain) NSMutableArray * searchResult;
+@property(nonatomic, retain) TorrentFromSearch * selectedTorrent;
+@property(nonatomic, retain) UIImageView * selectedCellImage;
 
 @end

@@ -259,6 +259,9 @@
 					[torrentsData removeObject:oldTorrent];
 					[torrentsData addObject:newTorrent];
 					break;
+				} else if ([[torrentsData lastObject] isEqual:oldTorrent]) {
+					// if we reached the last object, it means this is a new torrent!
+					[torrentsData addObject:newTorrent];
 				}
 			}
 		}

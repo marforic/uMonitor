@@ -12,10 +12,11 @@
 #import "TorrentWebParser.h"
 #import "TorrentBrowserCell.h"
 #import "TorrentFromSearch.h"
+#import "Utilities.h"
 
 @implementation TorrentBrowserViewController
 
-@synthesize torrentSearchBar, cell, searchResult;
+@synthesize torrentSearchBar, cell, searchResult, selectedTorrent, selectedCellImage;
 
 - (id)initWithCoder:(NSCoder *)coder {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -94,9 +95,26 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    TorrentFromSearch * torrent = [searchResult objectAtIndex:indexPath.row];
-	NSString * torrentURL = [torrent.link stringByReplacingOccurrencesOfString:@"/tor/" withString:@"/get/"];
-	[tnm addTorrent:torrentURL];
+    self.selectedTorrent = [searchResult objectAtIndex:indexPath.row];
+	self.selectedCellImage = ((TorrentBrowserCell *)[self.tableView cellForRowAtIndexPath:indexPath]).torrentSite;
+	[Utilities alertOKCancelAction:@"Start downloading" 
+						andMessage:@"Are you sure you want to start downloading the selected torrent?" 
+					  withDelegate:self];
+}
+
+#pragma mark -
+#pragma mark UIAlertViewDelegate Methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	NSString * torrentURL = [selectedTorrent.link stringByReplacingOccurrencesOfString:@"/tor/" withString:@"/get/"];
+	switch (buttonIndex) {
+		case 1: // OK
+			[tnm addTorrent:torrentURL];
+			self.selectedCellImage.image = [UIImage imageNamed:@"ok.png"];
+			break;
+		default:
+			break;
+	}
 }
 
 #pragma mark -
@@ -117,6 +135,8 @@
 
 - (void)dealloc {
 	[torrentSearchBar release];
+	[selectedTorrent release];
+	[selectedCellImage release];
 	[tnm release];
 	[twp release];
 	[cell release];
