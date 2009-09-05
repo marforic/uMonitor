@@ -58,3 +58,9 @@ typedef enum _SETTINGS_TAG {
 	UNAME_TAG = 2,
 	PWD_TAG = 3
 } SETTINGS_TAG;
+
+typedef enum _TORRENT_SITES {
+	MININOVA = 0,
+	EZTV = 1,
+	TORRENTZ = 2
+} TORRENT_SITES;
