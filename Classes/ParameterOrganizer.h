@@ -13,7 +13,7 @@
 @class TorrentNetworkManager;
 
 @interface ParameterOrganizer : NSObject<TorrentOrganizer> {
-	NSArray * organizedTorrents;
+	NSMutableArray * organizedTorrents;
 	TorrentNetworkManager * tnm;
 	TORRENTS_ARRAY index;
 	NSString * textLabel;

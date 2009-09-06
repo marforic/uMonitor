@@ -26,5 +26,9 @@
 +(UIImage *)colorizeImage:(UIImage *)baseImage color:(UIColor *)theColor;
 +(NSArray *)RGBtoHSB:(UIColor *)RGBcolor;
 + (void)insertItemOrderedByName:(NSArray *)item inArrey:(NSMutableArray *)ma;
++ (void)removeNotNeededTorrentsFromList:(NSArray *)organizedTorrents 
+						andOriginalList:(NSMutableArray *)torrentsData
+					   usingRemovedList:(NSArray *)removedTorrents 
+						andNeedToDelete:(BOOL)needToDelete;
 
 @end

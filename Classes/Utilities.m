@@ -10,7 +10,6 @@
 
 #import "uTorrentConstants.h"
 
-
 @implementation Utilities
 
 + (NSString *)getStatusReadable:(NSDecimalNumber *)status forProgress:(NSDecimalNumber *)progress {
@@ -273,6 +272,61 @@
 				break;
 			} else if (i == (count - 1))
 				[ma addObject:item];
+		}
+	}
+}
+
++ (void)removeNotNeededTorrentsFromList:(NSArray *)organizedTorrents 
+						andOriginalList:(NSMutableArray *)torrentsData
+					   usingRemovedList:(NSArray *)removedTorrents 
+						 andNeedToDelete:(BOOL)needToDelete {
+	if (removedTorrents != nil) {
+		NSInteger count = [organizedTorrents count];
+		BOOL stop = NO;
+		for (NSString * rm in removedTorrents) {
+			for (NSInteger i = 0; i < count && !stop; i++) {
+				NSMutableArray * ma = (NSMutableArray *)[organizedTorrents objectAtIndex:i];
+				NSUInteger j, count2 = [ma count];
+				for (j = 0; j < count2 && !stop; j++) {
+					NSArray * t = (NSArray *)[ma objectAtIndex:j];
+					NSString * tHash = (NSString *)[t objectAtIndex:HASH];
+					if ([rm isEqual:tHash]) {
+						[ma removeObjectAtIndex:j];
+						stop = YES;
+					}
+				}
+			}
+			stop = NO;
+		}
+	} else if (needToDelete) {
+		BOOL toRemove = YES;
+		NSInteger i, count = [organizedTorrents count];
+		NSUInteger k, count3 = [torrentsData count];
+		for (i = 0; i < count; i++) {
+			NSMutableArray * indexToRemove = [[NSMutableArray alloc] init];
+			NSMutableArray * ma = (NSMutableArray *)[organizedTorrents objectAtIndex:i];
+			NSUInteger j, count2 = [ma count];
+			for (j = 0; j < count2; j++) {
+				NSArray * a = (NSArray *)[ma objectAtIndex:j];
+				NSString * aHASH = (NSString *)[a objectAtIndex:HASH];
+				for (k = 0; k < count3; k++) {
+					NSArray * b = (NSArray *)[torrentsData objectAtIndex:k];
+					NSString * bHash = (NSString *)[b objectAtIndex:HASH];
+					if ([aHASH isEqual:bHash]) {
+						toRemove = NO;
+						break;
+					}
+				}
+				if (toRemove)
+					[indexToRemove addObject:[NSNumber numberWithInt:j]];
+				toRemove = YES;
+			}
+			NSUInteger l, count4 = [indexToRemove count];
+			for (l = 0; l < count4; l++) {
+				NSNumber * n = (NSNumber *)[indexToRemove objectAtIndex:l];
+				[ma removeObjectAtIndex:[n intValue]];
+			}
+			[indexToRemove release];
 		}
 	}
 }

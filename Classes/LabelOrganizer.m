@@ -9,6 +9,7 @@
 #import "LabelOrganizer.h"
 #import "TorrentNetworkManager.h"
 #import "uTorrentConstants.h"
+#import "Utilities.h"
 
 @implementation LabelOrganizer
 
@@ -26,26 +27,25 @@
 }
 
 - (void)organize {
-	if ([labelTitels count] == 0 && [organizedTorrents count] == 0) {
-		NSUInteger i = 0;
-		NSNumber * index;
-		for (NSArray * label in tnm.labelsData) {
-			index = [[NSNumber alloc] initWithInteger:i];
-			[labelTitels setValue:index forKey:[label objectAtIndex:0]];
-			[index release];
-			NSMutableArray * array = [[NSMutableArray alloc] init];
-			[organizedTorrents addObject:array];
-			[array release];
-			i++;
-		}
+	[organizedTorrents removeAllObjects];
+	[labelTitels removeAllObjects];
+	NSUInteger i = 0;
+	NSNumber * index;
+	for (NSArray * label in tnm.labelsData) {
 		index = [[NSNumber alloc] initWithInteger:i];
-		[labelTitels setValue:index forKey:@"no label"];
+		[labelTitels setValue:index forKey:[label objectAtIndex:0]];
 		[index release];
 		NSMutableArray * array = [[NSMutableArray alloc] init];
 		[organizedTorrents addObject:array];
 		[array release];
+		i++;
 	}
-	
+	index = [[NSNumber alloc] initWithInteger:i];
+	[labelTitels setValue:index forKey:@"no label"];
+	[index release];
+	NSMutableArray * array = [[NSMutableArray alloc] init];
+	[organizedTorrents addObject:array];
+	[array release];
 	for (NSArray * torrent in tnm.torrentsData) {
 		NSString * torrentLabel = [torrent objectAtIndex:LABEL];
 		NSNumber * section = [labelTitels valueForKey:torrentLabel];

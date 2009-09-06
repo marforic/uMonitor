@@ -8,6 +8,7 @@
 
 #import "ParameterOrganizer.h"
 #import "TorrentNetworkManager.h"
+#import "Utilities.h"
 
 @implementation ParameterOrganizer
 
@@ -33,6 +34,7 @@
 
 - (void)organize {
 	NSMutableArray * organized = [organizedTorrents objectAtIndex:0];
+	[organized removeAllObjects];
 	for (NSArray * torrent in tnm.torrentsData) {
 		NSNumber * size = [torrent objectAtIndex:index];
 		NSInteger i;
