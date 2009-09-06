@@ -546,7 +546,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = uTorrentView_Prefix.pch;
 				GCC_VERSION = 4.0;
-				"GCC_VERSION[arch=*]" = "";
+				"GCC_VERSION[arch=*]" = 4.2;
 				"GCC_VERSION[sdk=iphoneos3.0][arch=*]" = 4.2;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = uMonitor;
@@ -562,6 +562,8 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = uTorrentView_Prefix.pch;
+				"GCC_VERSION[arch=*]" = 4.2;
+				"GCC_VERSION[sdk=iphoneos3.0][arch=*]" = 4.2;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = uMonitor;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "32AA433A-A6A3-4AE1-BE1A-49896CA0C060";
@@ -573,9 +575,10 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "$HOME/Library/SDKs/JSON/$(PLATFORM_NAME).sdk";
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Claudio Marforio";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -584,8 +587,8 @@
 					"-ljson",
 				);
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos3.1;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1BCC844E-5778-45A7-976F-3F5DC783F836";
+				SDKROOT = iphoneos3.0;
 				USER_HEADER_SEARCH_PATHS = "$(ELEMENTPARSER_SRC)/**";
 			};
 			name = iPhoneBay;
@@ -598,9 +601,11 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = uTorrentView_Prefix.pch;
+				"GCC_VERSION[arch=*]" = 4.2;
+				"GCC_VERSION[sdk=iphoneos3.0][arch=*]" = 4.2;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = uMonitor;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "32AA433A-A6A3-4AE1-BE1A-49896CA0C060";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1BCC844E-5778-45A7-976F-3F5DC783F836";
 			};
 			name = iPhoneBay;
 		};
@@ -612,6 +617,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Claudio Marforio";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -634,6 +640,8 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = uTorrentView_Prefix.pch;
+				"GCC_VERSION[arch=*]" = 4.2;
+				"GCC_VERSION[sdk=iphoneos3.0][arch=*]" = 4.2;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = uMonitor;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C280E293-6C6C-449C-925E-35024CE7E6FE";
@@ -649,6 +657,7 @@
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
@@ -672,6 +681,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Claudio Marforio";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
