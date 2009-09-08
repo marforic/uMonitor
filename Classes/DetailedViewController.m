@@ -20,7 +20,7 @@
 - (id)initWithTorrent:(NSArray *)selectedTorrent {
 	if (self = [super initWithStyle:UITableViewStyleGrouped])
 		self.torrent = selectedTorrent;
-	mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
+	self.mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
 	tnm = [mainAppDelegate getTNM];
     return self;
 }

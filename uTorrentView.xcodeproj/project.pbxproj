@@ -566,7 +566,7 @@
 				"GCC_VERSION[sdk=iphoneos3.0][arch=*]" = 4.2;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = uMonitor;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "32AA433A-A6A3-4AE1-BE1A-49896CA0C060";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1BCC844E-5778-45A7-976F-3F5DC783F836";
 			};
 			name = Release;
 		};
@@ -690,8 +690,8 @@
 					"-ljson",
 				);
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "32AA433A-A6A3-4AE1-BE1A-49896CA0C060";
-				SDKROOT = iphoneos2.2;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1BCC844E-5778-45A7-976F-3F5DC783F836";
+				SDKROOT = iphoneos3.0;
 				USER_HEADER_SEARCH_PATHS = "$(ELEMENTPARSER_SRC)/**";
 			};
 			name = Release;
