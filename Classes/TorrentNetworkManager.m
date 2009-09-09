@@ -243,15 +243,17 @@
 		//[self.removedTorrents release];
 		self.removedTorrents = [jsonItem objectForKey:@"torrentm"];
 		if (self.removedTorrents != nil) {
-			for (NSString * removedTorrentHash in self.removedTorrents) {
-				for (NSArray* oldTorrent in torrentsData) {
+			for (NSString * removedTorrentHash in removedTorrents) {
+				for (NSArray * oldTorrent in torrentsData) {
 					NSString * oldHash = [oldTorrent objectAtIndex:HASH];
-					if ([removedTorrentHash isEqual:oldHash])
+					if ([removedTorrentHash isEqual:oldHash]) {
 						[torrentsData removeObject:oldTorrent];
+						break;
+					}
 				}
 			}
 		}
-		for (NSArray* newTorrent in [jsonItem objectForKey:@"torrentp"]) {
+		for (NSArray * newTorrent in [jsonItem objectForKey:@"torrentp"]) {
 			for (NSArray* oldTorrent in torrentsData) {
 				NSString * newHash = [newTorrent objectAtIndex:HASH];
 				NSString * oldHash = [oldTorrent objectAtIndex:HASH];
