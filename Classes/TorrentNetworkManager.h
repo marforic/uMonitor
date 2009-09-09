@@ -20,6 +20,7 @@
 	NSMutableArray * listeners;
 	NSMutableArray * torrentsData;
 	NSMutableArray * labelsData;
+	NSMutableArray * pendingRequests;
 	NSNumber * unlabelledTorrents;
 	NSString * torrentsCacheID;
 	NSArray * removedTorrents;
@@ -57,7 +58,7 @@
 - (void)actionStartForTorrent:(NSString *)hash;
 - (void)actionStopForTorrent:(NSString *)hash;
 - (void)actionDeleteData:(NSString *)hash;
-- (void)actionDeleteDotTorrent:(NSString *)hash;
+- (void)actionDeleteForTorrent:(NSString *)hash;
 - (void)requestList;
 - (void)addTorrent:(NSString *)torrentURL;
 

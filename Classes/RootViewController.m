@@ -63,7 +63,7 @@
 	allPickerView.hidden = YES;
 	pickerView.alpha = 0.0;
 	[mainAppDelegate.window addSubview:allPickerView];
-	[self networkRequest];
+	//[self networkRequest];
 }
 
 - (void)networkRequest {

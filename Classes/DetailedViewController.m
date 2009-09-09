@@ -73,7 +73,7 @@
 		case 0: // cancel
 			break;
 		case 1: // delete .torrent only
-			[tnm actionDeleteDotTorrent:[self.torrent objectAtIndex:HASH]];
+			[tnm actionDeleteForTorrent:[self.torrent objectAtIndex:HASH]];
 			//NSLog(@".torrent deleted");
 			break;
 		case 2: // delete .torrent and data

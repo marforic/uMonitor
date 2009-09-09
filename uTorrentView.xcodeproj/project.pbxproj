@@ -17,6 +17,7 @@
 		494C4084105026E5002AB715 /* TorrentBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494C4082105026E5002AB715 /* TorrentBrowserViewController.m */; };
 		494C4085105026E5002AB715 /* TorrentBrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 494C4083105026E5002AB715 /* TorrentBrowserViewController.xib */; };
 		494C4158105037D5002AB715 /* TorrentWebParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 494C4157105037D5002AB715 /* TorrentWebParser.m */; };
+		497033BD10578A7600D751D8 /* PendingRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 497033BC10578A7600D751D8 /* PendingRequest.m */; };
 		4984CB9D104DBB410021371E /* LabelOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4984CB9C104DBB410021371E /* LabelOrganizer.m */; };
 		4984CC31104DD0EF0021371E /* ParameterOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4984CC30104DD0EF0021371E /* ParameterOrganizer.m */; };
 		49AC9E290F0E3B5C001DC76B /* StatusOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E280F0E3B5C001DC76B /* StatusOrganizer.m */; };
@@ -90,6 +91,8 @@
 		494C4156105037D5002AB715 /* TorrentWebParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentWebParser.h; sourceTree = "<group>"; };
 		494C4157105037D5002AB715 /* TorrentWebParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorrentWebParser.m; sourceTree = "<group>"; };
 		494C43D510506B50002AB715 /* TorrentWebParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentWebParserDelegate.h; sourceTree = "<group>"; };
+		497033BB10578A7600D751D8 /* PendingRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingRequest.h; sourceTree = "<group>"; };
+		497033BC10578A7600D751D8 /* PendingRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingRequest.m; sourceTree = "<group>"; };
 		4984CB9B104DBB410021371E /* LabelOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelOrganizer.h; sourceTree = "<group>"; };
 		4984CB9C104DBB410021371E /* LabelOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelOrganizer.m; sourceTree = "<group>"; };
 		4984CC2F104DD0EF0021371E /* ParameterOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParameterOrganizer.h; sourceTree = "<group>"; };
@@ -406,6 +409,8 @@
 				49F16D240EFFFC490069037E /* TorrentNetworkManager.h */,
 				49F16D250EFFFC490069037E /* TorrentNetworkManager.m */,
 				49F16D2E0F0010730069037E /* TorrentListener.h */,
+				497033BB10578A7600D751D8 /* PendingRequest.h */,
+				497033BC10578A7600D751D8 /* PendingRequest.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -529,6 +534,7 @@
 				494C4158105037D5002AB715 /* TorrentWebParser.m in Sources */,
 				619BB09F10505C5000B687D4 /* TorrentBrowserCell.m in Sources */,
 				619BB0C510505F3C00B687D4 /* TorrentFromSearch.m in Sources */,
+				497033BD10578A7600D751D8 /* PendingRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
