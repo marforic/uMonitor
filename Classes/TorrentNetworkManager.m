@@ -320,6 +320,7 @@
 		needListUpdate = pr.needListUpdate;
 		needToDelete = pr.needToDelete;
 		[self sendNetworkRequest:pr.action];
+		[pendingRequests removeObjectAtIndex:0];
 	} else
 		hasReceivedResponse = YES;
 	
