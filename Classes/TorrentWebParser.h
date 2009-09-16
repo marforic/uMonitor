@@ -7,20 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
-@class TorrentFromSearch;
+@class Torrent;
 
 @interface TorrentWebParser : NSObject {
 	@private
 	BOOL needToAppend;
 	NSXMLParser * rssParser;
 	id delegate;
-	TorrentFromSearch * item;
+	Torrent * item;
 	NSMutableString * characters;
 	NSMutableArray * resultTorrents;
 }
 
 @property(nonatomic, retain) NSXMLParser * rssParser;
-@property(nonatomic, retain) TorrentFromSearch * item;
+@property(nonatomic, retain) Torrent * item;
 @property(nonatomic, retain) NSMutableString * characters;
 
 - (void)parseRSSResultsForQuery:(NSString *)query andDelegate:(id)parserDelegate;

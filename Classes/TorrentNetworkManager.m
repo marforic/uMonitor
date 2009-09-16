@@ -342,7 +342,6 @@
 	if (url == nil)
 		url = @"";
 	NSString * urlrequest = [[NSString alloc] initWithFormat:@"%@&cid=%@", url, (self.torrentsCacheID != nil) ? self.torrentsCacheID : @""];
-
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlrequest]];
 	[urlrequest release];	

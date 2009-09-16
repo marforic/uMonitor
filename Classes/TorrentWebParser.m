@@ -7,7 +7,7 @@
 //
 
 #import "TorrentWebParser.h"
-#import "TorrentFromSearch.h"
+#import "Torrent.h"
 #import "TorrentWebParserDelegate.h"
 
 @implementation TorrentWebParser
@@ -50,7 +50,7 @@
     //NSLog(@"found this element: %@", elementName);
 	needToAppend = NO;
 	if ([elementName isEqualToString:@"item"]) {
-		TorrentFromSearch * i = [[TorrentFromSearch alloc] init];
+		Torrent * i = [[Torrent alloc] init];
 		self.item = i;
 		[i release];
 	} else if ([elementName isEqualToString:@"title"] || 

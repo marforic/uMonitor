@@ -11,12 +11,13 @@
 #import "uTorrentViewAppDelegate.h"
 #import "TorrentWebParser.h"
 #import "TorrentBrowserCell.h"
-#import "TorrentFromSearch.h"
+#import "TorrentLinkCell.h"
+#import "Torrent.h"
 #import "Utilities.h"
 
 @implementation TorrentBrowserViewController
 
-@synthesize torrentSearchBar, cell, searchResult, selectedTorrent, selectedCellImage;
+@synthesize torrentSearchBar, cell, searchResult, selectedTorrent, selectedCellImage, firstCell, torrentURLTextField;
 
 - (id)initWithCoder:(NSCoder *)coder {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -31,6 +32,7 @@
 	uTorrentViewAppDelegate * appDel = [[UIApplication sharedApplication] delegate];
 	tnm = [[appDel getTNM] retain];
 	twp = [[TorrentWebParser alloc] init];
+	torrentURLTextField.delegate = self;
 	self.navigationItem.title = @"Search and add torrents";
 }
 
@@ -56,7 +58,7 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [searchResult count];
+    return [searchResult count] + 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -68,34 +70,48 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"TorrentBrowserCell";
-    
-    self.cell = (TorrentBrowserCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        [[NSBundle mainBundle] loadNibNamed:@"TorrentBrowserCell" owner:self options:nil];
-    }
-	
-    // Set up the cell...
-	TorrentFromSearch * torrent = [searchResult objectAtIndex:indexPath.row];
-	cell.torrentName.text = torrent.title;
-	NSString * size = [[NSString alloc] initWithFormat:@"%2.2f %@", torrent.size, torrent.unit];
-	cell.torrentSize.text = size;
-	[size release];
-	NSString * seeds = [[NSString alloc] initWithFormat:@"%i", torrent.seeds];
-	cell.torrentSeeds.text = seeds;
-	[seeds release];
-	NSString * leechers = [[NSString alloc] initWithFormat:@"%i", torrent.leechers];
-	cell.torrentLeechers.text = leechers;
-	[leechers release];
-	cell.torrentCategory.text = torrent.categoryName;
-	if ([torrent.link rangeOfString:@"www.mininova.org"].location != NSNotFound) {
-		cell.torrentSite.image = [UIImage imageNamed:@"mininova.png"];
+	static NSString *firstCellIdentifier = @"TorrentLinkCell";
+    UITableViewCell * result;
+	if (indexPath.row > 0) {
+		self.cell = (TorrentBrowserCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		if (cell == nil) {
+			[[NSBundle mainBundle] loadNibNamed:@"TorrentBrowserCell" owner:self options:nil];
+		}
+		
+		// Set up the cell...
+		Torrent * torrent = [searchResult objectAtIndex:(indexPath.row - 1)];
+		cell.torrentName.text = torrent.title;
+		NSString * size = [[NSString alloc] initWithFormat:@"%2.2f %@", torrent.size, torrent.unit];
+		cell.torrentSize.text = size;
+		[size release];
+		NSString * seeds = [[NSString alloc] initWithFormat:@"%i", torrent.seeds];
+		cell.torrentSeeds.text = seeds;
+		[seeds release];
+		NSString * leechers = [[NSString alloc] initWithFormat:@"%i", torrent.leechers];
+		cell.torrentLeechers.text = leechers;
+		[leechers release];
+		cell.torrentCategory.text = torrent.categoryName;
+		if ([torrent.link rangeOfString:@"www.mininova.org"].location != NSNotFound) {
+			cell.torrentSite.image = [UIImage imageNamed:@"mininova.png"];
+		}
+		result = cell;
+	} else {
+		self.firstCell = (TorrentLinkCell *)[tableView dequeueReusableCellWithIdentifier:firstCellIdentifier];
+		if (firstCell == nil) {
+			[[NSBundle mainBundle] loadNibNamed:@"TorrentLinkCell" owner:self options:nil];
+		}
+		result = firstCell;
 	}
-    return cell;
+
+    return result;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.selectedTorrent = [searchResult objectAtIndex:indexPath.row];
+	NSInteger index = indexPath.row - 1;
+	if (index < 0)
+		return;
+    self.selectedTorrent = [searchResult objectAtIndex:(indexPath.row - 1)];
 	self.selectedCellImage = ((TorrentBrowserCell *)[self.tableView cellForRowAtIndexPath:indexPath]).torrentSite;
 	[Utilities alertOKCancelAction:@"Start downloading" 
 						andMessage:@"Are you sure you want to start downloading the selected torrent?" 
@@ -115,6 +131,15 @@
 		default:
 			break;
 	}
+}
+
+#pragma mark -
+#pragma mark UITextFieldDelegate Methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	[tnm addTorrent:torrentURLTextField.text];
+	[textField resignFirstResponder];
+	return YES;
 }
 
 #pragma mark -
@@ -140,6 +165,8 @@
 	[tnm release];
 	[twp release];
 	[cell release];
+	[firstCell release];
+	[torrentURLTextField release];
     [super dealloc];
 }
 

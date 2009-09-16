@@ -86,7 +86,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 	[self networkRequest];
-	//[self.torrentsTable reloadData];
 }
 
 // Override to allow orientations other than the default portrait orientation.
