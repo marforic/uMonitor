@@ -48,7 +48,7 @@
 		// load User settings
 		NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
 		NSData * accountsData = [defaults objectForKey:@"accounts"];
-		if (![accountsData isKindOfClass:[NSArray class]]) {
+		if (accountsData) {
 			NSMutableArray * c = [[NSMutableArray alloc] initWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:accountsData]];
 			NSInteger index = [[defaults objectForKey:@"selectedAccount"] integerValue];
 			UserAccount * ua = [c objectAtIndex:index];
@@ -236,6 +236,7 @@
 	// Uncomment to see what is returned from the network call
 	
 	NSDictionary * jsonItem = [readableString JSONValue];
+	//NSLog(@"readable: %@", readableString);
 	if (!jsonItem) { // something wrong with the settings
 		// stop the spinning
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -290,7 +291,7 @@
 		NSArray * labelColorData;
 		for (NSArray * label in self.labelsData) {
 			if ((labelColorData = [defaults arrayForKey:[label objectAtIndex:0]]) == nil) {
-				NSLog(@"%@/%@ not found:", [label objectAtIndex:0], labelColorData);
+				// NSLog(@"%@/%@ not found:", [label objectAtIndex:0], labelColorData);
 				// label not found in user defaults, create random color and store it
 				randomH = (float) random() / (float) 0x7fffffff;
 				NSArray * colorInfo = [[NSArray alloc] initWithObjects:[NSNumber numberWithFloat:randomH], [NSNumber numberWithFloat:1.0f], nil];
@@ -348,7 +349,9 @@
 	if (![url hasPrefix:@"http://"]) url = [NSString stringWithFormat:@"http://%@", url];
 	if ([url hasSuffix:@"/"]) url = [url substringToIndex:[url length] - 1];
 	if ([url hasSuffix:@"/gui"]) url = [url substringToIndex:[url length] - 4];
-	return [NSString stringWithFormat:@"%@:%@/gui/%@", url, (settingsPort && [settingsPort length] != 0) ? settingsPort : @"80", request];
+	NSString * req = [NSString stringWithFormat:@"%@:%@/gui/%@", url, (settingsPort && [settingsPort length] != 0) ? settingsPort : @"80", request];
+	//NSLog(@"request: %@", req);
+	return req;
 }
 
 - (void)sendNetworkRequest:(NSString *)request {

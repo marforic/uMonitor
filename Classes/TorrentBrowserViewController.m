@@ -109,8 +109,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSInteger index = indexPath.row - 1;
-	if (index < 0)
+	if (index <= 0) {
+		[self.tableView cellForRowAtIndexPath:indexPath].selected = NO;
 		return;
+	}
+	
     self.selectedTorrent = [searchResult objectAtIndex:(indexPath.row - 1)];
 	self.selectedCellImage = ((TorrentBrowserCell *)[self.tableView cellForRowAtIndexPath:indexPath]).torrentSite;
 	[Utilities alertOKCancelAction:@"Start downloading" 
@@ -147,6 +150,10 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
 	[twp parseRSSResultsForQuery:torrentSearchBar.text andDelegate:self];
+	[torrentSearchBar resignFirstResponder];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
 	[torrentSearchBar resignFirstResponder];
 }
 

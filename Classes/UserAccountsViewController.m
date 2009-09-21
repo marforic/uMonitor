@@ -38,7 +38,7 @@
 																						  action:@selector(addButtonPressed)];
 	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
 	NSData * accountsData = [defaults objectForKey:@"accounts"];
-	if ([accountsData isKindOfClass:[NSArray class]]) {
+	if (!accountsData) {
 		accounts = [[NSMutableArray alloc] init];
 		selectedAccountIndex = 0;
 	} else {
@@ -62,25 +62,18 @@
     [super viewDidAppear:animated];
 }
 
-
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-*/
-/*
 - (void)viewDidDisappear:(BOOL)animated {
+	if (needToSave) {
+		NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:accounts] forKey:@"accounts"];
+		NSNumber * selectedAccount = [[NSNumber alloc] initWithInteger:selectedAccountIndex];
+		[defaults setObject:selectedAccount forKey:@"selectedAccount"];
+		[selectedAccount release];
+		needToSave = NO;
+		[self.tableView reloadData];
+	}
 	[super viewDidDisappear:animated];
 }
-*/
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
@@ -110,7 +103,6 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     static NSString * CellIdentifier = @"Cell";
     
     self.cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -119,7 +111,7 @@
     }
 	
 	if (selectedAccountIndex == indexPath.row)
-		self.cell.backgroundColor = [UIColor redColor]; // FIX: does not work
+		self.cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"status_green.png"]];
 	
     NSString * aName = [[accounts objectAtIndex:indexPath.row] accountName];
     cell.textLabel.text = aName ? aName : @"Unnamed";
@@ -130,27 +122,32 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.navigationItem.rightBarButtonItem = editButton;
+	self.navigationItem.rightBarButtonItem.enabled = YES;
+	[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:selectedAccountIndex inSection:0]].accessoryView = nil;
+	[tableView cellForRowAtIndexPath:indexPath].accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"status_green.png"]];
+	[tableView cellForRowAtIndexPath:indexPath].selected = NO;
 	selectedAccountIndex = indexPath.row;
 	UserAccount * ua = [accounts objectAtIndex:selectedAccountIndex];
+	if (!tnm) {
+		uTorrentViewAppDelegate * appDel = [[UIApplication sharedApplication] delegate];
+		tnm = [[appDel getTNM] retain];
+	}
 	tnm.settingsAddress = ua.stringAddress;
 	tnm.settingsPort = ua.stringPort;
 	tnm.settingsUname = ua.stringUname;
 	tnm.settingsPassword = ua.stringPassword;
+	needToSave = YES;
 }
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
+    if (editingStyle == UITableViewCellEditingStyleDelete && [accounts count] > 1) {
+		self.navigationItem.rightBarButtonItem.enabled = NO;
+		[accounts removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
 }
-*/
 
 
 /*

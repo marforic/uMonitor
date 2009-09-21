@@ -81,6 +81,10 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[self.tableView cellForRowAtIndexPath:indexPath].selected = NO;
+}
+
 #pragma mark -
 #pragma mark TextField Delegate Methods
 
