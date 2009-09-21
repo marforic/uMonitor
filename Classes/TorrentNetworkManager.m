@@ -21,6 +21,12 @@
 
 #import <JSON/JSON.h>
 
+@implementation NSURLRequest(DataController)
++ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host {
+	return YES; // Or whatever logic
+}
+@end
+
 @implementation TorrentNetworkManager
 	
 @synthesize torrentsData;
