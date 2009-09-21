@@ -114,7 +114,7 @@
 		return;
 	}
 	
-    self.selectedTorrent = [searchResult objectAtIndex:(indexPath.row - 1)];
+    self.selectedTorrent = [searchResult objectAtIndex:index];
 	self.selectedCellImage = ((TorrentBrowserCell *)[self.tableView cellForRowAtIndexPath:indexPath]).torrentSite;
 	[Utilities alertOKCancelAction:@"Start downloading" 
 						andMessage:@"Are you sure you want to start downloading the selected torrent?" 
