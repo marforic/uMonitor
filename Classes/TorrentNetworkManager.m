@@ -13,6 +13,7 @@
 #import "uTorrentConstants.h"
 #import "uTorrentViewAppDelegate.h"
 #import "PendingRequest.h"
+#import "UserAccount.h"
 
 #import <SystemConfiguration/SCNetworkConnection.h>
 #import <netinet/in.h>
@@ -45,10 +46,18 @@
 		hasReceivedResponse = YES;
 		pendingRequests = [[NSMutableArray alloc] init];
 		// load User settings
-		settingsAddress = [[NSUserDefaults standardUserDefaults] stringForKey:@"address_preference"];
-		settingsPort = [[NSUserDefaults standardUserDefaults] stringForKey:@"uport_preference"];
-		settingsUname = [[NSUserDefaults standardUserDefaults] stringForKey:@"username_preference"];
-		settingsPassword = [[NSUserDefaults standardUserDefaults] stringForKey:@"pwd_preference"];
+		NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+		NSData * accountsData = [defaults objectForKey:@"accounts"];
+		if (![accountsData isKindOfClass:[NSArray class]]) {
+			NSMutableArray * c = [[NSMutableArray alloc] initWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:accountsData]];
+			NSInteger index = [[defaults objectForKey:@"selectedAccount"] integerValue];
+			UserAccount * ua = [c objectAtIndex:index];
+			self.settingsAddress = ua.stringAddress;
+			self.settingsPort = ua.stringPort;
+			self.settingsUname = ua.stringUname;
+			self.settingsPassword = ua.stringPassword;
+			[c release];
+		}
     }
     return self;
 }

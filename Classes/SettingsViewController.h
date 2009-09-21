@@ -9,23 +9,20 @@
 #import <UIKit/UIKit.h>
 @class SettingsCell;
 @class TorrentNetworkManager;
+@class UserAccount;
 
 @interface SettingsViewController : UITableViewController<UITextFieldDelegate> {
 	@private
-	NSString * stringAddress;
-	NSString * stringPort;
-	NSString * stringUname;
-	NSString * stringPassword;
+	UserAccount * userAccount;
 	TorrentNetworkManager * tnm;
 	
 	IBOutlet SettingsCell * cell;
 }
 
-@property (nonatomic, retain) NSString * stringAddress;
-@property (nonatomic, retain) NSString * stringPort;
-@property (nonatomic, retain) NSString * stringUname;
-@property (nonatomic, retain) NSString * stringPassword;
-@property (nonatomic, retain) IBOutlet SettingsCell * cell;
-@property (nonatomic, retain) TorrentNetworkManager * tnm;
+@property(nonatomic, retain) IBOutlet SettingsCell * cell;
+@property(nonatomic, retain) TorrentNetworkManager * tnm;
+@property(nonatomic, retain) UserAccount * userAccount;
+
+- (id)initWithAccount:(UserAccount *)uAccount;
 
 @end

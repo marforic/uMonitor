@@ -56,7 +56,8 @@ typedef enum _SETTINGS_TAG {
 	ADDRESS_TAG = 0,
 	PORT_TAG = 1,
 	UNAME_TAG = 2,
-	PWD_TAG = 3
+	PWD_TAG = 3,
+	ACCOUNT_NAME_TAG = 4
 } SETTINGS_TAG;
 
 typedef enum _TORRENT_SITES {

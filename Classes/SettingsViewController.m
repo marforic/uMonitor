@@ -11,10 +11,18 @@
 #import "uTorrentConstants.h"
 #import "SettingsCell.h"
 #import "TorrentNetworkManager.h"
+#import "UserAccount.h"
 
 @implementation SettingsViewController
 
-@synthesize stringAddress, stringPort, stringUname, stringPassword, cell, tnm;
+@synthesize cell, tnm, userAccount;
+
+- (id)initWithAccount:(UserAccount *)uAccount {
+	if (self = [super initWithNibName:@"SettingsViewController" bundle:nil]) {
+		self.userAccount = uAccount;
+	}
+	return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,10 +32,6 @@
 	self.tnm = [mainAppDelegate getTNM];
 	
 	self.navigationItem.title = @"Settings";
-    self.stringAddress = [[NSUserDefaults standardUserDefaults] stringForKey:@"address_preference"];
-	self.stringPort = [[NSUserDefaults standardUserDefaults] stringForKey:@"uport_preference"];
-	self.stringUname = [[NSUserDefaults standardUserDefaults] stringForKey:@"username_preference"];
-	self.stringPassword = [[NSUserDefaults standardUserDefaults] stringForKey:@"pwd_preference"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,7 +48,7 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 5;
 }
 
 
@@ -58,18 +62,20 @@
 		[[NSBundle mainBundle] loadNibNamed:@"SettingsCell" owner:self options:nil];
 		switch (indexPath.row) {
 			case 0:
-				[cell setCellDataWithLabelString:@"Address:" withText:self.stringAddress isSecure:NO withKeyboardType:UIKeyboardTypeURL andTag:ADDRESS_TAG];
+				[cell setCellDataWithLabelString:@"Profile Name:" withText:userAccount.accountName isSecure:NO withKeyboardType:UIKeyboardTypeDefault andTag:ACCOUNT_NAME_TAG];
 				break;
 			case 1:
-				[cell setCellDataWithLabelString:@"Port:" withText:self.stringPort isSecure:NO withKeyboardType:UIKeyboardTypeNumbersAndPunctuation andTag:PORT_TAG];
+				[cell setCellDataWithLabelString:@"Address:" withText:userAccount.stringAddress isSecure:NO withKeyboardType:UIKeyboardTypeURL andTag:ADDRESS_TAG];
 				break;
 			case 2:
-				[cell setCellDataWithLabelString:@"Username:" withText:self.stringUname isSecure:NO withKeyboardType:UIKeyboardTypeDefault andTag:UNAME_TAG];
+				[cell setCellDataWithLabelString:@"Port:" withText:userAccount.stringPort isSecure:NO withKeyboardType:UIKeyboardTypeNumbersAndPunctuation andTag:PORT_TAG];
 				break;
 			case 3:
-				[cell setCellDataWithLabelString:@"Password:" withText:self.stringPassword isSecure:YES withKeyboardType:UIKeyboardTypeDefault andTag:PWD_TAG];
+				[cell setCellDataWithLabelString:@"Username:" withText:userAccount.stringUname isSecure:NO withKeyboardType:UIKeyboardTypeDefault andTag:UNAME_TAG];
 				break;
-
+			case 4:
+				[cell setCellDataWithLabelString:@"Password:" withText:userAccount.stringPassword isSecure:YES withKeyboardType:UIKeyboardTypeDefault andTag:PWD_TAG];
+				break;
 		}
     }
     return cell;
@@ -85,26 +91,22 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
 	if (textField.tag == ADDRESS_TAG) {
-		[[NSUserDefaults standardUserDefaults] setObject:textField.text forKey:@"address_preference"];
-		self.tnm.settingsAddress = textField.text;
+		self.userAccount.stringAddress = textField.text;
 	} else if (textField.tag == PORT_TAG) {
-		[[NSUserDefaults standardUserDefaults] setObject:textField.text forKey:@"uport_preference"];
-		self.tnm.settingsPort = textField.text;
+		self.userAccount.stringPort = textField.text;
 	} else if (textField.tag == UNAME_TAG) {
-		[[NSUserDefaults standardUserDefaults] setObject:textField.text forKey:@"username_preference"];
-		self.tnm.settingsUname = textField.text;
+		self.userAccount.stringUname = textField.text;
+	} else if (textField.tag == PWD_TAG) {
+		self.userAccount.stringPassword = textField.text;
 	} else {
-		[[NSUserDefaults standardUserDefaults] setObject:textField.text forKey:@"pwd_preference"];
-		self.tnm.settingsPassword = textField.text;
+		self.userAccount.accountName = textField.text;
 	}
+
 }
 
 - (void)dealloc {
 	[cell release];
-	[stringAddress release];
-	[stringPort release];
-	[stringUname release];
-	[stringPassword release];
+	[userAccount release];
 	[tnm release];
 	[super dealloc];
 }
