@@ -109,7 +109,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSInteger index = indexPath.row - 1;
-	if (index <= 0) {
+	if (index < 0) {
 		[self.tableView cellForRowAtIndexPath:indexPath].selected = NO;
 		return;
 	}
