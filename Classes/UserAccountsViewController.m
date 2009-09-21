@@ -125,7 +125,6 @@
 	self.navigationItem.rightBarButtonItem.enabled = YES;
 	[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:selectedAccountIndex inSection:0]].accessoryView = nil;
 	[tableView cellForRowAtIndexPath:indexPath].accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"status_green.png"]];
-	[tableView cellForRowAtIndexPath:indexPath].selected = NO;
 	selectedAccountIndex = indexPath.row;
 	UserAccount * ua = [accounts objectAtIndex:selectedAccountIndex];
 	if (!tnm) {
