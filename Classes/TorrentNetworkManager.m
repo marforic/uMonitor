@@ -346,7 +346,7 @@
 
 - (NSString *)createRequest:(NSString *)request {
 	NSString * url = settingsAddress;
-	if (![url hasPrefix:@"http://"]) url = [NSString stringWithFormat:@"http://%@", url];
+	if (![url hasPrefix:@"http://"] && ![url hasPrefix:@"https://"]) url = [NSString stringWithFormat:@"http://%@", url];
 	if ([url hasSuffix:@"/"]) url = [url substringToIndex:[url length] - 1];
 	if ([url hasSuffix:@"/gui"]) url = [url substringToIndex:[url length] - 4];
 	NSString * req = [NSString stringWithFormat:@"%@:%@/gui/%@", url, (settingsPort && [settingsPort length] != 0) ? settingsPort : @"80", request];
