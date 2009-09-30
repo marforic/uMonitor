@@ -28,6 +28,15 @@
 }
 @end
 
+@interface TorrentNetworkManager (PrivateMethods)
+
+- (void)parseToken:(NSString *)index;
+- (void)finishRequest;
+
+@end
+
+
+
 @implementation TorrentNetworkManager
 	
 @synthesize torrentsData;
@@ -36,7 +45,7 @@
 @synthesize unlabelledTorrents;
 @synthesize removedTorrents;
 @synthesize needToDelete;
-@synthesize settingsAddress, settingsPort, settingsUname, settingsPassword;
+@synthesize settingsAddress, settingsPort, settingsUname, settingsPassword, currentRequestAction;
 
 - (id)init {
 	if (self = [super init]) {
@@ -235,9 +244,19 @@
 	NSString * readableString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
 	// Uncomment to see what is returned from the network call
 	
+	if (type == T_TOKEN) {
+		[self parseToken:readableString];
+		[connection release];
+		[readableString release];
+		[self finishRequest];
+		return;
+	}
+	
 	NSDictionary * jsonItem = [readableString JSONValue];
 	//NSLog(@"readable: %@", readableString);
+	static int count = 0;
 	if (!jsonItem) { // something wrong with the settings
+		
 		// stop the spinning
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 		
@@ -245,6 +264,19 @@
 		[connection release];
 		[receivedData release];
 		[readableString release];
+		
+		if (!count) {
+			[self getToken];
+			count++;
+			PendingRequest * pr = [[PendingRequest alloc] initWithAction:currentRequestAction 
+																	type:type 
+															needToDelete:needToDelete 
+													   andNeedListUpdate:needListUpdate];
+			[pendingRequests addObject:pr];
+			[pr release];
+			return;
+		}
+		
 		[Utilities createAndShowAlertWithTitle:@"Network Problem" 
 									andMessage:@"There's something wrong evaluating the JSON answer from the server. \n Either check the settings or contact the developers!" 
 								  withDelegate:self 
@@ -311,6 +343,9 @@
 	if ([jsonItem objectForKey:@"torrentc"] != nil)
 		self.torrentsCacheID = [jsonItem objectForKey:@"torrentc"];
 	
+	[connection release];
+	[readableString release];
+	
 	// call update method on listeners
 	// only if it was a requestList!
 	if (needListUpdate == NO) {
@@ -322,21 +357,18 @@
 		}
 	}
 	
+	[self finishRequest];
+}
+
+- (void)finishRequest {
 	// stop the spinning
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	
     // release the connection, and the data object
-    [connection release];
     [receivedData release];
-	[readableString release];
 	
 	if ([pendingRequests count] > 0) {
-		PendingRequest * pr = [pendingRequests objectAtIndex:0];
-		type = pr.type;
-		needListUpdate = pr.needListUpdate;
-		needToDelete = pr.needToDelete;
-		[self sendNetworkRequest:pr.action];
-		[pendingRequests removeObjectAtIndex:0];
+		[self sendNetworkRequest];
 	} else
 		hasReceivedResponse = YES;
 	
@@ -349,14 +381,20 @@
 	if (![url hasPrefix:@"http://"] && ![url hasPrefix:@"https://"]) url = [NSString stringWithFormat:@"http://%@", url];
 	if ([url hasSuffix:@"/"]) url = [url substringToIndex:[url length] - 1];
 	if ([url hasSuffix:@"/gui"]) url = [url substringToIndex:[url length] - 4];
-	NSString * req = [NSString stringWithFormat:@"%@:%@/gui/%@", url, (settingsPort && [settingsPort length] != 0) ? settingsPort : @"80", request];
-	//NSLog(@"request: %@", req);
+	NSString * req = [NSString stringWithFormat:@"%@:%@/gui/%@%@", url, (settingsPort && [settingsPort length] != 0) ? settingsPort : @"80", (token) ? token : @"", request];
+	NSLog(@"request: %@", req);
 	return req;
 }
 
-- (void)sendNetworkRequest:(NSString *)request {
+- (void)sendNetworkRequest {
 	// create the request
-	NSString * url = [self createRequest:request];
+	PendingRequest * pendingRequest = [pendingRequests objectAtIndex:0];
+	type = pendingRequest.type;
+	needToDelete = pendingRequest.needToDelete;
+	needListUpdate = pendingRequest.needListUpdate;
+	currentRequestAction = pendingRequest.action;
+	NSString * url = [self createRequest:pendingRequest.action];
+	[pendingRequests removeObjectAtIndex:0];
 	if (url == nil)
 		url = @"";
 	NSString * urlrequest = [[NSString alloc] initWithFormat:@"%@&cid=%@", url, (self.torrentsCacheID != nil) ? self.torrentsCacheID : @""];
@@ -378,129 +416,103 @@
 }
 
 - (void)actionStartForTorrent:(NSString *)hash {
-	NSUInteger requestType = T_START;
-	BOOL requestNeedToDelete = NO;
-	BOOL requestNeedListUpdate = YES;
-	NSString * requestAction = [[NSString alloc] initWithFormat:@"?action=start&hash=%@", hash];
-	if (hasReceivedResponse) {
-		type = requestType;
-		needListUpdate = requestNeedListUpdate;
-		needToDelete = requestNeedToDelete;
-		[self sendNetworkRequest:requestAction];
-	} else {
-		PendingRequest * pr = [[PendingRequest alloc] initWithAction:requestAction 
-																type:requestType 
-														needToDelete:requestNeedToDelete 
-												   andNeedListUpdate:requestNeedListUpdate];
-		[pendingRequests addObject:pr];
-		[pr release];
-	}
+	NSString * requestAction = [[NSString alloc] initWithFormat:@"action=start&hash=%@", hash];
+	PendingRequest * pr = [[PendingRequest alloc] initWithAction:requestAction 
+															type:T_START 
+													needToDelete:NO 
+											   andNeedListUpdate:YES];
+	[pendingRequests addObject:pr];
+	[pr release];
+	if (hasReceivedResponse)
+		[self sendNetworkRequest];
 	[requestAction release];
 }
 
 - (void)actionStopForTorrent:(NSString *)hash {
-	NSUInteger requestType = T_STOP;
-	BOOL requestNeedToDelete = NO;
-	BOOL requestNeedListUpdate = YES;
-	NSString * requestAction = [[NSString alloc] initWithFormat:@"?action=stop&hash=%@", hash];
-	if (hasReceivedResponse) {
-		type = requestType;
-		needListUpdate = requestNeedListUpdate;
-		needToDelete = requestNeedToDelete;
-		[self sendNetworkRequest:requestAction];
-	} else {
-		PendingRequest * pr = [[PendingRequest alloc] initWithAction:requestAction 
-																type:requestType 
-														needToDelete:requestNeedToDelete 
-												   andNeedListUpdate:requestNeedListUpdate];
-		[pendingRequests addObject:pr];
-		[pr release];
-	}
+	NSString * requestAction = [[NSString alloc] initWithFormat:@"action=stop&hash=%@", hash];
+	PendingRequest * pr = [[PendingRequest alloc] initWithAction:requestAction 
+															type:T_STOP 
+													needToDelete:NO 
+											   andNeedListUpdate:YES];
+	[pendingRequests addObject:pr];
+	[pr release];
+	if (hasReceivedResponse)
+		[self sendNetworkRequest];
 	[requestAction release];
 }
 
 - (void)actionDeleteForTorrent:(NSString *)hash {
-	NSUInteger requestType = T_DELETE;
-	BOOL requestNeedToDelete = YES;
-	BOOL requestNeedListUpdate = YES;
-	NSString * requestAction = [[NSString alloc] initWithFormat:@"?action=remove&hash=%@", hash];
-	if (hasReceivedResponse) {
-		type = requestType;
-		needListUpdate = requestNeedListUpdate;
-		needToDelete = requestNeedToDelete;
-		[self sendNetworkRequest:requestAction];
-	} else {
-		PendingRequest * pr = [[PendingRequest alloc] initWithAction:requestAction 
-																type:requestType 
-														needToDelete:requestNeedToDelete 
-												   andNeedListUpdate:requestNeedListUpdate];
-		[pendingRequests addObject:pr];
-		[pr release];
-	}
+	NSString * requestAction = [[NSString alloc] initWithFormat:@"action=remove&hash=%@", hash];
+	PendingRequest * pr = [[PendingRequest alloc] initWithAction:requestAction 
+															type:T_DELETE 
+													needToDelete:YES 
+											   andNeedListUpdate:YES];
+	[pendingRequests addObject:pr];
+	[pr release];
+	if (hasReceivedResponse)
+		[self sendNetworkRequest];
 	[requestAction release];
 }
 
 - (void)actionDeleteData:(NSString *)hash {
-	NSUInteger requestType = T_DELETE;
-	BOOL requestNeedToDelete = YES;
-	BOOL requestNeedListUpdate = YES;
-	NSString * requestAction = [[NSString alloc] initWithFormat:@"?action=removedata&hash=%@", hash];
-	if (hasReceivedResponse) {
-		type = requestType;
-		needListUpdate = requestNeedListUpdate;
-		needToDelete = requestNeedToDelete;
-		[self sendNetworkRequest:requestAction];
-	} else {
-		PendingRequest * pr = [[PendingRequest alloc] initWithAction:requestAction 
-																type:requestType 
-														needToDelete:requestNeedToDelete 
-												   andNeedListUpdate:requestNeedListUpdate];
-		[pendingRequests addObject:pr];
-		[pr release];
-	}
+	NSString * requestAction = [[NSString alloc] initWithFormat:@"action=removedata&hash=%@", hash];
+	PendingRequest * pr = [[PendingRequest alloc] initWithAction:requestAction 
+															type:T_DELETE 
+													needToDelete:YES 
+											   andNeedListUpdate:YES];
+	[pendingRequests addObject:pr];
+	[pr release];
+	if (hasReceivedResponse)
+		[self sendNetworkRequest];
 	[requestAction release];
 }
 
 - (void)requestList {
-	NSUInteger requestType = T_LIST;
-	BOOL requestNeedToDelete = NO;
-	BOOL requestNeedListUpdate = NO;
-	NSString * requestAction = @"?list=1";
-	if (hasReceivedResponse) {
-		type = requestType;
-		needListUpdate = requestNeedListUpdate;
-		needToDelete = requestNeedToDelete;
-		[self sendNetworkRequest:requestAction];
-	} else {
-		PendingRequest * pr = [[PendingRequest alloc] initWithAction:requestAction 
-																type:requestType 
-														needToDelete:requestNeedToDelete 
-												   andNeedListUpdate:requestNeedListUpdate];
-		[pendingRequests addObject:pr];
-		[pr release];
-	}
+	NSString * requestAction = @"list=1";
+	PendingRequest * pr = [[PendingRequest alloc] initWithAction:requestAction 
+															type:T_LIST 
+													needToDelete:NO 
+											   andNeedListUpdate:NO];
+	[pendingRequests addObject:pr];
+	[pr release];
+	if (hasReceivedResponse)
+		[self sendNetworkRequest];
 }
 
 - (void)addTorrent:(NSString *)torrentURL {
-	NSUInteger requestType = T_ADD;
-	BOOL requestNeedToDelete = NO;
-	BOOL requestNeedListUpdate = YES;
-	NSString * requestAction = [[NSString alloc] initWithFormat:@"?action=add-url&s=%@", torrentURL];
-	if (hasReceivedResponse) {
-		type = requestType;
-		needListUpdate = requestNeedListUpdate;
-		needToDelete = requestNeedToDelete;
-		[self sendNetworkRequest:requestAction];
-	} else {
-		PendingRequest * pr = [[PendingRequest alloc] initWithAction:requestAction 
-																type:requestType 
-														needToDelete:requestNeedToDelete 
-												   andNeedListUpdate:requestNeedListUpdate];
-		[pendingRequests addObject:pr];
-		[pr release];
-	}
+	NSString * requestAction = [[NSString alloc] initWithFormat:@"action=add-url&s=%@", torrentURL];
+	PendingRequest * pr = [[PendingRequest alloc] initWithAction:requestAction 
+															type:T_ADD 
+													needToDelete:NO 
+											   andNeedListUpdate:YES];
+	[pendingRequests addObject:pr];
+	[pr release];
+	if (hasReceivedResponse)
+		[self sendNetworkRequest];
 	[requestAction release];
 }
+
+- (void)getToken {
+	NSString * requestAction = @"token.html";
+	PendingRequest * pr = [[PendingRequest alloc] initWithAction:requestAction 
+															type:T_TOKEN 
+													needToDelete:NO 
+											   andNeedListUpdate:NO];
+	[pendingRequests addObject:pr];
+	[pr release];
+	if (hasReceivedResponse)
+		[self sendNetworkRequest];
+	[requestAction release];
+}
+
+- (void)parseToken:(NSString *)index {
+	NSArray * first = [index componentsSeparatedByString:@"<div id='token' style='display:none;'>"];
+	first = [[first objectAtIndex:1] componentsSeparatedByString:@"</div>"];
+	token = [[NSString alloc] initWithFormat:@"?token=%@&", [first objectAtIndex:0]];
+}
+
+#pragma mark -
+#pragma mark Notify Listeners
 
 - (void)addListener:(id<TorrentListener>)listener {
 	[listeners addObject:listener];
@@ -541,6 +553,8 @@
 	[settingsPort release];
 	[settingsUname release];
 	[settingsPassword release];
+	[currentRequestAction release];
+	[token release];
     [super dealloc];
 }
 

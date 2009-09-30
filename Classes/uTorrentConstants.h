@@ -49,7 +49,8 @@ typedef enum _RESPONSE_TYPE {
 	T_DELETE = 3,
 	T_NETWORK_PROBLEM = 4,
 	T_DOWNLOAD_PROBLEM = 5,
-	T_ADD = 6
+	T_ADD = 6,
+	T_TOKEN = 7
 } RESPONSE_TYPE;
 
 typedef enum _SETTINGS_TAG {

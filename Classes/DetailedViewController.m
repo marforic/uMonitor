@@ -54,7 +54,7 @@
 
 - (void)stopButtonAction {
 	[tnm actionStopForTorrent:[self.torrent objectAtIndex:HASH]];
-	//NSLog(@"Stop Button");
+	NSLog(@"Stop Button");
 }
 
 - (void)deleteButtonAction {

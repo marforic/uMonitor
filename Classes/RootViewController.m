@@ -63,6 +63,8 @@
 	allPickerView.hidden = YES;
 	pickerView.alpha = 0.0;
 	[mainAppDelegate.window addSubview:allPickerView];
+	NSLog(@"getting token");
+	[tnm getToken];
 	//[self networkRequest];
 }
 

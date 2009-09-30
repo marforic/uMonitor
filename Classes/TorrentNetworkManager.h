@@ -24,28 +24,31 @@
 	NSNumber * unlabelledTorrents;
 	NSString * torrentsCacheID;
 	NSArray * removedTorrents;
+	NSString * currentRequestAction;
 	NSString * settingsPassword;
 	NSString * settingsUname;
 	NSString * settingsPort;
 	NSString * settingsAddress;
+	NSString * token;
 }
 
-@property (nonatomic, retain) NSMutableArray * torrentsData;
-@property (nonatomic, retain) NSMutableArray * labelsData;
-@property (nonatomic, retain) NSArray * removedTorrents;
-@property (nonatomic, retain) NSString * torrentsCacheID;
-@property (nonatomic, retain) NSNumber * unlabelledTorrents;
-@property (nonatomic, retain) NSString * settingsAddress;
-@property (nonatomic, retain) NSString * settingsPort;
-@property (nonatomic, retain) NSString * settingsUname;
-@property (nonatomic, retain) NSString * settingsPassword;
+@property(nonatomic, retain) NSMutableArray * torrentsData;
+@property(nonatomic, retain) NSMutableArray * labelsData;
+@property(nonatomic, retain) NSArray * removedTorrents;
+@property(nonatomic, retain) NSString * torrentsCacheID;
+@property(nonatomic, retain) NSNumber * unlabelledTorrents;
+@property(nonatomic, retain) NSString * currentRequestAction;
+@property(nonatomic, retain) NSString * settingsAddress;
+@property(nonatomic, retain) NSString * settingsPort;
+@property(nonatomic, retain) NSString * settingsUname;
+@property(nonatomic, retain) NSString * settingsPassword;
 @property BOOL needToDelete;
 
 - (BOOL)connectedToNetwork;
 - (BOOL)hostAvailable:(NSString *)theHost;
 - (BOOL)addressFromString:(NSString *)IPAddress address:(struct sockaddr_in *) address;
 - (NSString *)getIPAddressForHost:(NSString *)theHost;
-- (void)sendNetworkRequest:(NSString *)request;
+- (void)sendNetworkRequest;
 - (NSNumber *) updateUnlabelledTorrents;
 
 - (NSString *)createRequest:(NSString *)request;
@@ -61,6 +64,8 @@
 - (void)actionDeleteForTorrent:(NSString *)hash;
 - (void)requestList;
 - (void)addTorrent:(NSString *)torrentURL;
+
+- (void)getToken;
 
 - (void)addListener:(id<TorrentListener>)listener;
 - (void)removeListener:(id<TorrentListener>)listener;
