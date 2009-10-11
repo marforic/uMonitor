@@ -60,11 +60,13 @@
 		if (accountsData) {
 			NSMutableArray * c = [[NSMutableArray alloc] initWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:accountsData]];
 			NSInteger index = [[defaults objectForKey:@"selectedAccount"] integerValue];
-			UserAccount * ua = [c objectAtIndex:index];
-			self.settingsAddress = ua.stringAddress;
-			self.settingsPort = ua.stringPort;
-			self.settingsUname = ua.stringUname;
-			self.settingsPassword = ua.stringPassword;
+			if (index >= 0 && index < [c count]) {
+				UserAccount * ua = [c objectAtIndex:index];
+				self.settingsAddress = ua.stringAddress;
+				self.settingsPort = ua.stringPort;
+				self.settingsUname = ua.stringUname;
+				self.settingsPassword = ua.stringPassword;
+			}
 			[c release];
 		}
     }

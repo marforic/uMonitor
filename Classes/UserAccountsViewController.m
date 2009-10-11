@@ -16,6 +16,7 @@
 
 - (void)editButtonPressed;
 - (void)addButtonPressed;
+- (void)save;
 
 @end
 
@@ -64,11 +65,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
 	if (needToSave) {
-		NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:accounts] forKey:@"accounts"];
-		NSNumber * selectedAccount = [[NSNumber alloc] initWithInteger:selectedAccountIndex];
-		[defaults setObject:selectedAccount forKey:@"selectedAccount"];
-		[selectedAccount release];
+		[self save];
 		needToSave = NO;
 		[self.tableView reloadData];
 	}
@@ -145,6 +142,9 @@
 		self.navigationItem.rightBarButtonItem.enabled = NO;
 		[accounts removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+		selectedAccountIndex = indexPath.row - 1;
+		[self save];
+		[self.tableView reloadData];
     }   
 }
 
@@ -191,6 +191,14 @@
 	[accounts addObject:ua];
 	[ua release];
 	[self.tableView reloadData];
+}
+
+- (void)save {
+	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:accounts] forKey:@"accounts"];
+	NSNumber * selectedAccount = [[NSNumber alloc] initWithInteger:selectedAccountIndex];
+	[defaults setObject:selectedAccount forKey:@"selectedAccount"];
+	[selectedAccount release];
 }
 
 - (void)dealloc {
