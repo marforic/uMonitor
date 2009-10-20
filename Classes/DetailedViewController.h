@@ -16,6 +16,7 @@
 	@private
 	IBOutlet UIView * customFooter;
 	IBOutlet UIButton * startButton;
+	IBOutlet UIButton * forcestartButton;
 	IBOutlet UIButton * deleteButton;
 	
 	NSArray * torrent;
@@ -25,6 +26,7 @@
 
 @property(nonatomic, retain) IBOutlet UIView * customFooter;
 @property(nonatomic, retain) IBOutlet UIButton * startButton;
+@property(nonatomic, retain) IBOutlet UIButton * forcestartButton;
 @property(nonatomic, retain) IBOutlet UIButton * deleteButton;
 
 @property(nonatomic, retain) TorrentNetworkManager * tnm;
@@ -33,6 +35,7 @@
 
 - (id)initWithTorrent:(NSArray *)selectedTorrent;
 - (void)startButtonAction;
+- (void)forcestartButtonAction;
 - (void)stopButtonAction;
 - (void)deleteButtonAction;
 

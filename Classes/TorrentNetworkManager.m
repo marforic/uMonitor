@@ -430,6 +430,19 @@
 	[requestAction release];
 }
 
+- (void)actionForceStartForTorrent:(NSString *)hash {
+	NSString * requestAction = [[NSString alloc] initWithFormat:@"action=forcestart&hash=%@", hash];
+	PendingRequest * pr = [[PendingRequest alloc] initWithAction:requestAction 
+															type:T_START 
+													needToDelete:NO 
+											   andNeedListUpdate:YES];
+	[pendingRequests addObject:pr];
+	[pr release];
+	if (hasReceivedResponse)
+		[self sendNetworkRequest];
+	[requestAction release];
+}
+
 - (void)actionStopForTorrent:(NSString *)hash {
 	NSString * requestAction = [[NSString alloc] initWithFormat:@"action=stop&hash=%@", hash];
 	PendingRequest * pr = [[PendingRequest alloc] initWithAction:requestAction 

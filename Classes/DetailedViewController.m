@@ -15,7 +15,7 @@
 
 @implementation DetailedViewController
 
-@synthesize torrent, customFooter, startButton, deleteButton, tnm, mainAppDelegate;
+@synthesize torrent, customFooter, startButton, forcestartButton, deleteButton, tnm, mainAppDelegate;
 
 - (id)initWithTorrent:(NSArray *)selectedTorrent {
 	if (self = [super initWithStyle:UITableViewStyleGrouped])
@@ -52,9 +52,14 @@
 	//NSLog(@"Start Button");
 }
 
+- (void)forcestartButtonAction {
+	[tnm actionForceStartForTorrent:[self.torrent objectAtIndex:HASH]];
+	//NSLog(@"ForceStart Button");
+}
+
 - (void)stopButtonAction {
 	[tnm actionStopForTorrent:[self.torrent objectAtIndex:HASH]];
-	NSLog(@"Stop Button");
+	//NSLog(@"Stop Button");
 }
 
 - (void)deleteButtonAction {
@@ -129,6 +134,9 @@
 	// action for start button
 	[self.startButton addTarget:self action:@selector(startButtonAction) forControlEvents:UIControlEventTouchDown];
 	
+	// action for force-starting button
+	[self.forcestartButton addTarget:self action:@selector(forcestartButtonAction) forControlEvents:UIControlEventTouchDown];
+	
 	// check if the torrent is running or not to set the start/stop button accordingly
 	int torrentStatus = [Utilities getStatusProgrammable:[self.torrent objectAtIndex:STATUS]
 											 forProgress:[self.torrent objectAtIndex:PERCENT_PROGRESS]];
@@ -137,9 +145,15 @@
 		[self.startButton setTitle:@"Stop" forState:UIControlStateHighlighted];
 		[self.startButton removeTarget:self	action:@selector(startButtonAction) forControlEvents:UIControlEventTouchDown];
 		[self.startButton addTarget:self action:@selector(stopButtonAction) forControlEvents:UIControlEventTouchDown];
-	}
-	else if (torrentStatus == CHECKING || torrentStatus == ERROR)
+		self.forcestartButton.enabled = NO;
+	} else if (torrentStatus == CHECKING || torrentStatus == ERROR) {
 		self.startButton.enabled = NO;
+		self.forcestartButton.enabled = NO;
+	} else {
+		self.startButton.enabled = YES;
+		self.forcestartButton.enabled = YES;
+	}
+		
 	
 	return self.customFooter;
 }
@@ -246,6 +260,7 @@
 	[tnm removeListener:self];
 	[customFooter release];
 	[startButton release];
+	[forcestartButton release];
 	[deleteButton release];
 	[torrent release];
 	[tnm release];

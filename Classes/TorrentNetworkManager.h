@@ -59,6 +59,7 @@
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
 
 - (void)actionStartForTorrent:(NSString *)hash;
+- (void)actionForceStartForTorrent:(NSString *)hash;
 - (void)actionStopForTorrent:(NSString *)hash;
 - (void)actionDeleteData:(NSString *)hash;
 - (void)actionDeleteForTorrent:(NSString *)hash;
