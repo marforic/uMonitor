@@ -1,0 +1,8 @@
+iPhone application for monitoring uTorrent
+Author: Claudio Marforio, Mike Godenzi
+e-mail: marforio@gmail.com, godenzim@gmail.com
+URL: http://www.cloudgoessocial.net/µmonitor/
+
+<h2>NOTES</h2>
+
+Files restructuring could be useful to reflect XCode groups.
