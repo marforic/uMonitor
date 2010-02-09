@@ -567,7 +567,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Claudio Marforio";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -578,7 +578,7 @@
 				"GCC_VERSION[sdk=iphoneos3.0][arch=*]" = 4.2;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = uMonitor;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1BCC844E-5778-45A7-976F-3F5DC783F836";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = Debug;
 		};
@@ -586,7 +586,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Claudio Marforio";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = uTorrentView_Prefix.pch;
@@ -594,7 +594,7 @@
 				"GCC_VERSION[sdk=iphoneos3.0][arch=*]" = 4.2;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = uMonitor;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1BCC844E-5778-45A7-976F-3F5DC783F836";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = Release;
 		};
@@ -603,7 +603,7 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "$HOME/Library/SDKs/JSON/$(PLATFORM_NAME).sdk";
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Claudio Marforio";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = 4.0;
@@ -616,7 +616,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "µMonitor";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1BCC844E-5778-45A7-976F-3F5DC783F836";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos3.0;
 				USER_HEADER_SEARCH_PATHS = "$(ELEMENTPARSER_SRC)/**";
 			};
@@ -626,7 +626,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Claudio Marforio";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = uTorrentView_Prefix.pch;
@@ -634,7 +634,7 @@
 				"GCC_VERSION[sdk=iphoneos3.0][arch=*]" = 4.2;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = uMonitor;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1BCC844E-5778-45A7-976F-3F5DC783F836";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = iPhoneBay;
 		};
@@ -643,7 +643,7 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "$HOME/Library/SDKs/JSON/$(PLATFORM_NAME).sdk";
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Claudio Marforio";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -658,7 +658,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "µMonitor";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1BCC844E-5778-45A7-976F-3F5DC783F836";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos3.0;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -669,7 +669,7 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "$HOME/Library/SDKs/JSON/$(PLATFORM_NAME).sdk";
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Claudio Marforio";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = 4.0;
@@ -682,7 +682,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "µMonitor";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1BCC844E-5778-45A7-976F-3F5DC783F836";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos3.0;
 				USER_HEADER_SEARCH_PATHS = "$(ELEMENTPARSER_SRC)/**";
 			};
