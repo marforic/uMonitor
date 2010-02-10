@@ -1,0 +1,4 @@
+build
+.DS_Store
+uTorrentView.xcodeproj/*.pbxuser
+uTorrentView.xcodeproj/*.perspectivev3
