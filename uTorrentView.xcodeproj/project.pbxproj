@@ -577,6 +577,7 @@
 				"GCC_VERSION[arch=*]" = 4.2;
 				"GCC_VERSION[sdk=iphoneos3.0][arch=*]" = 4.2;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PRODUCT_NAME = uMonitor;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
@@ -593,6 +594,7 @@
 				"GCC_VERSION[arch=*]" = 4.2;
 				"GCC_VERSION[sdk=iphoneos3.0][arch=*]" = 4.2;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PRODUCT_NAME = uMonitor;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
@@ -617,7 +619,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = "µMonitor";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos4.0;
 				USER_HEADER_SEARCH_PATHS = "$(ELEMENTPARSER_SRC)/**";
 			};
 			name = iPhoneBay;
@@ -633,6 +635,7 @@
 				"GCC_VERSION[arch=*]" = 4.2;
 				"GCC_VERSION[sdk=iphoneos3.0][arch=*]" = 4.2;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PRODUCT_NAME = uMonitor;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
@@ -659,7 +662,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = "µMonitor";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos4.0;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -683,7 +686,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = "µMonitor";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos4.0;
 				USER_HEADER_SEARCH_PATHS = "$(ELEMENTPARSER_SRC)/**";
 			};
 			name = Release;
