@@ -354,4 +354,49 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	}
 }
 
++ (URL_TYPE)getURLType:(NSString *)urlString {
+	URL_TYPE urlType = URL_TYPE_UNKNOWN;
+	NSString *lowerCaseURLString = [urlString lowercaseString];
+	NSArray *urlArray = [lowerCaseURLString componentsSeparatedByString:@"/"];
+	NSString *urlObject = [urlArray lastObject];
+	NSString *urlBase = [urlArray objectAtIndex:2];
+	
+	NSArray *urlExtention = [urlObject componentsSeparatedByString:@"."];
+	
+	if ((([urlExtention count] > 1) && ([[urlExtention lastObject] isEqual:@"torrent"])) ||
+		(([urlExtention count] > 1) && ([[urlExtention lastObject] rangeOfString:@"downloadtorrent"].location != NSNotFound)) ||
+		(([urlBase isEqual:@"www.mininova.org"]) && ([urlArray count] > 3) && ([[urlArray objectAtIndex:3] isEqual:@"get"])) ||
+		(([urlBase isEqual:@"www.demonoid.com"]) && ([urlArray count] > 4) && ([[urlArray objectAtIndex:4] isEqual:@"download"])) ||
+		(([urlBase isEqual:@"www.torrent411.com"]) && ([urlArray count] > 3) && ([[urlArray objectAtIndex:3] rangeOfString:@"download.php?id="].location != NSNotFound))
+		) {
+		// Tested with :
+		// - torrentleech
+		// - torrentbytes
+		// - demonoid
+		// - pirate bay
+		// - mininova
+		// - isoHunt
+		// Not working with :
+		// - torrent411 (problem with getting file => it gives a 0 bytes file ...)
+		urlType = URL_TYPE_DOWNLOAD_TORRENT;
+	} else if (([urlExtention count] > 1) &&
+			   ((([[urlExtention lastObject] length] == 3)&&
+				 (![[urlExtention lastObject] isEqual:@"htm"])&&
+				 (![[urlExtention lastObject] isEqual:@"php"])&&
+				 (![[urlExtention lastObject] isEqual:@"jpg"])&&
+				 (![[urlExtention lastObject] isEqual:@"png"])&&
+				 (![[urlExtention lastObject] isEqual:@"com"])&&
+				 (![[urlExtention lastObject] isEqual:@"gif"])
+				 ) ||
+			    ([[urlExtention lastObject] isEqual:@"divx"]) ||
+			    ([[urlExtention lastObject] isEqual:@"ipsw"]) ||
+				([[urlExtention lastObject] isEqual:@"7z"])
+				)) {
+				   urlType = URL_TYPE_DOWNLOAD_HTTP_FTP;
+			   } else {
+				   urlType = URL_TYPE_DONT_DOWNLOAD;
+			   }
+	return urlType;
+}
+
 @end
