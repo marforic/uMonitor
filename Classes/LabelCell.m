@@ -51,6 +51,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	CGRect frame = CGRectMake(boundsX + 250, 12, 40, 40);
 	BlueBadge *blueBadge = [[BlueBadge alloc] initWithFrame:frame];
 	[blueBadge drawWithCount:[count intValue]];
+	blueBadge.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+
 	[self.contentView addSubview:blueBadge];
 	[blueBadge release];
 }

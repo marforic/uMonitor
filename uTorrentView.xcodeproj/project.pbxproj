@@ -82,6 +82,7 @@
 		F9E08E0B11F34E8300CC7006 /* browserReload.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E08E0611F34E8300CC7006 /* browserReload.png */; };
 		F9E08E0C11F34E8300CC7006 /* browserSafari.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E08E0711F34E8300CC7006 /* browserSafari.png */; };
 		F9E08E0D11F34E8300CC7006 /* browserStop.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E08E0811F34E8300CC7006 /* browserStop.png */; };
+		F9E08E1211F38AA000CC7006 /* CustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E08E1111F38AA000CC7006 /* CustomTabBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -193,6 +194,8 @@
 		F9E08E0611F34E8300CC7006 /* browserReload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browserReload.png; sourceTree = "<group>"; };
 		F9E08E0711F34E8300CC7006 /* browserSafari.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browserSafari.png; sourceTree = "<group>"; };
 		F9E08E0811F34E8300CC7006 /* browserStop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browserStop.png; sourceTree = "<group>"; };
+		F9E08E1011F38AA000CC7006 /* CustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarController.h; sourceTree = "<group>"; };
+		F9E08E1111F38AA000CC7006 /* CustomTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,6 +313,8 @@
 			children = (
 				619E72380F07A42D00A9CBDB /* CustomAlertView.h */,
 				619E72390F07A42D00A9CBDB /* CustomAlertView.m */,
+				F9E08E1011F38AA000CC7006 /* CustomTabBarController.h */,
+				F9E08E1111F38AA000CC7006 /* CustomTabBarController.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -591,6 +596,7 @@
 				49BAF950106178A800311D1D /* UserAccount.m in Sources */,
 				49BAF95510617DDD00311D1D /* UserAccountsViewController.m in Sources */,
 				F9E08DCA11F3495D00CC7006 /* BrowserViewController.m in Sources */,
+				F9E08E1211F38AA000CC7006 /* CustomTabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
