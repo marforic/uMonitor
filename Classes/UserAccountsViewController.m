@@ -119,7 +119,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	
 	if (selectedAccountIndex == indexPath.row)
 		self.cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"status_green.png"]];
-	
+	else
+		self.cell.accessoryType = UITableViewCellAccessoryNone;
     NSString * aName = [[accounts objectAtIndex:indexPath.row] accountName];
     cell.textLabel.text = aName ? aName : @"Unnamed";
 
