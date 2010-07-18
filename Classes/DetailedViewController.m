@@ -92,7 +92,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 													otherButtonTitles:@"Cancel", @"Delete .torrent", @"Delete .torrent and data", nil];
 	actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
 	actionSheet.destructiveButtonIndex = 2;	// make the second button red (destructive)
-	[actionSheet showInView:self.view]; // show from our table view (pops up in the middle of the table)
+	[actionSheet showInView:self.parentViewController.tabBarController.view]; // show from our table view (pops up in the middle of the table)
 	[actionSheet release];
 }
 
