@@ -30,7 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #import <Foundation/Foundation.h>
-
+#import "uTorrentConstants.h"
 
 @interface Utilities : NSObject {
 
@@ -53,5 +53,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 						andOriginalList:(NSMutableArray *)torrentsData
 					   usingRemovedList:(NSArray *)removedTorrents 
 						andNeedToDelete:(BOOL)needToDelete;
++ (URL_TYPE)getURLType:(NSString *)urlString;
 
 @end

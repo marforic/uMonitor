@@ -76,6 +76,12 @@
 		61DDE7270EFEDB5F00EE8119 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DDE7260EFEDB5F00EE8119 /* Utilities.m */; };
 		61EB956B0EF6CC6000340762 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EB956A0EF6CC6000340762 /* SystemConfiguration.framework */; };
 		61EE0FC00F13A627001798BB /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 61EE0FBF0F13A627001798BB /* Icon.png */; };
+		F9E08DCA11F3495D00CC7006 /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E08DC911F3495D00CC7006 /* BrowserViewController.m */; };
+		F9E08E0911F34E8300CC7006 /* browserBack.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E08E0411F34E8300CC7006 /* browserBack.png */; };
+		F9E08E0A11F34E8300CC7006 /* browserForward.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E08E0511F34E8300CC7006 /* browserForward.png */; };
+		F9E08E0B11F34E8300CC7006 /* browserReload.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E08E0611F34E8300CC7006 /* browserReload.png */; };
+		F9E08E0C11F34E8300CC7006 /* browserSafari.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E08E0711F34E8300CC7006 /* browserSafari.png */; };
+		F9E08E0D11F34E8300CC7006 /* browserStop.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E08E0811F34E8300CC7006 /* browserStop.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -180,6 +186,13 @@
 		61EB956A0EF6CC6000340762 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		61EE0FBF0F13A627001798BB /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9E08DC811F3495D00CC7006 /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
+		F9E08DC911F3495D00CC7006 /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
+		F9E08E0411F34E8300CC7006 /* browserBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browserBack.png; sourceTree = "<group>"; };
+		F9E08E0511F34E8300CC7006 /* browserForward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browserForward.png; sourceTree = "<group>"; };
+		F9E08E0611F34E8300CC7006 /* browserReload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browserReload.png; sourceTree = "<group>"; };
+		F9E08E0711F34E8300CC7006 /* browserSafari.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browserSafari.png; sourceTree = "<group>"; };
+		F9E08E0811F34E8300CC7006 /* browserStop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browserStop.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +213,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F9E08DC711F3495D00CC7006 /* Browser */,
 				494C4155105037B7002AB715 /* Parser */,
 				494C40651050236F002AB715 /* Torrent Browser */,
 				4984CB29104DAAB70021371E /* Custom UI */,
@@ -303,6 +317,11 @@
 		616140180F0410A700DD585B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F9E08E0411F34E8300CC7006 /* browserBack.png */,
+				F9E08E0511F34E8300CC7006 /* browserForward.png */,
+				F9E08E0611F34E8300CC7006 /* browserReload.png */,
+				F9E08E0711F34E8300CC7006 /* browserSafari.png */,
+				F9E08E0811F34E8300CC7006 /* browserStop.png */,
 				611B0C7E10A4DE7200081869 /* umonitor_icon.png */,
 				6175C8651052FE9400B405C1 /* ok.png */,
 				6178B9131051B7F500502BEE /* favicons */,
@@ -433,6 +452,15 @@
 			name = Network;
 			sourceTree = "<group>";
 		};
+		F9E08DC711F3495D00CC7006 /* Browser */ = {
+			isa = PBXGroup;
+			children = (
+				F9E08DC811F3495D00CC7006 /* BrowserViewController.h */,
+				F9E08DC911F3495D00CC7006 /* BrowserViewController.m */,
+			);
+			path = Browser;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -521,6 +549,11 @@
 				49BAF8E71061681400311D1D /* TorrentLinkCell.xib in Resources */,
 				49BAF95610617DDD00311D1D /* UserAccountsViewController.xib in Resources */,
 				611B0C7F10A4DE7200081869 /* umonitor_icon.png in Resources */,
+				F9E08E0911F34E8300CC7006 /* browserBack.png in Resources */,
+				F9E08E0A11F34E8300CC7006 /* browserForward.png in Resources */,
+				F9E08E0B11F34E8300CC7006 /* browserReload.png in Resources */,
+				F9E08E0C11F34E8300CC7006 /* browserSafari.png in Resources */,
+				F9E08E0D11F34E8300CC7006 /* browserStop.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +590,7 @@
 				49BAF8DD1061671B00311D1D /* TorrentLinkCell.m in Sources */,
 				49BAF950106178A800311D1D /* UserAccount.m in Sources */,
 				49BAF95510617DDD00311D1D /* UserAccountsViewController.m in Sources */,
+				F9E08DCA11F3495D00CC7006 /* BrowserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,7 +721,7 @@
 				PRODUCT_NAME = "µMonitor";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos4.0;
-				USER_HEADER_SEARCH_PATHS = "$(ELEMENTPARSER_SRC)/**";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};
