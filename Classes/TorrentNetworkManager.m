@@ -277,7 +277,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		return;
 	}
 	
-	NSDictionary * jsonItem = [readableString JSONValue];
+//	NSDictionary * jsonItem = [readableString JSONValue];
+	NSError *error;
+	SBJSON *json = [[SBJSON new] autorelease];
+	NSDictionary *jsonItem = [json objectWithString:readableString error:&error];
+	if (!jsonItem)
+		NSLog(@"%@", error);
 	//NSLog(@"readable: %@", readableString);
 	static int count = 0;
 	if (!jsonItem) { // something wrong with the settings
@@ -402,6 +407,22 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 - (NSString *)createRequest:(NSString *)request {
+	// load User settings
+	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+	NSData * accountsData = [defaults objectForKey:@"accounts"];
+	if (accountsData) {
+		NSMutableArray * c = [[NSMutableArray alloc] initWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:accountsData]];
+		NSInteger index = [[defaults objectForKey:@"selectedAccount"] integerValue];
+		if (index >= 0 && index < [c count]) {
+			UserAccount * ua = [c objectAtIndex:index];
+			self.settingsAddress = ua.stringAddress;
+			self.settingsPort = ua.stringPort;
+			self.settingsUname = ua.stringUname;
+			self.settingsPassword = ua.stringPassword;
+		}
+		[c release];
+	}
+
 	NSString * url = settingsAddress;
 	if (![url hasPrefix:@"http://"] && ![url hasPrefix:@"https://"]) url = [NSString stringWithFormat:@"http://%@", url];
 	if ([url hasSuffix:@"/"]) url = [url substringToIndex:[url length] - 1];
