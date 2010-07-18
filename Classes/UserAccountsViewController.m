@@ -75,24 +75,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 - (void)viewDidAppear:(BOOL)animated {
 	if (needToSave) {
-		NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:accounts] forKey:@"accounts"];
-		NSNumber * selectedAccount = [[NSNumber alloc] initWithInteger:selectedAccountIndex];
-		[defaults setObject:selectedAccount forKey:@"selectedAccount"];
-		[selectedAccount release];
-		needToSave = NO;
-		[self.tableView reloadData];
-	}
-    [super viewDidAppear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-	if (needToSave) {
 		[self save];
 		needToSave = NO;
 		[self.tableView reloadData];
 	}
-	[super viewDidDisappear:animated];
+	[super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -155,7 +142,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	tnm.settingsPort = ua.stringPort;
 	tnm.settingsUname = ua.stringUname;
 	tnm.settingsPassword = ua.stringPassword;
-	needToSave = YES;
+	[self save];
 }
 
 
