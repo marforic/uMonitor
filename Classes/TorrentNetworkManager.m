@@ -43,7 +43,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #import <arpa/inet.h>
 #import <netdb.h>
 
-#import <JSON/JSON.h>
+#import "JSON.h"
 
 @implementation NSURLRequest(DataController)
 + (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host {
@@ -277,12 +277,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		return;
 	}
 	
-//	NSDictionary * jsonItem = [readableString JSONValue];
-	NSError *error;
-	SBJSON *json = [[SBJSON new] autorelease];
-	NSDictionary *jsonItem = [json objectWithString:readableString error:&error];
-	if (!jsonItem)
-		NSLog(@"%@", error);
+	NSDictionary * jsonItem = [readableString JSONValue];
+	//NSError *error;
+	//SBJSON *json = [[SBJSON new] autorelease];
+	//NSDictionary *jsonItem = [json objectWithString:readableString error:&error];
+	//if (!jsonItem)
+	//	NSLog(@"%@", error);
 	//NSLog(@"readable: %@", readableString);
 	static int count = 0;
 	if (!jsonItem) { // something wrong with the settings

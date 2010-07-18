@@ -6,3 +6,10 @@
     #import <Foundation/Foundation.h>
     #import <UIKit/UIKit.h>
 #endif
+
+// Logging
+#ifdef DEBUG
+#   define DLog(fmt, ...) NSLog([@"%s [Line %d] " stringByAppendingString:(fmt ? fmt : @"")], __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#   define DLog(...)
+#endif
