@@ -52,7 +52,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 @property(nonatomic, retain) IBOutlet UIButton * forcestartButton;
 @property(nonatomic, retain) IBOutlet UIButton * deleteButton;
 
-@property(nonatomic, retain) TorrentNetworkManager * tnm;
 @property(nonatomic, retain) uTorrentViewAppDelegate * mainAppDelegate;
 @property(nonatomic, retain) NSArray * torrent;
 
