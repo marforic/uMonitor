@@ -199,7 +199,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     }
     
     // Set up the cell...
-	NSString * cellContent = [NSString alloc];
+	NSString * cellContent;
 	int index;
 	switch (index = [indexPath indexAtPosition:1]) {
 		case 0:
