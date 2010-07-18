@@ -38,13 +38,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 @implementation DetailedViewController
 
-@synthesize torrent, customFooter, startButton, forcestartButton, deleteButton, tnm, mainAppDelegate;
+@synthesize torrent, customFooter, startButton, forcestartButton, deleteButton, mainAppDelegate;
 
 - (id)initWithTorrent:(NSArray *)selectedTorrent {
 	if (self = [super initWithStyle:UITableViewStyleGrouped])
 		self.torrent = selectedTorrent;
 	self.mainAppDelegate = (uTorrentViewAppDelegate *)[[UIApplication sharedApplication] delegate];
-	tnm = [mainAppDelegate getTNM];
+	tnm = [[mainAppDelegate getTNM] retain];
     return self;
 }
 
