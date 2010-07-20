@@ -34,15 +34,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 @implementation UserAccount
 
-@synthesize stringAddress, stringPort, stringUname, stringPassword, accountName;
+@synthesize stringAddress, stringPort, stringUname, stringPassword, accountName, boolSSL;
 
-- (id)initWithName:(NSString *)name address:(NSString *)address port:(NSString *)port uname:(NSString *)uname password:(NSString *)password {
+- (id)initWithName:(NSString *)name address:(NSString *)address port:(NSString *)port uname:(NSString *)uname password:(NSString *)password ssl:(BOOL)ssl {
 	if (self = [super init]) {
 		self.accountName = name;
 		self.stringAddress = address;
 		self.stringPort = port;
 		self.stringUname = uname;
 		self.stringPassword = password;
+		self.boolSSL = ssl;
 	}
 	return self;
 }
@@ -54,6 +55,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		self.stringPort = [coder decodeObjectForKey:@"stringPort"];
 		self.stringUname = [coder decodeObjectForKey:@"stringUname"];
 		self.stringPassword = [coder decodeObjectForKey:@"stringPassword"];
+		self.boolSSL = [coder decodeBoolForKey:@"boolSSL"];
 	}
 	return self;
 }
@@ -64,6 +66,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	[coder encodeObject:self.stringPort forKey:@"stringPort"];
 	[coder encodeObject:self.stringUname forKey:@"stringUname"];
 	[coder encodeObject:self.stringPassword forKey:@"stringPassword"];
+	[coder encodeBool:self.boolSSL forKey:@"boolSSL"];
 }
 
 - (void)dealloc {

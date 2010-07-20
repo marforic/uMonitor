@@ -52,6 +52,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	NSString * settingsUname;
 	NSString * settingsPort;
 	NSString * settingsAddress;
+	BOOL settingsSSL;
 	NSString * token;
 }
 
@@ -65,6 +66,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 @property(nonatomic, retain) NSString * settingsPort;
 @property(nonatomic, retain) NSString * settingsUname;
 @property(nonatomic, retain) NSString * settingsPassword;
+@property(nonatomic) BOOL settingsSSL;
 @property BOOL needToDelete;
 
 - (BOOL)connectedToNetwork;

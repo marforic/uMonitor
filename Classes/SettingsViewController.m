@@ -38,7 +38,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 @implementation SettingsViewController
 
-@synthesize cell, tnm, userAccount;
+@synthesize cell, switchCell, tnm, userAccount;
 
 - (id)initWithAccount:(UserAccount *)uAccount {
 	if (self = [super initWithNibName:@"SettingsViewController" bundle:nil]) {
@@ -71,37 +71,67 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 6;
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"SettingsCell";
+    static NSString *CellIdentifier = @"Cell";
+    static NSString *SwitchCellIdentifier = @"SwitchCell";
+	
+	UITableViewCell *newCell;
     
-    self.cell = (SettingsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-		[[NSBundle mainBundle] loadNibNamed:@"SettingsCell" owner:self options:nil];
-		switch (indexPath.row) {
-			case 0:
-				[cell setCellDataWithLabelString:@"Profile Name:" withText:userAccount.accountName isSecure:NO withKeyboardType:UIKeyboardTypeDefault andTag:ACCOUNT_NAME_TAG];
-				break;
-			case 1:
-				[cell setCellDataWithLabelString:@"Address:" withText:userAccount.stringAddress isSecure:NO withKeyboardType:UIKeyboardTypeURL andTag:ADDRESS_TAG];
-				break;
-			case 2:
-				[cell setCellDataWithLabelString:@"Port:" withText:userAccount.stringPort isSecure:NO withKeyboardType:UIKeyboardTypeNumbersAndPunctuation andTag:PORT_TAG];
-				break;
-			case 3:
-				[cell setCellDataWithLabelString:@"Username:" withText:userAccount.stringUname isSecure:NO withKeyboardType:UIKeyboardTypeDefault andTag:UNAME_TAG];
-				break;
-			case 4:
-				[cell setCellDataWithLabelString:@"Password:" withText:userAccount.stringPassword isSecure:YES withKeyboardType:UIKeyboardTypeDefault andTag:PWD_TAG];
-				break;
-		}
-    }
-    return cell;
+	switch (indexPath.row) {
+		case 0:
+			[[NSBundle mainBundle] loadNibNamed:@"SettingsCell" owner:self options:nil];
+			if (cell == nil)
+				self.cell = (SettingsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+			[cell setCellDataWithLabelString:@"Profile Name:" withText:userAccount.accountName isSecure:NO withKeyboardType:UIKeyboardTypeDefault andTag:ACCOUNT_NAME_TAG];
+			newCell = cell;
+			break;
+		case 1:
+			[[NSBundle mainBundle] loadNibNamed:@"SettingsCell" owner:self options:nil];
+			if (cell == nil)
+				self.cell = (SettingsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+			[cell setCellDataWithLabelString:@"Address:" withText:userAccount.stringAddress isSecure:NO withKeyboardType:UIKeyboardTypeURL andTag:ADDRESS_TAG];
+			newCell = cell;
+			break;
+		case 2:
+			[[NSBundle mainBundle] loadNibNamed:@"SettingsCell" owner:self options:nil];
+			if (cell == nil)
+				self.cell = (SettingsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+			[cell setCellDataWithLabelString:@"Port:" withText:userAccount.stringPort isSecure:NO withKeyboardType:UIKeyboardTypeNumbersAndPunctuation andTag:PORT_TAG];
+			newCell = cell;
+			break;
+		case 3:
+			[[NSBundle mainBundle] loadNibNamed:@"SettingsCell" owner:self options:nil];
+			if (cell == nil)
+				self.cell = (SettingsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+			[cell setCellDataWithLabelString:@"Username:" withText:userAccount.stringUname isSecure:NO withKeyboardType:UIKeyboardTypeDefault andTag:UNAME_TAG];
+			newCell = cell;
+			break;
+		case 4:
+			[[NSBundle mainBundle] loadNibNamed:@"SettingsCell" owner:self options:nil];
+			if (cell == nil)
+				self.cell = (SettingsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+			[cell setCellDataWithLabelString:@"Password:" withText:userAccount.stringPassword isSecure:YES withKeyboardType:UIKeyboardTypeDefault andTag:PWD_TAG];
+			newCell = cell;
+			break;
+		case 5:
+			switchCell = (SwitchCell *)[tableView dequeueReusableCellWithIdentifier:SwitchCellIdentifier];
+			if (switchCell == nil) {
+				switchCell = [[[SwitchCell alloc] initWithFrame:CGRectZero reuseIdentifier:SwitchCellIdentifier] autorelease];
+			}
+			[switchCell setCellDataWithLabelString:NSLocalizedString(@"SSL:",@"")
+										 withState:userAccount.boolSSL
+											andTag:SSL_TAG];
+			[switchCell.switchButton addTarget:self action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
+			newCell = switchCell;
+	}
+
+    return newCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -129,6 +159,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		self.userAccount.accountName = textField.text;
 	}
 
+}
+
+#pragma mark -
+#pragma mark UISwitch responder
+
+- (void)switchValueChanged:(id)sender {
+	if (((UISwitch *)sender).tag == SSL_TAG)
+		self.userAccount.boolSSL = [sender isOn];
 }
 
 - (void)dealloc {

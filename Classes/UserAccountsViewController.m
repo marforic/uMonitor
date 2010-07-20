@@ -143,6 +143,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	tnm.settingsPort = ua.stringPort;
 	tnm.settingsUname = ua.stringUname;
 	tnm.settingsPassword = ua.stringPassword;
+	tnm.settingsSSL = ua.boolSSL;
 	[self save];
 }
 
@@ -198,7 +199,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 												 address:nil 
 													port:nil 
 												   uname:nil 
-												password:nil];
+												password:nil
+													 ssl:NO];
 	[accounts addObject:ua];
 	[ua release];
 	[self.tableView reloadData];

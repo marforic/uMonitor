@@ -76,6 +76,7 @@
 		61DDE7270EFEDB5F00EE8119 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DDE7260EFEDB5F00EE8119 /* Utilities.m */; };
 		61EB956B0EF6CC6000340762 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EB956A0EF6CC6000340762 /* SystemConfiguration.framework */; };
 		61EE0FC00F13A627001798BB /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 61EE0FBF0F13A627001798BB /* Icon.png */; };
+		F9AAF93E11F6537B00FDE82F /* SwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AAF8FD11F64EE100FDE82F /* SwitchCell.m */; };
 		F9E08DCA11F3495D00CC7006 /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E08DC911F3495D00CC7006 /* BrowserViewController.m */; };
 		F9E08E0911F34E8300CC7006 /* browserBack.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E08E0411F34E8300CC7006 /* browserBack.png */; };
 		F9E08E0A11F34E8300CC7006 /* browserForward.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E08E0511F34E8300CC7006 /* browserForward.png */; };
@@ -187,6 +188,8 @@
 		61EB956A0EF6CC6000340762 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		61EE0FBF0F13A627001798BB /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9AAF8FC11F64EE100FDE82F /* SwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchCell.h; sourceTree = "<group>"; };
+		F9AAF8FD11F64EE100FDE82F /* SwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchCell.m; sourceTree = "<group>"; };
 		F9E08DC811F3495D00CC7006 /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
 		F9E08DC911F3495D00CC7006 /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
 		F9E08E0411F34E8300CC7006 /* browserBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browserBack.png; sourceTree = "<group>"; };
@@ -315,6 +318,8 @@
 				619E72390F07A42D00A9CBDB /* CustomAlertView.m */,
 				F9E08E1011F38AA000CC7006 /* CustomTabBarController.h */,
 				F9E08E1111F38AA000CC7006 /* CustomTabBarController.m */,
+				F9AAF8FC11F64EE100FDE82F /* SwitchCell.h */,
+				F9AAF8FD11F64EE100FDE82F /* SwitchCell.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -597,6 +602,7 @@
 				49BAF95510617DDD00311D1D /* UserAccountsViewController.m in Sources */,
 				F9E08DCA11F3495D00CC7006 /* BrowserViewController.m in Sources */,
 				F9E08E1211F38AA000CC7006 /* CustomTabBarController.m in Sources */,
+				F9AAF93E11F6537B00FDE82F /* SwitchCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
