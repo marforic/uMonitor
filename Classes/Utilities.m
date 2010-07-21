@@ -345,8 +345,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 				toRemove = YES;
 			}
 			NSUInteger l, count4 = [indexToRemove count];
-			for (l = 0; l < count4; l++) {
-				NSNumber * n = (NSNumber *)[indexToRemove objectAtIndex:l];
+			for (l = 1; l <= count4; l++) {
+				// Delete from last one to first one to be consistant when deleting several objects
+				NSNumber * n = (NSNumber *)[indexToRemove objectAtIndex:count4-l];
 				[ma removeObjectAtIndex:[n intValue]];
 			}
 			[indexToRemove release];
