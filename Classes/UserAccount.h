@@ -39,6 +39,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	NSString * stringPort;
 	NSString * stringUname;
 	NSString * stringPassword;
+	BOOL boolSSL;
 }
 
 @property(nonatomic, retain) NSString * accountName;
@@ -46,7 +47,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 @property(nonatomic, retain) NSString * stringPort;
 @property(nonatomic, retain) NSString * stringUname;
 @property(nonatomic, retain) NSString * stringPassword;
+@property(nonatomic) BOOL boolSSL;
 
-- (id)initWithName:(NSString *)name address:(NSString *)address port:(NSString *)port uname:(NSString *)uname password:(NSString *)password;
+- (id)initWithName:(NSString *)name address:(NSString *)address port:(NSString *)port uname:(NSString *)uname password:(NSString *)password ssl:(BOOL)ssl;
 
 @end

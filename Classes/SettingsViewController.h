@@ -30,6 +30,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #import <UIKit/UIKit.h>
+#import "SwitchCell.h"
+
 @class SettingsCell;
 @class TorrentNetworkManager;
 @class UserAccount;
@@ -40,12 +42,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	TorrentNetworkManager * tnm;
 	
 	IBOutlet SettingsCell * cell;
+	SwitchCell * switchCell;
 }
 
 @property(nonatomic, retain) IBOutlet SettingsCell * cell;
+@property(nonatomic, retain) SwitchCell * switchCell;
 @property(nonatomic, retain) TorrentNetworkManager * tnm;
 @property(nonatomic, retain) UserAccount * userAccount;
 
 - (id)initWithAccount:(UserAccount *)uAccount;
+- (void)switchValueChanged:(id)sender;
 
 @end

@@ -68,7 +68,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 @synthesize unlabelledTorrents;
 @synthesize removedTorrents;
 @synthesize needToDelete;
-@synthesize settingsAddress, settingsPort, settingsUname, settingsPassword, currentRequestAction;
+@synthesize settingsAddress, settingsPort, settingsUname, settingsPassword, settingsSSL, currentRequestAction;
 
 - (id)init {
 	if (self = [super init]) {
@@ -89,6 +89,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 				self.settingsPort = ua.stringPort;
 				self.settingsUname = ua.stringUname;
 				self.settingsPassword = ua.stringPassword;
+				self.settingsSSL = ua.boolSSL;
 			}
 			[c release];
 		}
@@ -419,12 +420,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 			self.settingsPort = ua.stringPort;
 			self.settingsUname = ua.stringUname;
 			self.settingsPassword = ua.stringPassword;
+			self.settingsSSL = ua.boolSSL;
 		}
 		[c release];
 	}
 
 	NSString * url = settingsAddress;
-	if (![url hasPrefix:@"http://"] && ![url hasPrefix:@"https://"]) url = [NSString stringWithFormat:@"http://%@", url];
+	if (settingsSSL)
+		url = [NSString stringWithFormat:@"https://%@", url];
+	else
+		url = [NSString stringWithFormat:@"http://%@", url];
 	if ([url hasSuffix:@"/"]) url = [url substringToIndex:[url length] - 1];
 	if ([url hasSuffix:@"/gui"]) url = [url substringToIndex:[url length] - 4];
 	NSString * req = [NSString stringWithFormat:@"%@:%@/gui/%@%@", url, (settingsPort && [settingsPort length] != 0) ? settingsPort : @"80", (token) ? token : @"", request];
