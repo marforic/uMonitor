@@ -65,8 +65,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	[self.fakeView addSubview:self.sliderView];
 	// set the paramenters
 	[self.sliderView.hue setMinimumTrackImage:[UIImage imageNamed:@"transparent.png"] forState:UIControlStateNormal];
+	[self.sliderView.hue setMaximumTrackImage:[UIImage imageNamed:@"transparent.png"] forState:UIControlStateNormal];
 	[self.sliderView.hue setThumbImage:self.plainThumbImage forState:UIControlStateNormal];
 	[self.sliderView.brightness setMinimumTrackImage:[UIImage imageNamed:@"transparent.png"] forState:UIControlStateNormal];
+	[self.sliderView.brightness setMaximumTrackImage:[UIImage imageNamed:@"transparent.png"] forState:UIControlStateNormal];
 	[self.sliderView.brightness setThumbImage:self.plainThumbImage forState:UIControlStateNormal];
 	// add selectors for events
 	[self.sliderView.hue addTarget:self action:@selector(updateHueSlider) forControlEvents:UIControlEventValueChanged];

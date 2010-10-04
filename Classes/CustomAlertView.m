@@ -52,12 +52,6 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
 		CGRect frame = CGRectMake(40, 35, 200.0, 7.0);
 		hueSlider = [[[UISlider alloc] initWithFrame:frame] retain];
 		hueSlider.minimumValue = 0.01;
-		UIImage * stetchLeftTrack = [UIImage imageNamed:@"hue.png"];
-		[hueSlider setThumbImage:self.plainThumbImage forState:UIControlStateNormal];
-		//[hueSlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
-		//[hueSlider setMaximumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
-		[hueSlider addTarget:self action:@selector(updateHueSlider) forControlEvents:UIControlEventValueChanged];
-		[hueSlider addTarget:self action:@selector(updateBrightnessSlider) forControlEvents:UIControlEventValueChanged];
 		frame = CGRectMake(110, 90, 200.0, 20.0);
 		UILabel * brightness = [[[UILabel alloc] initWithFrame:frame] retain];
 		brightness.backgroundColor = [UIColor clearColor];
@@ -67,12 +61,6 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
 		brightness.text = @"Brightness";
 		frame = CGRectMake(40, 85, 200.0, 7.0);
 		brightnessSlider = [[[UISlider alloc] initWithFrame:frame] retain];
-		stetchLeftTrack = [UIImage imageNamed:@"brightness.png"];
-		[brightnessSlider setThumbImage:self.plainThumbImage forState:UIControlStateNormal];
-		[brightnessSlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
-		[brightnessSlider setMaximumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
-		[brightnessSlider addTarget:self action:@selector(updateBrightnessSlider) forControlEvents:UIControlEventValueChanged];
-		// insert UITextField before first button
 		BOOL inserted = NO;
 		for( UIView *view in self.subviews ){
 			if(!inserted && ![view isKindOfClass:[UILabel class]]) {
@@ -82,7 +70,6 @@ cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)ot
 			}
 		}
 		
-		//[self addSubview:myTextField];
 		// ensure that layout for views is done once
 		layoutDone = NO;
 		

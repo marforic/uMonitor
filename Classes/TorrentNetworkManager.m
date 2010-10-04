@@ -265,7 +265,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     // do something with the data
     // receivedData is declared as a method instance elsewhere
-    //NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
+    // NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
+	// NSLog(@"Received: %@", receivedData);
 	
 	NSString * readableString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
 	// Uncomment to see what is returned from the network call
@@ -433,7 +434,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	if ([url hasSuffix:@"/"]) url = [url substringToIndex:[url length] - 1];
 	if ([url hasSuffix:@"/gui"]) url = [url substringToIndex:[url length] - 4];
 	NSString * req = [NSString stringWithFormat:@"%@:%@/gui/%@%@", url, (settingsPort && [settingsPort length] != 0) ? settingsPort : @"80", (token) ? token : @"", request];
-	//NSLog(@"request: %@", req);
+	NSLog(@"request: %@", req);
 	return req;
 }
 
